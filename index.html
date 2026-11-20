@@ -36,8 +36,8 @@
     /* 實景圓桌容器 */
     .round-table-wrapper {
       position: relative;
-      width: 148px;
-      height: 148px;
+      width: 260px;
+      height: 260px;
       margin: 0 auto;
     }
 
@@ -46,32 +46,32 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 78px;
-      height: 78px;
+      width: 132px;
+      height: 132px;
       transform: translate(-50%, -50%);
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #D48A82, #B3645C 75%, #964E47 100%);
-      box-shadow: 0 6px 14px rgba(150, 78, 71, 0.22), inset 0 2px 4px rgba(255, 255, 255, 0.35);
+      box-shadow: 0 8px 18px rgba(150, 78, 71, 0.22), inset 0 2px 5px rgba(255, 255, 255, 0.35);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      border: 2px solid #F3EAE0;
+      border: 2.5px solid #F3EAE0;
       z-index: 2;
     }
 
     /* 中央轉盤 */
     .round-table-lazy-susan {
-      width: 52px;
-      height: 52px;
+      width: 88px;
+      height: 88px;
       border-radius: 50%;
-      background: rgba(255, 253, 249, 0.92);
+      background: rgba(255, 253, 249, 0.94);
       border: 1px solid #E2D5C5;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 5px rgba(120, 112, 103, 0.15);
+      box-shadow: 0 2px 6px rgba(120, 112, 103, 0.15);
     }
 
     /* 長官主桌樣式 */
@@ -80,22 +80,76 @@
       box-shadow: 0 6px 14px rgba(166, 117, 54, 0.25);
     }
 
+    /* 12人長官大主桌專屬容器 */
+    .vip-big-table-wrapper {
+      position: relative;
+      width: 210px;
+      height: 210px;
+      margin: 0 auto;
+    }
+
+    .vip-big-table-surface {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 112px;
+      height: 112px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #E3B574, #C6924E 75%, #A67536 100%);
+      box-shadow: 0 8px 18px rgba(166, 117, 54, 0.28), inset 0 2px 5px rgba(255, 255, 255, 0.45);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2.5px solid #F7EDE0;
+      z-index: 2;
+      cursor: help;
+    }
+
+    .vip-big-lazy-susan {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      background: rgba(255, 253, 249, 0.94);
+      border: 1px solid #DFC7A7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(120, 112, 103, 0.16);
+    }
+
+    /* 素食桌樣式 */
+    .veg-table-surface {
+      background: radial-gradient(circle at 35% 35%, #84A58A, #628368 75%, #4A6850 100%);
+      box-shadow: 0 6px 14px rgba(74, 104, 80, 0.24);
+    }
+
+    /* 預備桌鎖定樣式 */
+    .reserve-locked-surface {
+      background: radial-gradient(circle at 35% 35%, #B8B0A6, #968E84 75%, #7A7269 100%);
+      box-shadow: 0 4px 10px rgba(122, 114, 105, 0.2);
+    }
+
     /* 座椅按鈕 */
     .seat-btn {
       position: absolute;
-      width: 24px;
-      height: 24px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       font-size: 11px;
       font-weight: 600;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      line-height: 1.05;
       transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
       transform: translate(-50%, -50%);
       z-index: 3;
       cursor: pointer;
-      box-shadow: 0 2px 4px rgba(80, 70, 60, 0.14);
+      box-shadow: 0 2px 5px rgba(80, 70, 60, 0.16);
     }
 
     /* 空位（鼠尾草綠燈） */
@@ -136,8 +190,17 @@
       background-color: #D4B483;
       color: #FFFDF9;
       border: 1.5px solid #FAF4EB;
+      cursor: help;
+      opacity: 0.95;
+    }
+
+    /* 預備桌未開放席 */
+    .seat-locked {
+      background-color: #B5ADA3;
+      color: #FFFDF9;
+      border: 1.5px solid #F3EFEA;
       cursor: not-allowed;
-      opacity: 0.85;
+      opacity: 0.8;
     }
 
     /* 自訂捲軸（無黑色） */
@@ -184,7 +247,7 @@
             </span>
           </div>
           <p class="text-xs text-[#787067] mt-0.5">
-            全場 50 桌・每桌 10 席（第 02 桌為長官主桌保留席，開放 490 席即時紅綠燈選位）
+            舞台前 1 桌長官大主桌（12 席）＋ 宴會廳 53 桌（含第 50 桌素食桌、第 53 桌預備桌）
           </p>
         </div>
       </div>
@@ -203,11 +266,34 @@
     </div>
   </header>
 
-  <!-- 主內容雙欄工作區 -->
-  <main class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+  <!-- 隱私權與個資同意宣告條 -->
+  <div class="max-w-[1440px] w-full mx-auto px-4 sm:px-6 pt-5">
+    <div id="privacyConsentCard" class="p-4 sm:p-5 rounded-2xl bg-[#FFFDF9] border-2 border-[#D9B89C] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div class="space-y-1">
+        <div class="text-xs font-bold text-[#A85D55] tracking-wide">【個人資料蒐集與使用告知事項】</div>
+        <p class="text-sm text-[#38332E] font-medium leading-relaxed">
+          本表單資料僅用於長庚科大旺年會聯繫及活動安排，不作其他用途，活動整體核銷結束後刪除。
+        </p>
+      </div>
+      <label class="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-xl bg-[#F9F1EE] border border-[#E5C6BE] cursor-pointer select-none shrink-0 hover:bg-[#F4E6E1] transition">
+        <input id="privacyConsentCheckbox" type="checkbox" onchange="handlePrivacyConsentChange()"
+          class="w-4 h-4 accent-[#C87D75] rounded cursor-pointer" />
+        <span class="text-sm font-bold text-[#8C534C]">我同意上述個資使用方式</span>
+      </label>
+    </div>
+  </div>
 
-    <!-- 左側欄：報名登錄、陪同者與計費明細（佔 4 欄） -->
-    <section class="lg:col-span-4 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6 space-y-5 lg:sticky lg:top-24">
+  <!-- 主內容雙欄工作區 -->
+  <main id="mainWorkspace" class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start relative">
+
+    <!-- 未勾選個資同意前之鎖定遮罩 -->
+    <div id="consentLockOverlay" class="col-span-1 lg:col-span-12 rounded-2xl bg-[#FFFDF9]/85 backdrop-blur-[2px] border border-dashed border-[#D6C7B4] p-8 text-center space-y-2">
+      <div class="serif-title text-base font-bold text-[#5C4938]">請先勾選上方「我同意上述個資使用方式」</div>
+      <p class="text-xs text-[#787067]">勾選同意後，即可開始填寫報名資料與進入選位區選擇桌次。</p>
+    </div>
+
+    <!-- 報名登錄、陪同者與計費明細（佔 4 欄） -->
+    <section id="registrationFormSection" class="hidden lg:col-span-4 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6 space-y-5 lg:sticky lg:top-24">
       <div class="border-b border-[#EFE8DD] pb-3.5 flex items-center justify-between">
         <div>
           <h2 class="serif-title text-lg font-bold text-[#38332E]">參加者報名與陪同者登記</h2>
@@ -222,9 +308,10 @@
       <div class="space-y-3.5">
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-semibold text-[#5C5349] mb-1">F 帳號 <span class="text-[#C86D65]">*</span></label>
-            <input id="inputFAccount" type="text" placeholder="例：F12345" oninput="handleMainInput()"
+            <label class="block text-xs font-semibold text-[#5C5349] mb-1">F 帳號（大寫 F + 9碼數字）<span class="text-[#C86D65]">*</span></label>
+            <input id="inputFAccount" type="text" maxlength="10" placeholder="例：F000009999" oninput="handleMainInput()"
               class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition uppercase" />
+            <p id="fAccountHint" class="text-[11px] text-[#8C8276] mt-0.5">共 10 碼，例如 F000009999</p>
           </div>
           <div>
             <label class="block text-xs font-semibold text-[#5C5349] mb-1">參加者姓名 <span class="text-[#C86D65]">*</span></label>
@@ -247,11 +334,11 @@
         </div>
       </div>
 
-      <!-- 陪同者（一般眷屬 / 長期工 / 臨時工）區塊 -->
+      <!-- 陪同者（一般眷屬 / 其他）區塊 -->
       <div class="pt-2 border-t border-[#EFE8DD]">
         <div class="flex items-center justify-between mb-2.5">
           <div>
-            <span class="text-sm font-bold text-[#38332E]">陪同者（一般眷屬 / 長期工 / 臨時工）</span>
+            <span class="text-sm font-bold text-[#38332E]">陪同者（一般眷屬 / 其他）</span>
             <span class="text-xs text-[#787067] ml-1">（上限 3 位）</span>
           </div>
           <button type="button" id="btnAddGuest" onclick="addGuest()"
@@ -263,7 +350,7 @@
         <!-- 收費說明小卡 -->
         <div class="p-2.5 rounded-xl bg-[#F7F3EC] border border-[#E8DFD1] text-[11px] text-[#696056] leading-relaxed mb-3">
           <span class="font-semibold text-[#A85D55]">收費與佔位標準：</span>
-          教職員本人免費佔位｜一般眷屬：未滿 1 歲免費（<span class="underline">不佔位</span>）、1–6 歲 250 元、7–12 歲國小 450 元、國中（含）以上 880 元｜長期工或臨時工：每位 880 元（佔位）。
+          教職員本人免費佔位｜一般眷屬：未滿 1 歲免費（<span class="underline">不佔位</span>）、1–6 歲 250 元、7–12 歲國小 450 元、國中（含）以上 880 元｜其他（含臨時工、工讀生、退休老師、國外學者等）：每位 880 元（佔位）。
         </div>
 
         <div id="guestsContainer" class="space-y-2.5"></div>
@@ -276,7 +363,7 @@
           <span id="seatProgressText" class="text-xs font-semibold text-[#C87D75]">需選 1 席・已選 0 席</span>
         </div>
         <div id="currentTargetBanner" class="px-3 py-2 rounded-lg bg-[#FFF3DF] border border-[#E8C99B] text-xs text-[#8A5A19] font-semibold">
-          👉 目前選位對象：請先填寫參加者姓名後點右側綠燈選位
+          👉 目前選位對象：請先填寫參加者姓名後至選位區點選綠燈空位
         </div>
         <div id="seatAssignmentPreview" class="space-y-1.5 text-xs"></div>
       </div>
@@ -300,19 +387,19 @@
       </button>
     </section>
 
-    <!-- 右側欄：宴會廳 50 桌實景圓桌平面圖（佔 8 欄） -->
-    <section class="lg:col-span-8 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6">
+    <!-- 選位區：長官大主桌 + 宴會廳 53 桌實景圓桌平面圖（佔 8 欄） -->
+    <section id="seatSelectionSection" class="hidden lg:col-span-8 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6">
       <!-- 圖例與統計列 -->
       <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#EFE8DD]">
         <div>
-          <h2 class="serif-title text-lg font-bold text-[#38332E]">宴會廳實景圓桌配置圖（50 桌）</h2>
-          <p class="text-xs text-[#787067] mt-0.5">請先點擊右側綠燈空位選席；滑鼠移至紅燈座位可查看入座者隱私遮罩姓名</p>
+          <h2 class="serif-title text-lg font-bold text-[#38332E]">選位區｜宴會廳實景圓桌配置圖</h2>
+          <p class="text-xs text-[#787067] mt-0.5">請先點選下方 7 排桌次卡片，再於展開的大圓桌中點擊綠燈空位</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3 text-xs font-medium bg-[#FAF7F2] px-3.5 py-2 rounded-xl border border-[#E8DFD1]">
           <span class="flex items-center gap-1.5 text-[#4E6B54]">
             <span class="w-3 h-3 rounded-full bg-[#6E8B74] inline-block"></span>
-            空位 (<span id="statAvailable">490</span>)
+            空位 (<span id="statAvailable">520</span>)
           </span>
           <span class="flex items-center gap-1.5 text-[#B87D2E]">
             <span class="w-3 h-3 rounded-full bg-[#E09F3E] inline-block"></span>
@@ -322,15 +409,19 @@
             <span class="w-3 h-3 rounded-full bg-[#C86D65] inline-block"></span>
             已佔用 (<span id="statOccupied">0</span>)
           </span>
-          <span class="flex items-center gap-1.5 text-[#9B7744]">
-            <span class="w-3 h-3 rounded-full bg-[#D4B483] inline-block"></span>
-            長官主桌 (02桌)
+          <span class="flex items-center gap-1.5 text-[#4A6850]">
+            <span class="w-3 h-3 rounded-full bg-[#628368] inline-block"></span>
+            素食桌 (第 50 桌)
+          </span>
+          <span class="flex items-center gap-1.5 text-[#7A7269]">
+            <span class="w-3 h-3 rounded-full bg-[#968E84] inline-block"></span>
+            預備桌 (第 53 桌)
           </span>
         </div>
       </div>
 
       <!-- 主舞台橫幅 -->
-      <div class="mt-4 mb-5">
+      <div class="mt-4 mb-4">
         <div class="max-w-xl mx-auto py-2.5 px-6 rounded-2xl bg-gradient-to-r from-[#EFE6D8] via-[#E5D6C3] to-[#EFE6D8] border border-[#D8C6B0] text-center shadow-2xs">
           <span class="serif-title text-sm font-bold text-[#5C4938] tracking-widest">
             ✦ 主 舞 臺 & 摸 彩 頒 獎 區 ✦
@@ -338,27 +429,33 @@
         </div>
       </div>
 
-      <!-- 右側即時「目前選位對象」引導橫幅 -->
+      <!-- 舞台正前方正中央：長官大主桌（單獨一桌・12 席，滑鼠移至桌號/座位才顯示長官姓名） -->
+      <div id="vipHeadTableContainer" class="mb-5"></div>
+
+      <!-- 即時「目前選位對象」引導橫幅 -->
       <div id="hallCurrentTargetBar" class="mb-4 px-4 py-2.5 rounded-xl bg-[#FFF6E5] border border-[#E6C794] flex flex-wrap items-center justify-between gap-2 text-xs">
         <span class="font-bold text-[#8A5A19]">🎯 目前選位對象：<span id="hallTargetName" class="underline">尚未填寫姓名</span></span>
-        <span id="hallTargetHint" class="text-[#787067]">請先在左側填寫姓名，再點擊下方綠燈空位</span>
+        <span id="hallTargetHint" class="text-[#787067]">請先點選下方桌次卡片，再於展開的大圓桌中點擊綠燈空位</span>
       </div>
 
       <!-- 桌次快速篩選器 -->
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-4 text-xs">
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-xs">
         <div class="flex items-center gap-1.5 flex-wrap">
-          <span class="text-[#787067] font-medium">快速定位：</span>
-          <button onclick="filterTables('all')" id="filter-all" class="filter-chip px-2.5 py-1 rounded-lg bg-[#C87D75] text-[#FFFDF9] font-medium cursor-pointer">全部 50 桌</button>
-          <button onclick="filterTables('1-10')" id="filter-1-10" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">第 01–10 桌</button>
-          <button onclick="filterTables('11-25')" id="filter-11-25" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">第 11–25 桌</button>
-          <button onclick="filterTables('26-40')" id="filter-26-40" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">第 26–40 桌</button>
-          <button onclick="filterTables('41-50')" id="filter-41-50" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">第 41–50 桌</button>
+          <span class="text-[#787067] font-medium">快速篩選：</span>
+          <button onclick="filterTables('all')" id="filter-all" class="filter-chip px-2.5 py-1 rounded-lg bg-[#C87D75] text-[#FFFDF9] font-medium cursor-pointer">全部 53 桌 (7×7+4)</button>
+          <button onclick="filterTables('veg')" id="filter-veg" class="filter-chip px-2.5 py-1 rounded-lg bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] cursor-pointer">🌱 素食桌 (50桌)</button>
+          <button onclick="filterTables('1-21')" id="filter-1-21" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">前區 (01–21桌)</button>
+          <button onclick="filterTables('22-42')" id="filter-22-42" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">中區 (22–42桌)</button>
+          <button onclick="filterTables('43-53')" id="filter-43-53" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">後區與加開桌 (43–53桌)</button>
           <button onclick="filterTables('available')" id="filter-available" class="filter-chip px-2.5 py-1 rounded-lg bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] cursor-pointer">僅看尚有空位</button>
         </div>
       </div>
 
-      <!-- 宴會廳左右雙區 + 中央紅毯走道容器 -->
-      <div id="banquetHallContainer" class="max-h-[760px] overflow-y-auto pr-1 space-y-4"></div>
+      <!-- 上半部：一行 7 桌迷你圓點選桌總覽（7×7 + 4 桌） -->
+      <div id="banquetHallContainer" class="max-h-[380px] overflow-y-auto pr-1 space-y-3 pb-2"></div>
+
+      <!-- 下半部：點選桌次後展開的置中大圓桌與 10 席明細 -->
+      <div id="activeTableDetailStage" class="mt-5 pt-5 border-t-2 border-dashed border-[#E6DDD0]"></div>
     </section>
   </main>
 
@@ -424,7 +521,7 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-semibold text-[#5C5349] mb-1">原報名人 F 帳號</label>
-          <input id="queryFAccount" type="text" placeholder="例：F12345"
+          <input id="queryFAccount" type="text" maxlength="10" placeholder="例：F000009999"
             class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm uppercase focus:outline-none focus:border-[#C87D75]" />
         </div>
         <div>
@@ -533,20 +630,29 @@
     import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     // ==================== 系統狀態與資料結構 ====================
-    const TOTAL_TABLES = 50;
-    const SEATS_PER_TABLE = 10;
-    const VIP_TABLE = 2; // 第 02 桌長官主桌
-    const ADMIN_PASSWORD = "0120";
-    const LOCAL_STORAGE_KEY = "cgust_116_banquet_registrations_v3";
-
-    // 陪同者身分別選項：一般眷屬、長期工或臨時工
-    const COMPANION_ROLES = [
-      { id: "family", label: "一般眷屬" },
-      { id: "long_term_worker", label: "長期工" },
-      { id: "temp_worker", label: "臨時工" }
+    // 舞台前長官大主桌（單獨一桌・12人座）
+    const VIP_EXECUTIVES = [
+      "范君瑜", "樓迎統", "楊文進", "簡淑慧",
+      "劉杏元", "孫三能", "余怡珍", "劉倩君",
+      "林鴻銘", "陳美燕", "謝喜龍", "黃聰龍"
     ];
 
-    // 一般眷屬收費級距（長期工與臨時工統一 880 元佔位）
+    // 一般宴會廳：7×7 桌（49桌） + 4 桌 = 53 桌，每桌 10 人（原 2 號桌開放選擇）
+    const TOTAL_REGULAR_TABLES = 53; // 7*7 + 4
+    const SEATS_PER_TABLE = 10;
+    const VEGETARIAN_TABLE = 50; // 第 50 桌清楚標示為「素食桌」
+    const RESERVE_TABLE = 53;    // 第 53 桌為「預備桌」，當第 01~52 桌全部選完才開放
+
+    const ADMIN_PASSWORD = "0120";
+    const LOCAL_STORAGE_KEY = "cgust_116_banquet_registrations_v4";
+
+    // 陪同者身分別選項：一般眷屬、其他（含臨時工、工讀生、退休老師、國外學者等）
+    const COMPANION_ROLES = [
+      { id: "family", label: "一般眷屬" },
+      { id: "other", label: "其他（臨時工 / 工讀生 / 退休老師 / 國外學者等）" }
+    ];
+
+    // 一般眷屬收費級距（其他身分別統一 880 元佔位）
     const FAMILY_AGE_TIERS = [
       { id: "infant", label: "未滿 1 歲（免費・不佔位）", fee: 0, needsSeat: false },
       { id: "child_1_6", label: "1–6 歲（250 元・佔位）", fee: 250, needsSeat: true },
@@ -572,6 +678,7 @@
     };
 
     let currentTableFilter = "all";
+    let activeExpandedTable = 1; // 目前點選展開檢視大圓桌的桌號
     let lastReceiptPlainText = "";
 
     // 預設內建您的 Firebase 雲端即時同步設定
@@ -599,25 +706,61 @@
 
     function getCompanionPricing(guest) {
       const roleId = guest.roleId || "family";
-      const roleObj = COMPANION_ROLES.find(r => r.id === roleId) || COMPANION_ROLES[0];
-      if (roleId === "long_term_worker" || roleId === "temp_worker") {
+      if (roleId === "other" || roleId === "long_term_worker" || roleId === "temp_worker") {
         return {
-          roleLabel: roleObj.label,
-          shortLabel: roleObj.label,
-          detailLabel: `${roleObj.label}（880 元・佔位）`,
+          roleLabel: "其他",
+          shortLabel: "其他（880元）",
+          detailLabel: "其他（臨時工/工讀生/退休老師/國外學者・880 元・佔位）",
           fee: 880,
           needsSeat: true
         };
       }
       const tierObj = FAMILY_AGE_TIERS.find(t => t.id === (guest.ageTierId || "adult_880")) || FAMILY_AGE_TIERS[3];
       return {
-        roleLabel: roleObj.label,
-        shortLabel: `${roleObj.label}-${tierObj.label.split("（")[0]}`,
-        detailLabel: `${roleObj.label} - ${tierObj.label}`,
+        roleLabel: "一般眷屬",
+        shortLabel: `一般眷屬-${tierObj.label.split("（")[0]}`,
+        detailLabel: `一般眷屬 - ${tierObj.label}`,
         fee: tierObj.fee,
         needsSeat: tierObj.needsSeat
       };
     }
+
+    // 驗證 F 帳號格式：大寫 F 開頭 + 9 位數字，共 10 碼（例如 F000009999）
+    function isValidFAccountFormat(fAcc) {
+      return /^F\d{9}$/.test((fAcc || "").trim());
+    }
+
+    // 判斷是否 1~52 桌（520席）已全滿，若是則自動解鎖第 53 桌預備桌
+    function isReserveTableUnlocked(occupiedMap) {
+      const regularCapacity = (TOTAL_REGULAR_TABLES - 1) * SEATS_PER_TABLE; // 52 * 10 = 520 席
+      let regularUsed = 0;
+      for (let t = 1; t < RESERVE_TABLE; t++) {
+        for (let s = 1; s <= SEATS_PER_TABLE; s++) {
+          if (occupiedMap.has(`${t}-${s}`)) regularUsed++;
+        }
+      }
+      return regularUsed >= regularCapacity;
+    }
+
+    // 個資使用同意勾選控制
+    window.handlePrivacyConsentChange = function() {
+      const checked = document.getElementById("privacyConsentCheckbox").checked;
+      const overlay = document.getElementById("consentLockOverlay");
+      const formSec = document.getElementById("registrationFormSection");
+      const seatSec = document.getElementById("seatSelectionSection");
+
+      if (checked) {
+        overlay.classList.add("hidden");
+        formSec.classList.remove("hidden");
+        seatSec.classList.remove("hidden");
+        renderVipHeadTable();
+        renderBanquetHall();
+      } else {
+        overlay.classList.remove("hidden");
+        formSec.classList.add("hidden");
+        seatSec.classList.add("hidden");
+      }
+    };
 
     function generateRegId() {
       const now = new Date();
@@ -721,7 +864,6 @@
         auth = getAuth(app);
         db = getFirestore(app);
 
-        // 判斷是否為使用者自訂專案（如 cgust-year-end-party），若是則直接使用匿名登入，避免吃到預覽沙盒的 __initial_auth_token 導致 custom-token-mismatch
         const isCustomProject = cfg.projectId === DEFAULT_FIREBASE_CONFIG.projectId ||
           Boolean(localStorage.getItem("cgust_116_firebase_cfg")) ||
           new URLSearchParams(window.location.search).has("cfg");
@@ -816,7 +958,6 @@
     }
 
     // ==================== 表單與計費邏輯 ====================
-    // 取得目前正在排隊選位的對象（依序：本人 -> 需佔位的陪同者 #1 -> #2 -> #3）
     function getCurrentSelectionTarget() {
       const maskedHost = maskMiddleName(formState.name);
       if (!formState.mainSeat) {
@@ -848,7 +989,7 @@
         }
       }
 
-      return null; // 所有需要座位的人都已選完
+      return null;
     }
 
     function getAllDraftSelectedSeats() {
@@ -877,10 +1018,25 @@
     }
 
     window.handleMainInput = function() {
-      formState.fAccount = document.getElementById("inputFAccount").value.trim().toUpperCase();
+      const rawF = document.getElementById("inputFAccount").value.trim().toUpperCase();
+      document.getElementById("inputFAccount").value = rawF;
+      formState.fAccount = rawF;
       formState.name = document.getElementById("inputName").value.trim();
       formState.ext = document.getElementById("inputExt").value.trim();
       formState.email = document.getElementById("inputEmail").value.trim();
+
+      const hintEl = document.getElementById("fAccountHint");
+      if (!rawF) {
+        hintEl.className = "text-[11px] text-[#8C8276] mt-0.5";
+        hintEl.textContent = "共 10 碼，例如 F000009999";
+      } else if (isValidFAccountFormat(rawF)) {
+        hintEl.className = "text-[11px] text-[#4E6B54] font-semibold mt-0.5";
+        hintEl.textContent = "✓ F 帳號格式正確（大寫 F + 9 碼數字）";
+      } else {
+        hintEl.className = "text-[11px] text-[#C86D65] font-semibold mt-0.5";
+        hintEl.textContent = "須為大寫 F + 9 個數字（共 10 碼，例 F000009999）";
+      }
+
       renderGuestsForm();
       updateBillingAndSeatPreview();
       renderBanquetHall();
@@ -892,10 +1048,9 @@
         return;
       }
       if (!formState.mainSeat) {
-        showToast("請先在右側圓桌圖為「本人」選好座位，才能再新增並填寫下一位陪同者！");
+        showToast("請先至選位區為「本人」選好座位，才能再新增並填寫下一位陪同者！");
         return;
       }
-      // 檢查前一位已新增的陪同者是否尚未填姓名或尚未完成選位
       for (let i = 0; i < formState.guests.length; i++) {
         const prev = formState.guests[i];
         const pricing = getCompanionPricing(prev);
@@ -909,7 +1064,7 @@
         }
       }
       if (formState.guests.length >= 3) {
-        showToast("每位參加者最多僅能登記 3 位陪同者（一般眷屬 / 長期工 / 臨時工）。");
+        showToast("每位參加者最多僅能登記 3 位陪同者（一般眷屬 / 其他）。");
         return;
       }
       formState.guests.push({
@@ -956,7 +1111,7 @@
         target.ageTierId = ageTierId;
         const pricing = getCompanionPricing(target);
         if (!pricing.needsSeat) {
-          target.seat = null; // 未滿1歲不佔位自動釋出預選席
+          target.seat = null;
         }
         renderGuestsForm();
         updateBillingAndSeatPreview();
@@ -965,7 +1120,7 @@
     };
 
     function getRequiredSeatCount() {
-      let count = 1; // 本人 1 席
+      let count = 1;
       formState.guests.forEach(g => {
         if (getCompanionPricing(g).needsSeat) count += 1;
       });
@@ -1049,7 +1204,7 @@
               </div>
             ` : `
               <div class="text-[11px] text-[#696056] bg-[#FFFDF9] px-2.5 py-1.5 rounded-lg border border-[#EAE0D2]">
-                身分別為「<strong>${pricing.roleLabel}</strong>」，依規定每位收費 <strong>880 元</strong>（需佔 1 席）。
+                身分別為「<strong>其他</strong>」（臨時工 / 工讀生 / 退休老師 / 國外學者等），每位收費 <strong>880 元</strong>（需佔 1 席）。
               </div>
             `}
           </div>
@@ -1068,7 +1223,6 @@
       document.getElementById("seatProgressText").textContent = `需選 ${needed} 席・已選 ${selectedCount} 席`;
       document.getElementById("totalAmountDisplay").textContent = total.toLocaleString();
 
-      // 更新左右兩側「目前選位對象」提示條
       const leftBanner = document.getElementById("currentTargetBanner");
       const hallTargetName = document.getElementById("hallTargetName");
       const hallTargetHint = document.getElementById("hallTargetHint");
@@ -1081,20 +1235,19 @@
       } else if (!target.readyToPick) {
         leftBanner.className = "px-3 py-2 rounded-lg bg-[#FFF3DF] border border-[#E8C99B] text-xs text-[#8A5A19] font-semibold";
         leftBanner.textContent = target.type === "main"
-          ? "👉 目前選位對象：請先填寫「參加者姓名」後再點右側綠燈選位"
-          : `👉 目前選位對象：請先填寫「陪同者 #${target.guestIndex + 1} 姓名」後再選位`;
+          ? "👉 目前選位對象：請先填寫「參加者姓名」後再至選位區點選綠燈空位"
+          : `👉 目前選位對象：請先填寫「陪同者 #${target.guestIndex + 1} 姓名」後再至選位區選位`;
         hallTargetName.textContent = target.type === "main" ? "待填寫參加者姓名" : `待填寫陪同者 #${target.guestIndex + 1} 姓名`;
-        hallTargetHint.textContent = "填妥姓名後即可點擊下方綠燈空位";
+        hallTargetHint.textContent = "填妥姓名後即可在選位區點擊綠燈空位";
       } else {
         leftBanner.className = "px-3 py-2 rounded-lg bg-[#FFF3DF] border border-[#E8C99B] text-xs text-[#8A5A19] font-semibold";
-        leftBanner.textContent = `👉 目前選位對象：${target.displayLabel}（請點擊右側綠燈空位）`;
+        leftBanner.textContent = `👉 目前選位對象：${target.displayLabel}（請至選位區點擊綠燈空位）`;
         hallTargetName.textContent = target.displayLabel;
         hallTargetHint.textContent = formState.mainSeat
           ? `必須與本人同坐「第 ${String(formState.mainSeat.table).padStart(2, "0")} 桌」`
-          : "請從右側 50 桌中任選一席綠燈空位";
+          : "請先點選下方桌次卡片，再於展開的大圓桌中點擊綠燈空位";
       }
 
-      // 費用明細副標
       const feeParts = ["本人免費(1席)"];
       formState.guests.forEach((g, idx) => {
         const pricing = getCompanionPricing(g);
@@ -1103,7 +1256,6 @@
       });
       document.getElementById("feeBreakdownSub").textContent = feeParts.join(" + ");
 
-      // 座位配對列表（直接顯示遮罩標示名稱：楊O宇、楊O宇眷屬1、楊O宇眷屬2）
       const previewEl = document.getElementById("seatAssignmentPreview");
       const rows = [];
       const mainSeat = formState.mainSeat;
@@ -1112,7 +1264,7 @@
         <div class="flex items-center justify-between py-1 px-2 rounded-lg bg-[#FFFDF9] border border-[#EDE4D8]">
           <span class="font-medium text-[#38332E]">本人：${hostTag}</span>
           <span class="${mainSeat ? "text-[#4E6B54] font-bold" : "text-[#C86D65]"}">
-            ${mainSeat ? `第 ${String(mainSeat.table).padStart(2, "0")} 桌・${mainSeat.seat} 號席` : "請點右側綠燈選位"}
+            ${mainSeat ? `第 ${String(mainSeat.table).padStart(2, "0")} 桌${mainSeat.table === VEGETARIAN_TABLE ? "(素食桌)" : ""}・${mainSeat.seat} 號席` : "請至選位區點選綠燈"}
           </span>
         </div>
       `);
@@ -1136,7 +1288,7 @@
             <div class="flex items-center justify-between py-1 px-2 rounded-lg bg-[#FFFDF9] border border-[#EDE4D8]">
               <span class="text-[#5C5349]">${aliasLabel}（${gRealName}）</span>
               <span class="${s ? "text-[#4E6B54] font-bold" : "text-[#C86D65]"}">
-                ${s ? `第 ${String(s.table).padStart(2, "0")} 桌・${s.seat} 號席` : "請點同桌綠燈選位"}
+                ${s ? `第 ${String(s.table).padStart(2, "0")} 桌・${s.seat} 號席` : "請至選位區點選同桌綠燈"}
               </span>
             </div>
           `);
@@ -1146,7 +1298,67 @@
       previewEl.innerHTML = rows.join("");
     }
 
-    // ==================== 實景圓桌平面圖渲染與互動 ====================
+    // ==================== 舞台前長官大主桌（12席）與 7×7+4 宴會廳渲染 ====================
+    function renderVipHeadTable() {
+      const container = document.getElementById("vipHeadTableContainer");
+      if (!container) return;
+
+      let seatsHtml = "";
+      for (let i = 0; i < VIP_EXECUTIVES.length; i++) {
+        const seatNum = i + 1;
+        const execName = VIP_EXECUTIVES[i];
+        const angleDeg = i * (360 / VIP_EXECUTIVES.length) - 90;
+        const rad = (angleDeg * Math.PI) / 180;
+        const radius = 84;
+        const x = 105 + radius * Math.cos(rad);
+        const y = 105 + radius * Math.sin(rad);
+
+        seatsHtml += `
+          <button type="button" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px; width:26px; height:26px;"
+            class="seat-btn seat-vip text-[10px]"
+            onclick="showToast('長官主桌 ${seatNum} 號席：${execName}（長官專席保留，不開放一般選位）')"
+            onmouseenter="showSeatTooltip(event, '主桌 ${seatNum} 號：${execName}')"
+            onmouseleave="hideSeatTooltip()">
+            ${seatNum}
+          </button>
+        `;
+      }
+
+      const fullVipTooltip = VIP_EXECUTIVES.map((n, idx) => `${idx + 1}號:${n}`).join("、");
+
+      container.innerHTML = `
+        <div class="max-w-md mx-auto p-3.5 rounded-2xl bg-gradient-to-b from-[#FBF5EA] to-[#F7EDE0] border-2 border-[#DFC397] shadow-xs text-center">
+          <div class="flex items-center justify-center gap-2 mb-2">
+            <span class="px-2.5 py-0.5 rounded-lg bg-[#C6924E] text-[#FFFDF9] text-xs font-bold">👑 舞台最前方・長官大主桌</span>
+            <span class="text-[11px] text-[#8A6736]">滑鼠移至桌號或席次查看名單</span>
+          </div>
+          <div class="flex justify-center">
+            <div class="vip-big-table-wrapper">
+              <div class="vip-big-table-surface"
+                onmouseenter="showSeatTooltip(event, '長官主桌名單：${escapeHtml(fullVipTooltip)}')"
+                onmouseleave="hideSeatTooltip()"
+                onclick="showToast('長官主桌名單：${escapeHtml(fullVipTooltip)}')">
+                <div class="vip-big-lazy-susan">
+                  <span class="serif-title text-xs font-bold text-[#9B7744]">長官主桌</span>
+                  <span class="text-[9px] text-[#8C8276]">專屬保留</span>
+                </div>
+              </div>
+              ${seatsHtml}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    window.selectTableToInspect = function(tableNum) {
+      activeExpandedTable = tableNum;
+      renderBanquetHall();
+      const stageEl = document.getElementById("activeTableDetailStage");
+      if (stageEl) {
+        stageEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+    };
+
     window.filterTables = function(mode) {
       currentTableFilter = mode;
       document.querySelectorAll(".filter-chip").forEach(btn => {
@@ -1156,57 +1368,20 @@
       if (activeBtn) {
         activeBtn.className = "filter-chip px-2.5 py-1 rounded-lg bg-[#C87D75] text-[#FFFDF9] font-medium cursor-pointer";
       }
+      if (mode === "veg") {
+        activeExpandedTable = VEGETARIAN_TABLE;
+      }
       renderBanquetHall();
     };
 
-    function renderBanquetHall() {
-      const occupiedMap = getOccupiedSeatMap();
-      const draftSeats = getAllDraftSelectedSeats();
-      const totalAvailable = (TOTAL_TABLES - 1) * SEATS_PER_TABLE - occupiedMap.size;
-      document.getElementById("statAvailable").textContent = Math.max(0, totalAvailable);
-      document.getElementById("statSelected").textContent = draftSeats.length;
-      document.getElementById("statOccupied").textContent = occupiedMap.size;
-
-      const rowsHtml = [];
-      for (let rowIdx = 0; rowIdx < TOTAL_TABLES / 2; rowIdx++) {
-        const leftTable = rowIdx * 2 + 1;
-        const rightTable = rowIdx * 2 + 2;
-
-        const showLeft = shouldShowTable(leftTable, occupiedMap);
-        const showRight = shouldShowTable(rightTable, occupiedMap);
-        if (!showLeft && !showRight) continue;
-
-        rowsHtml.push(`
-          <div class="grid grid-cols-1 md:grid-cols-11 items-center gap-3">
-            <div class="md:col-span-5">
-              ${showLeft ? renderSingleRoundTable(leftTable, occupiedMap) : ""}
-            </div>
-            <div class="hidden md:flex md:col-span-1 flex-col items-center justify-center self-stretch">
-              <div class="w-6 flex-1 bg-gradient-to-b from-[#E5B8B2]/45 via-[#D89A92]/55 to-[#E5B8B2]/45 border-x border-[#DFC6C2] flex items-center justify-center">
-                <span class="text-[9px] text-[#9E5A52] tracking-widest [writing-mode:vertical-rl] opacity-75">紅毯走道</span>
-              </div>
-            </div>
-            <div class="md:col-span-5">
-              ${showRight ? renderSingleRoundTable(rightTable, occupiedMap) : ""}
-            </div>
-          </div>
-        `);
-      }
-
-      const container = document.getElementById("banquetHallContainer");
-      container.innerHTML = rowsHtml.length > 0
-        ? rowsHtml.join("")
-        : `<div class="text-center py-12 text-sm text-[#8C8276]">目前篩選條件下沒有符合的桌次</div>`;
-    }
-
-    function shouldShowTable(tableNum, occupiedMap) {
+    function shouldShowTable(tableNum, occupiedMap, reserveUnlocked) {
       if (currentTableFilter === "all") return true;
-      if (currentTableFilter === "1-10") return tableNum >= 1 && tableNum <= 10;
-      if (currentTableFilter === "11-25") return tableNum >= 11 && tableNum <= 25;
-      if (currentTableFilter === "26-40") return tableNum >= 26 && tableNum <= 40;
-      if (currentTableFilter === "41-50") return tableNum >= 41 && tableNum <= 50;
+      if (currentTableFilter === "veg") return tableNum === VEGETARIAN_TABLE;
+      if (currentTableFilter === "1-21") return tableNum >= 1 && tableNum <= 21;
+      if (currentTableFilter === "22-42") return tableNum >= 22 && tableNum <= 42;
+      if (currentTableFilter === "43-53") return tableNum >= 43 && tableNum <= 53;
       if (currentTableFilter === "available") {
-        if (tableNum === VIP_TABLE) return false;
+        if (tableNum === RESERVE_TABLE && !reserveUnlocked) return false;
         let used = 0;
         for (let s = 1; s <= SEATS_PER_TABLE; s++) {
           if (occupiedMap.has(`${tableNum}-${s}`)) used++;
@@ -1216,80 +1391,227 @@
       return true;
     }
 
-    function renderSingleRoundTable(tableNum, occupiedMap) {
-      const isVip = tableNum === VIP_TABLE;
+    function renderBanquetHall() {
+      const occupiedMap = getOccupiedSeatMap();
       const draftSeats = getAllDraftSelectedSeats();
+      const reserveUnlocked = isReserveTableUnlocked(occupiedMap);
+
+      const activeTableCount = reserveUnlocked ? TOTAL_REGULAR_TABLES : (TOTAL_REGULAR_TABLES - 1);
+      const totalAvailable = activeTableCount * SEATS_PER_TABLE - occupiedMap.size;
+      document.getElementById("statAvailable").textContent = Math.max(0, totalAvailable);
+      document.getElementById("statSelected").textContent = draftSeats.length;
+      document.getElementById("statOccupied").textContent = occupiedMap.size;
+
+      // 依據 7×7 桌（7 排 × 每排 7 桌 = 49 桌） + 最後 1 排加開 4 桌（共 53 桌）排列
+      const gridRows = [];
+      for (let r = 0; r < 7; r++) {
+        const rowTables = [];
+        for (let c = 1; c <= 7; c++) {
+          rowTables.push(r * 7 + c);
+        }
+        gridRows.push({ label: `第 ${r + 1} 排（7 桌）`, tables: rowTables });
+      }
+      gridRows.push({ label: "加開與預備區（4 桌）", tables: [50, 51, 52, 53] });
+
+      const sectionsHtml = [];
+      gridRows.forEach(rowObj => {
+        const visibleTables = rowObj.tables.filter(t => shouldShowTable(t, occupiedMap, reserveUnlocked));
+        if (visibleTables.length === 0) return;
+
+        sectionsHtml.push(`
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2 text-[11px] font-semibold text-[#8C8276] px-0.5">
+              <span>${rowObj.label}</span>
+              <div class="flex-1 h-px bg-[#EAE0D2]"></div>
+            </div>
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2">
+              ${visibleTables.map(t => renderMiniTableCard(t, occupiedMap, draftSeats, reserveUnlocked)).join("")}
+            </div>
+          </div>
+        `);
+      });
+
+      const container = document.getElementById("banquetHallContainer");
+      container.innerHTML = sectionsHtml.length > 0
+        ? sectionsHtml.join("")
+        : `<div class="text-center py-8 text-sm text-[#8C8276]">目前篩選條件下沒有符合的桌次</div>`;
+
+      renderExpandedSingleTable(activeExpandedTable, occupiedMap, draftSeats, reserveUnlocked);
+    }
+
+    // 迷你卡片呈現該桌選位燈號現況（一行 7 桌，點擊後在下方展開大圓桌）
+    function renderMiniTableCard(tableNum, occupiedMap, draftSeats, reserveUnlocked) {
+      const isVeg = tableNum === VEGETARIAN_TABLE;
+      const isReserve = tableNum === RESERVE_TABLE;
+      const isReserveLocked = isReserve && !reserveUnlocked;
+      const isActive = activeExpandedTable === tableNum;
+
+      let occupiedCount = 0;
+      const dots = [];
+      for (let s = 1; s <= SEATS_PER_TABLE; s++) {
+        const isOcc = occupiedMap.has(`${tableNum}-${s}`);
+        const isDraft = draftSeats.some(d => d.table === tableNum && d.seat === s);
+        if (isOcc) occupiedCount++;
+
+        let dotColor = "bg-[#6E8B74]"; // 空位綠點
+        if (isReserveLocked) dotColor = "bg-[#C2BBB2]";
+        else if (isOcc) dotColor = "bg-[#C86D65]"; // 已佔用紅點
+        else if (isDraft) dotColor = "bg-[#E09F3E]"; // 預選黃點
+
+        dots.push(`<span class="w-1.5 h-1.5 rounded-full ${dotColor} inline-block"></span>`);
+      }
+
+      const freeCount = isReserveLocked ? 0 : SEATS_PER_TABLE - occupiedCount;
+
+      let cardStyle = "bg-[#FAF7F2] border-[#E5DBD0] hover:border-[#C87D75]";
+      if (isVeg) cardStyle = "bg-[#EEF5EF] border-[#9BB8A0] hover:border-[#4E6B54]";
+      if (isReserveLocked) cardStyle = "bg-[#F2EFEA] border-[#D5CEC5] opacity-85";
+      if (isActive) {
+        cardStyle = isVeg
+          ? "bg-[#E2EFE4] border-2 border-[#4E6B54] ring-2 ring-[#4E6B54]/20 shadow-xs"
+          : "bg-[#FDF6EC] border-2 border-[#C87D75] ring-2 ring-[#C87D75]/20 shadow-xs";
+      }
+
+      const topRowDots = dots.slice(0, 6).join("");
+      const bottomRowDots = dots.slice(6, 10).join("");
+
+      return `
+        <button type="button" onclick="selectTableToInspect(${tableNum})"
+          class="p-2 rounded-xl border text-center transition flex flex-col items-center justify-between gap-1 cursor-pointer ${cardStyle}">
+          <div class="w-full flex items-center justify-center gap-1">
+            <span class="serif-title text-sm font-bold text-[#38332E]">${String(tableNum).padStart(2, "0")}</span>
+            ${isVeg ? `<span class="px-1 py-0.2 rounded bg-[#4E6B54] text-[#FFFDF9] text-[9px] font-bold">素食</span>` : ""}
+            ${isReserve ? `<span class="px-1 py-0.2 rounded bg-[#8C8276] text-[#FFFDF9] text-[9px] font-bold">預備</span>` : ""}
+          </div>
+          <div class="text-[10px] font-medium ${isReserveLocked ? "text-[#7A7269]" : freeCount > 0 ? "text-[#4E6B54]" : "text-[#B2564E]"}">
+            ${isReserveLocked ? "未開放" : freeCount > 0 ? `剩 ${freeCount} 席` : "已客滿"}
+          </div>
+          <div class="flex flex-col items-center gap-0.5 pt-0.5">
+            <div class="flex items-center gap-0.5">${topRowDots}</div>
+            <div class="flex items-center gap-0.5">${bottomRowDots}</div>
+          </div>
+        </button>
+      `;
+    }
+
+    // 點選桌次後，在選位區正中央展開大圓桌與 10 個大型座位按鈕
+    function renderExpandedSingleTable(tableNum, occupiedMap, draftSeats, reserveUnlocked) {
+      const stageEl = document.getElementById("activeTableDetailStage");
+      if (!stageEl) return;
+
+      const isVeg = tableNum === VEGETARIAN_TABLE;
+      const isReserve = tableNum === RESERVE_TABLE;
+      const isReserveLocked = isReserve && !reserveUnlocked;
+
       let occupiedCount = 0;
       for (let s = 1; s <= SEATS_PER_TABLE; s++) {
         if (occupiedMap.has(`${tableNum}-${s}`)) occupiedCount++;
       }
-      const freeCount = isVip ? 0 : SEATS_PER_TABLE - occupiedCount;
+      const freeCount = isReserveLocked ? 0 : SEATS_PER_TABLE - occupiedCount;
 
       let seatsHtml = "";
       for (let s = 1; s <= SEATS_PER_TABLE; s++) {
         const angleDeg = (s - 1) * (360 / SEATS_PER_TABLE) - 90;
         const rad = (angleDeg * Math.PI) / 180;
-        const radius = 58;
-        const x = 74 + radius * Math.cos(rad);
-        const y = 74 + radius * Math.sin(rad);
+        const radius = 104;
+        const x = 130 + radius * Math.cos(rad);
+        const y = 130 + radius * Math.sin(rad);
 
         const occInfo = occupiedMap.get(`${tableNum}-${s}`);
         const draftInfo = draftSeats.find(sel => sel.table === tableNum && sel.seat === s);
 
         let btnClass = "seat-available";
+        let subText = "空位";
         let hoverAttr = "";
         let clickAttr = `onclick="handleSeatClick(${tableNum}, ${s})"`;
 
-        if (isVip) {
-          btnClass = "seat-vip";
-          clickAttr = `onclick="showToast('第 02 桌為長官主桌（校長、副校長、教務長、各院院長專席），不開放一般報名選擇。')"`;
-          hoverAttr = `onmouseenter="showSeatTooltip(event, '長官主桌保留席')" onmouseleave="hideSeatTooltip()"`;
+        if (isReserveLocked) {
+          btnClass = "seat-locked";
+          subText = "鎖定";
+          clickAttr = `onclick="showToast('第 53 桌為「預備桌」，必須等第 01～52 桌所有位置都選完後才會開放選擇！')"`;
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '預備桌（需等全場 520 席全滿才開放）')" onmouseleave="hideSeatTooltip()"`;
         } else if (occInfo) {
           btnClass = "seat-occupied";
+          subText = "已選";
           const safeLabel = escapeHtml(occInfo.displayLabel);
           clickAttr = `onclick="showToast('第 ${String(tableNum).padStart(2, "0")} 桌 ${s} 號席已被「${safeLabel}」預約')"`;
           hoverAttr = `onmouseenter="showSeatTooltip(event, '${safeLabel}')" onmouseleave="hideSeatTooltip()"`;
         } else if (draftInfo) {
           btnClass = "seat-selected";
+          subText = "暫選";
           const safeDraftLabel = escapeHtml(draftInfo.label);
           hoverAttr = `onmouseenter="showSeatTooltip(event, '${safeDraftLabel}（點擊可取消此席）')" onmouseleave="hideSeatTooltip()"`;
         } else {
-          hoverAttr = `onmouseenter="showSeatTooltip(event, '第 ${String(tableNum).padStart(2, "0")} 桌 ${s} 號空位')" onmouseleave="hideSeatTooltip()"`;
+          const tableTag = isVeg ? "【素食桌】" : isReserve ? "【預備桌】" : "";
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '第 ${String(tableNum).padStart(2, "0")} 桌${tableTag} ${s} 號空位')" onmouseleave="hideSeatTooltip()"`;
         }
 
         seatsHtml += `
           <button type="button" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px;"
             class="seat-btn ${btnClass}" ${clickAttr} ${hoverAttr}>
-            ${s}
+            <span class="font-bold text-[11px]">${String(s).padStart(2, "0")}</span>
+            <span class="text-[8px] opacity-95">${subText}</span>
           </button>
         `;
       }
 
-      return `
-        <div class="p-3 rounded-2xl bg-[#FAF7F2] border ${isVip ? "border-[#DFC397] bg-[#FBF6EC]" : "border-[#E8DFD1]"} hover:border-[#D3C4B0] transition">
-          <div class="flex items-center justify-between text-[11px] mb-1.5 px-1">
-            <span class="font-bold ${isVip ? "text-[#9B7744]" : "text-[#4A423B]"}">
-              第 ${String(tableNum).padStart(2, "0")} 桌 ${isVip ? "👑 長官主桌" : ""}
-            </span>
-            <span class="${isVip ? "text-[#9B7744]" : freeCount > 0 ? "text-[#4E6B54] font-semibold" : "text-[#B2564E]"}">
-              ${isVip ? "長官專席保留" : freeCount > 0 ? `剩 ${freeCount} 席` : "已客滿"}
-            </span>
-          </div>
-          <div class="round-table-wrapper">
-            <div class="round-table-surface ${isVip ? "vip-table-surface" : ""}">
-              <div class="round-table-lazy-susan">
-                <span class="serif-title text-xs font-bold ${isVip ? "text-[#9B7744]" : "text-[#964E47]"}">${String(tableNum).padStart(2, "0")}桌</span>
-                <span class="text-[9px] text-[#8C8276]">${isVip ? "主桌" : "10人席"}</span>
-              </div>
+      let tableSurfaceClass = "";
+      let centerTitleColor = "text-[#964E47]";
+      let centerSubText = "歡聚一堂";
+      let badgeHtml = "";
+
+      if (isVeg) {
+        tableSurfaceClass = "veg-table-surface";
+        centerTitleColor = "text-[#4A6850]";
+        centerSubText = "素食桌";
+        badgeHtml = `<span class="px-2.5 py-0.5 rounded-lg bg-[#4E6B54] text-[#FFFDF9] text-xs font-bold">🌱 素食桌</span>`;
+      } else if (isReserve) {
+        if (isReserveLocked) {
+          tableSurfaceClass = "reserve-locked-surface";
+          centerTitleColor = "text-[#6E675F]";
+          centerSubText = "滿席啟用";
+        }
+        badgeHtml = `<span class="px-2.5 py-0.5 rounded-lg bg-[#8C8276] text-[#FFFDF9] text-xs font-bold">預備桌</span>`;
+      }
+
+      stageEl.innerHTML = `
+        <div class="rounded-2xl bg-[#FAF7F2] border border-[#E6DDD0] p-4 sm:p-5">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+            <div class="flex items-center gap-2">
+              <h3 class="serif-title text-lg font-bold text-[#38332E]">第 ${String(tableNum).padStart(2, "0")} 桌</h3>
+              ${badgeHtml}
             </div>
-            ${seatsHtml}
+            <span class="text-xs font-semibold ${isReserveLocked ? "text-[#7A7269]" : freeCount > 0 ? "text-[#4E6B54]" : "text-[#B2564E]"}">
+              ${isReserveLocked ? "第 01～52 桌全滿後開放" : `尚餘 ${freeCount} 席`}
+            </span>
           </div>
+
+          <div class="flex justify-center py-2">
+            <div class="round-table-wrapper">
+              <div class="round-table-surface ${tableSurfaceClass}">
+                <div class="round-table-lazy-susan">
+                  <span class="text-[9px] tracking-widest text-[#8C8276]">TABLE</span>
+                  <span class="serif-title text-xl font-bold ${centerTitleColor} leading-tight">${String(tableNum).padStart(2, "0")}</span>
+                  <span class="text-[10px] text-[#787067]">${centerSubText}</span>
+                </div>
+              </div>
+              ${seatsHtml}
+            </div>
+          </div>
+
+          <p class="text-center text-[11px] text-[#787067] mt-2">
+            綠燈為可選空位；黃燈為您目前暫選（點擊可取消）；紅燈為其他人已預約（滑鼠移至紅燈可查看遮罩姓名）。
+          </p>
         </div>
       `;
     }
 
     window.handleSeatClick = function(tableNum, seatNum) {
-      if (tableNum === VIP_TABLE) return;
+      const occupiedMap = getOccupiedSeatMap();
+      if (tableNum === RESERVE_TABLE && !isReserveTableUnlocked(occupiedMap)) {
+        showToast("第 53 桌為「預備桌」，必須等第 01～52 桌所有位置都選完後才會開放選擇！");
+        return;
+      }
 
       // 1. 若點擊的是目前已預選的本人座位 -> 取消本人與同行者座位以便重選
       if (formState.mainSeat && formState.mainSeat.table === tableNum && formState.mainSeat.seat === seatNum) {
@@ -1315,13 +1637,13 @@
       // 3. 取得目前選位對象
       const target = getCurrentSelectionTarget();
       if (!target) {
-        showToast("目前所有已登記人員皆已完成選位！若要新增陪同者請按左側「+ 新增陪同者」，或點擊黃色座位取消重選。");
+        showToast("目前所有已登記人員皆已完成選位！若要新增陪同者請按「+ 新增陪同者」，或點擊黃色座位取消重選。");
         return;
       }
 
       if (!target.readyToPick) {
         if (target.type === "main") {
-          showToast("請先在左側填寫「參加者姓名」，再點選右側綠燈座位！");
+          showToast("請先填寫「參加者姓名」，再到選位區點選綠燈座位！");
           document.getElementById("inputName").focus();
         } else {
           showToast(`請先填寫「陪同者 #${target.guestIndex + 1}」的姓名，選完座位才能再填下一位！`);
@@ -1332,11 +1654,12 @@
       // 4. 分配座位給目前選位對象
       if (target.type === "main") {
         formState.mainSeat = { table: tableNum, seat: seatNum };
-        showToast(`已為「${target.displayLabel}」選定第 ${String(tableNum).padStart(2, "0")} 桌 ${seatNum} 號席！`);
+        const vegNotice = tableNum === VEGETARIAN_TABLE ? "（提醒：您選擇的是「素食桌」）" : "";
+        showToast(`已為「${target.displayLabel}」選定第 ${String(tableNum).padStart(2, "0")} 桌 ${seatNum} 號席${vegNotice}！`);
       } else {
         const lockedTable = formState.mainSeat.table;
         if (tableNum !== lockedTable) {
-          showToast(`依規定陪同者必須坐在同一桌！請選擇「第 ${String(lockedTable).padStart(2, "0")} 桌」的綠燈空位。`);
+          showToast(`依規定陪同者必須坐在同一桌！請在選位區選擇「第 ${String(lockedTable).padStart(2, "0")} 桌」的綠燈空位。`);
           return;
         }
         const gObj = formState.guests.find(g => g.id === target.guestId);
@@ -1365,19 +1688,29 @@
 
     // ==================== 驗證與存檔流程 ====================
     window.openConfirmSubmitModal = function() {
+      if (!document.getElementById("privacyConsentCheckbox").checked) {
+        return showToast("請先勾選「我同意上述個資使用方式」。");
+      }
+
       handleMainInput();
-      if (!formState.fAccount) return showToast("請填寫您的「F 帳號」。");
+      if (!formState.fAccount) {
+        document.getElementById("inputFAccount").focus();
+        return showToast("請填寫您的「F 帳號」（需為大寫 F 再加 9 個數字，共 10 碼，例如 F000009999）。");
+      }
+      if (!isValidFAccountFormat(formState.fAccount)) {
+        document.getElementById("inputFAccount").focus();
+        return showToast("「F 帳號」格式錯誤！請輸入大寫 F 再加 9 個數字（共 10 碼，例如 F000009999）。");
+      }
       if (!formState.name) return showToast("請填寫「參加者姓名」。");
       if (!formState.ext) return showToast("請填寫「學校分機」。");
       if (!formState.email || !formState.email.includes("@")) return showToast("請填寫正確的「學校 Email」。");
 
       const duplicateReg = isFAccountAlreadyRegistered(formState.fAccount);
       if (duplicateReg) {
-        showToast(`F 帳號「${formState.fAccount}」已有報名紀錄（編號：${duplicateReg.regId}），不得重複報名或重複佔位！如需重選請先至右上角「查詢 / 取消報名與重選」。`);
+        showToast(`F 帳號「${formState.fAccount}」已有報名紀錄（編號：${duplicateReg.regId}），不得重複報名或重複佔位！如需重選請先至上方「查詢 / 取消報名與重選」。`);
         return;
       }
 
-      // 檢查同行者姓名與座位是否填寫完整
       for (let i = 0; i < formState.guests.length; i++) {
         if (!formState.guests[i].name.trim()) {
           return showToast(`請填寫「陪同者 #${i + 1}」的姓名。`);
@@ -1387,7 +1720,7 @@
       const draftSeats = getAllDraftSelectedSeats();
       const needed = getRequiredSeatCount();
       if (!formState.mainSeat || draftSeats.length !== needed) {
-        return showToast(`您總共需要 ${needed} 個座位，目前僅選了 ${draftSeats.length} 席，請在右側圓桌圖點選足額的同桌空位。`);
+        return showToast(`您總共需要 ${needed} 個座位，目前僅選了 ${draftSeats.length} 席，請至選位區點選足額的同桌空位。`);
       }
 
       const targetTable = formState.mainSeat.table;
@@ -1396,6 +1729,10 @@
       }
 
       const occupiedMap = getOccupiedSeatMap();
+      if (targetTable === RESERVE_TABLE && !isReserveTableUnlocked(occupiedMap)) {
+        return showToast("第 53 桌為預備桌，必須等全場第 01～52 桌全滿後才開放選擇！");
+      }
+
       for (const s of draftSeats) {
         if (occupiedMap.has(`${s.table}-${s.seat}`)) {
           return showToast(`第 ${String(s.table).padStart(2, "0")} 桌 ${s.seat} 號席剛剛已被其他同仁選走，請更換同桌其他綠燈空位！`);
@@ -1404,11 +1741,12 @@
 
       const total = calculateTotalAmount();
       const maskedHost = maskMiddleName(formState.name);
+      const tableSpecialTag = targetTable === VEGETARIAN_TABLE ? "（🌱 素食桌）" : targetTable === RESERVE_TABLE ? "（預備桌）" : "";
       let detailHtml = `
         <div class="p-3.5 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] space-y-1.5 text-xs">
           <div><span class="text-[#787067]">報名人：</span><strong>${escapeHtml(formState.name)}</strong>（${escapeHtml(formState.fAccount)}／分機 ${escapeHtml(formState.ext)}）</div>
           <div><span class="text-[#787067]">學校信箱：</span>${escapeHtml(formState.email)}</div>
-          <div><span class="text-[#787067]">選定桌次：</span><strong class="text-[#4E6B54]">第 ${String(targetTable).padStart(2, "0")} 桌</strong></div>
+          <div><span class="text-[#787067]">選定桌次：</span><strong class="text-[#4E6B54]">第 ${String(targetTable).padStart(2, "0")} 桌 ${tableSpecialTag}</strong></div>
         </div>
         <div class="space-y-1.5 text-xs">
           <div class="font-bold text-[#5C5349]">出席與座位明細：</div>
@@ -1508,6 +1846,8 @@
         document.getElementById("inputName").value = "";
         document.getElementById("inputExt").value = "";
         document.getElementById("inputEmail").value = "";
+        document.getElementById("fAccountHint").className = "text-[11px] text-[#8C8276] mt-0.5";
+        document.getElementById("fAccountHint").textContent = "共 10 碼，例如 F000009999";
         renderGuestsForm();
         updateBillingAndSeatPreview();
         renderBanquetHall();
@@ -1521,7 +1861,8 @@
     };
 
     function showReceiptModal(reg) {
-      const tableStr = `第 ${String(reg.mainSeat.table).padStart(2, "0")} 桌`;
+      const vegTag = reg.mainSeat.table === VEGETARIAN_TABLE ? "（🌱 素食桌）" : "";
+      const tableStr = `第 ${String(reg.mainSeat.table).padStart(2, "0")} 桌${vegTag}`;
       const seatLines = [`・本人 ${reg.name}：${tableStr} ${reg.mainSeat.seat} 號席（免費）`];
       reg.guests.forEach(g => {
         const sTxt = g.seatInfo ? `${tableStr} ${g.seatInfo.seat} 號席` : "不佔位";
@@ -1628,7 +1969,8 @@
 
     function renderCancelManagementView(reg) {
       const area = document.getElementById("cancelResultArea");
-      const tableStr = `第 ${String(reg.mainSeat.table).padStart(2, "0")} 桌`;
+      const vegTag = reg.mainSeat.table === VEGETARIAN_TABLE ? "（素食桌）" : "";
+      const tableStr = `第 ${String(reg.mainSeat.table).padStart(2, "0")} 桌${vegTag}`;
 
       let guestsHtml = "";
       if (reg.guests && reg.guests.length > 0) {
@@ -1648,7 +1990,7 @@
           `;
         }).join("");
       } else {
-        guestsHtml = `<div class="text-xs text-[#8C8276] px-1">無登記陪同者（一般眷屬 / 長期工 / 臨時工）</div>`;
+        guestsHtml = `<div class="text-xs text-[#8C8276] px-1">無登記陪同者</div>`;
       }
 
       area.innerHTML = `
@@ -1781,7 +2123,7 @@
           <div class="serif-title text-xl font-bold text-[#38332E] mt-0.5">${totalGroups} 組</div>
         </div>
         <div class="p-3 rounded-xl bg-[#FFFDF9] border border-[#E6DDD0]">
-          <div class="text-[11px] text-[#787067]">實際佔位總人數（上限 490）</div>
+          <div class="text-[11px] text-[#787067]">一般席實際佔位人數（上限 530）</div>
           <div class="serif-title text-xl font-bold text-[#4E6B54] mt-0.5">${totalSeatedPeople} 人</div>
         </div>
         <div class="p-3 rounded-xl bg-[#FFFDF9] border border-[#E6DDD0]">
@@ -1802,7 +2144,7 @@
       const filtered = registrations.filter(r => {
         if (!kw) return true;
         const guestNames = (r.guests || []).map(g => `${g.name} ${g.roleLabel || ""}`).join(" ");
-        const tableStr = `第${String(r.mainSeat.table).padStart(2, "0")}桌 ${r.mainSeat.table}桌`;
+        const tableStr = `第${String(r.mainSeat.table).padStart(2, "0")}桌 ${r.mainSeat.table}桌 ${r.mainSeat.table === VEGETARIAN_TABLE ? "素食桌" : ""}`;
         return `${r.regId} ${r.fAccount} ${r.name} ${r.ext} ${r.email} ${guestNames} ${tableStr}`.toLowerCase().includes(kw);
       });
 
@@ -1815,7 +2157,8 @@
       }
 
       tbody.innerHTML = filtered.map(r => {
-        const tableStr = `第 ${String(r.mainSeat.table).padStart(2, "0")} 桌`;
+        const vegTag = r.mainSeat.table === VEGETARIAN_TABLE ? "(素食桌)" : "";
+        const tableStr = `第 ${String(r.mainSeat.table).padStart(2, "0")} 桌${vegTag}`;
         const peopleList = [
           `<div class="font-semibold text-[#38332E]">・${escapeHtml(r.name)}（本人・${tableStr} ${r.mainSeat.seat}號）</div>`,
           ...(r.guests || []).map(g => {
@@ -1855,6 +2198,7 @@
         "報名編號",
         "專屬取消碼",
         "桌次",
+        "桌別屬性",
         "座位號碼",
         "出席人員姓名",
         "身分別",
@@ -1871,6 +2215,28 @@
       ];
 
       const rows = [headers];
+
+      VIP_EXECUTIVES.forEach((execName, idx) => {
+        rows.push([
+          "VIP-MAIN",
+          "-",
+          "長官大主桌",
+          "舞台前主桌(12席)",
+          `${idx + 1}號`,
+          execName,
+          "受邀長官",
+          "長官主桌保留席",
+          "佔位",
+          0,
+          0,
+          "-",
+          execName,
+          "-",
+          "-",
+          "",
+          ""
+        ]);
+      });
 
       const flatEntries = [];
       registrations.forEach(r => {
@@ -1914,10 +2280,12 @@
       flatEntries.sort((a, b) => (a.table - b.table) || (a.seat - b.seat));
 
       flatEntries.forEach(item => {
+        const tableAttr = item.table === VEGETARIAN_TABLE ? "素食桌" : item.table === RESERVE_TABLE ? "預備桌" : "一般桌";
         rows.push([
           item.regId,
           item.cancelCode,
           `第${String(item.table).padStart(2, "0")}桌`,
+          tableAttr,
           item.seat === 99 ? "不佔位" : `${item.seat}號`,
           item.personName,
           item.roleCategory,
@@ -1943,7 +2311,7 @@
       a.download = `長庚科技大學116年旺年會_報到與發獎總表_${today}.csv`;
       a.click();
       URL.revokeObjectURL(url);
-      showToast("已成功匯出「長庚科技大學116年旺年會」Excel 總表！");
+      showToast("已成功匯出「長庚科技大學116年旺年會」Excel 總表（含長官主桌與素食桌標示）！");
     };
 
     // ==================== 共用輔助函式 ====================
@@ -1971,6 +2339,7 @@
     }
 
     function refreshAllUI() {
+      renderVipHeadTable();
       renderGuestsForm();
       updateBillingAndSeatPreview();
       renderBanquetHall();
@@ -1980,6 +2349,7 @@
     }
 
     // 啟動初始化
+    renderVipHeadTable();
     renderGuestsForm();
     updateBillingAndSeatPreview();
     renderBanquetHall();
