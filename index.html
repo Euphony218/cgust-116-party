@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>長庚科技大學116年旺年會｜線上報名與實景圓桌選位系統</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #FAF7F2;
+      --bg-card: #FFFDF9;
+      --morandi-rose: #C87D75;
+      --morandi-rose-dark: #A85D55;
+      --morandi-sage: #6E8B74;
+      --morandi-sage-light: #E9F0EA;
+      --morandi-sand: #E6DDD0;
+      --morandi-amber: #D9A05B;
+      --morandi-slate: #5C6B73;
+      --text-ink: #38332E;
+      --text-muted: #787067;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--text-ink);
+      background-image: radial-gradient(#E6DDD0 0.8px, transparent 0.8px);
+      background-size: 20px 20px;
+    }
+
+    .serif-title {
+      font-family: 'Noto Serif TC', serif;
+    }
+
+    /* 實景圓桌容器 */
+    .round-table-wrapper {
+      position: relative;
+      width: 148px;
+      height: 148px;
+      margin: 0 auto;
+    }
+
+    /* 莫蘭迪酒紅絨布圓桌 */
+    .round-table-surface {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 78px;
+      height: 78px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #D48A82, #B3645C 75%, #964E47 100%);
+      box-shadow: 0 6px 14px rgba(150, 78, 71, 0.22), inset 0 2px 4px rgba(255, 255, 255, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #F3EAE0;
+      z-index: 2;
+    }
+
+    /* 中央轉盤 */
+    .round-table-lazy-susan {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: rgba(255, 253, 249, 0.92);
+      border: 1px solid #E2D5C5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 5px rgba(120, 112, 103, 0.15);
+    }
+
+    /* 長官主桌樣式 */
+    .vip-table-surface {
+      background: radial-gradient(circle at 35% 35%, #E3B574, #C6924E 75%, #A67536 100%);
+      box-shadow: 0 6px 14px rgba(166, 117, 54, 0.25);
+    }
+
+    /* 座椅按鈕 */
+    .seat-btn {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(80, 70, 60, 0.14);
+    }
+
+    /* 空位（鼠尾草綠燈） */
+    .seat-available {
+      background-color: #6E8B74;
+      color: #FFFDF9;
+      border: 1.5px solid #F7F4EE;
+    }
+    .seat-available:hover {
+      background-color: #55705B;
+      transform: translate(-50%, -50%) scale(1.18);
+      box-shadow: 0 4px 8px rgba(110, 139, 116, 0.35);
+    }
+
+    /* 目前預選（暖杏黃） */
+    .seat-selected {
+      background-color: #E09F3E;
+      color: #FFFDF9;
+      border: 2px solid #FFFDF9;
+      transform: translate(-50%, -50%) scale(1.2);
+      box-shadow: 0 0 0 2px #E09F3E, 0 4px 10px rgba(224, 159, 62, 0.4);
+    }
+
+    /* 已佔用（陶土紅燈） */
+    .seat-occupied {
+      background-color: #C86D65;
+      color: #FFFDF9;
+      border: 1.5px solid #F9ECEA;
+      cursor: help;
+    }
+    .seat-occupied:hover {
+      transform: translate(-50%, -50%) scale(1.15);
+      background-color: #B2564E;
+    }
+
+    /* 長官主桌保留席 */
+    .seat-vip {
+      background-color: #D4B483;
+      color: #FFFDF9;
+      border: 1.5px solid #FAF4EB;
+      cursor: not-allowed;
+      opacity: 0.85;
+    }
+
+    /* 自訂捲軸（無黑色） */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F3EDE4;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CFC3B4;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B5A694;
+    }
+
+    /* 懸停氣泡框 */
+    #seatTooltip {
+      pointer-events: none;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- 頂部導覽列（溫潤奶茶暖白質感） -->
+  <header class="sticky top-0 z-30 bg-[#FFFDF9]/95 backdrop-blur border-b border-[#E6DDD0] shadow-xs">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-[#C87D75] text-[#FFFDF9] flex items-center justify-center shadow-xs font-serif font-bold text-lg">
+          庚
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5 flex-wrap">
+            <h1 class="serif-title text-xl sm:text-2xl font-bold text-[#38332E] tracking-wide">
+              長庚科技大學116年旺年會
+            </h1>
+            <span id="syncStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#F3EDE4] text-[#787067] border border-[#E2D7C7]">
+              <span class="w-2 h-2 rounded-full bg-[#D9A05B]"></span>
+              連線初始化中...
+            </span>
+          </div>
+          <p class="text-xs text-[#787067] mt-0.5">
+            全場 50 桌・每桌 10 席（第 02 桌為長官主桌保留席，開放 490 席即時紅綠燈選位）
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2.5 flex-wrap">
+        <button onclick="openCancelOrQueryModal()" class="px-3.5 py-2 rounded-xl text-sm font-medium bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EBE1D3] border border-[#DFD3C3] transition flex items-center gap-1.5 cursor-pointer">
+          <svg class="w-4 h-4 text-[#A85D55]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+          查詢 / 取消報名與重選
+        </button>
+
+        <button onclick="openAdminLoginModal()" class="px-3.5 py-2 rounded-xl text-sm font-medium bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] shadow-xs transition flex items-center gap-1.5 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          後台查驗 / 匯出 Excel
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容雙欄工作區 -->
+  <main class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+    <!-- 左側欄：報名登錄、陪同者與計費明細（佔 4 欄） -->
+    <section class="lg:col-span-4 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6 space-y-5 lg:sticky lg:top-24">
+      <div class="border-b border-[#EFE8DD] pb-3.5 flex items-center justify-between">
+        <div>
+          <h2 class="serif-title text-lg font-bold text-[#38332E]">參加者報名與陪同者登記</h2>
+          <p class="text-xs text-[#787067] mt-0.5">每位同仁限報 1 次（不可重複佔位），最多可帶 3 位陪同者</p>
+        </div>
+        <span class="px-2.5 py-1 rounded-lg bg-[#F6EFE6] text-[#A85D55] text-xs font-semibold border border-[#EADBC8]">
+          同組限坐同桌
+        </span>
+      </div>
+
+      <!-- 本人基本資料 -->
+      <div class="space-y-3.5">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-[#5C5349] mb-1">F 帳號 <span class="text-[#C86D65]">*</span></label>
+            <input id="inputFAccount" type="text" placeholder="例：F12345" oninput="handleMainInput()"
+              class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition uppercase" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#5C5349] mb-1">參加者姓名 <span class="text-[#C86D65]">*</span></label>
+            <input id="inputName" type="text" placeholder="請輸入真實姓名" oninput="handleMainInput()"
+              class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-[#5C5349] mb-1">學校分機 <span class="text-[#C86D65]">*</span></label>
+            <input id="inputExt" type="text" placeholder="例：5678" oninput="handleMainInput()"
+              class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[#5C5349] mb-1">學校 Email <span class="text-[#C86D65]">*</span></label>
+            <input id="inputEmail" type="email" placeholder="帳號@mail.cgust.edu.tw" oninput="handleMainInput()"
+              class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 陪同者（一般眷屬 / 長期工 / 臨時工）區塊 -->
+      <div class="pt-2 border-t border-[#EFE8DD]">
+        <div class="flex items-center justify-between mb-2.5">
+          <div>
+            <span class="text-sm font-bold text-[#38332E]">陪同者（一般眷屬 / 長期工 / 臨時工）</span>
+            <span class="text-xs text-[#787067] ml-1">（上限 3 位）</span>
+          </div>
+          <button type="button" id="btnAddGuest" onclick="addGuest()"
+            class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] border border-[#C6D8C9] transition cursor-pointer shrink-0">
+            + 新增陪同者
+          </button>
+        </div>
+
+        <!-- 收費說明小卡 -->
+        <div class="p-2.5 rounded-xl bg-[#F7F3EC] border border-[#E8DFD1] text-[11px] text-[#696056] leading-relaxed mb-3">
+          <span class="font-semibold text-[#A85D55]">收費與佔位標準：</span>
+          教職員本人免費佔位｜一般眷屬：未滿 1 歲免費（<span class="underline">不佔位</span>）、1–6 歲 250 元、7–12 歲國小 450 元、國中（含）以上 880 元｜長期工或臨時工：每位 880 元（佔位）。
+        </div>
+
+        <div id="guestsContainer" class="space-y-2.5"></div>
+      </div>
+
+      <!-- 目前選位配對預覽 -->
+      <div class="p-3.5 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-[#5C5349]">目前選位配對進度</span>
+          <span id="seatProgressText" class="text-xs font-semibold text-[#C87D75]">需選 1 席・已選 0 席</span>
+        </div>
+        <div id="currentTargetBanner" class="px-3 py-2 rounded-lg bg-[#FFF3DF] border border-[#E8C99B] text-xs text-[#8A5A19] font-semibold">
+          👉 目前選位對象：請先填寫參加者姓名後點右側綠燈選位
+        </div>
+        <div id="seatAssignmentPreview" class="space-y-1.5 text-xs"></div>
+      </div>
+
+      <!-- 應繳金額總結 -->
+      <div class="p-4 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9] flex items-center justify-between">
+        <div>
+          <p class="text-xs text-[#8C534C] font-medium">本筆報名應繳總金額</p>
+          <p id="feeBreakdownSub" class="text-[11px] text-[#9E706A] mt-0.5">本人免費（1 席）</p>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-[#A85D55] font-semibold">NT$</span>
+          <span id="totalAmountDisplay" class="serif-title text-2xl font-bold text-[#A85D55]">0</span>
+        </div>
+      </div>
+
+      <!-- 送出按鈕 -->
+      <button type="button" onclick="openConfirmSubmitModal()"
+        class="w-full py-3 rounded-xl bg-[#C87D75] hover:bg-[#B36860] text-[#FFFDF9] font-bold text-sm shadow-sm transition cursor-pointer tracking-wide">
+        檢視明細並確定存檔
+      </button>
+    </section>
+
+    <!-- 右側欄：宴會廳 50 桌實景圓桌平面圖（佔 8 欄） -->
+    <section class="lg:col-span-8 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6">
+      <!-- 圖例與統計列 -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#EFE8DD]">
+        <div>
+          <h2 class="serif-title text-lg font-bold text-[#38332E]">宴會廳實景圓桌配置圖（50 桌）</h2>
+          <p class="text-xs text-[#787067] mt-0.5">請先點擊右側綠燈空位選席；滑鼠移至紅燈座位可查看入座者隱私遮罩姓名</p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3 text-xs font-medium bg-[#FAF7F2] px-3.5 py-2 rounded-xl border border-[#E8DFD1]">
+          <span class="flex items-center gap-1.5 text-[#4E6B54]">
+            <span class="w-3 h-3 rounded-full bg-[#6E8B74] inline-block"></span>
+            空位 (<span id="statAvailable">490</span>)
+          </span>
+          <span class="flex items-center gap-1.5 text-[#B87D2E]">
+            <span class="w-3 h-3 rounded-full bg-[#E09F3E] inline-block"></span>
+            預選中 (<span id="statSelected">0</span>)
+          </span>
+          <span class="flex items-center gap-1.5 text-[#B2564E]">
+            <span class="w-3 h-3 rounded-full bg-[#C86D65] inline-block"></span>
+            已佔用 (<span id="statOccupied">0</span>)
+          </span>
+          <span class="flex items-center gap-1.5 text-[#9B7744]">
+            <span class="w-3 h-3 rounded-full bg-[#D4B483] inline-block"></span>
+            長官主桌 (02桌)
+          </span>
+        </div>
+      </div>
+
+      <!-- 主舞台橫幅 -->
+      <div class="mt-4 mb-5">
+        <div class="max-w-xl mx-auto py-2.5 px-6 rounded-2xl bg-gradient-to-r from-[#EFE6D8] via-[#E5D6C3] to-[#EFE6D8] border border-[#D8C6B0] text-center shadow-2xs">
+          <span class="serif-title text-sm font-bold text-[#5C4938] tracking-widest">
+            ✦ 主 舞 臺 & 摸 彩 頒 獎 區 ✦
+          </span>
+        </div>
+      </div>
+
+      <!-- 右側即時「目前選位對象」引導橫幅 -->
+      <div id="hallCurrentTargetBar" class="mb-4 px-4 py-2.5 rounded-xl bg-[#FFF6E5] border border-[#E6C794] flex flex-wrap items-center justify-between gap-2 text-xs">
+        <span class="font-bold text-[#8A5A19]">🎯 目前選位對象：<span id="hallTargetName" class="underline">尚未填寫姓名</span></span>
+        <span id="hallTargetHint" class="text-[#787067]">請先在左側填寫姓名，再點擊下方綠燈空位</span>
+      </div>
+
+      <!-- 桌次快速篩選器 -->
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-4 text-xs">
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <span class="text-[#787067] font-medium">快速定位：</span>
+          <button onclick="filterTables('all')" id="filter-all" class="filter-chip px-2.5 py-1 rounded-lg bg-[#C87D75] text-[#FFFDF9] font-medium cursor-pointer">全部 50 桌</button>
+          <button onclick="filterTables('1-10')" id="filter-1-10" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">第 01–10 桌</button>
+          <button onclick="filterTables('11-25')" id="filter-11-25" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">第 11–25 桌</button>
+          <button onclick="filterTables('26-40')" id="filter-26-40" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">第 26–40 桌</button>
+          <button onclick="filterTables('41-50')" id="filter-41-50" class="filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">第 41–50 桌</button>
+          <button onclick="filterTables('available')" id="filter-available" class="filter-chip px-2.5 py-1 rounded-lg bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] cursor-pointer">僅看尚有空位</button>
+        </div>
+      </div>
+
+      <!-- 宴會廳左右雙區 + 中央紅毯走道容器 -->
+      <div id="banquetHallContainer" class="max-h-[760px] overflow-y-auto pr-1 space-y-4"></div>
+    </section>
+  </main>
+
+  <!-- 懸停提示氣泡（顯示遮罩姓名或眷屬編號） -->
+  <div id="seatTooltip" class="fixed z-50 hidden px-3 py-1.5 rounded-xl bg-[#4A423B] text-[#FFFDF9] text-xs font-medium shadow-md border border-[#6E6359]">
+  </div>
+
+  <!-- 彈窗 1：確認存檔與金額明細 -->
+  <div id="confirmSubmitModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-md w-full p-6 shadow-xl space-y-4">
+      <div class="border-b border-[#EFE8DD] pb-3">
+        <h3 class="serif-title text-lg font-bold text-[#38332E]">確認報名與繳費明細</h3>
+        <p class="text-xs text-[#787067] mt-0.5">存檔後系統將核發「報名編號」與「專屬取消碼」</p>
+      </div>
+      <div id="confirmModalContent" class="space-y-3 text-sm text-[#4A423B]"></div>
+      <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#EFE8DD]">
+        <button onclick="closeModal('confirmSubmitModal')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#F3EDE4] text-[#5C5349] hover:bg-[#E6DDD0] cursor-pointer">返回修改</button>
+        <button id="btnFinalSave" onclick="executeSaveRegistration()" class="px-5 py-2 rounded-xl text-xs font-bold bg-[#C87D75] text-[#FFFDF9] hover:bg-[#B36860] shadow-xs cursor-pointer">確定存檔並取得取消碼</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 彈窗 2：報名成功憑證（含報名編號、應繳總額、專屬取消碼） -->
+  <div id="receiptModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-lg w-full p-6 shadow-xl space-y-4">
+      <div class="flex items-center gap-3 border-b border-[#EFE8DD] pb-3.5">
+        <div class="w-10 h-10 rounded-full bg-[#E9F0EA] text-[#4E6B54] flex items-center justify-center font-bold text-lg">✓</div>
+        <div>
+          <h3 class="serif-title text-lg font-bold text-[#38332E]">報名成功！座位已為您鎖定</h3>
+          <p class="text-xs text-[#787067]">請務必妥善保存以下「報名編號」與「專屬取消碼」</p>
+        </div>
+      </div>
+
+      <div id="receiptContent" class="space-y-3"></div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-[#EFE8DD]">
+        <button onclick="copyReceiptText()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] cursor-pointer">
+          複製憑證與取消碼
+        </button>
+        <div class="flex items-center gap-2">
+          <a id="gmailSendLink" target="_blank" rel="noopener" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] cursor-pointer">
+            透過 Gmail 寄給自己
+          </a>
+          <button onclick="closeModal('receiptModal')" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#C87D75] text-[#FFFDF9] hover:bg-[#B36860] cursor-pointer">
+            完成
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 彈窗 3：查詢 / 憑 F 帳號 + 取消碼取消特定人或整筆報名 -->
+  <div id="cancelQueryModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-lg w-full p-6 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#EFE8DD] pb-3">
+        <div>
+          <h3 class="serif-title text-lg font-bold text-[#38332E]">查詢報名 / 取消特定席次或整筆重選</h3>
+          <p class="text-xs text-[#787067] mt-0.5">原報名人可輸入「F 帳號」與「專屬取消碼」進行異動</p>
+        </div>
+        <button onclick="closeModal('cancelQueryModal')" class="text-[#8C8276] hover:text-[#38332E] text-lg cursor-pointer">✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-[#5C5349] mb-1">原報名人 F 帳號</label>
+          <input id="queryFAccount" type="text" placeholder="例：F12345"
+            class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm uppercase focus:outline-none focus:border-[#C87D75]" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-[#5C5349] mb-1">專屬取消碼（6 碼）</label>
+          <input id="queryCancelCode" type="text" placeholder="請輸入報名時取得之取消碼"
+            class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm uppercase focus:outline-none focus:border-[#C87D75]" />
+        </div>
+      </div>
+
+      <button onclick="lookupRegistrationForCancel()" class="w-full py-2.5 rounded-xl bg-[#6E8B74] hover:bg-[#5A7560] text-[#FFFDF9] text-xs font-bold cursor-pointer transition">
+        驗證並查詢我的報名紀錄
+      </button>
+
+      <div id="cancelResultArea" class="space-y-3"></div>
+    </div>
+  </div>
+
+  <!-- 彈窗 4：管理員密碼驗證（密碼 0120，不顯示提示） -->
+  <div id="adminLoginModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-sm w-full p-6 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#EFE8DD] pb-3">
+        <h3 class="serif-title text-lg font-bold text-[#38332E]">管理員後台驗證</h3>
+        <button onclick="closeModal('adminLoginModal')" class="text-[#8C8276] hover:text-[#38332E] text-lg cursor-pointer">✕</button>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-[#5C5349] mb-1.5">請輸入管理員密碼</label>
+        <input id="adminPwdInput" type="password" placeholder="••••" onkeydown="if(event.key==='Enter') verifyAdminLogin()"
+          class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm focus:outline-none focus:border-[#C87D75]" />
+      </div>
+      <div class="flex justify-end gap-2">
+        <button onclick="closeModal('adminLoginModal')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#F3EDE4] text-[#5C5349] cursor-pointer">取消</button>
+        <button onclick="verifyAdminLogin()" class="px-5 py-2 rounded-xl text-xs font-bold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] cursor-pointer">登入後台</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 彈窗 5：管理員後台總表、取消碼查驗、多人雲端設定與 Excel 匯出 -->
+  <div id="adminDashboardModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-6xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 bg-[#F7F2EA] border-b border-[#E6DDD0] flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <h3 class="serif-title text-lg font-bold text-[#38332E]">長庚科技大學116年旺年會｜管理員後台查驗中心</h3>
+          <p class="text-xs text-[#787067]">含報名編號、專屬取消碼備查、座位總表與報到發獎 Excel 匯出</p>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="toggleCloudConfigPanel()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#FFFDF9] text-[#5C5349] border border-[#D8CBB8] hover:bg-[#F3EDE4] cursor-pointer">
+            多人雲端同步設定
+          </button>
+          <button onclick="exportAdminExcelCSV()" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] shadow-xs cursor-pointer">
+            匯出報到與發獎 Excel (.csv)
+          </button>
+          <button onclick="closeModal('adminDashboardModal')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-[#E8DFD1] text-[#5C5349] hover:bg-[#DCD0BE] cursor-pointer">
+            關閉
+          </button>
+        </div>
+      </div>
+
+      <!-- 多人雲端設定摺疊面板 -->
+      <div id="cloudConfigPanel" class="hidden px-6 py-4 bg-[#F4EFE6] border-b border-[#E2D6C5] space-y-3 text-xs">
+        <div class="font-bold text-[#38332E]">多人即時同步資料庫設定（Firebase Config）</div>
+        <p class="text-[#696056]">貼上您的 Firebase <code class="bg-[#FFFDF9] px-1.5 py-0.5 rounded border border-[#DFD3C3]">firebaseConfig</code> 物件後按連線，再複製「同事專用同步報名網址」發送給全校同仁即可永久即時互通：</p>
+        <textarea id="firebaseConfigInput" rows="3" placeholder='{"apiKey":"...","authDomain":"...","projectId":"...","storageBucket":"...","messagingSenderId":"...","appId":"..."}'
+          class="w-full p-2.5 rounded-xl bg-[#FFFDF9] border border-[#D8CBB8] font-mono text-xs focus:outline-none"></textarea>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="applyManualFirebaseConfig()" class="px-4 py-2 rounded-xl bg-[#C87D75] text-[#FFFDF9] font-bold cursor-pointer">1. 立即連線測試並套用</button>
+          <button onclick="copyShareableSyncUrl()" class="px-4 py-2 rounded-xl bg-[#6E8B74] text-[#FFFDF9] font-bold cursor-pointer">2. 複製「同事專用同步報名網址」</button>
+        </div>
+      </div>
+
+      <!-- 統計摘要卡 -->
+      <div id="adminSummaryCards" class="px-6 py-3.5 grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#FAF7F2] border-b border-[#EFE8DD]"></div>
+
+      <!-- 搜尋列與明細表 -->
+      <div class="px-6 py-3 bg-[#FFFDF9] border-b border-[#EFE8DD] flex items-center justify-between gap-3">
+        <input id="adminSearchInput" type="text" placeholder="搜尋報名編號、F 帳號、姓名、分機或桌號..." oninput="renderAdminTable()"
+          class="w-full max-w-md px-3.5 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-xs focus:outline-none focus:border-[#C87D75]" />
+        <span id="adminRowCount" class="text-xs text-[#787067]"></span>
+      </div>
+
+      <div class="flex-1 overflow-auto px-6 py-3">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b-2 border-[#E6DDD0] text-[#5C5349] bg-[#FAF7F2]">
+              <th class="py-2.5 px-2.5">報名編號</th>
+              <th class="py-2.5 px-2.5">F 帳號</th>
+              <th class="py-2.5 px-2.5">主報名人</th>
+              <th class="py-2.5 px-2.5">分機 / Email</th>
+              <th class="py-2.5 px-2.5">專屬取消碼</th>
+              <th class="py-2.5 px-2.5">桌次與出席人員明細</th>
+              <th class="py-2.5 px-2.5 text-right">應繳總額</th>
+              <th class="py-2.5 px-2.5 text-center">管理操作</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody" class="divide-y divide-[#EFE8DD]"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast 通知氣泡 -->
+  <div id="toastBox" class="fixed bottom-5 right-5 z-50 hidden px-4 py-3 rounded-xl bg-[#4A423B] text-[#FFFDF9] text-xs font-medium shadow-lg border border-[#6E6359]"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // ==================== 系統狀態與資料結構 ====================
+    const TOTAL_TABLES = 50;
+    const SEATS_PER_TABLE = 10;
+    const VIP_TABLE = 2; // 第 02 桌長官主桌
+    const ADMIN_PASSWORD = "0120";
+    const LOCAL_STORAGE_KEY = "cgust_116_banquet_registrations_v3";
+
+    // 陪同者身分別選項：一般眷屬、長期工或臨時工
+    const COMPANION_ROLES = [
+      { id: "family", label: "一般眷屬" },
+      { id: "long_term_worker", label: "長期工" },
+      { id: "temp_worker", label: "臨時工" }
+    ];
+
+    // 一般眷屬收費級距（長期工與臨時工統一 880 元佔位）
+    const FAMILY_AGE_TIERS = [
+      { id: "infant", label: "未滿 1 歲（免費・不佔位）", fee: 0, needsSeat: false },
+      { id: "child_1_6", label: "1–6 歲（250 元・佔位）", fee: 250, needsSeat: true },
+      { id: "child_7_12", label: "7–12 歲國小學童（450 元・佔位）", fee: 450, needsSeat: true },
+      { id: "adult_880", label: "國中（含）以上（880 元・佔位）", fee: 880, needsSeat: true }
+    ];
+
+    let db = null;
+    let auth = null;
+    let isCloudConnected = false;
+    let appId = typeof __app_id !== "undefined" ? __app_id : "cgust-116-banquet";
+
+    // 已存檔的報名紀錄陣列
+    let registrations = [];
+    // 目前表單編輯狀態（每位佔位者各自綁定自己的 seat: { table, seat } | null）
+    let formState = {
+      fAccount: "",
+      name: "",
+      ext: "",
+      email: "",
+      mainSeat: null, // { table, seat } | null
+      guests: [] // { id, name, roleId, ageTierId, seat: { table, seat } | null }
+    };
+
+    let currentTableFilter = "all";
+    let lastReceiptPlainText = "";
+
+    // 預設內建您的 Firebase 雲端即時同步設定
+    const DEFAULT_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyDtlaTEOD5JTOOsQEfh5QPMH_YhHfqZSbU",
+      authDomain: "cgust-year-end-party.firebaseapp.com",
+      projectId: "cgust-year-end-party",
+      storageBucket: "cgust-year-end-party.firebasestorage.app",
+      messagingSenderId: "220552108762",
+      appId: "1:220552108762:web:f9d5103a8fc6626b1c63e3"
+    };
+
+    // ==================== 隱私遮罩、計費與編號工具 ====================
+    function maskMiddleName(fullName) {
+      const clean = (fullName || "").trim();
+      if (!clean) return "已預約";
+      if (clean.length === 1) return clean;
+      if (clean.length === 2) return clean[0] + "O";
+      const chars = Array.from(clean);
+      if (chars.length === 3) {
+        return `${chars[0]}O${chars[2]}`;
+      }
+      return `${chars[0]}${"O".repeat(chars.length - 2)}${chars[chars.length - 1]}`;
+    }
+
+    function getCompanionPricing(guest) {
+      const roleId = guest.roleId || "family";
+      const roleObj = COMPANION_ROLES.find(r => r.id === roleId) || COMPANION_ROLES[0];
+      if (roleId === "long_term_worker" || roleId === "temp_worker") {
+        return {
+          roleLabel: roleObj.label,
+          shortLabel: roleObj.label,
+          detailLabel: `${roleObj.label}（880 元・佔位）`,
+          fee: 880,
+          needsSeat: true
+        };
+      }
+      const tierObj = FAMILY_AGE_TIERS.find(t => t.id === (guest.ageTierId || "adult_880")) || FAMILY_AGE_TIERS[3];
+      return {
+        roleLabel: roleObj.label,
+        shortLabel: `${roleObj.label}-${tierObj.label.split("（")[0]}`,
+        detailLabel: `${roleObj.label} - ${tierObj.label}`,
+        fee: tierObj.fee,
+        needsSeat: tierObj.needsSeat
+      };
+    }
+
+    function generateRegId() {
+      const now = new Date();
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const dd = String(now.getDate()).padStart(2, "0");
+      const rand = Math.floor(1000 + Math.random() * 9000);
+      return `CG116-${mm}${dd}-${rand}`;
+    }
+
+    function generateCancelCode() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      let code = "";
+      for (let i = 0; i < 6; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return code;
+    }
+
+    function getOccupiedSeatMap() {
+      const map = new Map();
+      registrations.forEach(reg => {
+        const maskedHost = maskMiddleName(reg.name);
+        if (reg.mainSeat) {
+          map.set(`${reg.mainSeat.table}-${reg.mainSeat.seat}`, {
+            displayLabel: maskedHost,
+            regId: reg.regId,
+            fAccount: reg.fAccount,
+            personType: "main",
+            personName: reg.name
+          });
+        }
+        let guestSeatCounter = 0;
+        (reg.guests || []).forEach((g, idx) => {
+          if (g.seatInfo) {
+            guestSeatCounter += 1;
+            map.set(`${g.seatInfo.table}-${g.seatInfo.seat}`, {
+              displayLabel: `${maskedHost}眷屬${guestSeatCounter}`,
+              regId: reg.regId,
+              fAccount: reg.fAccount,
+              personType: "guest",
+              personName: g.name,
+              guestIndex: idx
+            });
+          }
+        });
+      });
+      return map;
+    }
+
+    function isFAccountAlreadyRegistered(fAcc) {
+      const normalized = (fAcc || "").trim().toUpperCase();
+      if (!normalized) return null;
+      return registrations.find(r => (r.fAccount || "").trim().toUpperCase() === normalized) || null;
+    }
+
+    // ==================== Firebase 雲端即時同步初始化 ====================
+    function resolveFirebaseConfig() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const cfgParam = params.get("cfg");
+        if (cfgParam) {
+          const decoded = JSON.parse(decodeURIComponent(atob(cfgParam)));
+          if (decoded && decoded.apiKey) {
+            localStorage.setItem("cgust_116_firebase_cfg", JSON.stringify(decoded));
+            return decoded;
+          }
+        }
+      } catch (e) { console.warn("URL cfg parse error", e); }
+
+      try {
+        const saved = localStorage.getItem("cgust_116_firebase_cfg");
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.apiKey) return parsed;
+        }
+      } catch (e) {}
+
+      if (DEFAULT_FIREBASE_CONFIG && DEFAULT_FIREBASE_CONFIG.apiKey) {
+        return DEFAULT_FIREBASE_CONFIG;
+      }
+
+      if (typeof __firebase_config !== "undefined" && __firebase_config) {
+        try {
+          return typeof __firebase_config === "string" ? JSON.parse(__firebase_config) : __firebase_config;
+        } catch (e) {}
+      }
+
+      return null;
+    }
+
+    async function initDatabase() {
+      const cfg = resolveFirebaseConfig();
+      if (!cfg || !cfg.apiKey) {
+        loadFromLocalStorage();
+        updateSyncBadge(false);
+        return;
+      }
+
+      try {
+        const app = initializeApp(cfg);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        // 判斷是否為使用者自訂專案（如 cgust-year-end-party），若是則直接使用匿名登入，避免吃到預覽沙盒的 __initial_auth_token 導致 custom-token-mismatch
+        const isCustomProject = cfg.projectId === DEFAULT_FIREBASE_CONFIG.projectId ||
+          Boolean(localStorage.getItem("cgust_116_firebase_cfg")) ||
+          new URLSearchParams(window.location.search).has("cfg");
+
+        if (!isCustomProject && typeof __initial_auth_token !== "undefined" && __initial_auth_token) {
+          try {
+            await signInWithCustomToken(auth, __initial_auth_token);
+          } catch (tokenErr) {
+            await signInAnonymously(auth);
+          }
+        } else {
+          await signInAnonymously(auth);
+        }
+
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            subscribeRegistrations();
+          }
+        });
+      } catch (err) {
+        console.error("Firebase init failed:", err);
+        loadFromLocalStorage();
+        updateSyncBadge(false);
+      }
+    }
+
+    function subscribeRegistrations() {
+      if (!db) return;
+      const colRef = collection(db, "artifacts", appId, "public", "data", "banquet_116_regs");
+      onSnapshot(colRef, (snapshot) => {
+        const list = [];
+        snapshot.forEach(docSnap => {
+          list.push(docSnap.data());
+        });
+        list.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+        registrations = list;
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(registrations));
+        isCloudConnected = true;
+        updateSyncBadge(true);
+        refreshAllUI();
+      }, (error) => {
+        console.error("Snapshot error:", error);
+        loadFromLocalStorage();
+        updateSyncBadge(false);
+      });
+    }
+
+    function loadFromLocalStorage() {
+      try {
+        const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+        registrations = raw ? JSON.parse(raw) : [];
+      } catch (e) {
+        registrations = [];
+      }
+      refreshAllUI();
+    }
+
+    function updateSyncBadge(connected) {
+      const badge = document.getElementById("syncStatusBadge");
+      if (connected) {
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#E9F0EA] text-[#4E6B54] border border-[#C6D8C9]";
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#6E8B74] animate-pulse"></span>雲端多人即時同步中`;
+      } else {
+        badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#F9EFEA] text-[#A85D55] border border-[#E8CFC9]";
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#C86D65]"></span>本機暫存模式（請檢查網路或 Firebase 權限）`;
+      }
+    }
+
+    async function persistRegistration(regObj) {
+      if (isCloudConnected && db) {
+        const docRef = doc(db, "artifacts", appId, "public", "data", "banquet_116_regs", regObj.fAccount.toUpperCase());
+        await setDoc(docRef, regObj);
+      } else {
+        const idx = registrations.findIndex(r => r.fAccount.toUpperCase() === regObj.fAccount.toUpperCase());
+        if (idx >= 0) registrations[idx] = regObj;
+        else registrations.push(regObj);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(registrations));
+        refreshAllUI();
+      }
+    }
+
+    async function removeRegistrationDoc(fAccount) {
+      const key = fAccount.toUpperCase();
+      if (isCloudConnected && db) {
+        const docRef = doc(db, "artifacts", appId, "public", "data", "banquet_116_regs", key);
+        await deleteDoc(docRef);
+      } else {
+        registrations = registrations.filter(r => r.fAccount.toUpperCase() !== key);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(registrations));
+        refreshAllUI();
+      }
+    }
+
+    // ==================== 表單與計費邏輯 ====================
+    // 取得目前正在排隊選位的對象（依序：本人 -> 需佔位的陪同者 #1 -> #2 -> #3）
+    function getCurrentSelectionTarget() {
+      const maskedHost = maskMiddleName(formState.name);
+      if (!formState.mainSeat) {
+        return {
+          type: "main",
+          rawName: formState.name,
+          displayLabel: formState.name ? `${maskedHost}（本人）` : "",
+          readyToPick: Boolean(formState.name.trim())
+        };
+      }
+
+      let seatedGuestOrder = 0;
+      for (let i = 0; i < formState.guests.length; i++) {
+        const g = formState.guests[i];
+        const pricing = getCompanionPricing(g);
+        if (pricing.needsSeat) {
+          seatedGuestOrder += 1;
+          if (!g.seat) {
+            return {
+              type: "guest",
+              guestId: g.id,
+              guestIndex: i,
+              seatedOrder: seatedGuestOrder,
+              rawName: g.name,
+              displayLabel: `${maskedHost}眷屬${seatedGuestOrder}`,
+              readyToPick: Boolean(g.name.trim())
+            };
+          }
+        }
+      }
+
+      return null; // 所有需要座位的人都已選完
+    }
+
+    function getAllDraftSelectedSeats() {
+      const list = [];
+      const maskedHost = maskMiddleName(formState.name);
+      if (formState.mainSeat) {
+        list.push({
+          ...formState.mainSeat,
+          label: maskedHost || "本人預選"
+        });
+      }
+      let seatedGuestOrder = 0;
+      formState.guests.forEach(g => {
+        const pricing = getCompanionPricing(g);
+        if (pricing.needsSeat) {
+          seatedGuestOrder += 1;
+          if (g.seat) {
+            list.push({
+              ...g.seat,
+              label: `${maskedHost}眷屬${seatedGuestOrder}`
+            });
+          }
+        }
+      });
+      return list;
+    }
+
+    window.handleMainInput = function() {
+      formState.fAccount = document.getElementById("inputFAccount").value.trim().toUpperCase();
+      formState.name = document.getElementById("inputName").value.trim();
+      formState.ext = document.getElementById("inputExt").value.trim();
+      formState.email = document.getElementById("inputEmail").value.trim();
+      renderGuestsForm();
+      updateBillingAndSeatPreview();
+      renderBanquetHall();
+    };
+
+    window.addGuest = function() {
+      if (!formState.name.trim()) {
+        showToast("請先填寫「參加者姓名」並為本人選好座位，再新增陪同者。");
+        return;
+      }
+      if (!formState.mainSeat) {
+        showToast("請先在右側圓桌圖為「本人」選好座位，才能再新增並填寫下一位陪同者！");
+        return;
+      }
+      // 檢查前一位已新增的陪同者是否尚未填姓名或尚未完成選位
+      for (let i = 0; i < formState.guests.length; i++) {
+        const prev = formState.guests[i];
+        const pricing = getCompanionPricing(prev);
+        if (!prev.name.trim()) {
+          showToast(`請先填寫「陪同者 #${i + 1}」的姓名，再新增下一位！`);
+          return;
+        }
+        if (pricing.needsSeat && !prev.seat) {
+          showToast(`請先為「陪同者 #${i + 1}（${prev.name.trim()}）」選好同桌座位，才能再填寫下一位！`);
+          return;
+        }
+      }
+      if (formState.guests.length >= 3) {
+        showToast("每位參加者最多僅能登記 3 位陪同者（一般眷屬 / 長期工 / 臨時工）。");
+        return;
+      }
+      formState.guests.push({
+        id: "g_" + Date.now() + "_" + Math.random().toString(36).slice(2, 6),
+        name: "",
+        roleId: "family",
+        ageTierId: "adult_880",
+        seat: null
+      });
+      renderGuestsForm();
+      updateBillingAndSeatPreview();
+      renderBanquetHall();
+    };
+
+    window.removeGuest = function(guestId) {
+      formState.guests = formState.guests.filter(g => g.id !== guestId);
+      renderGuestsForm();
+      updateBillingAndSeatPreview();
+      renderBanquetHall();
+    };
+
+    window.updateGuestName = function(guestId, value) {
+      const target = formState.guests.find(g => g.id === guestId);
+      if (target) {
+        target.name = value;
+        updateBillingAndSeatPreview();
+        renderBanquetHall();
+      }
+    };
+
+    window.updateGuestRole = function(guestId, roleId) {
+      const target = formState.guests.find(g => g.id === guestId);
+      if (target) {
+        target.roleId = roleId;
+        renderGuestsForm();
+        updateBillingAndSeatPreview();
+        renderBanquetHall();
+      }
+    };
+
+    window.updateGuestAgeTier = function(guestId, ageTierId) {
+      const target = formState.guests.find(g => g.id === guestId);
+      if (target) {
+        target.ageTierId = ageTierId;
+        const pricing = getCompanionPricing(target);
+        if (!pricing.needsSeat) {
+          target.seat = null; // 未滿1歲不佔位自動釋出預選席
+        }
+        renderGuestsForm();
+        updateBillingAndSeatPreview();
+        renderBanquetHall();
+      }
+    };
+
+    function getRequiredSeatCount() {
+      let count = 1; // 本人 1 席
+      formState.guests.forEach(g => {
+        if (getCompanionPricing(g).needsSeat) count += 1;
+      });
+      return count;
+    }
+
+    function calculateTotalAmount() {
+      let total = 0;
+      formState.guests.forEach(g => {
+        total += getCompanionPricing(g).fee;
+      });
+      return total;
+    }
+
+    function renderGuestsForm() {
+      const container = document.getElementById("guestsContainer");
+      const addBtn = document.getElementById("btnAddGuest");
+      const target = getCurrentSelectionTarget();
+      const hasUnfinishedPrev = !formState.name.trim() || !formState.mainSeat ||
+        formState.guests.some(g => !g.name.trim() || (getCompanionPricing(g).needsSeat && !g.seat));
+      const disableAdd = formState.guests.length >= 3 || hasUnfinishedPrev;
+
+      addBtn.disabled = disableAdd;
+      addBtn.classList.toggle("opacity-50", disableAdd);
+      addBtn.classList.toggle("cursor-not-allowed", disableAdd);
+      addBtn.title = hasUnfinishedPrev ? "請先完成目前填寫對象的姓名與選位，才能新增下一位" : "";
+
+      if (formState.guests.length === 0) {
+        container.innerHTML = `<div class="text-center py-3 rounded-xl border border-dashed border-[#DFD5C7] text-xs text-[#9A9084]">
+          ${!formState.mainSeat ? "請先填寫上方參加者姓名並選好本人座位，即可新增陪同者" : "已選好本人座位，可點擊「+ 新增陪同者」繼續登記"}
+        </div>`;
+        return;
+      }
+
+      const maskedHost = maskMiddleName(formState.name);
+      let seatedOrderCounter = 0;
+
+      container.innerHTML = formState.guests.map((g, idx) => {
+        const pricing = getCompanionPricing(g);
+        const isFamily = (g.roleId || "family") === "family";
+        if (pricing.needsSeat) seatedOrderCounter += 1;
+        const displayAlias = pricing.needsSeat ? `${maskedHost}眷屬${seatedOrderCounter}` : "不佔位";
+        const isCurrentTarget = target && target.type === "guest" && target.guestId === g.id;
+
+        return `
+          <div class="p-3 rounded-xl ${isCurrentTarget ? "bg-[#FFF7E8] border-[#E0B973] ring-1 ring-[#E0B973]" : "bg-[#FAF7F2] border-[#E5DBD0]"} border space-y-2 transition">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs font-bold text-[#6E8B74]">陪同者 #${idx + 1}</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-semibold bg-[#FFFDF9] text-[#A85D55] border border-[#E6D5C8]">
+                  ${pricing.fee} 元・${pricing.needsSeat ? `標示：${escapeHtml(displayAlias)}` : "不佔位"}
+                </span>
+                ${isCurrentTarget ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#E09F3E] text-[#FFFDF9]">目前選位對象</span>` : ""}
+              </div>
+              <button type="button" onclick="removeGuest('${g.id}')" class="text-[11px] text-[#B2564E] hover:underline cursor-pointer">移除</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <div>
+                <label class="block text-[11px] font-medium text-[#696056] mb-0.5">陪同者姓名 <span class="text-[#C86D65]">*</span></label>
+                <input type="text" value="${escapeHtml(g.name)}" placeholder="請輸入姓名"
+                  oninput="updateGuestName('${g.id}', this.value)"
+                  class="w-full px-2.5 py-1.5 rounded-lg bg-[#FFFDF9] border border-[#DFD5C7] text-xs text-[#38332E] focus:outline-none focus:border-[#C87D75]" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-medium text-[#696056] mb-0.5">陪同者身分別 <span class="text-[#C86D65]">*</span></label>
+                <select onchange="updateGuestRole('${g.id}', this.value)"
+                  class="w-full px-2.5 py-1.5 rounded-lg bg-[#FFFDF9] border border-[#DFD5C7] text-xs text-[#38332E] focus:outline-none focus:border-[#C87D75]">
+                  ${COMPANION_ROLES.map(r => `<option value="${r.id}" ${(g.roleId || "family") === r.id ? "selected" : ""}>${r.label}</option>`).join("")}
+                </select>
+              </div>
+            </div>
+
+            ${isFamily ? `
+              <div>
+                <label class="block text-[11px] font-medium text-[#696056] mb-0.5">一般眷屬收費級距 <span class="text-[#C86D65]">*</span></label>
+                <select onchange="updateGuestAgeTier('${g.id}', this.value)"
+                  class="w-full px-2.5 py-1.5 rounded-lg bg-[#FFFDF9] border border-[#DFD5C7] text-xs text-[#38332E] focus:outline-none focus:border-[#C87D75]">
+                  ${FAMILY_AGE_TIERS.map(t => `<option value="${t.id}" ${(g.ageTierId || "adult_880") === t.id ? "selected" : ""}>${t.label}</option>`).join("")}
+                </select>
+              </div>
+            ` : `
+              <div class="text-[11px] text-[#696056] bg-[#FFFDF9] px-2.5 py-1.5 rounded-lg border border-[#EAE0D2]">
+                身分別為「<strong>${pricing.roleLabel}</strong>」，依規定每位收費 <strong>880 元</strong>（需佔 1 席）。
+              </div>
+            `}
+          </div>
+        `;
+      }).join("");
+    }
+
+    function updateBillingAndSeatPreview() {
+      const needed = getRequiredSeatCount();
+      const draftSeats = getAllDraftSelectedSeats();
+      const selectedCount = draftSeats.length;
+      const total = calculateTotalAmount();
+      const maskedHost = maskMiddleName(formState.name);
+      const target = getCurrentSelectionTarget();
+
+      document.getElementById("seatProgressText").textContent = `需選 ${needed} 席・已選 ${selectedCount} 席`;
+      document.getElementById("totalAmountDisplay").textContent = total.toLocaleString();
+
+      // 更新左右兩側「目前選位對象」提示條
+      const leftBanner = document.getElementById("currentTargetBanner");
+      const hallTargetName = document.getElementById("hallTargetName");
+      const hallTargetHint = document.getElementById("hallTargetHint");
+
+      if (!target) {
+        leftBanner.className = "px-3 py-2 rounded-lg bg-[#E9F0EA] border border-[#C6D8C9] text-xs text-[#4E6B54] font-semibold";
+        leftBanner.textContent = `✓ 目前所有席次皆已選位完成！可直接檢視明細存檔，或按「+ 新增陪同者」`;
+        hallTargetName.textContent = "全部已選位完成";
+        hallTargetHint.textContent = "可點「檢視明細並確定存檔」或繼續新增陪同者";
+      } else if (!target.readyToPick) {
+        leftBanner.className = "px-3 py-2 rounded-lg bg-[#FFF3DF] border border-[#E8C99B] text-xs text-[#8A5A19] font-semibold";
+        leftBanner.textContent = target.type === "main"
+          ? "👉 目前選位對象：請先填寫「參加者姓名」後再點右側綠燈選位"
+          : `👉 目前選位對象：請先填寫「陪同者 #${target.guestIndex + 1} 姓名」後再選位`;
+        hallTargetName.textContent = target.type === "main" ? "待填寫參加者姓名" : `待填寫陪同者 #${target.guestIndex + 1} 姓名`;
+        hallTargetHint.textContent = "填妥姓名後即可點擊下方綠燈空位";
+      } else {
+        leftBanner.className = "px-3 py-2 rounded-lg bg-[#FFF3DF] border border-[#E8C99B] text-xs text-[#8A5A19] font-semibold";
+        leftBanner.textContent = `👉 目前選位對象：${target.displayLabel}（請點擊右側綠燈空位）`;
+        hallTargetName.textContent = target.displayLabel;
+        hallTargetHint.textContent = formState.mainSeat
+          ? `必須與本人同坐「第 ${String(formState.mainSeat.table).padStart(2, "0")} 桌」`
+          : "請從右側 50 桌中任選一席綠燈空位";
+      }
+
+      // 費用明細副標
+      const feeParts = ["本人免費(1席)"];
+      formState.guests.forEach((g, idx) => {
+        const pricing = getCompanionPricing(g);
+        const gName = g.name.trim() || `陪同者${idx + 1}`;
+        feeParts.push(`${gName}(${pricing.roleLabel}) ${pricing.fee}元${pricing.needsSeat ? "" : "(不佔位)"}`);
+      });
+      document.getElementById("feeBreakdownSub").textContent = feeParts.join(" + ");
+
+      // 座位配對列表（直接顯示遮罩標示名稱：楊O宇、楊O宇眷屬1、楊O宇眷屬2）
+      const previewEl = document.getElementById("seatAssignmentPreview");
+      const rows = [];
+      const mainSeat = formState.mainSeat;
+      const hostTag = formState.name ? `${escapeHtml(maskedHost)}（${escapeHtml(formState.name)}）` : "未填姓名";
+      rows.push(`
+        <div class="flex items-center justify-between py-1 px-2 rounded-lg bg-[#FFFDF9] border border-[#EDE4D8]">
+          <span class="font-medium text-[#38332E]">本人：${hostTag}</span>
+          <span class="${mainSeat ? "text-[#4E6B54] font-bold" : "text-[#C86D65]"}">
+            ${mainSeat ? `第 ${String(mainSeat.table).padStart(2, "0")} 桌・${mainSeat.seat} 號席` : "請點右側綠燈選位"}
+          </span>
+        </div>
+      `);
+
+      let seatedOrder = 0;
+      formState.guests.forEach((g, idx) => {
+        const pricing = getCompanionPricing(g);
+        const gRealName = escapeHtml(g.name.trim() || `陪同者 #${idx + 1}`);
+        if (!pricing.needsSeat) {
+          rows.push(`
+            <div class="flex items-center justify-between py-1 px-2 rounded-lg bg-[#FFFDF9] border border-[#EDE4D8]">
+              <span class="text-[#5C5349]">${gRealName}（${pricing.shortLabel}）</span>
+              <span class="text-[#787067]">免費・不佔位</span>
+            </div>
+          `);
+        } else {
+          seatedOrder += 1;
+          const aliasLabel = `${escapeHtml(maskedHost)}眷屬${seatedOrder}`;
+          const s = g.seat;
+          rows.push(`
+            <div class="flex items-center justify-between py-1 px-2 rounded-lg bg-[#FFFDF9] border border-[#EDE4D8]">
+              <span class="text-[#5C5349]">${aliasLabel}（${gRealName}）</span>
+              <span class="${s ? "text-[#4E6B54] font-bold" : "text-[#C86D65]"}">
+                ${s ? `第 ${String(s.table).padStart(2, "0")} 桌・${s.seat} 號席` : "請點同桌綠燈選位"}
+              </span>
+            </div>
+          `);
+        }
+      });
+
+      previewEl.innerHTML = rows.join("");
+    }
+
+    // ==================== 實景圓桌平面圖渲染與互動 ====================
+    window.filterTables = function(mode) {
+      currentTableFilter = mode;
+      document.querySelectorAll(".filter-chip").forEach(btn => {
+        btn.className = "filter-chip px-2.5 py-1 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer";
+      });
+      const activeBtn = document.getElementById(`filter-${mode}`);
+      if (activeBtn) {
+        activeBtn.className = "filter-chip px-2.5 py-1 rounded-lg bg-[#C87D75] text-[#FFFDF9] font-medium cursor-pointer";
+      }
+      renderBanquetHall();
+    };
+
+    function renderBanquetHall() {
+      const occupiedMap = getOccupiedSeatMap();
+      const draftSeats = getAllDraftSelectedSeats();
+      const totalAvailable = (TOTAL_TABLES - 1) * SEATS_PER_TABLE - occupiedMap.size;
+      document.getElementById("statAvailable").textContent = Math.max(0, totalAvailable);
+      document.getElementById("statSelected").textContent = draftSeats.length;
+      document.getElementById("statOccupied").textContent = occupiedMap.size;
+
+      const rowsHtml = [];
+      for (let rowIdx = 0; rowIdx < TOTAL_TABLES / 2; rowIdx++) {
+        const leftTable = rowIdx * 2 + 1;
+        const rightTable = rowIdx * 2 + 2;
+
+        const showLeft = shouldShowTable(leftTable, occupiedMap);
+        const showRight = shouldShowTable(rightTable, occupiedMap);
+        if (!showLeft && !showRight) continue;
+
+        rowsHtml.push(`
+          <div class="grid grid-cols-1 md:grid-cols-11 items-center gap-3">
+            <div class="md:col-span-5">
+              ${showLeft ? renderSingleRoundTable(leftTable, occupiedMap) : ""}
+            </div>
+            <div class="hidden md:flex md:col-span-1 flex-col items-center justify-center self-stretch">
+              <div class="w-6 flex-1 bg-gradient-to-b from-[#E5B8B2]/45 via-[#D89A92]/55 to-[#E5B8B2]/45 border-x border-[#DFC6C2] flex items-center justify-center">
+                <span class="text-[9px] text-[#9E5A52] tracking-widest [writing-mode:vertical-rl] opacity-75">紅毯走道</span>
+              </div>
+            </div>
+            <div class="md:col-span-5">
+              ${showRight ? renderSingleRoundTable(rightTable, occupiedMap) : ""}
+            </div>
+          </div>
+        `);
+      }
+
+      const container = document.getElementById("banquetHallContainer");
+      container.innerHTML = rowsHtml.length > 0
+        ? rowsHtml.join("")
+        : `<div class="text-center py-12 text-sm text-[#8C8276]">目前篩選條件下沒有符合的桌次</div>`;
+    }
+
+    function shouldShowTable(tableNum, occupiedMap) {
+      if (currentTableFilter === "all") return true;
+      if (currentTableFilter === "1-10") return tableNum >= 1 && tableNum <= 10;
+      if (currentTableFilter === "11-25") return tableNum >= 11 && tableNum <= 25;
+      if (currentTableFilter === "26-40") return tableNum >= 26 && tableNum <= 40;
+      if (currentTableFilter === "41-50") return tableNum >= 41 && tableNum <= 50;
+      if (currentTableFilter === "available") {
+        if (tableNum === VIP_TABLE) return false;
+        let used = 0;
+        for (let s = 1; s <= SEATS_PER_TABLE; s++) {
+          if (occupiedMap.has(`${tableNum}-${s}`)) used++;
+        }
+        return used < SEATS_PER_TABLE;
+      }
+      return true;
+    }
+
+    function renderSingleRoundTable(tableNum, occupiedMap) {
+      const isVip = tableNum === VIP_TABLE;
+      const draftSeats = getAllDraftSelectedSeats();
+      let occupiedCount = 0;
+      for (let s = 1; s <= SEATS_PER_TABLE; s++) {
+        if (occupiedMap.has(`${tableNum}-${s}`)) occupiedCount++;
+      }
+      const freeCount = isVip ? 0 : SEATS_PER_TABLE - occupiedCount;
+
+      let seatsHtml = "";
+      for (let s = 1; s <= SEATS_PER_TABLE; s++) {
+        const angleDeg = (s - 1) * (360 / SEATS_PER_TABLE) - 90;
+        const rad = (angleDeg * Math.PI) / 180;
+        const radius = 58;
+        const x = 74 + radius * Math.cos(rad);
+        const y = 74 + radius * Math.sin(rad);
+
+        const occInfo = occupiedMap.get(`${tableNum}-${s}`);
+        const draftInfo = draftSeats.find(sel => sel.table === tableNum && sel.seat === s);
+
+        let btnClass = "seat-available";
+        let hoverAttr = "";
+        let clickAttr = `onclick="handleSeatClick(${tableNum}, ${s})"`;
+
+        if (isVip) {
+          btnClass = "seat-vip";
+          clickAttr = `onclick="showToast('第 02 桌為長官主桌（校長、副校長、教務長、各院院長專席），不開放一般報名選擇。')"`;
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '長官主桌保留席')" onmouseleave="hideSeatTooltip()"`;
+        } else if (occInfo) {
+          btnClass = "seat-occupied";
+          const safeLabel = escapeHtml(occInfo.displayLabel);
+          clickAttr = `onclick="showToast('第 ${String(tableNum).padStart(2, "0")} 桌 ${s} 號席已被「${safeLabel}」預約')"`;
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '${safeLabel}')" onmouseleave="hideSeatTooltip()"`;
+        } else if (draftInfo) {
+          btnClass = "seat-selected";
+          const safeDraftLabel = escapeHtml(draftInfo.label);
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '${safeDraftLabel}（點擊可取消此席）')" onmouseleave="hideSeatTooltip()"`;
+        } else {
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '第 ${String(tableNum).padStart(2, "0")} 桌 ${s} 號空位')" onmouseleave="hideSeatTooltip()"`;
+        }
+
+        seatsHtml += `
+          <button type="button" style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px;"
+            class="seat-btn ${btnClass}" ${clickAttr} ${hoverAttr}>
+            ${s}
+          </button>
+        `;
+      }
+
+      return `
+        <div class="p-3 rounded-2xl bg-[#FAF7F2] border ${isVip ? "border-[#DFC397] bg-[#FBF6EC]" : "border-[#E8DFD1]"} hover:border-[#D3C4B0] transition">
+          <div class="flex items-center justify-between text-[11px] mb-1.5 px-1">
+            <span class="font-bold ${isVip ? "text-[#9B7744]" : "text-[#4A423B]"}">
+              第 ${String(tableNum).padStart(2, "0")} 桌 ${isVip ? "👑 長官主桌" : ""}
+            </span>
+            <span class="${isVip ? "text-[#9B7744]" : freeCount > 0 ? "text-[#4E6B54] font-semibold" : "text-[#B2564E]"}">
+              ${isVip ? "長官專席保留" : freeCount > 0 ? `剩 ${freeCount} 席` : "已客滿"}
+            </span>
+          </div>
+          <div class="round-table-wrapper">
+            <div class="round-table-surface ${isVip ? "vip-table-surface" : ""}">
+              <div class="round-table-lazy-susan">
+                <span class="serif-title text-xs font-bold ${isVip ? "text-[#9B7744]" : "text-[#964E47]"}">${String(tableNum).padStart(2, "0")}桌</span>
+                <span class="text-[9px] text-[#8C8276]">${isVip ? "主桌" : "10人席"}</span>
+              </div>
+            </div>
+            ${seatsHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    window.handleSeatClick = function(tableNum, seatNum) {
+      if (tableNum === VIP_TABLE) return;
+
+      // 1. 若點擊的是目前已預選的本人座位 -> 取消本人與同行者座位以便重選
+      if (formState.mainSeat && formState.mainSeat.table === tableNum && formState.mainSeat.seat === seatNum) {
+        formState.mainSeat = null;
+        formState.guests.forEach(g => { g.seat = null; });
+        showToast("已取消本人座位，請重新選擇本人座位。");
+        renderGuestsForm();
+        updateBillingAndSeatPreview();
+        renderBanquetHall();
+        return;
+      }
+
+      // 2. 若點擊的是目前已預選的某位陪同者座位 -> 取消該陪同者座位
+      const clickedGuest = formState.guests.find(g => g.seat && g.seat.table === tableNum && g.seat.seat === seatNum);
+      if (clickedGuest) {
+        clickedGuest.seat = null;
+        renderGuestsForm();
+        updateBillingAndSeatPreview();
+        renderBanquetHall();
+        return;
+      }
+
+      // 3. 取得目前選位對象
+      const target = getCurrentSelectionTarget();
+      if (!target) {
+        showToast("目前所有已登記人員皆已完成選位！若要新增陪同者請按左側「+ 新增陪同者」，或點擊黃色座位取消重選。");
+        return;
+      }
+
+      if (!target.readyToPick) {
+        if (target.type === "main") {
+          showToast("請先在左側填寫「參加者姓名」，再點選右側綠燈座位！");
+          document.getElementById("inputName").focus();
+        } else {
+          showToast(`請先填寫「陪同者 #${target.guestIndex + 1}」的姓名，選完座位才能再填下一位！`);
+        }
+        return;
+      }
+
+      // 4. 分配座位給目前選位對象
+      if (target.type === "main") {
+        formState.mainSeat = { table: tableNum, seat: seatNum };
+        showToast(`已為「${target.displayLabel}」選定第 ${String(tableNum).padStart(2, "0")} 桌 ${seatNum} 號席！`);
+      } else {
+        const lockedTable = formState.mainSeat.table;
+        if (tableNum !== lockedTable) {
+          showToast(`依規定陪同者必須坐在同一桌！請選擇「第 ${String(lockedTable).padStart(2, "0")} 桌」的綠燈空位。`);
+          return;
+        }
+        const gObj = formState.guests.find(g => g.id === target.guestId);
+        if (gObj) {
+          gObj.seat = { table: tableNum, seat: seatNum };
+          showToast(`已為「${target.displayLabel}」選定第 ${String(tableNum).padStart(2, "0")} 桌 ${seatNum} 號席！`);
+        }
+      }
+
+      renderGuestsForm();
+      updateBillingAndSeatPreview();
+      renderBanquetHall();
+    };
+
+    window.showSeatTooltip = function(evt, text) {
+      const tip = document.getElementById("seatTooltip");
+      tip.textContent = text;
+      tip.style.left = (evt.clientX + 12) + "px";
+      tip.style.top = (evt.clientY - 28) + "px";
+      tip.classList.remove("hidden");
+    };
+
+    window.hideSeatTooltip = function() {
+      document.getElementById("seatTooltip").classList.add("hidden");
+    };
+
+    // ==================== 驗證與存檔流程 ====================
+    window.openConfirmSubmitModal = function() {
+      handleMainInput();
+      if (!formState.fAccount) return showToast("請填寫您的「F 帳號」。");
+      if (!formState.name) return showToast("請填寫「參加者姓名」。");
+      if (!formState.ext) return showToast("請填寫「學校分機」。");
+      if (!formState.email || !formState.email.includes("@")) return showToast("請填寫正確的「學校 Email」。");
+
+      const duplicateReg = isFAccountAlreadyRegistered(formState.fAccount);
+      if (duplicateReg) {
+        showToast(`F 帳號「${formState.fAccount}」已有報名紀錄（編號：${duplicateReg.regId}），不得重複報名或重複佔位！如需重選請先至右上角「查詢 / 取消報名與重選」。`);
+        return;
+      }
+
+      // 檢查同行者姓名與座位是否填寫完整
+      for (let i = 0; i < formState.guests.length; i++) {
+        if (!formState.guests[i].name.trim()) {
+          return showToast(`請填寫「陪同者 #${i + 1}」的姓名。`);
+        }
+      }
+
+      const draftSeats = getAllDraftSelectedSeats();
+      const needed = getRequiredSeatCount();
+      if (!formState.mainSeat || draftSeats.length !== needed) {
+        return showToast(`您總共需要 ${needed} 個座位，目前僅選了 ${draftSeats.length} 席，請在右側圓桌圖點選足額的同桌空位。`);
+      }
+
+      const targetTable = formState.mainSeat.table;
+      if (draftSeats.some(s => s.table !== targetTable)) {
+        return showToast("所有同組佔位人員必須安排在同一桌，請重新確認座位。");
+      }
+
+      const occupiedMap = getOccupiedSeatMap();
+      for (const s of draftSeats) {
+        if (occupiedMap.has(`${s.table}-${s.seat}`)) {
+          return showToast(`第 ${String(s.table).padStart(2, "0")} 桌 ${s.seat} 號席剛剛已被其他同仁選走，請更換同桌其他綠燈空位！`);
+        }
+      }
+
+      const total = calculateTotalAmount();
+      const maskedHost = maskMiddleName(formState.name);
+      let detailHtml = `
+        <div class="p-3.5 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] space-y-1.5 text-xs">
+          <div><span class="text-[#787067]">報名人：</span><strong>${escapeHtml(formState.name)}</strong>（${escapeHtml(formState.fAccount)}／分機 ${escapeHtml(formState.ext)}）</div>
+          <div><span class="text-[#787067]">學校信箱：</span>${escapeHtml(formState.email)}</div>
+          <div><span class="text-[#787067]">選定桌次：</span><strong class="text-[#4E6B54]">第 ${String(targetTable).padStart(2, "0")} 桌</strong></div>
+        </div>
+        <div class="space-y-1.5 text-xs">
+          <div class="font-bold text-[#5C5349]">出席與座位明細：</div>
+          <div class="flex justify-between py-1 border-b border-[#EFE8DD]">
+            <span>1. ${escapeHtml(formState.name)}（標示：${escapeHtml(maskedHost)}・${formState.mainSeat.seat} 號席）</span>
+            <span class="font-semibold">0 元</span>
+          </div>
+      `;
+
+      let seatedOrder = 0;
+      formState.guests.forEach((g, idx) => {
+        const pricing = getCompanionPricing(g);
+        if (pricing.needsSeat) seatedOrder += 1;
+        const seatStr = pricing.needsSeat && g.seat ? `標示：${escapeHtml(maskedHost)}眷屬${seatedOrder}・${g.seat.seat} 號席` : "不佔位";
+        detailHtml += `
+          <div class="flex justify-between py-1 border-b border-[#EFE8DD]">
+            <span>${idx + 2}. ${escapeHtml(g.name.trim())}（${pricing.shortLabel}・${seatStr}）</span>
+            <span class="font-semibold">${pricing.fee} 元</span>
+          </div>
+        `;
+      });
+
+      detailHtml += `
+        </div>
+        <div class="p-3.5 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9] flex items-center justify-between">
+          <span class="font-bold text-[#8C534C]">應繳交總金額</span>
+          <span class="serif-title text-xl font-bold text-[#A85D55]">NT$ ${total.toLocaleString()} 元</span>
+        </div>
+      `;
+
+      document.getElementById("confirmModalContent").innerHTML = detailHtml;
+      document.getElementById("confirmSubmitModal").classList.remove("hidden");
+    };
+
+    window.executeSaveRegistration = async function() {
+      const btn = document.getElementById("btnFinalSave");
+      btn.disabled = true;
+      btn.textContent = "寫入資料庫中...";
+
+      try {
+        if (isFAccountAlreadyRegistered(formState.fAccount)) {
+          closeModal("confirmSubmitModal");
+          showToast(`F 帳號 ${formState.fAccount} 已重複報名，系統已攔截此次存檔。`);
+          return;
+        }
+        const draftSeats = getAllDraftSelectedSeats();
+        const occupiedMap = getOccupiedSeatMap();
+        for (const s of draftSeats) {
+          if (occupiedMap.has(`${s.table}-${s.seat}`)) {
+            closeModal("confirmSubmitModal");
+            showToast(`第 ${String(s.table).padStart(2, "0")} 桌 ${s.seat} 號席已被他人搶先存檔，請重新選位！`);
+            return;
+          }
+        }
+
+        const regId = generateRegId();
+        const cancelCode = generateCancelCode();
+        const totalAmount = calculateTotalAmount();
+
+        const structuredGuests = formState.guests.map(g => {
+          const pricing = getCompanionPricing(g);
+          const seatInfo = pricing.needsSeat && g.seat ? { ...g.seat } : null;
+          return {
+            id: g.id,
+            name: g.name.trim(),
+            roleId: g.roleId || "family",
+            roleLabel: pricing.roleLabel,
+            ageTierId: g.ageTierId || "adult_880",
+            tierLabel: pricing.detailLabel,
+            shortLabel: pricing.shortLabel,
+            fee: pricing.fee,
+            needsSeat: pricing.needsSeat,
+            seatInfo
+          };
+        });
+
+        const newReg = {
+          regId,
+          cancelCode,
+          fAccount: formState.fAccount,
+          name: formState.name,
+          ext: formState.ext,
+          email: formState.email,
+          mainSeat: { ...formState.mainSeat },
+          guests: structuredGuests,
+          totalAmount,
+          createdAt: Date.now()
+        };
+
+        await persistRegistration(newReg);
+
+        closeModal("confirmSubmitModal");
+        showReceiptModal(newReg);
+
+        formState = { fAccount: "", name: "", ext: "", email: "", mainSeat: null, guests: [] };
+        document.getElementById("inputFAccount").value = "";
+        document.getElementById("inputName").value = "";
+        document.getElementById("inputExt").value = "";
+        document.getElementById("inputEmail").value = "";
+        renderGuestsForm();
+        updateBillingAndSeatPreview();
+        renderBanquetHall();
+      } catch (e) {
+        console.error(e);
+        showToast("存檔過程發生異常，請檢查網路連線後再試一次。");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "確定存檔並取得取消碼";
+      }
+    };
+
+    function showReceiptModal(reg) {
+      const tableStr = `第 ${String(reg.mainSeat.table).padStart(2, "0")} 桌`;
+      const seatLines = [`・本人 ${reg.name}：${tableStr} ${reg.mainSeat.seat} 號席（免費）`];
+      reg.guests.forEach(g => {
+        const sTxt = g.seatInfo ? `${tableStr} ${g.seatInfo.seat} 號席` : "不佔位";
+        const label = g.shortLabel || g.roleLabel || "陪同者";
+        seatLines.push(`・陪同 ${g.name}（${label}）：${sTxt}（${g.fee} 元）`);
+      });
+
+      lastReceiptPlainText = [
+        `【長庚科技大學116年旺年會 報名成功憑證】`,
+        `報名編號：${reg.regId}`,
+        `專屬取消碼：${reg.cancelCode}（請妥善保存，憑 F 帳號 + 取消碼可取消特定人或整筆重選）`,
+        `報名同仁：${reg.name}（${reg.fAccount}／分機 ${reg.ext}）`,
+        `應繳總金額：NT$ ${reg.totalAmount.toLocaleString()} 元`,
+        `座位明細：`,
+        ...seatLines
+      ].join("\n");
+
+      document.getElementById("receiptContent").innerHTML = `
+        <div class="grid grid-cols-2 gap-3">
+          <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0]">
+            <div class="text-[11px] text-[#787067]">報名編號</div>
+            <div class="font-mono text-sm font-bold text-[#38332E] mt-0.5">${reg.regId}</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9]">
+            <div class="text-[11px] text-[#8C534C]">不可公開・專屬取消碼</div>
+            <div class="font-mono text-base font-bold text-[#A85D55] tracking-widest mt-0.5">${reg.cancelCode}</div>
+          </div>
+        </div>
+        <div class="p-3.5 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] text-xs space-y-1.5">
+          <div class="flex justify-between">
+            <span class="text-[#787067]">應繳交總金額：</span>
+            <strong class="text-sm text-[#A85D55]">NT$ ${reg.totalAmount.toLocaleString()} 元</strong>
+          </div>
+          <div class="text-[#5C5349] pt-1 border-t border-[#EAE0D2] space-y-1">
+            ${seatLines.map(l => `<div>${escapeHtml(l)}</div>`).join("")}
+          </div>
+        </div>
+      `;
+
+      const subject = encodeURIComponent(`【長庚科技大學116年旺年會】報名成功憑證 (${reg.regId})`);
+      const body = encodeURIComponent(lastReceiptPlainText);
+      document.getElementById("gmailSendLink").href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(reg.email)}&su=${subject}&body=${body}`;
+
+      document.getElementById("receiptModal").classList.remove("hidden");
+    }
+
+    function fallbackCopyText(text, successMsg) {
+      try {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.top = "-9999px";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(textarea);
+        if (ok) {
+          showToast(successMsg);
+        } else {
+          showToast("複製失敗，請手動選取文字複製。");
+        }
+      } catch (err) {
+        showToast("無法自動存取剪貼簿，請手動選取文字複製。");
+      }
+    }
+
+    window.copyReceiptText = function() {
+      fallbackCopyText(lastReceiptPlainText, "已複製報名編號、取消碼與座位明細至剪貼簿！");
+    };
+
+    // ==================== 查詢與憑 F 帳號 + 取消碼取消特定人或整筆報名 ====================
+    window.openCancelOrQueryModal = function() {
+      document.getElementById("queryFAccount").value = "";
+      document.getElementById("queryCancelCode").value = "";
+      document.getElementById("cancelResultArea").innerHTML = "";
+      document.getElementById("cancelQueryModal").classList.remove("hidden");
+    };
+
+    window.lookupRegistrationForCancel = function() {
+      const fAcc = document.getElementById("queryFAccount").value.trim().toUpperCase();
+      const code = document.getElementById("queryCancelCode").value.trim().toUpperCase();
+      const area = document.getElementById("cancelResultArea");
+
+      if (!fAcc || !code) {
+        showToast("請同時輸入「F 帳號」與「專屬取消碼」。");
+        return;
+      }
+
+      const reg = registrations.find(r => r.fAccount.toUpperCase() === fAcc);
+      if (!reg) {
+        area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-xs text-[#A85D55]">查無此 F 帳號的報名紀錄。</div>`;
+        return;
+      }
+
+      if ((reg.cancelCode || "").toUpperCase() !== code) {
+        area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-xs text-[#A85D55]">專屬取消碼驗證錯誤，請確認後再試。</div>`;
+        return;
+      }
+
+      renderCancelManagementView(reg);
+    };
+
+    function renderCancelManagementView(reg) {
+      const area = document.getElementById("cancelResultArea");
+      const tableStr = `第 ${String(reg.mainSeat.table).padStart(2, "0")} 桌`;
+
+      let guestsHtml = "";
+      if (reg.guests && reg.guests.length > 0) {
+        guestsHtml = reg.guests.map(g => {
+          const label = g.shortLabel || g.roleLabel || "陪同者";
+          return `
+            <div class="flex items-center justify-between py-2 px-3 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0]">
+              <div>
+                <span class="font-semibold text-[#38332E]">${escapeHtml(g.name)}</span>
+                <span class="text-[#787067] ml-1.5">(${escapeHtml(label)}・${g.seatInfo ? `${tableStr} ${g.seatInfo.seat} 號席` : "不佔位"}・${g.fee} 元)</span>
+              </div>
+              <button onclick="cancelSpecificGuest('${reg.fAccount}', '${g.id}')"
+                class="px-2.5 py-1 rounded-lg bg-[#F9EFEA] text-[#B2564E] hover:bg-[#F2DDD7] border border-[#E8CFC9] font-semibold cursor-pointer shrink-0">
+                取消此陪同者
+              </button>
+            </div>
+          `;
+        }).join("");
+      } else {
+        guestsHtml = `<div class="text-xs text-[#8C8276] px-1">無登記陪同者（一般眷屬 / 長期工 / 臨時工）</div>`;
+      }
+
+      area.innerHTML = `
+        <div class="p-4 rounded-xl bg-[#F7F3EC] border border-[#E2D6C5] space-y-3 text-xs">
+          <div class="flex items-center justify-between border-b border-[#E5D9C8] pb-2">
+            <div>
+              <span class="font-bold text-[#38332E]">報名編號：${reg.regId}</span>
+              <span class="ml-2 text-[#6E8B74] font-semibold">目前應繳：NT$ ${reg.totalAmount.toLocaleString()} 元</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="font-semibold text-[#5C5349]">主報名人（若需更換桌次，請取消整筆報名後重新選位）：</div>
+            <div class="flex items-center justify-between py-2 px-3 rounded-xl bg-[#FFFDF9] border border-[#E6DDD0]">
+              <span><strong>${escapeHtml(reg.name)}</strong>（${reg.fAccount}）・${tableStr} ${reg.mainSeat.seat} 號席</span>
+              <span class="text-[#6E8B74] font-semibold">本人席位</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5">
+            <div class="font-semibold text-[#5C5349]">陪同者名單（可單獨取消特定人並自動重算金額）：</div>
+            ${guestsHtml}
+          </div>
+
+          <div class="pt-2 border-t border-[#E5D9C8] flex items-center justify-between gap-2">
+            <span class="text-[#787067]">取消整筆後可立即重新選桌與登記</span>
+            <button onclick="cancelEntireRegistration('${reg.fAccount}')"
+              class="px-3.5 py-2 rounded-xl bg-[#C86D65] hover:bg-[#B2564E] text-[#FFFDF9] font-bold cursor-pointer">
+              取消整筆報名並釋出所有座位
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    window.cancelSpecificGuest = async function(fAccount, guestId) {
+      const reg = registrations.find(r => r.fAccount.toUpperCase() === fAccount.toUpperCase());
+      if (!reg) return;
+
+      const updatedGuests = (reg.guests || []).filter(g => g.id !== guestId);
+      const newTotal = updatedGuests.reduce((sum, g) => sum + (g.fee || 0), 0);
+
+      const updatedReg = {
+        ...reg,
+        guests: updatedGuests,
+        totalAmount: newTotal
+      };
+
+      await persistRegistration(updatedReg);
+      showToast("已取消該位陪同者並釋出座位，總金額已自動更新！");
+      renderCancelManagementView(updatedReg);
+    };
+
+    window.cancelEntireRegistration = async function(fAccount) {
+      await removeRegistrationDoc(fAccount);
+      closeModal("cancelQueryModal");
+      showToast(`已取消 ${fAccount} 的整筆報名並釋出所有座位，您現在可以重新選位了！`);
+    };
+
+    // ==================== 管理員後台（密碼 0120） ====================
+    window.openAdminLoginModal = function() {
+      document.getElementById("adminPwdInput").value = "";
+      document.getElementById("adminLoginModal").classList.remove("hidden");
+      setTimeout(() => document.getElementById("adminPwdInput").focus(), 50);
+    };
+
+    window.verifyAdminLogin = function() {
+      const val = document.getElementById("adminPwdInput").value.trim();
+      if (val !== ADMIN_PASSWORD) {
+        showToast("密碼錯誤，無法進入管理員後台。");
+        return;
+      }
+      closeModal("adminLoginModal");
+      renderAdminDashboard();
+      document.getElementById("adminDashboardModal").classList.remove("hidden");
+    };
+
+    window.toggleCloudConfigPanel = function() {
+      const panel = document.getElementById("cloudConfigPanel");
+      panel.classList.toggle("hidden");
+      const inputEl = document.getElementById("firebaseConfigInput");
+      if (!inputEl.value.trim()) {
+        inputEl.value = JSON.stringify(resolveFirebaseConfig(), null, 2);
+      }
+    };
+
+    window.applyManualFirebaseConfig = function() {
+      const raw = document.getElementById("firebaseConfigInput").value.trim();
+      if (!raw) return showToast("請先貼上 firebaseConfig 設定內容。");
+      try {
+        const jsonMatch = raw.match(/\{[\s\S]*\}/);
+        if (!jsonMatch) throw new Error("找不到大括號設定物件");
+        const parsed = Function(`"use strict"; return (${jsonMatch[0]});`)();
+        if (!parsed.apiKey || !parsed.projectId) throw new Error("缺少 apiKey 或 projectId");
+
+        localStorage.setItem("cgust_116_firebase_cfg", JSON.stringify(parsed));
+        showToast("設定已儲存，正在連線至共用雲端資料庫...");
+        initDatabase();
+      } catch (e) {
+        showToast("設定格式解析失敗，請確認貼上完整的 { apiKey: ... } 物件。");
+      }
+    };
+
+    window.copyShareableSyncUrl = function() {
+      const saved = localStorage.getItem("cgust_116_firebase_cfg") || JSON.stringify(DEFAULT_FIREBASE_CONFIG);
+      const encoded = btoa(encodeURIComponent(saved));
+      const baseUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${baseUrl}?cfg=${encoded}`;
+      fallbackCopyText(shareUrl, "已複製「同事專用同步報名網址」！直接分享此連結給全校同仁即可永久即時互通。");
+    };
+
+    function renderAdminDashboard() {
+      let totalGroups = registrations.length;
+      let totalSeatedPeople = 0;
+      let totalUnseatedInfants = 0;
+      let grandTotalFee = 0;
+
+      registrations.forEach(r => {
+        totalSeatedPeople += 1;
+        grandTotalFee += (r.totalAmount || 0);
+        (r.guests || []).forEach(g => {
+          if (g.needsSeat) totalSeatedPeople += 1;
+          else totalUnseatedInfants += 1;
+        });
+      });
+
+      document.getElementById("adminSummaryCards").innerHTML = `
+        <div class="p-3 rounded-xl bg-[#FFFDF9] border border-[#E6DDD0]">
+          <div class="text-[11px] text-[#787067]">已報名組數（F 帳號數）</div>
+          <div class="serif-title text-xl font-bold text-[#38332E] mt-0.5">${totalGroups} 組</div>
+        </div>
+        <div class="p-3 rounded-xl bg-[#FFFDF9] border border-[#E6DDD0]">
+          <div class="text-[11px] text-[#787067]">實際佔位總人數（上限 490）</div>
+          <div class="serif-title text-xl font-bold text-[#4E6B54] mt-0.5">${totalSeatedPeople} 人</div>
+        </div>
+        <div class="p-3 rounded-xl bg-[#FFFDF9] border border-[#E6DDD0]">
+          <div class="text-[11px] text-[#787067]">不佔位嬰幼兒（未滿 1 歲）</div>
+          <div class="serif-title text-xl font-bold text-[#8C7A68] mt-0.5">${totalUnseatedInfants} 人</div>
+        </div>
+        <div class="p-3 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9]">
+          <div class="text-[11px] text-[#8C534C]">應收款總金額</div>
+          <div class="serif-title text-xl font-bold text-[#A85D55] mt-0.5">NT$ ${grandTotalFee.toLocaleString()}</div>
+        </div>
+      `;
+
+      renderAdminTable();
+    }
+
+    window.renderAdminTable = function() {
+      const kw = (document.getElementById("adminSearchInput").value || "").trim().toLowerCase();
+      const filtered = registrations.filter(r => {
+        if (!kw) return true;
+        const guestNames = (r.guests || []).map(g => `${g.name} ${g.roleLabel || ""}`).join(" ");
+        const tableStr = `第${String(r.mainSeat.table).padStart(2, "0")}桌 ${r.mainSeat.table}桌`;
+        return `${r.regId} ${r.fAccount} ${r.name} ${r.ext} ${r.email} ${guestNames} ${tableStr}`.toLowerCase().includes(kw);
+      });
+
+      document.getElementById("adminRowCount").textContent = `顯示 ${filtered.length} / ${registrations.length} 筆紀錄`;
+
+      const tbody = document.getElementById("adminTableBody");
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-[#8C8276]">目前尚無符合條件的報名紀錄</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(r => {
+        const tableStr = `第 ${String(r.mainSeat.table).padStart(2, "0")} 桌`;
+        const peopleList = [
+          `<div class="font-semibold text-[#38332E]">・${escapeHtml(r.name)}（本人・${tableStr} ${r.mainSeat.seat}號）</div>`,
+          ...(r.guests || []).map(g => {
+            const seatInfo = g.seatInfo ? `${tableStr} ${g.seatInfo.seat}號` : "不佔位";
+            const label = g.shortLabel || g.roleLabel || "陪同者";
+            return `<div class="text-[#696056]">・${escapeHtml(g.name)}（${escapeHtml(label)}・${seatInfo}・${g.fee}元）</div>`;
+          })
+        ].join("");
+
+        return `
+          <tr class="hover:bg-[#FAF7F2]">
+            <td class="py-2.5 px-2.5 font-mono font-semibold text-[#4A423B]">${r.regId}</td>
+            <td class="py-2.5 px-2.5 font-mono font-bold text-[#6E8B74]">${escapeHtml(r.fAccount)}</td>
+            <td class="py-2.5 px-2.5 font-bold text-[#38332E]">${escapeHtml(r.name)}</td>
+            <td class="py-2.5 px-2.5 text-[#696056]">分機 ${escapeHtml(r.ext)}<br/><span class="text-[11px]">${escapeHtml(r.email)}</span></td>
+            <td class="py-2.5 px-2.5 font-mono font-bold text-[#A85D55]">${r.cancelCode}</td>
+            <td class="py-2.5 px-2.5 space-y-0.5">${peopleList}</td>
+            <td class="py-2.5 px-2.5 text-right font-bold text-[#A85D55]">NT$ ${(r.totalAmount || 0).toLocaleString()}</td>
+            <td class="py-2.5 px-2.5 text-center">
+              <button onclick="adminDeleteReg('${escapeHtml(r.fAccount)}')" class="px-2.5 py-1 rounded-lg bg-[#F9EFEA] text-[#B2564E] hover:bg-[#F2DDD7] border border-[#E8CFC9] cursor-pointer">
+                刪除釋出
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    };
+
+    window.adminDeleteReg = async function(fAccount) {
+      await removeRegistrationDoc(fAccount);
+      renderAdminDashboard();
+      showToast(`管理員已刪除 ${fAccount} 的報名並釋出座位。`);
+    };
+
+    window.exportAdminExcelCSV = function() {
+      const headers = [
+        "報名編號",
+        "專屬取消碼",
+        "桌次",
+        "座位號碼",
+        "出席人員姓名",
+        "身分別",
+        "收費級距明細",
+        "是否佔位",
+        "個人應繳金額",
+        "同組應繳總金額",
+        "主報名人F帳號",
+        "主報名人姓名",
+        "學校分機",
+        "學校Email",
+        "當日報到簽名",
+        "發錢/發獎簽收確認"
+      ];
+
+      const rows = [headers];
+
+      const flatEntries = [];
+      registrations.forEach(r => {
+        flatEntries.push({
+          table: r.mainSeat.table,
+          seat: r.mainSeat.seat,
+          regId: r.regId,
+          cancelCode: r.cancelCode,
+          personName: r.name,
+          roleCategory: "教職員本人",
+          detailLabel: "教職員本人（免費）",
+          seated: "佔位",
+          fee: 0,
+          groupTotal: r.totalAmount,
+          fAccount: r.fAccount,
+          hostName: r.name,
+          ext: r.ext,
+          email: r.email
+        });
+
+        (r.guests || []).forEach(g => {
+          flatEntries.push({
+            table: g.seatInfo ? g.seatInfo.table : r.mainSeat.table,
+            seat: g.seatInfo ? g.seatInfo.seat : 99,
+            regId: r.regId,
+            cancelCode: r.cancelCode,
+            personName: g.name,
+            roleCategory: g.roleLabel || "一般眷屬",
+            detailLabel: g.shortLabel || g.tierLabel || "",
+            seated: g.needsSeat ? "佔位" : "不佔位(未滿1歲)",
+            fee: g.fee,
+            groupTotal: r.totalAmount,
+            fAccount: r.fAccount,
+            hostName: r.name,
+            ext: r.ext,
+            email: r.email
+          });
+        });
+      });
+
+      flatEntries.sort((a, b) => (a.table - b.table) || (a.seat - b.seat));
+
+      flatEntries.forEach(item => {
+        rows.push([
+          item.regId,
+          item.cancelCode,
+          `第${String(item.table).padStart(2, "0")}桌`,
+          item.seat === 99 ? "不佔位" : `${item.seat}號`,
+          item.personName,
+          item.roleCategory,
+          item.detailLabel,
+          item.seated,
+          item.fee,
+          item.groupTotal,
+          item.fAccount,
+          item.hostName,
+          item.ext,
+          item.email,
+          "",
+          ""
+        ]);
+      });
+
+      const csvContent = "\uFEFF" + rows.map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const today = new Date().toISOString().slice(0, 10);
+      a.href = url;
+      a.download = `長庚科技大學116年旺年會_報到與發獎總表_${today}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("已成功匯出「長庚科技大學116年旺年會」Excel 總表！");
+    };
+
+    // ==================== 共用輔助函式 ====================
+    window.closeModal = function(id) {
+      document.getElementById(id).classList.add("hidden");
+    };
+
+    window.showToast = function(msg) {
+      const box = document.getElementById("toastBox");
+      box.textContent = msg;
+      box.classList.remove("hidden");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        box.classList.add("hidden");
+      }, 4200);
+    };
+
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function refreshAllUI() {
+      renderGuestsForm();
+      updateBillingAndSeatPreview();
+      renderBanquetHall();
+      if (!document.getElementById("adminDashboardModal").classList.contains("hidden")) {
+        renderAdminDashboard();
+      }
+    }
+
+    // 啟動初始化
+    renderGuestsForm();
+    updateBillingAndSeatPreview();
+    renderBanquetHall();
+    initDatabase();
+  </script>
+</body>
+</html>
