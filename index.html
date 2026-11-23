@@ -16,7 +16,6 @@
       --morandi-sage-light: #E9F0EA;
       --morandi-sand: #E6DDD0;
       --morandi-amber: #D9A05B;
-      --morandi-slate: #5C6B73;
       --text-ink: #38332E;
       --text-muted: #787067;
     }
@@ -33,7 +32,6 @@
       font-family: 'Noto Serif TC', serif;
     }
 
-    /* 實景圓桌容器 */
     .round-table-wrapper {
       position: relative;
       width: 260px;
@@ -41,7 +39,6 @@
       margin: 0 auto;
     }
 
-    /* 莫蘭迪酒紅絨布圓桌 */
     .round-table-surface {
       position: absolute;
       top: 50%;
@@ -60,7 +57,6 @@
       z-index: 2;
     }
 
-    /* 中央轉盤 */
     .round-table-lazy-susan {
       width: 88px;
       height: 88px;
@@ -74,13 +70,6 @@
       box-shadow: 0 2px 6px rgba(120, 112, 103, 0.15);
     }
 
-    /* 長官主桌樣式 */
-    .vip-table-surface {
-      background: radial-gradient(circle at 35% 35%, #E3B574, #C6924E 75%, #A67536 100%);
-      box-shadow: 0 6px 14px rgba(166, 117, 54, 0.25);
-    }
-
-    /* 12人長官大主桌專屬容器 */
     .vip-big-table-wrapper {
       position: relative;
       width: 210px;
@@ -120,19 +109,16 @@
       box-shadow: 0 2px 6px rgba(120, 112, 103, 0.16);
     }
 
-    /* 素食桌樣式 */
     .veg-table-surface {
       background: radial-gradient(circle at 35% 35%, #84A58A, #628368 75%, #4A6850 100%);
       box-shadow: 0 6px 14px rgba(74, 104, 80, 0.24);
     }
 
-    /* 預備桌鎖定樣式 */
     .reserve-locked-surface {
       background: radial-gradient(circle at 35% 35%, #B8B0A6, #968E84 75%, #7A7269 100%);
       box-shadow: 0 4px 10px rgba(122, 114, 105, 0.2);
     }
 
-    /* 座椅按鈕 */
     .seat-btn {
       position: absolute;
       width: 36px;
@@ -152,7 +138,6 @@
       box-shadow: 0 2px 5px rgba(80, 70, 60, 0.16);
     }
 
-    /* 空位（鼠尾草綠燈） */
     .seat-available {
       background-color: #6E8B74;
       color: #FFFDF9;
@@ -164,7 +149,6 @@
       box-shadow: 0 4px 8px rgba(110, 139, 116, 0.35);
     }
 
-    /* 目前預選（暖杏黃） */
     .seat-selected {
       background-color: #E09F3E;
       color: #FFFDF9;
@@ -173,7 +157,6 @@
       box-shadow: 0 0 0 2px #E09F3E, 0 4px 10px rgba(224, 159, 62, 0.4);
     }
 
-    /* 已佔用（陶土紅燈） */
     .seat-occupied {
       background-color: #C86D65;
       color: #FFFDF9;
@@ -185,7 +168,6 @@
       background-color: #B2564E;
     }
 
-    /* 長官主桌保留席 */
     .seat-vip {
       background-color: #D4B483;
       color: #FFFDF9;
@@ -194,7 +176,6 @@
       opacity: 0.95;
     }
 
-    /* 預備桌未開放席 */
     .seat-locked {
       background-color: #B5ADA3;
       color: #FFFDF9;
@@ -203,7 +184,6 @@
       opacity: 0.8;
     }
 
-    /* 自訂捲軸（無黑色） */
     ::-webkit-scrollbar {
       width: 7px;
       height: 7px;
@@ -220,7 +200,6 @@
       background: #B5A694;
     }
 
-    /* 懸停氣泡框 */
     #seatTooltip {
       pointer-events: none;
       transition: opacity 0.15s ease, transform 0.15s ease;
@@ -229,7 +208,7 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-  <!-- 頂部導覽列（溫潤奶茶暖白質感） -->
+  <!-- 頂部導覽列 -->
   <header class="sticky top-0 z-30 bg-[#FFFDF9]/95 backdrop-blur border-b border-[#E6DDD0] shadow-xs">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
@@ -243,16 +222,21 @@
             </h1>
             <span id="syncStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#F3EDE4] text-[#787067] border border-[#E2D7C7]">
               <span class="w-2 h-2 rounded-full bg-[#D9A05B]"></span>
-              連線初始化中...
+              雲端資料庫安全驗證中...
             </span>
           </div>
           <p class="text-xs text-[#787067] mt-0.5">
-            舞台前 1 桌長官大主桌（12 席）＋ 宴會廳 53 桌（含第 50 桌素食桌、第 53 桌預備桌）
+            舞台前 1 桌長官大主桌（12 席）＋ 宴會廳 53 桌（含第 50 桌素食桌、第 53 桌預備桌與線上候補機制）
           </p>
         </div>
       </div>
 
       <div class="flex items-center gap-2.5 flex-wrap">
+        <button onclick="openWaitlistModal()" id="btnOpenWaitlist" class="px-3.5 py-2 rounded-xl text-sm font-medium bg-[#FFF3DF] text-[#8A5A19] hover:bg-[#FBE6C4] border border-[#E6C794] transition flex items-center gap-1.5 cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          座位已滿／登記候補
+        </button>
+
         <button onclick="openCancelOrQueryModal()" class="px-3.5 py-2 rounded-xl text-sm font-medium bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EBE1D3] border border-[#DFD3C3] transition flex items-center gap-1.5 cursor-pointer">
           <svg class="w-4 h-4 text-[#A85D55]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
           查詢 / 取消報名與重選
@@ -260,11 +244,24 @@
 
         <button onclick="openAdminLoginModal()" class="px-3.5 py-2 rounded-xl text-sm font-medium bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] shadow-xs transition flex items-center gap-1.5 cursor-pointer">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          後台查驗 / 匯出 Excel
+          管理員後台
         </button>
       </div>
     </div>
   </header>
+
+  <!-- 系統狀態警告橫幅 -->
+  <div id="systemAlertBanner" class="hidden max-w-[1440px] w-full mx-auto px-4 sm:px-6 pt-4">
+    <div id="systemAlertBox" class="p-4 rounded-2xl bg-[#F9EFEA] border-2 border-[#C86D65] text-[#8C3B34] flex items-center justify-between gap-3">
+      <div class="space-y-0.5">
+        <div id="systemAlertTitle" class="text-sm font-bold">⚠️ 雲端資料庫尚未連線，已暫停報名功能</div>
+        <div id="systemAlertDesc" class="text-xs">為確保 650 人同步選位不撞位且資料確實寫入後台，系統在未連上雲端資料庫前禁止報名。請確認網路連線或重新整理頁面。</div>
+      </div>
+      <button onclick="window.location.reload()" class="px-4 py-2 rounded-xl bg-[#C86D65] text-[#FFFDF9] text-xs font-bold shrink-0 cursor-pointer hover:bg-[#B2564E]">
+        重新連線
+      </button>
+    </div>
+  </div>
 
   <!-- 隱私權與個資同意宣告條 -->
   <div class="max-w-[1440px] w-full mx-auto px-4 sm:px-6 pt-5">
@@ -286,10 +283,10 @@
   <!-- 主內容雙欄工作區 -->
   <main id="mainWorkspace" class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start relative">
 
-    <!-- 未勾選個資同意前之鎖定遮罩 -->
+    <!-- 未勾選個資同意或系統未就緒前之鎖定提示 -->
     <div id="consentLockOverlay" class="col-span-1 lg:col-span-12 rounded-2xl bg-[#FFFDF9]/85 backdrop-blur-[2px] border border-dashed border-[#D6C7B4] p-8 text-center space-y-2">
-      <div class="serif-title text-base font-bold text-[#5C4938]">請先勾選上方「我同意上述個資使用方式」</div>
-      <p class="text-xs text-[#787067]">勾選同意後，即可開始填寫報名資料與進入選位區選擇桌次。</p>
+      <div id="lockOverlayTitle" class="serif-title text-base font-bold text-[#5C4938]">請先勾選上方「我同意上述個資使用方式」</div>
+      <p id="lockOverlayDesc" class="text-xs text-[#787067]">勾選同意後，即可開始填寫報名資料與進入選位區選擇桌次。</p>
     </div>
 
     <!-- 報名登錄、陪同者與計費明細（佔 4 欄） -->
@@ -297,7 +294,7 @@
       <div class="border-b border-[#EFE8DD] pb-3.5 flex items-center justify-between">
         <div>
           <h2 class="serif-title text-lg font-bold text-[#38332E]">參加者報名與陪同者登記</h2>
-          <p class="text-xs text-[#787067] mt-0.5">每位同仁限報 1 次（不可重複佔位），最多可帶 3 位陪同者</p>
+          <p class="text-xs text-[#787067] mt-0.5">每位同仁限報 1 次（資料庫原子鎖定不重複），最多 3 位陪同者</p>
         </div>
         <span class="px-2.5 py-1 rounded-lg bg-[#F6EFE6] text-[#A85D55] text-xs font-semibold border border-[#EADBC8]">
           同組限坐同桌
@@ -381,7 +378,7 @@
       </div>
 
       <!-- 送出按鈕 -->
-      <button type="button" onclick="openConfirmSubmitModal()"
+      <button type="button" id="btnOpenConfirm" onclick="openConfirmSubmitModal()"
         class="w-full py-3 rounded-xl bg-[#C87D75] hover:bg-[#B36860] text-[#FFFDF9] font-bold text-sm shadow-sm transition cursor-pointer tracking-wide">
         檢視明細並確定存檔
       </button>
@@ -429,7 +426,7 @@
         </div>
       </div>
 
-      <!-- 舞台正前方正中央：長官大主桌（單獨一桌・12 席，滑鼠移至桌號/座位才顯示長官姓名） -->
+      <!-- 舞台正前方正中央：長官大主桌 -->
       <div id="vipHeadTableContainer" class="mb-5"></div>
 
       <!-- 即時「目前選位對象」引導橫幅 -->
@@ -451,7 +448,7 @@
         </div>
       </div>
 
-      <!-- 上半部：一行 7 桌迷你圓點選桌總覽（7×7 + 4 桌） -->
+      <!-- 上半部：一行 7 桌迷你圓點選桌總覽 -->
       <div id="banquetHallContainer" class="max-h-[380px] overflow-y-auto pr-1 space-y-3 pb-2"></div>
 
       <!-- 下半部：點選桌次後展開的置中大圓桌與 10 席明細 -->
@@ -459,45 +456,49 @@
     </section>
   </main>
 
-  <!-- 懸停提示氣泡（顯示遮罩姓名或眷屬編號） -->
-  <div id="seatTooltip" class="fixed z-50 hidden px-3 py-1.5 rounded-xl bg-[#4A423B] text-[#FFFDF9] text-xs font-medium shadow-md border border-[#6E6359]">
-  </div>
+  <!-- 懸停提示氣泡 -->
+  <div id="seatTooltip" class="fixed z-50 hidden px-3 py-1.5 rounded-xl bg-[#4A423B] text-[#FFFDF9] text-xs font-medium shadow-md border border-[#6E6359]"></div>
 
   <!-- 彈窗 1：確認存檔與金額明細 -->
   <div id="confirmSubmitModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
     <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-md w-full p-6 shadow-xl space-y-4">
       <div class="border-b border-[#EFE8DD] pb-3">
         <h3 class="serif-title text-lg font-bold text-[#38332E]">確認報名與繳費明細</h3>
-        <p class="text-xs text-[#787067] mt-0.5">存檔後系統將核發「報名編號」與「專屬取消碼」</p>
+        <p class="text-xs text-[#787067] mt-0.5">送出後將透過雲端交易機制原子鎖定座位並核發「報名編號」與「專屬取消碼」</p>
       </div>
       <div id="confirmModalContent" class="space-y-3 text-sm text-[#4A423B]"></div>
       <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[#EFE8DD]">
         <button onclick="closeModal('confirmSubmitModal')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#F3EDE4] text-[#5C5349] hover:bg-[#E6DDD0] cursor-pointer">返回修改</button>
-        <button id="btnFinalSave" onclick="executeSaveRegistration()" class="px-5 py-2 rounded-xl text-xs font-bold bg-[#C87D75] text-[#FFFDF9] hover:bg-[#B36860] shadow-xs cursor-pointer">確定存檔並取得取消碼</button>
+        <button id="btnFinalSave" onclick="executeSaveRegistration()" class="px-5 py-2 rounded-xl text-xs font-bold bg-[#C87D75] text-[#FFFDF9] hover:bg-[#B36860] shadow-xs cursor-pointer">確定鎖定座位並存檔</button>
       </div>
     </div>
   </div>
 
-  <!-- 彈窗 2：報名成功憑證（含報名編號、應繳總額、專屬取消碼） -->
+  <!-- 彈窗 2：報名成功憑證 -->
   <div id="receiptModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
     <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-lg w-full p-6 shadow-xl space-y-4">
       <div class="flex items-center gap-3 border-b border-[#EFE8DD] pb-3.5">
         <div class="w-10 h-10 rounded-full bg-[#E9F0EA] text-[#4E6B54] flex items-center justify-center font-bold text-lg">✓</div>
         <div>
-          <h3 class="serif-title text-lg font-bold text-[#38332E]">報名成功！座位已為您鎖定</h3>
-          <p class="text-xs text-[#787067]">請務必妥善保存以下「報名編號」與「專屬取消碼」</p>
+          <h3 class="serif-title text-lg font-bold text-[#38332E]">報名成功！雲端座位已原子鎖定</h3>
+          <p class="text-xs text-[#787067]">請務必妥善保存或寄信備存以下「報名編號」與「專屬取消碼」</p>
         </div>
       </div>
 
       <div id="receiptContent" class="space-y-3"></div>
 
       <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-[#EFE8DD]">
-        <button onclick="copyReceiptText()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] cursor-pointer">
-          複製憑證與取消碼
-        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="copyReceiptText()" class="px-3 py-2 rounded-xl text-xs font-semibold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] cursor-pointer">
+            複製憑證
+          </button>
+          <button onclick="downloadReceiptTxt()" class="px-3 py-2 rounded-xl text-xs font-semibold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] cursor-pointer">
+            下載憑證檔
+          </button>
+        </div>
         <div class="flex items-center gap-2">
           <a id="gmailSendLink" target="_blank" rel="noopener" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] cursor-pointer">
-            透過 Gmail 寄給自己
+            Gmail 寄給自己
           </a>
           <button onclick="closeModal('receiptModal')" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#C87D75] text-[#FFFDF9] hover:bg-[#B36860] cursor-pointer">
             完成
@@ -513,7 +514,7 @@
       <div class="flex items-center justify-between border-b border-[#EFE8DD] pb-3">
         <div>
           <h3 class="serif-title text-lg font-bold text-[#38332E]">查詢報名 / 取消特定席次或整筆重選</h3>
-          <p class="text-xs text-[#787067] mt-0.5">原報名人可輸入「F 帳號」與「專屬取消碼」進行異動</p>
+          <p class="text-xs text-[#787067] mt-0.5">原報名人需同時提供正確的「F 帳號」與「專屬取消碼」方可讀取與異動</p>
         </div>
         <button onclick="closeModal('cancelQueryModal')" class="text-[#8C8276] hover:text-[#38332E] text-lg cursor-pointer">✕</button>
       </div>
@@ -526,12 +527,12 @@
         </div>
         <div>
           <label class="block text-xs font-semibold text-[#5C5349] mb-1">專屬取消碼（6 碼）</label>
-          <input id="queryCancelCode" type="text" placeholder="請輸入報名時取得之取消碼"
+          <input id="queryCancelCode" type="text" maxlength="6" placeholder="請輸入報名時取得之取消碼"
             class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm uppercase focus:outline-none focus:border-[#C87D75]" />
         </div>
       </div>
 
-      <button onclick="lookupRegistrationForCancel()" class="w-full py-2.5 rounded-xl bg-[#6E8B74] hover:bg-[#5A7560] text-[#FFFDF9] text-xs font-bold cursor-pointer transition">
+      <button id="btnLookupCancel" onclick="lookupRegistrationForCancel()" class="w-full py-2.5 rounded-xl bg-[#6E8B74] hover:bg-[#5A7560] text-[#FFFDF9] text-xs font-bold cursor-pointer transition">
         驗證並查詢我的報名紀錄
       </button>
 
@@ -539,82 +540,125 @@
     </div>
   </div>
 
-  <!-- 彈窗 4：管理員密碼驗證（密碼 0120，不顯示提示） -->
-  <div id="adminLoginModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-sm w-full p-6 shadow-xl space-y-4">
+  <!-- 彈窗 4：線上候補登記 -->
+  <div id="waitlistModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-md w-full p-6 shadow-xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#EFE8DD] pb-3">
-        <h3 class="serif-title text-lg font-bold text-[#38332E]">管理員後台驗證</h3>
-        <button onclick="closeModal('adminLoginModal')" class="text-[#8C8276] hover:text-[#38332E] text-lg cursor-pointer">✕</button>
+        <div>
+          <h3 class="serif-title text-lg font-bold text-[#38332E]">長庚科技大學116年旺年會｜線上候補登記</h3>
+          <p class="text-xs text-[#787067] mt-0.5">若現場桌次已滿或尚無同桌連續空位，可先登記候補序號</p>
+        </div>
+        <button onclick="closeModal('waitlistModal')" class="text-[#8C8276] hover:text-[#38332E] text-lg cursor-pointer">✕</button>
       </div>
-      <div>
-        <label class="block text-xs font-semibold text-[#5C5349] mb-1.5">請輸入管理員密碼</label>
-        <input id="adminPwdInput" type="password" placeholder="••••" onkeydown="if(event.key==='Enter') verifyAdminLogin()"
-          class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm focus:outline-none focus:border-[#C87D75]" />
+
+      <div class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="block font-semibold text-[#5C5349] mb-1">F 帳號（10碼）*</label>
+            <input id="wlFAccount" type="text" maxlength="10" placeholder="F000009999" class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] uppercase" />
+          </div>
+          <div>
+            <label class="block font-semibold text-[#5C5349] mb-1">參加者姓名 *</label>
+            <input id="wlName" type="text" placeholder="請輸入姓名" class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7]" />
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2.5">
+          <div>
+            <label class="block font-semibold text-[#5C5349] mb-1">學校分機 *</label>
+            <input id="wlExt" type="text" placeholder="例：5678" class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7]" />
+          </div>
+          <div>
+            <label class="block font-semibold text-[#5C5349] mb-1">需求總席次（含本人）*</label>
+            <select id="wlSeatsNeeded" class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7]">
+              <option value="1">1 席（僅本人）</option>
+              <option value="2">2 席（本人 + 1位佔位）</option>
+              <option value="3">3 席（本人 + 2位佔位）</option>
+              <option value="4">4 席（本人 + 3位佔位）</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-semibold text-[#5C5349] mb-1">學校 Email *</label>
+          <input id="wlEmail" type="email" placeholder="帳號@mail.cgust.edu.tw" class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7]" />
+        </div>
+        <div>
+          <label class="block font-semibold text-[#5C5349] mb-1">候補備註（如素食需求、陪同者身分別）</label>
+          <input id="wlNote" type="text" placeholder="例：需素食桌、帶 2 位眷屬" class="w-full px-3 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7]" />
+        </div>
       </div>
-      <div class="flex justify-end gap-2">
-        <button onclick="closeModal('adminLoginModal')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#F3EDE4] text-[#5C5349] cursor-pointer">取消</button>
-        <button onclick="verifyAdminLogin()" class="px-5 py-2 rounded-xl text-xs font-bold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] cursor-pointer">登入後台</button>
+
+      <div class="flex justify-end gap-2 pt-2 border-t border-[#EFE8DD]">
+        <button onclick="closeModal('waitlistModal')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#F3EDE4] text-[#5C5349] cursor-pointer">取消</button>
+        <button id="btnSubmitWaitlist" onclick="submitWaitlistEntry()" class="px-5 py-2 rounded-xl text-xs font-bold bg-[#D9A05B] text-[#FFFDF9] hover:bg-[#C28A46] cursor-pointer">送出候補登記</button>
       </div>
     </div>
   </div>
 
-  <!-- 彈窗 5：管理員後台總表、取消碼查驗、多人雲端設定與 Excel 匯出 -->
+  <!-- 彈窗 5：管理員安全驗證 -->
+  <div id="adminLoginModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-sm w-full p-6 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-[#EFE8DD] pb-3">
+        <div>
+          <h3 class="serif-title text-lg font-bold text-[#38332E]">管理員安全驗證登入</h3>
+          <p class="text-[11px] text-[#787067] mt-0.5">採用 Firebase Authentication 授權帳號驗證</p>
+        </div>
+        <button onclick="closeModal('adminLoginModal')" class="text-[#8C8276] hover:text-[#38332E] text-lg cursor-pointer">✕</button>
+      </div>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold text-[#5C5349] mb-1">管理員帳號（Email）</label>
+          <input id="adminEmailInput" type="email" placeholder="admin@mail.cgust.edu.tw"
+            class="w-full px-3.5 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm focus:outline-none focus:border-[#C87D75]" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-[#5C5349] mb-1">管理員密碼</label>
+          <input id="adminPwdInput" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter') verifyAdminLogin()"
+            class="w-full px-3.5 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-sm focus:outline-none focus:border-[#C87D75]" />
+        </div>
+      </div>
+      <div class="flex justify-end gap-2">
+        <button onclick="closeModal('adminLoginModal')" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#F3EDE4] text-[#5C5349] cursor-pointer">取消</button>
+        <button id="btnAdminLogin" onclick="verifyAdminLogin()" class="px-5 py-2 rounded-xl text-xs font-bold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] cursor-pointer">登入後台</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 彈窗 6：管理員後台總表、報名截止開關、候補名單與 Excel 匯出 -->
   <div id="adminDashboardModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5">
     <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-6xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
       <div class="px-6 py-4 bg-[#F7F2EA] border-b border-[#E6DDD0] flex flex-wrap items-center justify-between gap-3">
         <div>
           <h3 class="serif-title text-lg font-bold text-[#38332E]">長庚科技大學116年旺年會｜管理員後台查驗中心</h3>
-          <p class="text-xs text-[#787067]">含報名編號、專屬取消碼備查、座位總表與報到發獎 Excel 匯出</p>
+          <p class="text-xs text-[#787067]">僅授權管理員可讀取完整個資與取消碼，支援報名截止開關與 Excel 總表匯出</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
-          <button onclick="toggleCloudConfigPanel()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-[#FFFDF9] text-[#5C5349] border border-[#D8CBB8] hover:bg-[#F3EDE4] cursor-pointer">
-            多人雲端同步設定
+          <button id="btnToggleRegOpen" onclick="toggleRegistrationStatus()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-[#FFF3DF] text-[#8A5A19] border border-[#E6C794] cursor-pointer">
+            報名狀態：開放中（點擊截止）
           </button>
           <button onclick="exportAdminExcelCSV()" class="px-4 py-2 rounded-xl text-xs font-bold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] shadow-xs cursor-pointer">
             匯出報到與發獎 Excel (.csv)
           </button>
-          <button onclick="closeModal('adminDashboardModal')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-[#E8DFD1] text-[#5C5349] hover:bg-[#DCD0BE] cursor-pointer">
-            關閉
+          <button onclick="adminSignOut()" class="px-3 py-2 rounded-xl text-xs font-semibold bg-[#E8DFD1] text-[#5C5349] hover:bg-[#DCD0BE] cursor-pointer">
+            登出並關閉
           </button>
         </div>
       </div>
 
-      <!-- 多人雲端設定摺疊面板 -->
-      <div id="cloudConfigPanel" class="hidden px-6 py-4 bg-[#F4EFE6] border-b border-[#E2D6C5] space-y-3 text-xs">
-        <div class="font-bold text-[#38332E]">多人即時同步資料庫設定（Firebase Config）</div>
-        <p class="text-[#696056]">貼上您的 Firebase <code class="bg-[#FFFDF9] px-1.5 py-0.5 rounded border border-[#DFD3C3]">firebaseConfig</code> 物件後按連線，再複製「同事專用同步報名網址」發送給全校同仁即可永久即時互通：</p>
-        <textarea id="firebaseConfigInput" rows="3" placeholder='{"apiKey":"...","authDomain":"...","projectId":"...","storageBucket":"...","messagingSenderId":"...","appId":"..."}'
-          class="w-full p-2.5 rounded-xl bg-[#FFFDF9] border border-[#D8CBB8] font-mono text-xs focus:outline-none"></textarea>
-        <div class="flex flex-wrap items-center gap-2">
-          <button onclick="applyManualFirebaseConfig()" class="px-4 py-2 rounded-xl bg-[#C87D75] text-[#FFFDF9] font-bold cursor-pointer">1. 立即連線測試並套用</button>
-          <button onclick="copyShareableSyncUrl()" class="px-4 py-2 rounded-xl bg-[#6E8B74] text-[#FFFDF9] font-bold cursor-pointer">2. 複製「同事專用同步報名網址」</button>
+      <div id="adminSummaryCards" class="px-6 py-3.5 grid grid-cols-2 sm:grid-cols-5 gap-3 bg-[#FAF7F2] border-b border-[#EFE8DD]"></div>
+
+      <div class="px-6 py-3 bg-[#FFFDF9] border-b border-[#EFE8DD] flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <button onclick="switchAdminTab('regs')" id="tabAdminRegs" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#C87D75] text-[#FFFDF9] cursor-pointer">正式報名總表</button>
+          <button onclick="switchAdminTab('waitlist')" id="tabAdminWaitlist" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#F5EFE6] text-[#5C5349] cursor-pointer">線上候補名單</button>
+          <input id="adminSearchInput" type="text" placeholder="搜尋報名編號、F 帳號、姓名、分機或桌號..." oninput="renderAdminTable()"
+            class="w-64 sm:w-80 px-3.5 py-1.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-xs focus:outline-none focus:border-[#C87D75]" />
         </div>
-      </div>
-
-      <!-- 統計摘要卡 -->
-      <div id="adminSummaryCards" class="px-6 py-3.5 grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#FAF7F2] border-b border-[#EFE8DD]"></div>
-
-      <!-- 搜尋列與明細表 -->
-      <div class="px-6 py-3 bg-[#FFFDF9] border-b border-[#EFE8DD] flex items-center justify-between gap-3">
-        <input id="adminSearchInput" type="text" placeholder="搜尋報名編號、F 帳號、姓名、分機或桌號..." oninput="renderAdminTable()"
-          class="w-full max-w-md px-3.5 py-2 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-xs focus:outline-none focus:border-[#C87D75]" />
         <span id="adminRowCount" class="text-xs text-[#787067]"></span>
       </div>
 
       <div class="flex-1 overflow-auto px-6 py-3">
         <table class="w-full text-left border-collapse text-xs">
-          <thead>
-            <tr class="border-b-2 border-[#E6DDD0] text-[#5C5349] bg-[#FAF7F2]">
-              <th class="py-2.5 px-2.5">報名編號</th>
-              <th class="py-2.5 px-2.5">F 帳號</th>
-              <th class="py-2.5 px-2.5">主報名人</th>
-              <th class="py-2.5 px-2.5">分機 / Email</th>
-              <th class="py-2.5 px-2.5">專屬取消碼</th>
-              <th class="py-2.5 px-2.5">桌次與出席人員明細</th>
-              <th class="py-2.5 px-2.5 text-right">應繳總額</th>
-              <th class="py-2.5 px-2.5 text-center">管理操作</th>
-            </tr>
-          </thead>
+          <thead id="adminTableHead"></thead>
           <tbody id="adminTableBody" class="divide-y divide-[#EFE8DD]"></tbody>
         </table>
       </div>
@@ -626,33 +670,25 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, doc, getDoc, getDocs, setDoc, runTransaction, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // ==================== 系統狀態與資料結構 ====================
-    // 舞台前長官大主桌（單獨一桌・12人座）
     const VIP_EXECUTIVES = [
       "范君瑜", "樓迎統", "楊文進", "簡淑慧",
       "劉杏元", "孫三能", "余怡珍", "劉倩君",
       "林鴻銘", "陳美燕", "謝喜龍", "黃聰龍"
     ];
 
-    // 一般宴會廳：7×7 桌（49桌） + 4 桌 = 53 桌，每桌 10 人（原 2 號桌開放選擇）
-    const TOTAL_REGULAR_TABLES = 53; // 7*7 + 4
+    const TOTAL_REGULAR_TABLES = 53;
     const SEATS_PER_TABLE = 10;
-    const VEGETARIAN_TABLE = 50; // 第 50 桌清楚標示為「素食桌」
-    const RESERVE_TABLE = 53;    // 第 53 桌為「預備桌」，當第 01~52 桌全部選完才開放
+    const VEGETARIAN_TABLE = 50;
+    const RESERVE_TABLE = 53;
 
-    const ADMIN_PASSWORD = "0120";
-    const LOCAL_STORAGE_KEY = "cgust_116_banquet_registrations_v4";
-
-    // 陪同者身分別選項：一般眷屬、其他（含臨時工、工讀生、退休老師、國外學者等）
     const COMPANION_ROLES = [
       { id: "family", label: "一般眷屬" },
       { id: "other", label: "其他（臨時工 / 工讀生 / 退休老師 / 國外學者等）" }
     ];
 
-    // 一般眷屬收費級距（其他身分別統一 880 元佔位）
     const FAMILY_AGE_TIERS = [
       { id: "infant", label: "未滿 1 歲（免費・不佔位）", fee: 0, needsSeat: false },
       { id: "child_1_6", label: "1–6 歲（250 元・佔位）", fee: 250, needsSeat: true },
@@ -660,29 +696,7 @@
       { id: "adult_880", label: "國中（含）以上（880 元・佔位）", fee: 880, needsSeat: true }
     ];
 
-    let db = null;
-    let auth = null;
-    let isCloudConnected = false;
-    let appId = typeof __app_id !== "undefined" ? __app_id : "cgust-116-banquet";
-
-    // 已存檔的報名紀錄陣列
-    let registrations = [];
-    // 目前表單編輯狀態（每位佔位者各自綁定自己的 seat: { table, seat } | null）
-    let formState = {
-      fAccount: "",
-      name: "",
-      ext: "",
-      email: "",
-      mainSeat: null, // { table, seat } | null
-      guests: [] // { id, name, roleId, ageTierId, seat: { table, seat } | null }
-    };
-
-    let currentTableFilter = "all";
-    let activeExpandedTable = 1; // 目前點選展開檢視大圓桌的桌號
-    let lastReceiptPlainText = "";
-
-    // 預設內建您的 Firebase 雲端即時同步設定
-    const DEFAULT_FIREBASE_CONFIG = {
+    const OFFICIAL_FIREBASE_CONFIG = {
       apiKey: "AIzaSyDtlaTEOD5JTOOsQEfh5QPMH_YhHfqZSbU",
       authDomain: "cgust-year-end-party.firebaseapp.com",
       projectId: "cgust-year-end-party",
@@ -691,7 +705,34 @@
       appId: "1:220552108762:web:f9d5103a8fc6626b1c63e3"
     };
 
-    // ==================== 隱私遮罩、計費與編號工具 ====================
+    const APP_NAMESPACE = "cgust-116-banquet";
+    const PUBLIC_BASE = ["artifacts", APP_NAMESPACE, "public", "data"];
+
+    let db = null;
+    let auth = null;
+    let isCloudConnected = false;
+    let isAdminAuthenticated = false;
+    let isRegistrationOpen = true;
+
+    let publicSeatSlots = {};
+    let adminRegistrations = [];
+    let adminWaitlist = [];
+    let activeAdminTab = "regs";
+
+    let formState = {
+      fAccount: "",
+      name: "",
+      ext: "",
+      email: "",
+      mainSeat: null,
+      guests: []
+    };
+
+    let currentTableFilter = "all";
+    let activeExpandedTable = 1;
+    let lastReceiptPlainText = "";
+    let lastReceiptRegId = "";
+
     function maskMiddleName(fullName) {
       const clean = (fullName || "").trim();
       if (!clean) return "已預約";
@@ -702,6 +743,28 @@
         return `${chars[0]}O${chars[2]}`;
       }
       return `${chars[0]}${"O".repeat(chars.length - 2)}${chars[chars.length - 1]}`;
+    }
+
+    function generateUniqueRegId() {
+      const now = new Date();
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const dd = String(now.getDate()).padStart(2, "0");
+      const timePart = (Date.now() % 1679616).toString(36).toUpperCase().padStart(4, "0");
+      const array = new Uint32Array(1);
+      window.crypto.getRandomValues(array);
+      const randPart = (array[0] % 1679616).toString(36).toUpperCase().padStart(4, "0");
+      return `CG116-${mm}${dd}-${timePart}${randPart}`;
+    }
+
+    function generateSecureCancelCode() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      const array = new Uint8Array(6);
+      window.crypto.getRandomValues(array);
+      let code = "";
+      for (let i = 0; i < 6; i++) {
+        code += chars.charAt(array[i] % chars.length);
+      }
+      return code;
     }
 
     function getCompanionPricing(guest) {
@@ -725,239 +788,164 @@
       };
     }
 
-    // 驗證 F 帳號格式：大寫 F 開頭 + 9 位數字，共 10 碼（例如 F000009999）
     function isValidFAccountFormat(fAcc) {
       return /^F\d{9}$/.test((fAcc || "").trim());
     }
 
-    // 判斷是否 1~52 桌（520席）已全滿，若是則自動解鎖第 53 桌預備桌
-    function isReserveTableUnlocked(occupiedMap) {
-      const regularCapacity = (TOTAL_REGULAR_TABLES - 1) * SEATS_PER_TABLE; // 52 * 10 = 520 席
+    function isReserveTableUnlocked() {
+      const neededForCurrentGroup = getRequiredSeatCount();
       let regularUsed = 0;
+      let hasTableWithEnoughSeats = false;
+
       for (let t = 1; t < RESERVE_TABLE; t++) {
+        let tableFree = 0;
         for (let s = 1; s <= SEATS_PER_TABLE; s++) {
-          if (occupiedMap.has(`${t}-${s}`)) regularUsed++;
+          if (publicSeatSlots[`${t}-${s}`]) regularUsed++;
+          else tableFree++;
+        }
+        if (tableFree >= neededForCurrentGroup) {
+          hasTableWithEnoughSeats = true;
         }
       }
-      return regularUsed >= regularCapacity;
+
+      const regularCapacity = (TOTAL_REGULAR_TABLES - 1) * SEATS_PER_TABLE;
+      return regularUsed >= regularCapacity || !hasTableWithEnoughSeats;
     }
 
-    // 個資使用同意勾選控制
-    window.handlePrivacyConsentChange = function() {
-      const checked = document.getElementById("privacyConsentCheckbox").checked;
+    function updateWorkspaceAvailability() {
+      const consented = document.getElementById("privacyConsentCheckbox").checked;
       const overlay = document.getElementById("consentLockOverlay");
+      const lockTitle = document.getElementById("lockOverlayTitle");
+      const lockDesc = document.getElementById("lockOverlayDesc");
       const formSec = document.getElementById("registrationFormSection");
       const seatSec = document.getElementById("seatSelectionSection");
 
-      if (checked) {
-        overlay.classList.add("hidden");
-        formSec.classList.remove("hidden");
-        seatSec.classList.remove("hidden");
-        renderVipHeadTable();
-        renderBanquetHall();
-      } else {
+      if (!isCloudConnected) {
         overlay.classList.remove("hidden");
         formSec.classList.add("hidden");
         seatSec.classList.add("hidden");
-      }
-    };
-
-    function generateRegId() {
-      const now = new Date();
-      const mm = String(now.getMonth() + 1).padStart(2, "0");
-      const dd = String(now.getDate()).padStart(2, "0");
-      const rand = Math.floor(1000 + Math.random() * 9000);
-      return `CG116-${mm}${dd}-${rand}`;
-    }
-
-    function generateCancelCode() {
-      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      let code = "";
-      for (let i = 0; i < 6; i++) {
-        code += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return code;
-    }
-
-    function getOccupiedSeatMap() {
-      const map = new Map();
-      registrations.forEach(reg => {
-        const maskedHost = maskMiddleName(reg.name);
-        if (reg.mainSeat) {
-          map.set(`${reg.mainSeat.table}-${reg.mainSeat.seat}`, {
-            displayLabel: maskedHost,
-            regId: reg.regId,
-            fAccount: reg.fAccount,
-            personType: "main",
-            personName: reg.name
-          });
-        }
-        let guestSeatCounter = 0;
-        (reg.guests || []).forEach((g, idx) => {
-          if (g.seatInfo) {
-            guestSeatCounter += 1;
-            map.set(`${g.seatInfo.table}-${g.seatInfo.seat}`, {
-              displayLabel: `${maskedHost}眷屬${guestSeatCounter}`,
-              regId: reg.regId,
-              fAccount: reg.fAccount,
-              personType: "guest",
-              personName: g.name,
-              guestIndex: idx
-            });
-          }
-        });
-      });
-      return map;
-    }
-
-    function isFAccountAlreadyRegistered(fAcc) {
-      const normalized = (fAcc || "").trim().toUpperCase();
-      if (!normalized) return null;
-      return registrations.find(r => (r.fAccount || "").trim().toUpperCase() === normalized) || null;
-    }
-
-    // ==================== Firebase 雲端即時同步初始化 ====================
-    function resolveFirebaseConfig() {
-      try {
-        const params = new URLSearchParams(window.location.search);
-        const cfgParam = params.get("cfg");
-        if (cfgParam) {
-          const decoded = JSON.parse(decodeURIComponent(atob(cfgParam)));
-          if (decoded && decoded.apiKey) {
-            localStorage.setItem("cgust_116_firebase_cfg", JSON.stringify(decoded));
-            return decoded;
-          }
-        }
-      } catch (e) { console.warn("URL cfg parse error", e); }
-
-      try {
-        const saved = localStorage.getItem("cgust_116_firebase_cfg");
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (parsed && parsed.apiKey) return parsed;
-        }
-      } catch (e) {}
-
-      if (DEFAULT_FIREBASE_CONFIG && DEFAULT_FIREBASE_CONFIG.apiKey) {
-        return DEFAULT_FIREBASE_CONFIG;
-      }
-
-      if (typeof __firebase_config !== "undefined" && __firebase_config) {
-        try {
-          return typeof __firebase_config === "string" ? JSON.parse(__firebase_config) : __firebase_config;
-        } catch (e) {}
-      }
-
-      return null;
-    }
-
-    async function initDatabase() {
-      const cfg = resolveFirebaseConfig();
-      if (!cfg || !cfg.apiKey) {
-        loadFromLocalStorage();
-        updateSyncBadge(false);
+        lockTitle.textContent = "⚠️ 尚未連線至雲端資料庫，目前禁止報名";
+        lockDesc.textContent = "為防止資料遺失或多人撞位，系統在未取得雲端資料庫連線前已鎖定操作。請檢查網路連線或聯絡管理員。";
         return;
       }
 
+      if (!isRegistrationOpen) {
+        overlay.classList.remove("hidden");
+        formSec.classList.add("hidden");
+        seatSec.classList.add("hidden");
+        lockTitle.textContent = "📢 長庚科技大學116年旺年會 線上報名已截止";
+        lockDesc.textContent = "目前管理員已關閉線上報名與新增選位；若已報名同仁需查詢或取消，仍可使用右上角「查詢 / 取消報名與重選」。";
+        return;
+      }
+
+      if (!consented) {
+        overlay.classList.remove("hidden");
+        formSec.classList.add("hidden");
+        seatSec.classList.add("hidden");
+        lockTitle.textContent = "請先勾選上方「我同意上述個資使用方式」";
+        lockDesc.textContent = "勾選同意後，即可開始填寫報名資料與進入選位區選擇桌次。";
+        return;
+      }
+
+      overlay.classList.add("hidden");
+      formSec.classList.remove("hidden");
+      seatSec.classList.remove("hidden");
+      renderVipHeadTable();
+      renderBanquetHall();
+    }
+
+    window.handlePrivacyConsentChange = function() {
+      updateWorkspaceAvailability();
+    };
+
+    async function initDatabase() {
       try {
-        const app = initializeApp(cfg);
+        const app = initializeApp(OFFICIAL_FIREBASE_CONFIG);
         auth = getAuth(app);
         db = getFirestore(app);
 
-        const isCustomProject = cfg.projectId === DEFAULT_FIREBASE_CONFIG.projectId ||
-          Boolean(localStorage.getItem("cgust_116_firebase_cfg")) ||
-          new URLSearchParams(window.location.search).has("cfg");
-
-        if (!isCustomProject && typeof __initial_auth_token !== "undefined" && __initial_auth_token) {
-          try {
-            await signInWithCustomToken(auth, __initial_auth_token);
-          } catch (tokenErr) {
-            await signInAnonymously(auth);
-          }
-        } else {
-          await signInAnonymously(auth);
-        }
+        await signInAnonymously(auth);
 
         onAuthStateChanged(auth, (user) => {
           if (user) {
-            subscribeRegistrations();
+            isAdminAuthenticated = !user.isAnonymous;
+            subscribePublicSeatMapAndConfig();
+            if (isAdminAuthenticated) {
+              loadAdminPrivateCollections();
+            }
           }
         });
       } catch (err) {
-        console.error("Firebase init failed:", err);
-        loadFromLocalStorage();
+        console.error("Firebase connection failed:", err);
+        isCloudConnected = false;
+        showSystemAlert("雲端資料庫連線失敗（禁止報名）", "無法連線至 Firebase 伺服器，已自動鎖定報名以防假存檔與撞位。請確認網路環境未阻擋 Google/Firebase 連線。");
         updateSyncBadge(false);
+        updateWorkspaceAvailability();
       }
     }
 
-    function subscribeRegistrations() {
+    function subscribePublicSeatMapAndConfig() {
       if (!db) return;
-      const colRef = collection(db, "artifacts", appId, "public", "data", "banquet_116_regs");
-      onSnapshot(colRef, (snapshot) => {
-        const list = [];
-        snapshot.forEach(docSnap => {
-          list.push(docSnap.data());
-        });
-        list.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
-        registrations = list;
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(registrations));
+
+      const seatMapRef = doc(db, ...PUBLIC_BASE, "system_state", "public_seat_map");
+      onSnapshot(seatMapRef, (snap) => {
         isCloudConnected = true;
+        hideSystemAlert();
         updateSyncBadge(true);
+
+        if (snap.exists()) {
+          publicSeatSlots = snap.data().slots || {};
+        } else {
+          publicSeatSlots = {};
+        }
+        updateWorkspaceAvailability();
         refreshAllUI();
       }, (error) => {
-        console.error("Snapshot error:", error);
-        loadFromLocalStorage();
+        console.error("Public seat map snapshot error:", error);
+        isCloudConnected = false;
+        showSystemAlert("雲端即時同步中斷（已暫停報名）", `無法讀取雲端座位表（錯誤代碼：${error.code || "network"}）。請確認 Firestore Rules 已正確設定並重新整理。`);
         updateSyncBadge(false);
+        updateWorkspaceAvailability();
+      });
+
+      const configRef = doc(db, ...PUBLIC_BASE, "system_state", "banquet_config");
+      onSnapshot(configRef, (snap) => {
+        if (snap.exists() && typeof snap.data().isOpen === "boolean") {
+          isRegistrationOpen = snap.data().isOpen;
+        } else {
+          isRegistrationOpen = true;
+        }
+        if (!isRegistrationOpen) {
+          showSystemAlert("📢 本年度旺年會線上報名已截止", "管理員已關閉新報名登記；已報名同仁仍可點擊右上角「查詢 / 取消報名與重選」。");
+        } else if (isCloudConnected) {
+          hideSystemAlert();
+        }
+        updateWorkspaceAvailability();
+        updateAdminOpenToggleBtn();
       });
     }
 
-    function loadFromLocalStorage() {
-      try {
-        const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
-        registrations = raw ? JSON.parse(raw) : [];
-      } catch (e) {
-        registrations = [];
-      }
-      refreshAllUI();
+    function showSystemAlert(title, desc) {
+      document.getElementById("systemAlertTitle").textContent = title;
+      document.getElementById("systemAlertDesc").textContent = desc;
+      document.getElementById("systemAlertBanner").classList.remove("hidden");
+    }
+
+    function hideSystemAlert() {
+      document.getElementById("systemAlertBanner").classList.add("hidden");
     }
 
     function updateSyncBadge(connected) {
       const badge = document.getElementById("syncStatusBadge");
       if (connected) {
         badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#E9F0EA] text-[#4E6B54] border border-[#C6D8C9]";
-        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#6E8B74] animate-pulse"></span>雲端多人即時同步中`;
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#6E8B74] animate-pulse"></span>雲端安全同步中（交易鎖定防護）`;
       } else {
         badge.className = "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-[#F9EFEA] text-[#A85D55] border border-[#E8CFC9]";
-        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#C86D65]"></span>本機暫存模式（請檢查網路或 Firebase 權限）`;
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#C86D65]"></span>未連線（已鎖定禁止報名）`;
       }
     }
 
-    async function persistRegistration(regObj) {
-      if (isCloudConnected && db) {
-        const docRef = doc(db, "artifacts", appId, "public", "data", "banquet_116_regs", regObj.fAccount.toUpperCase());
-        await setDoc(docRef, regObj);
-      } else {
-        const idx = registrations.findIndex(r => r.fAccount.toUpperCase() === regObj.fAccount.toUpperCase());
-        if (idx >= 0) registrations[idx] = regObj;
-        else registrations.push(regObj);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(registrations));
-        refreshAllUI();
-      }
-    }
-
-    async function removeRegistrationDoc(fAccount) {
-      const key = fAccount.toUpperCase();
-      if (isCloudConnected && db) {
-        const docRef = doc(db, "artifacts", appId, "public", "data", "banquet_116_regs", key);
-        await deleteDoc(docRef);
-      } else {
-        registrations = registrations.filter(r => r.fAccount.toUpperCase() !== key);
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(registrations));
-        refreshAllUI();
-      }
-    }
-
-    // ==================== 表單與計費邏輯 ====================
     function getCurrentSelectionTarget() {
       const maskedHost = maskMiddleName(formState.name);
       if (!formState.mainSeat) {
@@ -1146,7 +1134,6 @@
       addBtn.disabled = disableAdd;
       addBtn.classList.toggle("opacity-50", disableAdd);
       addBtn.classList.toggle("cursor-not-allowed", disableAdd);
-      addBtn.title = hasUnfinishedPrev ? "請先完成目前填寫對象的姓名與選位，才能新增下一位" : "";
 
       if (formState.guests.length === 0) {
         container.innerHTML = `<div class="text-center py-3 rounded-xl border border-dashed border-[#DFD5C7] text-xs text-[#9A9084]">
@@ -1298,7 +1285,6 @@
       previewEl.innerHTML = rows.join("");
     }
 
-    // ==================== 舞台前長官大主桌（12席）與 7×7+4 宴會廳渲染 ====================
     function renderVipHeadTable() {
       const container = document.getElementById("vipHeadTableContainer");
       if (!container) return;
@@ -1374,7 +1360,7 @@
       renderBanquetHall();
     };
 
-    function shouldShowTable(tableNum, occupiedMap, reserveUnlocked) {
+    function shouldShowTable(tableNum, reserveUnlocked) {
       if (currentTableFilter === "all") return true;
       if (currentTableFilter === "veg") return tableNum === VEGETARIAN_TABLE;
       if (currentTableFilter === "1-21") return tableNum >= 1 && tableNum <= 21;
@@ -1384,7 +1370,7 @@
         if (tableNum === RESERVE_TABLE && !reserveUnlocked) return false;
         let used = 0;
         for (let s = 1; s <= SEATS_PER_TABLE; s++) {
-          if (occupiedMap.has(`${tableNum}-${s}`)) used++;
+          if (publicSeatSlots[`${tableNum}-${s}`]) used++;
         }
         return used < SEATS_PER_TABLE;
       }
@@ -1392,17 +1378,16 @@
     }
 
     function renderBanquetHall() {
-      const occupiedMap = getOccupiedSeatMap();
       const draftSeats = getAllDraftSelectedSeats();
-      const reserveUnlocked = isReserveTableUnlocked(occupiedMap);
+      const reserveUnlocked = isReserveTableUnlocked();
 
+      const occupiedCountTotal = Object.keys(publicSeatSlots).length;
       const activeTableCount = reserveUnlocked ? TOTAL_REGULAR_TABLES : (TOTAL_REGULAR_TABLES - 1);
-      const totalAvailable = activeTableCount * SEATS_PER_TABLE - occupiedMap.size;
+      const totalAvailable = activeTableCount * SEATS_PER_TABLE - occupiedCountTotal;
       document.getElementById("statAvailable").textContent = Math.max(0, totalAvailable);
       document.getElementById("statSelected").textContent = draftSeats.length;
-      document.getElementById("statOccupied").textContent = occupiedMap.size;
+      document.getElementById("statOccupied").textContent = occupiedCountTotal;
 
-      // 依據 7×7 桌（7 排 × 每排 7 桌 = 49 桌） + 最後 1 排加開 4 桌（共 53 桌）排列
       const gridRows = [];
       for (let r = 0; r < 7; r++) {
         const rowTables = [];
@@ -1415,7 +1400,7 @@
 
       const sectionsHtml = [];
       gridRows.forEach(rowObj => {
-        const visibleTables = rowObj.tables.filter(t => shouldShowTable(t, occupiedMap, reserveUnlocked));
+        const visibleTables = rowObj.tables.filter(t => shouldShowTable(t, reserveUnlocked));
         if (visibleTables.length === 0) return;
 
         sectionsHtml.push(`
@@ -1425,7 +1410,7 @@
               <div class="flex-1 h-px bg-[#EAE0D2]"></div>
             </div>
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2">
-              ${visibleTables.map(t => renderMiniTableCard(t, occupiedMap, draftSeats, reserveUnlocked)).join("")}
+              ${visibleTables.map(t => renderMiniTableCard(t, draftSeats, reserveUnlocked)).join("")}
             </div>
           </div>
         `);
@@ -1434,13 +1419,12 @@
       const container = document.getElementById("banquetHallContainer");
       container.innerHTML = sectionsHtml.length > 0
         ? sectionsHtml.join("")
-        : `<div class="text-center py-8 text-sm text-[#8C8276]">目前篩選條件下沒有符合的桌次</div>`;
+        : `<div class="text-center py-8 text-sm text-[#8C8276]">目前篩選條件下沒有符合的桌次，若已客滿可點擊右上角「座位已滿／登記候補」</div>`;
 
-      renderExpandedSingleTable(activeExpandedTable, occupiedMap, draftSeats, reserveUnlocked);
+      renderExpandedSingleTable(activeExpandedTable, draftSeats, reserveUnlocked);
     }
 
-    // 迷你卡片呈現該桌選位燈號現況（一行 7 桌，點擊後在下方展開大圓桌）
-    function renderMiniTableCard(tableNum, occupiedMap, draftSeats, reserveUnlocked) {
+    function renderMiniTableCard(tableNum, draftSeats, reserveUnlocked) {
       const isVeg = tableNum === VEGETARIAN_TABLE;
       const isReserve = tableNum === RESERVE_TABLE;
       const isReserveLocked = isReserve && !reserveUnlocked;
@@ -1449,14 +1433,14 @@
       let occupiedCount = 0;
       const dots = [];
       for (let s = 1; s <= SEATS_PER_TABLE; s++) {
-        const isOcc = occupiedMap.has(`${tableNum}-${s}`);
+        const isOcc = Boolean(publicSeatSlots[`${tableNum}-${s}`]);
         const isDraft = draftSeats.some(d => d.table === tableNum && d.seat === s);
         if (isOcc) occupiedCount++;
 
-        let dotColor = "bg-[#6E8B74]"; // 空位綠點
+        let dotColor = "bg-[#6E8B74]";
         if (isReserveLocked) dotColor = "bg-[#C2BBB2]";
-        else if (isOcc) dotColor = "bg-[#C86D65]"; // 已佔用紅點
-        else if (isDraft) dotColor = "bg-[#E09F3E]"; // 預選黃點
+        else if (isOcc) dotColor = "bg-[#C86D65]";
+        else if (isDraft) dotColor = "bg-[#E09F3E]";
 
         dots.push(`<span class="w-1.5 h-1.5 rounded-full ${dotColor} inline-block"></span>`);
       }
@@ -1494,8 +1478,7 @@
       `;
     }
 
-    // 點選桌次後，在選位區正中央展開大圓桌與 10 個大型座位按鈕
-    function renderExpandedSingleTable(tableNum, occupiedMap, draftSeats, reserveUnlocked) {
+    function renderExpandedSingleTable(tableNum, draftSeats, reserveUnlocked) {
       const stageEl = document.getElementById("activeTableDetailStage");
       if (!stageEl) return;
 
@@ -1505,7 +1488,7 @@
 
       let occupiedCount = 0;
       for (let s = 1; s <= SEATS_PER_TABLE; s++) {
-        if (occupiedMap.has(`${tableNum}-${s}`)) occupiedCount++;
+        if (publicSeatSlots[`${tableNum}-${s}`]) occupiedCount++;
       }
       const freeCount = isReserveLocked ? 0 : SEATS_PER_TABLE - occupiedCount;
 
@@ -1517,7 +1500,7 @@
         const x = 130 + radius * Math.cos(rad);
         const y = 130 + radius * Math.sin(rad);
 
-        const occInfo = occupiedMap.get(`${tableNum}-${s}`);
+        const maskedOccupant = publicSeatSlots[`${tableNum}-${s}`];
         const draftInfo = draftSeats.find(sel => sel.table === tableNum && sel.seat === s);
 
         let btnClass = "seat-available";
@@ -1528,12 +1511,12 @@
         if (isReserveLocked) {
           btnClass = "seat-locked";
           subText = "鎖定";
-          clickAttr = `onclick="showToast('第 53 桌為「預備桌」，必須等第 01～52 桌所有位置都選完後才會開放選擇！')"`;
-          hoverAttr = `onmouseenter="showSeatTooltip(event, '預備桌（需等全場 520 席全滿才開放）')" onmouseleave="hideSeatTooltip()"`;
-        } else if (occInfo) {
+          clickAttr = `onclick="showToast('第 53 桌為「預備桌」，當第 01～52 桌全滿或已無同桌連續空位時才會開放！')"`;
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '預備桌（第 01～52 桌滿席或無同桌空位時自動開放）')" onmouseleave="hideSeatTooltip()"`;
+        } else if (maskedOccupant) {
           btnClass = "seat-occupied";
           subText = "已選";
-          const safeLabel = escapeHtml(occInfo.displayLabel);
+          const safeLabel = escapeHtml(maskedOccupant);
           clickAttr = `onclick="showToast('第 ${String(tableNum).padStart(2, "0")} 桌 ${s} 號席已被「${safeLabel}」預約')"`;
           hoverAttr = `onmouseenter="showSeatTooltip(event, '${safeLabel}')" onmouseleave="hideSeatTooltip()"`;
         } else if (draftInfo) {
@@ -1569,7 +1552,7 @@
         if (isReserveLocked) {
           tableSurfaceClass = "reserve-locked-surface";
           centerTitleColor = "text-[#6E675F]";
-          centerSubText = "滿席啟用";
+          centerSubText = "預備桌";
         }
         badgeHtml = `<span class="px-2.5 py-0.5 rounded-lg bg-[#8C8276] text-[#FFFDF9] text-xs font-bold">預備桌</span>`;
       }
@@ -1582,7 +1565,7 @@
               ${badgeHtml}
             </div>
             <span class="text-xs font-semibold ${isReserveLocked ? "text-[#7A7269]" : freeCount > 0 ? "text-[#4E6B54]" : "text-[#B2564E]"}">
-              ${isReserveLocked ? "第 01～52 桌全滿後開放" : `尚餘 ${freeCount} 席`}
+              ${isReserveLocked ? "第 01～52 桌滿席或無同桌空位時自動開放" : `尚餘 ${freeCount} 席`}
             </span>
           </div>
 
@@ -1607,13 +1590,15 @@
     }
 
     window.handleSeatClick = function(tableNum, seatNum) {
-      const occupiedMap = getOccupiedSeatMap();
-      if (tableNum === RESERVE_TABLE && !isReserveTableUnlocked(occupiedMap)) {
-        showToast("第 53 桌為「預備桌」，必須等第 01～52 桌所有位置都選完後才會開放選擇！");
+      if (!isCloudConnected || !isRegistrationOpen) {
+        return showToast("目前無法選位，請確認雲端連線狀態與報名開放時間。");
+      }
+
+      if (tableNum === RESERVE_TABLE && !isReserveTableUnlocked()) {
+        showToast("第 53 桌為「預備桌」，必須等第 01～52 桌全滿或已無同桌連續空位時才會開放！");
         return;
       }
 
-      // 1. 若點擊的是目前已預選的本人座位 -> 取消本人與同行者座位以便重選
       if (formState.mainSeat && formState.mainSeat.table === tableNum && formState.mainSeat.seat === seatNum) {
         formState.mainSeat = null;
         formState.guests.forEach(g => { g.seat = null; });
@@ -1624,7 +1609,6 @@
         return;
       }
 
-      // 2. 若點擊的是目前已預選的某位陪同者座位 -> 取消該陪同者座位
       const clickedGuest = formState.guests.find(g => g.seat && g.seat.table === tableNum && g.seat.seat === seatNum);
       if (clickedGuest) {
         clickedGuest.seat = null;
@@ -1634,7 +1618,6 @@
         return;
       }
 
-      // 3. 取得目前選位對象
       const target = getCurrentSelectionTarget();
       if (!target) {
         showToast("目前所有已登記人員皆已完成選位！若要新增陪同者請按「+ 新增陪同者」，或點擊黃色座位取消重選。");
@@ -1651,11 +1634,10 @@
         return;
       }
 
-      // 4. 分配座位給目前選位對象
       if (target.type === "main") {
         formState.mainSeat = { table: tableNum, seat: seatNum };
         const vegNotice = tableNum === VEGETARIAN_TABLE ? "（提醒：您選擇的是「素食桌」）" : "";
-        showToast(`已為「${target.displayLabel}」選定第 ${String(tableNum).padStart(2, "0")} 桌 ${seatNum} 號席${vegNotice}！`);
+        showToast(`已為「${target.displayLabel}」暫選第 ${String(tableNum).padStart(2, "0")} 桌 ${seatNum} 號席${vegNotice}！`);
       } else {
         const lockedTable = formState.mainSeat.table;
         if (tableNum !== lockedTable) {
@@ -1665,7 +1647,7 @@
         const gObj = formState.guests.find(g => g.id === target.guestId);
         if (gObj) {
           gObj.seat = { table: tableNum, seat: seatNum };
-          showToast(`已為「${target.displayLabel}」選定第 ${String(tableNum).padStart(2, "0")} 桌 ${seatNum} 號席！`);
+          showToast(`已為「${target.displayLabel}」暫選第 ${String(tableNum).padStart(2, "0")} 桌 ${seatNum} 號席！`);
         }
       }
 
@@ -1686,8 +1668,9 @@
       document.getElementById("seatTooltip").classList.add("hidden");
     };
 
-    // ==================== 驗證與存檔流程 ====================
     window.openConfirmSubmitModal = function() {
+      if (!isCloudConnected) return showToast("尚未連線至雲端資料庫，禁止報名。");
+      if (!isRegistrationOpen) return showToast("線上報名已截止，無法送出新報名。");
       if (!document.getElementById("privacyConsentCheckbox").checked) {
         return showToast("請先勾選「我同意上述個資使用方式」。");
       }
@@ -1704,12 +1687,6 @@
       if (!formState.name) return showToast("請填寫「參加者姓名」。");
       if (!formState.ext) return showToast("請填寫「學校分機」。");
       if (!formState.email || !formState.email.includes("@")) return showToast("請填寫正確的「學校 Email」。");
-
-      const duplicateReg = isFAccountAlreadyRegistered(formState.fAccount);
-      if (duplicateReg) {
-        showToast(`F 帳號「${formState.fAccount}」已有報名紀錄（編號：${duplicateReg.regId}），不得重複報名或重複佔位！如需重選請先至上方「查詢 / 取消報名與重選」。`);
-        return;
-      }
 
       for (let i = 0; i < formState.guests.length; i++) {
         if (!formState.guests[i].name.trim()) {
@@ -1728,14 +1705,13 @@
         return showToast("所有同組佔位人員必須安排在同一桌，請重新確認座位。");
       }
 
-      const occupiedMap = getOccupiedSeatMap();
-      if (targetTable === RESERVE_TABLE && !isReserveTableUnlocked(occupiedMap)) {
-        return showToast("第 53 桌為預備桌，必須等全場第 01～52 桌全滿後才開放選擇！");
+      if (targetTable === RESERVE_TABLE && !isReserveTableUnlocked()) {
+        return showToast("第 53 桌為預備桌，必須等第 01～52 桌全滿或無同桌空位時才開放選擇！");
       }
 
       for (const s of draftSeats) {
-        if (occupiedMap.has(`${s.table}-${s.seat}`)) {
-          return showToast(`第 ${String(s.table).padStart(2, "0")} 桌 ${s.seat} 號席剛剛已被其他同仁選走，請更換同桌其他綠燈空位！`);
+        if (publicSeatSlots[`${s.table}-${s.seat}`]) {
+          return showToast(`第 ${String(s.table).padStart(2, "0")} 桌 ${s.seat} 號席已被其他同仁搶先預約，請更換同桌其他綠燈空位！`);
         }
       }
 
@@ -1751,7 +1727,7 @@
         <div class="space-y-1.5 text-xs">
           <div class="font-bold text-[#5C5349]">出席與座位明細：</div>
           <div class="flex justify-between py-1 border-b border-[#EFE8DD]">
-            <span>1. ${escapeHtml(formState.name)}（標示：${escapeHtml(maskedHost)}・${formState.mainSeat.seat} 號席）</span>
+            <span>1. ${escapeHtml(formState.name)}（公開標示：${escapeHtml(maskedHost)}・${formState.mainSeat.seat} 號席）</span>
             <span class="font-semibold">0 元</span>
           </div>
       `;
@@ -1760,7 +1736,7 @@
       formState.guests.forEach((g, idx) => {
         const pricing = getCompanionPricing(g);
         if (pricing.needsSeat) seatedOrder += 1;
-        const seatStr = pricing.needsSeat && g.seat ? `標示：${escapeHtml(maskedHost)}眷屬${seatedOrder}・${g.seat.seat} 號席` : "不佔位";
+        const seatStr = pricing.needsSeat && g.seat ? `公開標示：${escapeHtml(maskedHost)}眷屬${seatedOrder}・${g.seat.seat} 號席` : "不佔位";
         detailHtml += `
           <div class="flex justify-between py-1 border-b border-[#EFE8DD]">
             <span>${idx + 2}. ${escapeHtml(g.name.trim())}（${pricing.shortLabel}・${seatStr}）</span>
@@ -1782,33 +1758,45 @@
     };
 
     window.executeSaveRegistration = async function() {
+      if (!isCloudConnected || !db) {
+        closeModal("confirmSubmitModal");
+        return showToast("雲端資料庫未連線，禁止送出報名。");
+      }
+
       const btn = document.getElementById("btnFinalSave");
       btn.disabled = true;
-      btn.textContent = "寫入資料庫中...";
+      btn.textContent = "雲端原子鎖定座位中...";
 
       try {
-        if (isFAccountAlreadyRegistered(formState.fAccount)) {
-          closeModal("confirmSubmitModal");
-          showToast(`F 帳號 ${formState.fAccount} 已重複報名，系統已攔截此次存檔。`);
-          return;
-        }
-        const draftSeats = getAllDraftSelectedSeats();
-        const occupiedMap = getOccupiedSeatMap();
-        for (const s of draftSeats) {
-          if (occupiedMap.has(`${s.table}-${s.seat}`)) {
-            closeModal("confirmSubmitModal");
-            showToast(`第 ${String(s.table).padStart(2, "0")} 桌 ${s.seat} 號席已被他人搶先存檔，請重新選位！`);
-            return;
-          }
-        }
-
-        const regId = generateRegId();
-        const cancelCode = generateCancelCode();
+        const regId = generateUniqueRegId();
+        const cancelCode = generateSecureCancelCode();
         const totalAmount = calculateTotalAmount();
+        const fAccUpper = formState.fAccount.toUpperCase();
+        const maskedHost = maskMiddleName(formState.name);
 
+        const seatAssignments = [
+          {
+            key: `${formState.mainSeat.table}-${formState.mainSeat.seat}`,
+            table: formState.mainSeat.table,
+            seat: formState.mainSeat.seat,
+            publicLabel: maskedHost
+          }
+        ];
+
+        let seatedOrder = 0;
         const structuredGuests = formState.guests.map(g => {
           const pricing = getCompanionPricing(g);
-          const seatInfo = pricing.needsSeat && g.seat ? { ...g.seat } : null;
+          let seatInfo = null;
+          if (pricing.needsSeat && g.seat) {
+            seatedOrder += 1;
+            seatInfo = { ...g.seat };
+            seatAssignments.push({
+              key: `${g.seat.table}-${g.seat.seat}`,
+              table: g.seat.table,
+              seat: g.seat.seat,
+              publicLabel: `${maskedHost}眷屬${seatedOrder}`
+            });
+          }
           return {
             id: g.id,
             name: g.name.trim(),
@@ -1826,7 +1814,7 @@
         const newReg = {
           regId,
           cancelCode,
-          fAccount: formState.fAccount,
+          fAccount: fAccUpper,
           name: formState.name,
           ext: formState.ext,
           email: formState.email,
@@ -1836,7 +1824,52 @@
           createdAt: Date.now()
         };
 
-        await persistRegistration(newReg);
+        await runTransaction(db, async (transaction) => {
+          const configRef = doc(db, ...PUBLIC_BASE, "system_state", "banquet_config");
+          const fLockRef = doc(db, ...PUBLIC_BASE, "f_account_locks", fAccUpper);
+          const privateRegRef = doc(db, ...PUBLIC_BASE, "private_registrations", fAccUpper);
+          const seatMapRef = doc(db, ...PUBLIC_BASE, "system_state", "public_seat_map");
+
+          const configSnap = await transaction.get(configRef);
+          if (configSnap.exists() && configSnap.data().isOpen === false) {
+            throw new Error("REG_CLOSED");
+          }
+
+          const fLockSnap = await transaction.get(fLockRef);
+          if (fLockSnap.exists()) {
+            throw new Error("DUPLICATE_F_ACCOUNT");
+          }
+
+          const seatLockRefs = seatAssignments.map(sa => doc(db, ...PUBLIC_BASE, "seat_locks", sa.key));
+          for (let i = 0; i < seatLockRefs.length; i++) {
+            const seatSnap = await transaction.get(seatLockRefs[i]);
+            if (seatSnap.exists()) {
+              throw new Error(`SEAT_TAKEN:${seatAssignments[i].table}:${seatAssignments[i].seat}`);
+            }
+          }
+
+          const seatMapSnap = await transaction.get(seatMapRef);
+          const currentSlots = seatMapSnap.exists() ? { ...(seatMapSnap.data().slots || {}) } : {};
+
+          for (const sa of seatAssignments) {
+            if (currentSlots[sa.key]) {
+              throw new Error(`SEAT_TAKEN:${sa.table}:${sa.seat}`);
+            }
+            currentSlots[sa.key] = sa.publicLabel;
+          }
+
+          transaction.set(fLockRef, { fAccount: fAccUpper, regId, createdAt: newReg.createdAt });
+          for (let i = 0; i < seatLockRefs.length; i++) {
+            transaction.set(seatLockRefs[i], {
+              fAccount: fAccUpper,
+              regId,
+              publicLabel: seatAssignments[i].publicLabel,
+              createdAt: newReg.createdAt
+            });
+          }
+          transaction.set(privateRegRef, newReg);
+          transaction.set(seatMapRef, { slots: currentSlots, updatedAt: Date.now() }, { merge: true });
+        });
 
         closeModal("confirmSubmitModal");
         showReceiptModal(newReg);
@@ -1852,11 +1885,22 @@
         updateBillingAndSeatPreview();
         renderBanquetHall();
       } catch (e) {
-        console.error(e);
-        showToast("存檔過程發生異常，請檢查網路連線後再試一次。");
+        console.error("Transaction failed:", e);
+        closeModal("confirmSubmitModal");
+        const msg = String(e.message || "");
+        if (msg === "REG_CLOSED") {
+          showToast("抱歉，管理員剛剛已關閉線上報名。");
+        } else if (msg === "DUPLICATE_F_ACCOUNT") {
+          showToast(`F 帳號「${formState.fAccount}」已有報名紀錄，系統已阻擋重複報名與重複佔位！`);
+        } else if (msg.startsWith("SEAT_TAKEN:")) {
+          const parts = msg.split(":");
+          showToast(`抱歉！第 ${String(parts[1]).padStart(2, "0")} 桌 ${parts[2]} 號席剛剛被其他同仁搶先一步鎖定，請點選其他綠燈空位！`);
+        } else {
+          showToast("雲端資料庫寫入被拒絕或網路異常，請確認 Firebase Rules 權限設定後再試。");
+        }
       } finally {
         btn.disabled = false;
-        btn.textContent = "確定存檔並取得取消碼";
+        btn.textContent = "確定鎖定座位並存檔";
       }
     };
 
@@ -1870,6 +1914,7 @@
         seatLines.push(`・陪同 ${g.name}（${label}）：${sTxt}（${g.fee} 元）`);
       });
 
+      lastReceiptRegId = reg.regId;
       lastReceiptPlainText = [
         `【長庚科技大學116年旺年會 報名成功憑證】`,
         `報名編號：${reg.regId}`,
@@ -1883,8 +1928,8 @@
       document.getElementById("receiptContent").innerHTML = `
         <div class="grid grid-cols-2 gap-3">
           <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0]">
-            <div class="text-[11px] text-[#787067]">報名編號</div>
-            <div class="font-mono text-sm font-bold text-[#38332E] mt-0.5">${reg.regId}</div>
+            <div class="text-[11px] text-[#787067]">唯一報名編號</div>
+            <div class="font-mono text-xs sm:text-sm font-bold text-[#38332E] mt-0.5">${reg.regId}</div>
           </div>
           <div class="p-3 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9]">
             <div class="text-[11px] text-[#8C534C]">不可公開・專屬取消碼</div>
@@ -1921,11 +1966,8 @@
         textarea.select();
         const ok = document.execCommand("copy");
         document.body.removeChild(textarea);
-        if (ok) {
-          showToast(successMsg);
-        } else {
-          showToast("複製失敗，請手動選取文字複製。");
-        }
+        if (ok) showToast(successMsg);
+        else showToast("複製失敗，請手動選取文字複製。");
       } catch (err) {
         showToast("無法自動存取剪貼簿，請手動選取文字複製。");
       }
@@ -1935,7 +1977,17 @@
       fallbackCopyText(lastReceiptPlainText, "已複製報名編號、取消碼與座位明細至剪貼簿！");
     };
 
-    // ==================== 查詢與憑 F 帳號 + 取消碼取消特定人或整筆報名 ====================
+    window.downloadReceiptTxt = function() {
+      const blob = new Blob(["\uFEFF" + lastReceiptPlainText], { type: "text/plain;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `長庚科大116旺年會憑證_${lastReceiptRegId || "receipt"}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("已下載報名憑證文字檔至您的裝置！");
+    };
+
     window.openCancelOrQueryModal = function() {
       document.getElementById("queryFAccount").value = "";
       document.getElementById("queryCancelCode").value = "";
@@ -1943,28 +1995,45 @@
       document.getElementById("cancelQueryModal").classList.remove("hidden");
     };
 
-    window.lookupRegistrationForCancel = function() {
+    window.lookupRegistrationForCancel = async function() {
+      if (!isCloudConnected || !db) return showToast("雲端資料庫未連線，無法查詢。");
+
       const fAcc = document.getElementById("queryFAccount").value.trim().toUpperCase();
       const code = document.getElementById("queryCancelCode").value.trim().toUpperCase();
       const area = document.getElementById("cancelResultArea");
+      const btn = document.getElementById("btnLookupCancel");
 
       if (!fAcc || !code) {
         showToast("請同時輸入「F 帳號」與「專屬取消碼」。");
         return;
       }
 
-      const reg = registrations.find(r => r.fAccount.toUpperCase() === fAcc);
-      if (!reg) {
-        area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-xs text-[#A85D55]">查無此 F 帳號的報名紀錄。</div>`;
-        return;
-      }
+      btn.disabled = true;
+      btn.textContent = "雲端驗證查詢中...";
 
-      if ((reg.cancelCode || "").toUpperCase() !== code) {
-        area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-xs text-[#A85D55]">專屬取消碼驗證錯誤，請確認後再試。</div>`;
-        return;
-      }
+      try {
+        const docRef = doc(db, ...PUBLIC_BASE, "private_registrations", fAcc);
+        const snap = await getDoc(docRef);
 
-      renderCancelManagementView(reg);
+        if (!snap.exists()) {
+          area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-xs text-[#A85D55]">查無此 F 帳號的報名紀錄。</div>`;
+          return;
+        }
+
+        const reg = snap.data();
+        if ((reg.cancelCode || "").toUpperCase() !== code) {
+          area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-xs text-[#A85D55]">專屬取消碼驗證錯誤，請確認後再試。</div>`;
+          return;
+        }
+
+        renderCancelManagementView(reg);
+      } catch (err) {
+        console.error(err);
+        area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-xs text-[#A85D55]">查詢失敗：請確認網路連線或 Firestore 單筆讀取權限規則。</div>`;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "驗證並查詢我的報名紀錄";
+      }
     };
 
     function renderCancelManagementView(reg) {
@@ -1982,7 +2051,7 @@
                 <span class="font-semibold text-[#38332E]">${escapeHtml(g.name)}</span>
                 <span class="text-[#787067] ml-1.5">(${escapeHtml(label)}・${g.seatInfo ? `${tableStr} ${g.seatInfo.seat} 號席` : "不佔位"}・${g.fee} 元)</span>
               </div>
-              <button onclick="cancelSpecificGuest('${reg.fAccount}', '${g.id}')"
+              <button onclick="cancelSpecificGuest('${reg.fAccount}', '${reg.cancelCode}', '${g.id}')"
                 class="px-2.5 py-1 rounded-lg bg-[#F9EFEA] text-[#B2564E] hover:bg-[#F2DDD7] border border-[#E8CFC9] font-semibold cursor-pointer shrink-0">
                 取消此陪同者
               </button>
@@ -2011,13 +2080,13 @@
           </div>
 
           <div class="space-y-1.5">
-            <div class="font-semibold text-[#5C5349]">陪同者名單（可單獨取消特定人並自動重算金額）：</div>
+            <div class="font-semibold text-[#5C5349]">陪同者名單（可單獨取消特定人並自動釋出座位與重算金額）：</div>
             ${guestsHtml}
           </div>
 
           <div class="pt-2 border-t border-[#E5D9C8] flex items-center justify-between gap-2">
             <span class="text-[#787067]">取消整筆後可立即重新選桌與登記</span>
-            <button onclick="cancelEntireRegistration('${reg.fAccount}')"
+            <button onclick="cancelEntireRegistration('${reg.fAccount}', '${reg.cancelCode}')"
               class="px-3.5 py-2 rounded-xl bg-[#C86D65] hover:bg-[#B2564E] text-[#FFFDF9] font-bold cursor-pointer">
               取消整筆報名並釋出所有座位
             </button>
@@ -2026,89 +2095,287 @@
       `;
     }
 
-    window.cancelSpecificGuest = async function(fAccount, guestId) {
-      const reg = registrations.find(r => r.fAccount.toUpperCase() === fAccount.toUpperCase());
-      if (!reg) return;
+    window.cancelSpecificGuest = async function(fAccount, cancelCode, guestId) {
+      if (!db) return;
+      const fAccUpper = fAccount.toUpperCase();
 
-      const updatedGuests = (reg.guests || []).filter(g => g.id !== guestId);
-      const newTotal = updatedGuests.reduce((sum, g) => sum + (g.fee || 0), 0);
+      try {
+        let updatedRegResult = null;
+        await runTransaction(db, async (transaction) => {
+          const privateRegRef = doc(db, ...PUBLIC_BASE, "private_registrations", fAccUpper);
+          const seatMapRef = doc(db, ...PUBLIC_BASE, "system_state", "public_seat_map");
 
-      const updatedReg = {
-        ...reg,
-        guests: updatedGuests,
-        totalAmount: newTotal
-      };
+          const regSnap = await transaction.get(privateRegRef);
+          if (!regSnap.exists()) throw new Error("NOT_FOUND");
+          const reg = regSnap.data();
 
-      await persistRegistration(updatedReg);
-      showToast("已取消該位陪同者並釋出座位，總金額已自動更新！");
-      renderCancelManagementView(updatedReg);
+          if ((reg.cancelCode || "").toUpperCase() !== cancelCode.toUpperCase()) {
+            throw new Error("INVALID_CODE");
+          }
+
+          const targetGuest = (reg.guests || []).find(g => g.id === guestId);
+          if (!targetGuest) throw new Error("GUEST_NOT_FOUND");
+
+          const updatedGuests = (reg.guests || []).filter(g => g.id !== guestId);
+          const newTotal = updatedGuests.reduce((sum, g) => sum + (g.fee || 0), 0);
+
+          const seatMapSnap = await transaction.get(seatMapRef);
+          const currentSlots = seatMapSnap.exists() ? { ...(seatMapSnap.data().slots || {}) } : {};
+
+          if (targetGuest.seatInfo) {
+            const seatKey = `${targetGuest.seatInfo.table}-${targetGuest.seatInfo.seat}`;
+            const seatLockRef = doc(db, ...PUBLIC_BASE, "seat_locks", seatKey);
+            transaction.delete(seatLockRef);
+            delete currentSlots[seatKey];
+          }
+
+          const maskedHost = maskMiddleName(reg.name);
+          let orderCounter = 0;
+          updatedGuests.forEach(g => {
+            if (g.seatInfo) {
+              orderCounter += 1;
+              const sKey = `${g.seatInfo.table}-${g.seatInfo.seat}`;
+              currentSlots[sKey] = `${maskedHost}眷屬${orderCounter}`;
+            }
+          });
+
+          updatedRegResult = {
+            ...reg,
+            guests: updatedGuests,
+            totalAmount: newTotal
+          };
+
+          transaction.set(privateRegRef, updatedRegResult);
+          transaction.set(seatMapRef, { slots: currentSlots, updatedAt: Date.now() }, { merge: true });
+        });
+
+        showToast("已取消該位陪同者並釋出座位，總金額已自動更新！");
+        if (updatedRegResult) renderCancelManagementView(updatedRegResult);
+      } catch (err) {
+        console.error(err);
+        showToast("取消陪同者失敗，請確認驗證碼或網路連線狀態。");
+      }
     };
 
-    window.cancelEntireRegistration = async function(fAccount) {
-      await removeRegistrationDoc(fAccount);
-      closeModal("cancelQueryModal");
-      showToast(`已取消 ${fAccount} 的整筆報名並釋出所有座位，您現在可以重新選位了！`);
+    window.cancelEntireRegistration = async function(fAccount, cancelCode) {
+      if (!db) return;
+      const fAccUpper = fAccount.toUpperCase();
+
+      try {
+        await runTransaction(db, async (transaction) => {
+          const privateRegRef = doc(db, ...PUBLIC_BASE, "private_registrations", fAccUpper);
+          const fLockRef = doc(db, ...PUBLIC_BASE, "f_account_locks", fAccUpper);
+          const seatMapRef = doc(db, ...PUBLIC_BASE, "system_state", "public_seat_map");
+
+          const regSnap = await transaction.get(privateRegRef);
+          if (!regSnap.exists()) throw new Error("NOT_FOUND");
+          const reg = regSnap.data();
+
+          if (!isAdminAuthenticated && (reg.cancelCode || "").toUpperCase() !== cancelCode.toUpperCase()) {
+            throw new Error("INVALID_CODE");
+          }
+
+          const seatMapSnap = await transaction.get(seatMapRef);
+          const currentSlots = seatMapSnap.exists() ? { ...(seatMapSnap.data().slots || {}) } : {};
+
+          const keysToRelease = [];
+          if (reg.mainSeat) {
+            keysToRelease.push(`${reg.mainSeat.table}-${reg.mainSeat.seat}`);
+          }
+          (reg.guests || []).forEach(g => {
+            if (g.seatInfo) {
+              keysToRelease.push(`${g.seatInfo.table}-${g.seatInfo.seat}`);
+            }
+          });
+
+          for (const k of keysToRelease) {
+            const seatLockRef = doc(db, ...PUBLIC_BASE, "seat_locks", k);
+            transaction.delete(seatLockRef);
+            delete currentSlots[k];
+          }
+
+          transaction.delete(privateRegRef);
+          transaction.delete(fLockRef);
+          transaction.set(seatMapRef, { slots: currentSlots, updatedAt: Date.now() }, { merge: true });
+        });
+
+        closeModal("cancelQueryModal");
+        showToast(`已取消 ${fAccUpper} 的整筆報名並原子釋出所有座位！`);
+        if (isAdminAuthenticated) {
+          await loadAdminPrivateCollections();
+        }
+      } catch (err) {
+        console.error(err);
+        showToast("取消整筆報名失敗，請確認驗證碼或網路狀態。");
+      }
     };
 
-    // ==================== 管理員後台（密碼 0120） ====================
+    window.openWaitlistModal = function() {
+      if (!isCloudConnected) return showToast("雲端資料庫未連線，無法登記候補。");
+      document.getElementById("waitlistModal").classList.remove("hidden");
+    };
+
+    window.submitWaitlistEntry = async function() {
+      if (!db || !isCloudConnected) return showToast("雲端資料庫未連線。");
+
+      const fAcc = document.getElementById("wlFAccount").value.trim().toUpperCase();
+      const name = document.getElementById("wlName").value.trim();
+      const ext = document.getElementById("wlExt").value.trim();
+      const email = document.getElementById("wlEmail").value.trim();
+      const seatsNeeded = Number(document.getElementById("wlSeatsNeeded").value || 1);
+      const note = document.getElementById("wlNote").value.trim();
+
+      if (!isValidFAccountFormat(fAcc)) {
+        return showToast("F 帳號格式錯誤！請輸入大寫 F 再加 9 個數字（共 10 碼）。");
+      }
+      if (!name || !ext || !email.includes("@")) {
+        return showToast("請完整填寫姓名、學校分機與學校 Email。");
+      }
+
+      const btn = document.getElementById("btnSubmitWaitlist");
+      btn.disabled = true;
+      btn.textContent = "送出候補中...";
+
+      try {
+        const wlId = generateUniqueRegId().replace("CG116", "WL116");
+        const wlRef = doc(db, ...PUBLIC_BASE, "waitlist_entries", fAcc);
+        await setDoc(wlRef, {
+          wlId,
+          fAccount: fAcc,
+          name,
+          ext,
+          email,
+          seatsNeeded,
+          note,
+          createdAt: Date.now()
+        });
+        closeModal("waitlistModal");
+        showToast(`候補登記成功！您的候補編號為 ${wlId}，若有空位釋出將依序聯繫。`);
+      } catch (err) {
+        console.error(err);
+        showToast("候補登記失敗，請確認網路連線或資料庫權限規則。");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "送出候補登記";
+      }
+    };
+
     window.openAdminLoginModal = function() {
-      document.getElementById("adminPwdInput").value = "";
-      document.getElementById("adminLoginModal").classList.remove("hidden");
-      setTimeout(() => document.getElementById("adminPwdInput").focus(), 50);
-    };
-
-    window.verifyAdminLogin = function() {
-      const val = document.getElementById("adminPwdInput").value.trim();
-      if (val !== ADMIN_PASSWORD) {
-        showToast("密碼錯誤，無法進入管理員後台。");
+      if (isAdminAuthenticated) {
+        loadAdminPrivateCollections().then(() => {
+          document.getElementById("adminDashboardModal").classList.remove("hidden");
+        });
         return;
       }
-      closeModal("adminLoginModal");
-      renderAdminDashboard();
-      document.getElementById("adminDashboardModal").classList.remove("hidden");
+      document.getElementById("adminPwdInput").value = "";
+      document.getElementById("adminLoginModal").classList.remove("hidden");
+      setTimeout(() => document.getElementById("adminEmailInput").focus(), 50);
     };
 
-    window.toggleCloudConfigPanel = function() {
-      const panel = document.getElementById("cloudConfigPanel");
-      panel.classList.toggle("hidden");
-      const inputEl = document.getElementById("firebaseConfigInput");
-      if (!inputEl.value.trim()) {
-        inputEl.value = JSON.stringify(resolveFirebaseConfig(), null, 2);
+    window.verifyAdminLogin = async function() {
+      const email = document.getElementById("adminEmailInput").value.trim();
+      const pwd = document.getElementById("adminPwdInput").value;
+      if (!email || !pwd) {
+        return showToast("請輸入管理員 Email 與密碼。");
       }
-    };
 
-    window.applyManualFirebaseConfig = function() {
-      const raw = document.getElementById("firebaseConfigInput").value.trim();
-      if (!raw) return showToast("請先貼上 firebaseConfig 設定內容。");
+      const btn = document.getElementById("btnAdminLogin");
+      btn.disabled = true;
+      btn.textContent = "驗證中...";
+
       try {
-        const jsonMatch = raw.match(/\{[\s\S]*\}/);
-        if (!jsonMatch) throw new Error("找不到大括號設定物件");
-        const parsed = Function(`"use strict"; return (${jsonMatch[0]});`)();
-        if (!parsed.apiKey || !parsed.projectId) throw new Error("缺少 apiKey 或 projectId");
-
-        localStorage.setItem("cgust_116_firebase_cfg", JSON.stringify(parsed));
-        showToast("設定已儲存，正在連線至共用雲端資料庫...");
-        initDatabase();
-      } catch (e) {
-        showToast("設定格式解析失敗，請確認貼上完整的 { apiKey: ... } 物件。");
+        await signInWithEmailAndPassword(auth, email, pwd);
+        isAdminAuthenticated = true;
+        closeModal("adminLoginModal");
+        await loadAdminPrivateCollections();
+        document.getElementById("adminDashboardModal").classList.remove("hidden");
+        showToast("管理員安全驗證成功！");
+      } catch (err) {
+        console.error("Admin login error:", err);
+        showToast("管理員帳號或密碼驗證失敗（請確認已在 Firebase Authentication 建立管理員帳號）。");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "登入後台";
       }
     };
 
-    window.copyShareableSyncUrl = function() {
-      const saved = localStorage.getItem("cgust_116_firebase_cfg") || JSON.stringify(DEFAULT_FIREBASE_CONFIG);
-      const encoded = btoa(encodeURIComponent(saved));
-      const baseUrl = window.location.origin + window.location.pathname;
-      const shareUrl = `${baseUrl}?cfg=${encoded}`;
-      fallbackCopyText(shareUrl, "已複製「同事專用同步報名網址」！直接分享此連結給全校同仁即可永久即時互通。");
+    window.adminSignOut = async function() {
+      try {
+        await signOut(auth);
+        await signInAnonymously(auth);
+      } catch (e) {}
+      isAdminAuthenticated = false;
+      adminRegistrations = [];
+      adminWaitlist = [];
+      closeModal("adminDashboardModal");
+      showToast("已安全登出管理員後台。");
+    };
+
+    async function loadAdminPrivateCollections() {
+      if (!db || !isAdminAuthenticated) return;
+      try {
+        const regSnap = await getDocs(collection(db, ...PUBLIC_BASE, "private_registrations"));
+        const regs = [];
+        regSnap.forEach(d => regs.push(d.data()));
+        regs.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+        adminRegistrations = regs;
+
+        const wlSnap = await getDocs(collection(db, ...PUBLIC_BASE, "waitlist_entries"));
+        const wls = [];
+        wlSnap.forEach(d => wls.push(d.data()));
+        wls.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+        adminWaitlist = wls;
+
+        renderAdminDashboard();
+      } catch (err) {
+        console.error("Load admin collections failed:", err);
+        showToast("讀取管理員私有資料表失敗，請確認 Firestore Rules 已授權管理員帳號讀取。");
+      }
+    }
+
+    window.toggleRegistrationStatus = async function() {
+      if (!db || !isAdminAuthenticated) return;
+      const nextState = !isRegistrationOpen;
+      try {
+        const configRef = doc(db, ...PUBLIC_BASE, "system_state", "banquet_config");
+        await setDoc(configRef, { isOpen: nextState, updatedAt: Date.now() }, { merge: true });
+        showToast(nextState ? "已重新開放線上報名！" : "已立即截止並關閉線上報名！");
+      } catch (err) {
+        showToast("切換報名狀態失敗，請確認管理員寫入權限。");
+      }
+    };
+
+    function updateAdminOpenToggleBtn() {
+      const btn = document.getElementById("btnToggleRegOpen");
+      if (!btn) return;
+      if (isRegistrationOpen) {
+        btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold bg-[#E9F0EA] text-[#4E6B54] border border-[#C6D8C9] cursor-pointer";
+        btn.textContent = "報名狀態：開放中（點擊截止）";
+      } else {
+        btn.className = "px-3.5 py-2 rounded-xl text-xs font-bold bg-[#F9EFEA] text-[#A85D55] border border-[#E8CFC9] cursor-pointer";
+        btn.textContent = "報名狀態：已截止（點擊重開）";
+      }
+    }
+
+    window.switchAdminTab = function(tab) {
+      activeAdminTab = tab;
+      document.getElementById("tabAdminRegs").className = tab === "regs"
+        ? "px-3 py-1.5 rounded-xl text-xs font-bold bg-[#C87D75] text-[#FFFDF9] cursor-pointer"
+        : "px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#F5EFE6] text-[#5C5349] cursor-pointer";
+      document.getElementById("tabAdminWaitlist").className = tab === "waitlist"
+        ? "px-3 py-1.5 rounded-xl text-xs font-bold bg-[#C87D75] text-[#FFFDF9] cursor-pointer"
+        : "px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#F5EFE6] text-[#5C5349] cursor-pointer";
+      renderAdminTable();
     };
 
     function renderAdminDashboard() {
-      let totalGroups = registrations.length;
+      updateAdminOpenToggleBtn();
+      let totalGroups = adminRegistrations.length;
       let totalSeatedPeople = 0;
       let totalUnseatedInfants = 0;
       let grandTotalFee = 0;
 
-      registrations.forEach(r => {
+      adminRegistrations.forEach(r => {
         totalSeatedPeople += 1;
         grandTotalFee += (r.totalAmount || 0);
         (r.guests || []).forEach(g => {
@@ -2123,12 +2390,16 @@
           <div class="serif-title text-xl font-bold text-[#38332E] mt-0.5">${totalGroups} 組</div>
         </div>
         <div class="p-3 rounded-xl bg-[#FFFDF9] border border-[#E6DDD0]">
-          <div class="text-[11px] text-[#787067]">一般席實際佔位人數（上限 530）</div>
+          <div class="text-[11px] text-[#787067]">實際佔位總人數（上限 530）</div>
           <div class="serif-title text-xl font-bold text-[#4E6B54] mt-0.5">${totalSeatedPeople} 人</div>
         </div>
         <div class="p-3 rounded-xl bg-[#FFFDF9] border border-[#E6DDD0]">
-          <div class="text-[11px] text-[#787067]">不佔位嬰幼兒（未滿 1 歲）</div>
+          <div class="text-[11px] text-[#787067]">不佔位嬰幼兒</div>
           <div class="serif-title text-xl font-bold text-[#8C7A68] mt-0.5">${totalUnseatedInfants} 人</div>
+        </div>
+        <div class="p-3 rounded-xl bg-[#FFFDF9] border border-[#E6DDD0]">
+          <div class="text-[11px] text-[#787067]">候補登記組數</div>
+          <div class="serif-title text-xl font-bold text-[#B87D2E] mt-0.5">${adminWaitlist.length} 組</div>
         </div>
         <div class="p-3 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9]">
           <div class="text-[11px] text-[#8C534C]">應收款總金額</div>
@@ -2141,16 +2412,59 @@
 
     window.renderAdminTable = function() {
       const kw = (document.getElementById("adminSearchInput").value || "").trim().toLowerCase();
-      const filtered = registrations.filter(r => {
+      const thead = document.getElementById("adminTableHead");
+      const tbody = document.getElementById("adminTableBody");
+
+      if (activeAdminTab === "waitlist") {
+        thead.innerHTML = `
+          <tr class="border-b-2 border-[#E6DDD0] text-[#5C5349] bg-[#FAF7F2]">
+            <th class="py-2.5 px-2.5">候補序號</th>
+            <th class="py-2.5 px-2.5">F 帳號</th>
+            <th class="py-2.5 px-2.5">姓名</th>
+            <th class="py-2.5 px-2.5">分機 / Email</th>
+            <th class="py-2.5 px-2.5">需求席次</th>
+            <th class="py-2.5 px-2.5">備註說明</th>
+          </tr>
+        `;
+        const filteredWl = adminWaitlist.filter(w => !kw || `${w.wlId} ${w.fAccount} ${w.name} ${w.ext} ${w.note}`.toLowerCase().includes(kw));
+        document.getElementById("adminRowCount").textContent = `顯示 ${filteredWl.length} / ${adminWaitlist.length} 筆候補`;
+        tbody.innerHTML = filteredWl.length === 0
+          ? `<tr><td colspan="6" class="py-8 text-center text-[#8C8276]">目前尚無候補登記紀錄</td></tr>`
+          : filteredWl.map(w => `
+              <tr class="hover:bg-[#FAF7F2]">
+                <td class="py-2.5 px-2.5 font-mono font-bold text-[#B87D2E]">${w.wlId}</td>
+                <td class="py-2.5 px-2.5 font-mono font-bold text-[#6E8B74]">${escapeHtml(w.fAccount)}</td>
+                <td class="py-2.5 px-2.5 font-bold">${escapeHtml(w.name)}</td>
+                <td class="py-2.5 px-2.5 text-[#696056]">分機 ${escapeHtml(w.ext)}<br/>${escapeHtml(w.email)}</td>
+                <td class="py-2.5 px-2.5 font-bold">${w.seatsNeeded} 席</td>
+                <td class="py-2.5 px-2.5 text-[#696056]">${escapeHtml(w.note || "-")}</td>
+              </tr>
+            `).join("");
+        return;
+      }
+
+      thead.innerHTML = `
+        <tr class="border-b-2 border-[#E6DDD0] text-[#5C5349] bg-[#FAF7F2]">
+          <th class="py-2.5 px-2.5">報名編號</th>
+          <th class="py-2.5 px-2.5">F 帳號</th>
+          <th class="py-2.5 px-2.5">主報名人</th>
+          <th class="py-2.5 px-2.5">分機 / Email</th>
+          <th class="py-2.5 px-2.5">專屬取消碼</th>
+          <th class="py-2.5 px-2.5">桌次與出席人員明細</th>
+          <th class="py-2.5 px-2.5 text-right">應繳總額</th>
+          <th class="py-2.5 px-2.5 text-center">管理操作</th>
+        </tr>
+      `;
+
+      const filtered = adminRegistrations.filter(r => {
         if (!kw) return true;
         const guestNames = (r.guests || []).map(g => `${g.name} ${g.roleLabel || ""}`).join(" ");
         const tableStr = `第${String(r.mainSeat.table).padStart(2, "0")}桌 ${r.mainSeat.table}桌 ${r.mainSeat.table === VEGETARIAN_TABLE ? "素食桌" : ""}`;
         return `${r.regId} ${r.fAccount} ${r.name} ${r.ext} ${r.email} ${guestNames} ${tableStr}`.toLowerCase().includes(kw);
       });
 
-      document.getElementById("adminRowCount").textContent = `顯示 ${filtered.length} / ${registrations.length} 筆紀錄`;
+      document.getElementById("adminRowCount").textContent = `顯示 ${filtered.length} / ${adminRegistrations.length} 筆紀錄`;
 
-      const tbody = document.getElementById("adminTableBody");
       if (filtered.length === 0) {
         tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-[#8C8276]">目前尚無符合條件的報名紀錄</td></tr>`;
         return;
@@ -2178,7 +2492,7 @@
             <td class="py-2.5 px-2.5 space-y-0.5">${peopleList}</td>
             <td class="py-2.5 px-2.5 text-right font-bold text-[#A85D55]">NT$ ${(r.totalAmount || 0).toLocaleString()}</td>
             <td class="py-2.5 px-2.5 text-center">
-              <button onclick="adminDeleteReg('${escapeHtml(r.fAccount)}')" class="px-2.5 py-1 rounded-lg bg-[#F9EFEA] text-[#B2564E] hover:bg-[#F2DDD7] border border-[#E8CFC9] cursor-pointer">
+              <button onclick="cancelEntireRegistration('${escapeHtml(r.fAccount)}', '${escapeHtml(r.cancelCode)}')" class="px-2.5 py-1 rounded-lg bg-[#F9EFEA] text-[#B2564E] hover:bg-[#F2DDD7] border border-[#E8CFC9] cursor-pointer">
                 刪除釋出
               </button>
             </td>
@@ -2187,13 +2501,9 @@
       }).join("");
     };
 
-    window.adminDeleteReg = async function(fAccount) {
-      await removeRegistrationDoc(fAccount);
-      renderAdminDashboard();
-      showToast(`管理員已刪除 ${fAccount} 的報名並釋出座位。`);
-    };
-
     window.exportAdminExcelCSV = function() {
+      if (!isAdminAuthenticated) return showToast("僅管理員可匯出報表。");
+
       const headers = [
         "報名編號",
         "專屬取消碼",
@@ -2239,7 +2549,7 @@
       });
 
       const flatEntries = [];
-      registrations.forEach(r => {
+      adminRegistrations.forEach(r => {
         flatEntries.push({
           table: r.mainSeat.table,
           seat: r.mainSeat.seat,
@@ -2311,10 +2621,9 @@
       a.download = `長庚科技大學116年旺年會_報到與發獎總表_${today}.csv`;
       a.click();
       URL.revokeObjectURL(url);
-      showToast("已成功匯出「長庚科技大學116年旺年會」Excel 總表（含長官主桌與素食桌標示）！");
+      showToast("已成功匯出「長庚科技大學116年旺年會」Excel 總表！");
     };
 
-    // ==================== 共用輔助函式 ====================
     window.closeModal = function(id) {
       document.getElementById(id).classList.add("hidden");
     };
@@ -2326,7 +2635,7 @@
       clearTimeout(window.__toastTimer);
       window.__toastTimer = setTimeout(() => {
         box.classList.add("hidden");
-      }, 4200);
+      }, 4500);
     };
 
     function escapeHtml(str) {
@@ -2343,12 +2652,11 @@
       renderGuestsForm();
       updateBillingAndSeatPreview();
       renderBanquetHall();
-      if (!document.getElementById("adminDashboardModal").classList.contains("hidden")) {
+      if (isAdminAuthenticated && !document.getElementById("adminDashboardModal").classList.contains("hidden")) {
         renderAdminDashboard();
       }
     }
 
-    // 啟動初始化
     renderVipHeadTable();
     renderGuestsForm();
     updateBillingAndSeatPreview();
