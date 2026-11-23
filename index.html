@@ -753,6 +753,7 @@
     let inspectedTable = 1;
     let lastReceiptRegId = "";
     let lastReceiptPlainText = "";
+    let checkedDuplicateFAccount = null; // 紀錄已確認重複的 F 帳號
 
     // ==================== 隱私遮罩與格式驗證工具 ====================
     function maskMiddleName(fullName) {
@@ -1034,6 +1035,8 @@
     }
 
     // ==================== 左側表單輸入與陪同者控制 ====================
+    let fAccountCheckTimer = null;
+
     window.handleMainInput = function() {
       const rawF = document.getElementById("inputFAccount").value.trim().toUpperCase();
       document.getElementById("inputFAccount").value = rawF;
@@ -1060,12 +1063,21 @@
 
       const hintEl = document.getElementById("fAccountHint");
       if (!rawF) {
+        checkedDuplicateFAccount = null;
         hintEl.className = "text-xs text-[#8C8276] mt-1";
         hintEl.textContent = "共 10 碼，例如 F000009999";
       } else if (isValidFAccountFormat(rawF)) {
-        hintEl.className = "text-xs text-[#4E6B54] font-semibold mt-1";
-        hintEl.textContent = "✓ F 帳號格式正確（大寫 F + 9 碼數字）";
+        if (checkedDuplicateFAccount === rawF) {
+          hintEl.className = "text-xs text-[#C86D65] font-bold mt-1";
+          hintEl.textContent = "⛔ 此 F 帳號已完成報名，不可重複報名或重複佔位！";
+        } else {
+          hintEl.className = "text-xs text-[#4E6B54] font-semibold mt-1";
+          hintEl.textContent = "查詢帳號是否已報名中...";
+          clearTimeout(fAccountCheckTimer);
+          fAccountCheckTimer = setTimeout(() => verifyFAccountNotRegistered(rawF), 250);
+        }
       } else {
+        checkedDuplicateFAccount = null;
         hintEl.className = "text-xs text-[#C86D65] font-semibold mt-1";
         hintEl.textContent = "須為大寫 F + 9 個數字（共 10 碼，例 F000009999）";
       }
@@ -1087,6 +1099,36 @@
       updateBillingAndSeatPreview();
       renderBanquetHall();
     };
+
+    async function verifyFAccountNotRegistered(fAccUpper) {
+      if (!db || !isCloudConnected || !isValidFAccountFormat(fAccUpper)) return false;
+      const hintEl = document.getElementById("fAccountHint");
+      try {
+        const [fLockSnap, privSnap] = await Promise.all([
+          getDoc(doc(db, "artifacts", appId, "public", "data", "f_account_locks", fAccUpper)),
+          getDoc(doc(db, "artifacts", appId, "public", "data", "private_registrations", fAccUpper))
+        ]);
+        const isDup = fLockSnap.exists() || privSnap.exists();
+        if (isDup) {
+          checkedDuplicateFAccount = fAccUpper;
+          if (formState.fAccount === fAccUpper && hintEl) {
+            hintEl.className = "text-xs text-[#C86D65] font-bold mt-1";
+            hintEl.textContent = "⛔ 此 F 帳號已完成報名，不可重複報名！如需異動請點上方「查詢 / 取消報名與重選」。";
+          }
+          return true;
+        } else {
+          if (checkedDuplicateFAccount === fAccUpper) checkedDuplicateFAccount = null;
+          if (formState.fAccount === fAccUpper && hintEl) {
+            hintEl.className = "text-xs text-[#4E6B54] font-semibold mt-1";
+            hintEl.textContent = "✓ F 帳號格式正確且尚未報名";
+          }
+          return false;
+        }
+      } catch (e) {
+        console.warn("Check F account error:", e);
+        return false;
+      }
+    }
 
     window.addGuest = function() {
       if (!formState.name.trim()) {
@@ -1780,7 +1822,7 @@
     };
 
     // ==================== 驗證與 Firestore Transaction 原子鎖定存檔 ====================
-    window.openConfirmSubmitModal = function() {
+    window.openConfirmSubmitModal = async function() {
       if (!isCloudConnected || !isRegistrationOpen) {
         return showToast("系統目前未開放報名或雲端尚未連線。");
       }
@@ -1790,6 +1832,14 @@
         document.getElementById("inputFAccount").focus();
         return showToast("「F 帳號」格式錯誤！請輸入大寫 F 再加 9 個數字（共 10 碼，例如 F000009999）。");
       }
+
+      // 送出預覽前即時向雲端雙重確認該 F 帳號是否已報名
+      const isAlreadyRegistered = await verifyFAccountNotRegistered(formState.fAccount);
+      if (isAlreadyRegistered) {
+        document.getElementById("inputFAccount").focus();
+        return showToast(`⛔ F 帳號「${formState.fAccount}」已經報名過了，嚴禁重複報名或代他人重複佔位！如需更改座位請使用「查詢 / 取消報名與重選」。`);
+      }
+
       if (!formState.name) return showToast("請填寫「參加者姓名」。");
       if (!isValidExtensionFormat(formState.ext)) {
         document.getElementById("inputExt").focus();
@@ -1896,6 +1946,7 @@
         const totalAmount = calculateTotalAmount();
         const maskedHost = maskMiddleName(formState.name);
         const fAccUpper = formState.fAccount.toUpperCase();
+        const fullEmailLower = normalizeSchoolEmail(formState.email).toLowerCase();
 
         let seatedOrder = 0;
         const structuredGuests = formState.guests.map(g => {
@@ -1925,7 +1976,7 @@
           fAccount: fAccUpper,
           name: formState.name,
           ext: formState.ext,
-          email: normalizeSchoolEmail(formState.email),
+          email: fullEmailLower,
           mainSeat: { ...formState.mainSeat },
           guests: structuredGuests,
           totalAmount,
@@ -1935,11 +1986,20 @@
         await runTransaction(db, async (transaction) => {
           const fLockRef = doc(db, "artifacts", appId, "public", "data", "f_account_locks", fAccUpper);
           const privRegRef = doc(db, "artifacts", appId, "public", "data", "private_registrations", fAccUpper);
+          const emailLockRef = doc(db, "artifacts", appId, "public", "data", "email_locks", fullEmailLower);
           const pubMapRef = doc(db, "artifacts", appId, "public", "data", "system_state", "public_seat_map");
 
-          const fLockSnap = await transaction.get(fLockRef);
-          if (fLockSnap.exists()) {
+          const [fLockSnap, privRegSnap, emailLockSnap] = await Promise.all([
+            transaction.get(fLockRef),
+            transaction.get(privRegRef),
+            transaction.get(emailLockRef)
+          ]);
+
+          if (fLockSnap.exists() || privRegSnap.exists()) {
             throw new Error("DUPLICATE_F_ACCOUNT");
+          }
+          if (emailLockSnap.exists()) {
+            throw new Error("DUPLICATE_EMAIL");
           }
 
           const seatsToLock = [
@@ -1970,6 +2030,7 @@
           }
 
           transaction.set(fLockRef, { regId, createdAt: newReg.createdAt });
+          transaction.set(emailLockRef, { fAccount: fAccUpper, regId, createdAt: newReg.createdAt });
           for (const item of seatsToLock) {
             const seatLockRef = doc(db, "artifacts", appId, "public", "data", "seat_locks", item.key);
             transaction.set(seatLockRef, { fAccount: fAccUpper, displayLabel: item.label, createdAt: newReg.createdAt });
@@ -1981,6 +2042,7 @@
         closeModal("confirmSubmitModal");
         showReceiptModal(newReg);
 
+        checkedDuplicateFAccount = null;
         formState = { fAccount: "", name: "", ext: "", email: "", mainSeat: null, guests: [] };
         document.getElementById("inputFAccount").value = "";
         document.getElementById("inputName").value = "";
@@ -2000,7 +2062,10 @@
         closeModal("confirmSubmitModal");
         const msg = String(e?.message || "");
         if (msg === "DUPLICATE_F_ACCOUNT") {
-          showToast(`F 帳號「${formState.fAccount}」已有有效報名紀錄，系統已攔截重複報名與重複佔位！`);
+          checkedDuplicateFAccount = formState.fAccount;
+          showToast(`⛔ F 帳號「${formState.fAccount}」已有有效報名紀錄，系統已攔截重複報名與重複佔位！`);
+        } else if (msg === "DUPLICATE_EMAIL") {
+          showToast(`⛔ 此學校 Email（${normalizeSchoolEmail(formState.email)}）已被使用過，每人限報名一次！`);
         } else if (msg.startsWith("SEAT_TAKEN:")) {
           const parts = msg.split(":");
           showToast(`抱歉！${formatTableName(Number(parts[1]))} ${parts[2]} 號席剛剛被其他同仁搶先一步鎖定，請點選其他綠燈空位！`);
@@ -2288,11 +2353,17 @@
             transaction.delete(sLockRef);
           }
 
+          if (reg.email) {
+            const emailLockRef = doc(db, "artifacts", appId, "public", "data", "email_locks", reg.email.toLowerCase());
+            transaction.delete(emailLockRef);
+          }
+
           transaction.delete(privRef);
           transaction.delete(fLockRef);
           transaction.set(pubMapRef, { slots: currentSlots, updatedAt: Date.now() });
         });
 
+        if (checkedDuplicateFAccount === fAccUpper) checkedDuplicateFAccount = null;
         closeModal("cancelQueryModal");
         showToast(`已取消 ${fAccUpper} 的整筆報名並釋出所有座位！`);
         if (isAdminAuthenticated && !document.getElementById("adminDashboardModal").classList.contains("hidden")) {
@@ -2430,12 +2501,14 @@
       try {
         const regsSnap = await getDocs(collection(db, "artifacts", appId, "public", "data", "private_registrations"));
         const validSlots = {};
-        const validFAccounts = new Set();
+        const validFAccounts = new Map();
+        const validEmails = new Map();
 
         regsSnap.forEach(d => {
           const r = d.data();
           const fAcc = (r.fAccount || d.id).toUpperCase();
-          validFAccounts.add(fAcc);
+          validFAccounts.set(fAcc, r);
+          if (r.email) validEmails.set(r.email.toLowerCase(), { fAccount: fAcc, regId: r.regId });
           const maskedHost = maskMiddleName(r.name);
           if (r.mainSeat) {
             validSlots[`${r.mainSeat.table}-${r.mainSeat.seat}`] = maskedHost;
@@ -2457,12 +2530,33 @@
           }
         }
 
-        // 清除殘留的 f_account_locks
+        // 清除殘留的 f_account_locks 並補齊缺少的帳號鎖
         const fLocksSnap = await getDocs(collection(db, "artifacts", appId, "public", "data", "f_account_locks"));
+        const existingFLocks = new Set();
         for (const fDoc of fLocksSnap.docs) {
-          if (!validFAccounts.has(fDoc.id.toUpperCase())) {
+          const key = fDoc.id.toUpperCase();
+          if (!validFAccounts.has(key)) {
             await deleteDoc(fDoc.ref);
+          } else {
+            existingFLocks.add(key);
           }
+        }
+        for (const [fAcc, r] of validFAccounts.entries()) {
+          if (!existingFLocks.has(fAcc)) {
+            await setDoc(doc(db, "artifacts", appId, "public", "data", "f_account_locks", fAcc), {
+              regId: r.regId,
+              createdAt: r.createdAt || Date.now()
+            });
+          }
+        }
+
+        // 同步補齊 email_locks
+        for (const [em, info] of validEmails.entries()) {
+          await setDoc(doc(db, "artifacts", appId, "public", "data", "email_locks", em), {
+            fAccount: info.fAccount,
+            regId: info.regId,
+            createdAt: Date.now()
+          }, { merge: true });
         }
 
         // 覆寫更新公開座位圖
@@ -2470,7 +2564,7 @@
         await setDoc(pubMapRef, { slots: validSlots, updatedAt: Date.now() });
 
         await loadAdminData();
-        showToast("座位圖、座位鎖與 F 帳號鎖已與正式報名名單完全同步校正！");
+        showToast("座位圖、F 帳號唯一鎖與 Email 鎖已與正式報名名單完全同步校正！");
       } catch (e) {
         console.error("Reconcile error:", e);
         showToast("校正座位圖失敗，請確認 Firestore Rules 已允許管理員讀取 seat_locks 與 f_account_locks。");
