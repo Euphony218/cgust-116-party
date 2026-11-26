@@ -2156,7 +2156,7 @@
     #btnStartLottery:not(:disabled):hover{filter:brightness(1.1);}
     #btnStartLottery:not(:disabled):active,#btnStartLottery.is-pressed{transform:translateY(11px) scale(.97);box-shadow:0 2px 0 #741019,0 4px 0 #f7d383,0 9px 16px #15070a,inset 0 6px 18px #7e1018;filter:brightness(1.15);}
     #btnStartLottery:disabled{opacity:1;cursor:not-allowed!important;}
-    #btnStartLottery[data-state=offline],#btnStartLottery[data-state=locked],#btnStartLottery[data-state=done],#btnStartLottery[data-state=empty]{background:linear-gradient(#76636b,#493943);border-color:#a99b88;box-shadow:0 9px 0 #372a32,0 11px 0 #97836e;color:#f1e8de;font-size:clamp(22px,3vw,40px);text-shadow:none;}
+    #btnStartLottery[data-state=closed],#btnStartLottery[data-state=offline],#btnStartLottery[data-state=locked],#btnStartLottery[data-state=done],#btnStartLottery[data-state=empty]{background:linear-gradient(#76636b,#493943);border-color:#a99b88;box-shadow:0 9px 0 #372a32,0 11px 0 #97836e;color:#f1e8de;font-size:clamp(22px,3vw,40px);text-shadow:none;}
     #btnStartLottery[data-state=spinning]{font-size:clamp(25px,4vw,54px);}
     #stageBurst{position:absolute;left:50%;top:65%;width:130px;height:130px;border-radius:50%;border:10px solid #ffe0a1;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.4);}
     #drawStage.triggered #stageBurst{animation:stageBurst .8s ease-out both;}
@@ -2788,8 +2788,8 @@
             class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base uppercase focus:outline-none focus:border-[#C87D75]" />
         </div>
         <div>
-          <label class="block text-sm font-semibold text-[#5C5349] mb-1">專屬取消碼（6 碼）</label>
-          <input id="queryCancelCode" type="text" maxlength="16" placeholder="請輸入報名時取得之取消碼"
+          <label class="block text-sm font-semibold text-[#5C5349] mb-1">專屬取消碼（32 碼）</label>
+          <input id="queryCancelCode" type="text" maxlength="32" placeholder="請輸入報名時取得之取消碼"
             class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base uppercase focus:outline-none focus:border-[#C87D75]" />
         </div>
       </div>
@@ -2894,15 +2894,12 @@
       <div class="px-6 py-4 bg-[#F7F2EA] border-b border-[#E6DDD0] flex flex-wrap items-center justify-between gap-3">
         <div>
           <h3 class="serif-title text-xl font-bold text-[#38332E]">長庚科技大學116年旺年會｜管理員後台查驗中心</h3>
-          <p class="text-sm text-[#787067]">僅授權管理員可讀取完整個資與取消碼，支援報名截止開關、座位校正、候補單筆刪除與 Excel 總表匯出</p>
+          <p class="text-sm text-[#787067]">僅授權管理員可讀取完整個資與取消碼，支援活動時程控制、座位校正、候補單筆刪除與 Excel 總表匯出</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
-          <button id="btnSyncSeatMap" onclick="reconcilePublicSeatMap()" class="px-3.5 py-2 rounded-xl text-sm font-bold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] cursor-pointer" title="請先關閉報名，再依正式報名名單校正座位圖；不會刪除得獎紀錄。">
-            同步校正座位圖
-          </button>
-          <button id="btnToggleRegOpen" onclick="toggleRegistrationStatus()" class="px-3.5 py-2 rounded-xl text-sm font-bold bg-[#FFF3DF] text-[#8A5A19] border border-[#E6C794] cursor-pointer">
-            報名狀態：開放中（點擊截止）
-          </button>
+          <button id="btnSyncSeatMap" class="hidden" disabled>同步校正座位圖</button>
+          <button id="btnToggleRegOpen" onclick="openPhaseControl()" class="px-4 py-2 rounded-xl text-sm font-bold bg-[#C87D75] text-white cursor-pointer">活動時程與開放控制</button>
+          <button onclick="closeModal('adminDashboardModal')" class="px-3.5 py-2 rounded-xl text-sm font-bold bg-[#F5EFE6] border border-[#DFD3C3]">返回活動頁面</button>
           <button onclick="exportAdminExcelCSV()" class="px-4 py-2 rounded-xl text-sm font-bold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] shadow-sm cursor-pointer">
             匯出報到與發獎 Excel (.csv)
           </button>
@@ -2933,11 +2930,18 @@
     </div>
   </div>
 
+  <div id="phaseControlModal" class="fixed inset-0 z-[45] hidden bg-[#4A423B]/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
+    <div class="bg-[#FFFDF9] rounded-2xl w-full max-w-5xl max-h-[92vh] overflow-auto shadow-2xl border border-[#E6DDD0] p-5 sm:p-7">
+      <div class="flex justify-between items-start gap-3 mb-4"><div><h2 class="serif-title text-2xl font-bold">活動時程與開放控制</h2><p class="text-sm text-[#787067] mt-2">臺灣時間 UTC+8｜各功能獨立設定。手動開關會覆蓋預約時程，保留原時程供恢復。</p></div><button onclick="closeModal('phaseControlModal')" class="px-4 py-2 rounded-xl bg-[#F5EFE6] font-bold">關閉</button></div>
+      <div id="phaseEditor" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+      <p class="mt-4 text-sm text-[#787067]">截止時間可留空，表示不自動關閉。每張卡片分別儲存；開放抽獎不會自動抽出得主，仍需管理員登入並由貴賓按下大型按鈕。</p>
+    </div>
+  </div>
   <!-- Toast 通知氣泡 -->
   <div id="toastBox" class="fixed bottom-5 right-5 z-50 hidden px-5 py-3.5 rounded-xl bg-[#4A423B] text-[#FFFDF9] text-base font-medium shadow-lg border border-[#6E6359]"></div>
 
   <script>
-    let initializeApp, getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged, getFirestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc, runTransaction, onSnapshot;
+    let initializeApp, getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged, getFirestore, collection, doc, getDoc, getDocFromServer, getDocs, setDoc, deleteDoc, runTransaction, onSnapshot;
     let callBackend;
 
 
@@ -2984,7 +2988,20 @@
     let isCloudConnected = false;
     let isAdminAuthenticated = false;
     let isRegistrationOpen = false;
-    const appId = "cgust-116-banquet";
+    let phaseConfig=null, configReady=false, phaseBusy=false, phaseSignature="", checkinLookupBusy=false;
+    const PHASE_LABELS={registration:"報名與選位",checkin:"當天報到簽到",lottery:"線上幸運抽獎"};
+
+    function getPhase(config,key){
+  const p=config?.phases?.[key];
+  if(p && ["open","closed","scheduled"].includes(p.mode)) return p;
+  return {mode:key==="registration"&&config?.isOpen===true?"open":"closed",start:null,end:null};
+}
+function phaseOpen(config,key,now=Date.now()){
+  const p=getPhase(config,key);
+  return p.mode==="open" || (p.mode==="scheduled" && Number.isSafeInteger(p.start) && now>=p.start && (p.end===null || (Number.isSafeInteger(p.end)&&now<p.end)));
+}
+
+    const appId = "cgust-116-banquet-spark52";
 
     let activeMainPage = "register"; // "register" | "checkin" | "lottery"
 
@@ -3049,10 +3066,10 @@
       document.getElementById("jackpotQuotaStatus").textContent=p?`已抽出 ${usedCount(p.id,wins)} / ${p.quota} 名　｜　剩餘 ${left} 名`:"";
       const btn=document.getElementById("btnStartLottery"), cue=document.getElementById("stageCue");
       const pool=p?getEligibleLotteryParticipants(document.getElementById("lotteryExcludeWinners").checked).filter(x=>!wins.some(w=>recordKey(w)===p.id&&w.fAccount===x.fAccount)):[];
-      const state=isLotterySpinning?"spinning":!isAdminAuthenticated?"locked":!isCloudConnected?"offline":!p||left===0?"done":pool.length===0?"empty":"ready";
+      const state=isLotterySpinning?"spinning":!isAdminAuthenticated?"locked":!isCloudConnected||!configReady?"offline":!phaseAllowed("lottery")?"closed":!p||left===0?"done":pool.length===0?"empty":"ready";
       btn.dataset.state=state;btn.disabled=state!=="ready";
-      btn.lastElementChild.textContent=({spinning:"抽獎進行中",locked:"請先登入管理員",offline:"雲端連線中斷",done:"本獎項已抽完",empty:"尚無符合資格人員",ready:"開始抽獎"})[state];
-      if(!isLotterySpinning){cue.classList.remove("countdown");cue.textContent=({locked:"管理員登入後，邀請貴賓按下抽獎按鈕",offline:"請確認雲端連線",done:"請選擇下一個尚有名額的獎項",empty:"請先完成報到",ready:"邀請貴賓按下按鈕 · 每次抽出 1 名"})[state]||"";}
+      btn.lastElementChild.textContent=({spinning:"抽獎進行中",locked:"請先登入管理員",offline:"雲端連線中斷",closed:"抽獎尚未開放",done:"本獎項已抽完",empty:"尚無符合資格人員",ready:"開始抽獎"})[state];
+      if(!isLotterySpinning){cue.classList.remove("countdown");cue.textContent=({locked:"管理員登入後，邀請貴賓按下抽獎按鈕",offline:"請確認雲端連線",closed:"請管理員開放抽獎時段",done:"請選擇下一個尚有名額的獎項",empty:"請先完成報到",ready:"邀請貴賓按下按鈕 · 每次抽出 1 名"})[state]||"";}
     }
     window.refreshPrizeQuota=refreshPrizeQuota;
     window.toggleStageFullscreen=async function(){
@@ -3067,7 +3084,7 @@
         const el=document.getElementById(id); if(el) el.disabled=!allowed;
       }
       const status=document.getElementById('lotteryAccessStatus');
-      status.textContent=isAdminAuthenticated?'管理員已登入｜可操作抽獎':'訪客觀賞模式｜僅管理員登入後可操作抽獎';
+      status.textContent=isAdminAuthenticated?(phaseAllowed('lottery')?'管理員已登入｜抽獎已開放':'管理員已登入｜抽獎未開放'):'訪客觀賞模式｜僅管理員登入後可操作抽獎';
       document.getElementById('lotteryLoginBtn').classList.toggle('hidden',isAdminAuthenticated);
       document.getElementById('lotteryLogoutBtn').classList.toggle('hidden',!isAdminAuthenticated);
       document.getElementById('lotteryLogoutBtn').disabled=isLotterySpinning;
@@ -3101,7 +3118,7 @@
       });
 
       if (page === "register") {
-        updateWorkspaceAvailability();
+        pollGate52();updateWorkspaceAvailability();
       } else if (page === "checkin") {
         renderCheckinPage();
       } else if (page === "lottery") {
@@ -3119,23 +3136,9 @@
       return `${chars[0]}${"O".repeat(chars.length - 2)}${chars[chars.length - 1]}`;
     }
 
-    function generateUniqueRegId() {
-      const now = new Date();
-      const mm = String(now.getMonth() + 1).padStart(2, "0");
-      const dd = String(now.getDate()).padStart(2, "0");
-      const ts = Date.now().toString(36).toUpperCase().slice(-5);
-      const rand = Math.random().toString(36).toUpperCase().slice(2, 5);
-      return `CG116-${mm}${dd}-${ts}${rand}`;
-    }
+    function generateUniqueRegId(){return "CG116-"+crypto.randomUUID().toUpperCase();}
 
-    function generateCancelCode() {
-      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-      let code = "";
-      for (let i = 0; i < 6; i++) {
-        code += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      return code;
-    }
+    function generateCancelCode(){return Array.from(crypto.getRandomValues(new Uint8Array(16)),x=>x.toString(16).padStart(2,"0")).join("").toUpperCase();}
 
     function isValidFAccountFormat(fAcc) {
       return /^F\d{9}$/.test((fAcc || "").trim());
@@ -3254,16 +3257,58 @@
     }
 
     // ==================== Firebase 雲端連線與監聽 ====================
+    // Spark 專用：資料庫交易 + Rules；完全不依賴 Cloud Functions。
+    let unsubPrivate=null, privateReady=false, publicData=null, privateData=null, gateBusy=false, publicRegistrationOpen=false;
+    const baseRef=(...p)=>doc(db,'artifacts',appId,'public','data',...p);
+    const cfgRef52=()=>baseRef('system_state','banquet_config');
+    const pubRef52=()=>baseRef('system_state','public_view');
+    const evtRef52=()=>baseRef('system_state','private_event');
+    const regRef52=uid=>baseRef('private_registrations',uid);
+    const fRef52=f=>baseRef('f_account_locks',f);
+    const emailRef52=e=>baseRef('email_locks',e);
+    const roleRef52=uid=>baseRef('admin_users',uid);
+    const gateRef52=()=>baseRef('system_state','registration_gate');
+    const readData=s=>s.exists()?s.data():null;
+    const seatKey52=s=>`${s.table}-${s.seat}`;
+    const regKeys52=r=>[seatKey52(r.mainSeat),...r.guests.filter(g=>g.seatInfo).map(g=>seatKey52(g.seatInfo))];
+    const blankPublic52=()=>({slots:{},checkedInSlots:{},checkedInStaff:{},luckyDrawWinners:[]});
+    const blankEvent52=()=>({checkedInStaff:{},luckyDrawWinners:[]});
+    const require52=(b,m)=>{if(!b)throw new Error(m);};
+    async function adminRole52(user){if(!user||user.isAnonymous)return false;const s=await getDocFromServer(roleRef52(user.uid));return s.exists()&&s.data().active===true;}
+    function publicMirror52(p,e){const masked={};for(const v of Object.values(e.checkedInStaff||{})){const k=seatKey52(v);masked[k]={fAccount:k,name:maskMiddleName(v.name),table:v.table,seat:v.seat,checkedInAt:v.checkedInAt};}return {...p,checkedInStaff:masked,luckyDrawWinners:(e.luckyDrawWinners||[]).map(w=>({...w,fAccount:seatKey52(w),name:maskMiddleName(w.name)}))};}
+    async function getReg52(f){const uid=auth.currentUser.uid;if(isAdminAuthenticated){const lock=readData(await getDocFromServer(fRef52(f)));if(!lock)return null;return readData(await getDocFromServer(regRef52(lock.uid)));}const r=readData(await getDocFromServer(regRef52(uid)));return r?.fAccount===f?r:null;}
+    async function pollGate52(){if(!auth?.currentUser||isAdminAuthenticated||gateBusy||document.hidden||activeMainPage!=='register')return;gateBusy=true;const uid=auth.currentUser.uid;let open=false,ready=false;try{const s=await getDocFromServer(gateRef52());open=s.exists();ready=true;}catch(e){ready=e.code==='permission-denied';}finally{gateBusy=false;if(auth?.currentUser?.uid===uid&&!isAdminAuthenticated){publicRegistrationOpen=open;configReady=ready;refreshPhaseAccess(true);}}}
+    function syncViews52(){if(!publicData)return;isCloudConnected=!isAdminAuthenticated||privateReady;publicSeatSlots=publicData.slots||{};checkedInSlots=publicData.checkedInSlots||{};const e=isAdminAuthenticated?(privateData||blankEvent52()):publicData;checkedInStaff=e.checkedInStaff||{};luckyDrawWinners=(e.luckyDrawWinners||[]).filter(w=>PRESET_PRIZES.some(p=>p[0]===w.prize));updateSyncBadge(isCloudConnected);if(isCloudConnected)hideSystemAlert();updateNavBadges();refreshPhaseAccess(true);refreshAllUI();if(activeMainPage==='checkin')renderCheckinPage();if(!isLotterySpinning)renderLotteryPage();}
+    async function sparkAction52(action,d={}){
+      const user=auth.currentUser;require52(user,'請先登入');const uid=user.uid, admin=isAdminAuthenticated;
+      const adminOnly=()=>require52(admin,'僅管理員可以操作');
+      if(action==='initialize'){adminOnly();return runTransaction(db,async t=>{const [p,e,c,g]=await Promise.all([t.get(pubRef52()),t.get(evtRef52()),t.get(cfgRef52()),t.get(gateRef52())]);if(!p.exists())t.set(pubRef52(),blankPublic52());if(!e.exists())t.set(evtRef52(),blankEvent52());if(!c.exists())t.set(cfgRef52(),{phases:Object.fromEntries(Object.keys(PHASE_LABELS).map(k=>[k,{mode:'closed',start:null,end:null}]))});if(!g.exists())t.set(gateRef52(),{enabled:true});return {ok:true};});}
+      if(action==='setPhase'){adminOnly();require52(Object.keys(PHASE_LABELS).includes(d.phase),'無效階段');return runTransaction(db,async t=>{const c=readData(await t.get(cfgRef52()));require52(c,'請先初始化');const phases={...c.phases,[d.phase]:d.settings};t.set(cfgRef52(),{phases});return {phases};});}
+      if(action==='exists'){const r=readData(await getDocFromServer(regRef52(uid)));return {exists:r?.fAccount===d.fAccount};}
+      if(action==='lookup'){const r=await getReg52(d.fAccount);require52(r&&r.cancelCode===d.cancelCode,'資料不符；如已更換瀏覽器請洽管理員');return r;}
+      if(action==='register'){
+        require52(phaseAllowed('registration'),'REGISTRATION_CLOSED');const r={...d.registration,ownerUid:uid};r.seatKeys=regKeys52(r);require52(new Set(r.seatKeys).size===r.seatKeys.length,'座位重複');
+        return runTransaction(db,async t=>{const [s,own]=await Promise.all([t.get(pubRef52()),t.get(regRef52(uid))]);require52(!own.exists(),'DUPLICATE_F_ACCOUNT');const p=readData(s);require52(p,'未初始化');const slots={...p.slots};for(const k of r.seatKeys){if(slots[k])throw Error('SEAT_TAKEN:'+k.replace('-',':'));slots[k]='已預訂';}t.set(regRef52(uid),r);t.set(fRef52(r.fAccount),{uid});t.set(emailRef52(r.email),{uid});t.set(pubRef52(),{...p,slots});return r;});
+      }
+      if(action==='cancel'){
+        const r0=await getReg52(d.fAccount);require52(r0&&(admin||r0.cancelCode===d.cancelCode),'資料不符；跨裝置請洽管理員');const rr=regRef52(r0.ownerUid);
+        return runTransaction(db,async t=>{const [s,rs]=await Promise.all([t.get(pubRef52()),t.get(rr)]);const r=readData(rs),p=readData(s);require52(r&&(admin||r.cancelCode===d.cancelCode),'資料不存在');require52(!r.seatKeys.some(k=>p.checkedInSlots[k]),'已報到，不可取消，請洽主辦單位');const slots={...p.slots};if(d.guestId){const g=r.guests.find(x=>x.id===d.guestId);require52(g,'查無陪同者');const guests=r.guests.filter(x=>x.id!==d.guestId),next={...r,guests,totalAmount:guests.reduce((n,x)=>n+x.fee,0)};next.seatKeys=regKeys52(next);for(const k of r.seatKeys)if(!next.seatKeys.includes(k))delete slots[k];t.set(rr,next);if(g.seatInfo)t.set(pubRef52(),{...p,slots});return next;}for(const k of r.seatKeys)delete slots[k];t.delete(rr);t.delete(fRef52(r.fAccount));t.delete(emailRef52(r.email));t.set(pubRef52(),{...p,slots});return {ok:true};});
+      }
+      if(action==='waitlist'){require52(phaseAllowed('registration'),'REGISTRATION_CLOSED');return runTransaction(db,async t=>{const w=baseRef('waitlist_entries',uid),s=await t.get(w);require52(!s.exists(),'此瀏覽器已登記候補');t.set(w,{...d,ownerUid:uid,createdAt:Date.now()});return {ok:true};});}
+      if(action==='checkin'){adminOnly();const r0=await getReg52(d.fAccount);require52(r0,'查無報名');return runTransaction(db,async t=>{const [ps,es,rs,cs]=await Promise.all([t.get(pubRef52()),t.get(evtRef52()),t.get(regRef52(r0.ownerUid)),t.get(cfgRef52())]);require52(phaseOpen(readData(cs),'checkin'),'報到未開放');const p=readData(ps),e=readData(es),r=readData(rs);require52(r,'報名已取消');const k=seatKey52(r.mainSeat), lit={...p.checkedInSlots},staff={...e.checkedInStaff};require52(d.target==='ALL'||r.seatKeys.includes(d.target),'座位不符');for(const x of r.seatKeys)if(d.target==='ALL'||d.target===x){require52(p.slots[x],'座位已取消');lit[x]=true;}if(d.target==='ALL'||d.target===k)staff[r.fAccount]={fAccount:r.fAccount,name:r.name,table:r.mainSeat.table,seat:r.mainSeat.seat,checkedInAt:staff[r.fAccount]?.checkedInAt||Date.now()};const next={...e,checkedInStaff:staff};t.set(evtRef52(),next);t.set(pubRef52(),publicMirror52({...p,checkedInSlots:lit},next));return r;});}
+      if(action==='draw'){adminOnly();require52(PRESET_PRIZES.some(x=>x[0]===d.prize),'獎項不符');const prizeRef=baseRef('prize_results',d.prize);return runTransaction(db,async t=>{const [ps,es,cs,ws]=await Promise.all([t.get(pubRef52()),t.get(evtRef52()),t.get(cfgRef52()),t.get(prizeRef)]);require52(phaseOpen(readData(cs),'lottery'),'抽獎未開放');require52(!ws.exists(),'此獎項已抽完');const p=readData(ps),e=readData(es),prev=e.luckyDrawWinners||[];require52(!prev.some(w=>w.prize===d.prize),'此獎項已抽完');const eligible=Object.values(e.checkedInStaff).filter(v=>isValidFAccountFormat(v.fAccount)&&p.slots[seatKey52(v)]&&p.checkedInSlots[seatKey52(v)]&&(!d.excludeWinners||!prev.some(w=>w.fAccount===v.fAccount)));require52(eligible.length,'無符合抽獎資格者');const winner=eligible[randomIndex(eligible.length)];const win={id:'win_'+crypto.randomUUID(),prize:d.prize,prizeId:prizeKey(d.prize),amount:null,fAccount:winner.fAccount,name:winner.name,table:winner.table,seat:winner.seat,drawnAt:Date.now()};const next={...e,luckyDrawWinners:[win,...prev]};t.set(prizeRef,win);t.set(evtRef52(),next);t.set(pubRef52(),publicMirror52(p,next));return win;});}
+      if(action==='reconcile')throw Error('Spark 版不提供自動重建座位圖；請先備份並人工核對');
+      throw Error('不支援的操作');
+    }
+
     async function initDatabase() {
 
       try {
         ({ initializeApp } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"));
         ({ getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"));
-        ({ getFirestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc, runTransaction, onSnapshot } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"));
+        ({ getFirestore, collection, doc, getDoc, getDocFromServer, getDocs, setDoc, deleteDoc, runTransaction, onSnapshot } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"));
         const app = initializeApp(DEFAULT_FIREBASE_CONFIG);
-        const {getFunctions,httpsCallable}=await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-functions.js");
-        const invoke=httpsCallable(getFunctions(app,"us-central1"),"banquetAction");
-        callBackend=async(action,data={})=>(await invoke({action,...data})).data;
+        callBackend=sparkAction52;
         auth = getAuth(app);
         db = getFirestore(app);
 
@@ -3271,9 +3316,9 @@
         if (!auth.currentUser) await signInAnonymously(auth);
 
         onAuthStateChanged(auth, async (user) => {
-          isAdminAuthenticated=false;isCloudConnected=false;checkedInStaff={};luckyDrawWinners=[];if(unsubSeat)unsubSeat();updateLotteryAccess();
+          isAdminAuthenticated=false;isCloudConnected=false;checkedInStaff={};luckyDrawWinners=[];adminRegistrations=[];adminWaitlist=[];document.getElementById("adminTableBody").replaceChildren();document.getElementById("phaseEditor").replaceChildren();closeModal("phaseControlModal");closeModal("adminDashboardModal");if(unsubSeat)unsubSeat();if(unsubPrivate)unsubPrivate();privateReady=false;publicData=null;privateData=null;publicRegistrationOpen=false;if(unsubConfig)unsubConfig();configReady=false;phaseConfig=null;refreshPhaseAccess(true);updateLotteryAccess();
           if (user) {
-            try {const token=await user.getIdTokenResult();if(auth.currentUser?.uid!==user.uid)return;isAdminAuthenticated=token.claims.admin===true;} catch(e){console.error(e);}
+            try {const allowed=await adminRole52(user);if(auth.currentUser?.uid!==user.uid)return;isAdminAuthenticated=allowed;} catch(e){console.error(e);}
             updateLotteryAccess();
             subscribePublicSeatMap();
             subscribeBanquetConfig();
@@ -3291,69 +3336,57 @@
       }
     }
 
-    function subscribePublicSeatMap() {
-      const stateRef = doc(db, "artifacts", appId, "public", "data", "system_state", isAdminAuthenticated?"public_seat_map":"public_view");
-      if(unsubSeat) unsubSeat();
-      unsubSeat = onSnapshot(stateRef, {includeMetadataChanges:true}, (snap) => {
-        if(snap.metadata.fromCache || !snap.exists()){isCloudConnected=false;updateSyncBadge(false);updateWorkspaceAvailability();updateLotteryAccess();return;}
-        isCloudConnected = true;
-        hideSystemAlert();
-        updateSyncBadge(true);
-
-        if (snap.exists()) {
-          const data = snap.data();
-          publicSeatSlots = data.slots || {};
-          checkedInSlots = data.checkedInSlots || {};
-          checkedInStaff = data.checkedInStaff || {};
-          luckyDrawWinners = (data.luckyDrawWinners || []).filter(w=>PRESET_PRIZES.some(p=>p[0]===w.prize));
-          livePrizes = data.prizeQuotas || [];
-        } else {
-          publicSeatSlots = {};
-          checkedInSlots = {};
-          checkedInStaff = {};
-          luckyDrawWinners = [];
-          livePrizes = [];
-        }
-        updateNavBadges();
-        updateWorkspaceAvailability();
-        refreshAllUI();
-        if (activeMainPage === "checkin") renderCheckinPage();
-        if (!isLotterySpinning) renderLotteryPage();
-      }, (err) => {
-        console.error("Public seat map error:", err);
-        isCloudConnected = false;
-        updateSyncBadge(false);
-        showSystemAlert(
-          "⚠️ 雲端座位圖同步中斷，已暫停報名",
-          "無法讀取即時座位狀態（可能為網路中斷或權限設定限制），請重新整理頁面後再試。"
-        );
-        updateWorkspaceAvailability();updateLotteryAccess();
-      });
+    function subscribePublicSeatMap(){
+      if(unsubSeat)unsubSeat();if(unsubPrivate)unsubPrivate();publicData=null;privateData=null;privateReady=false;
+      const uid=auth.currentUser?.uid, admin=isAdminAuthenticated;
+      const error=err=>{console.error(err);isCloudConnected=false;updateSyncBadge(false);refreshPhaseAccess(true);showSystemAlert('雲端尚未初始化或同步中斷','請由管理員登入完成初始化，或確認新版 Rules 已發布。');};
+      unsubSeat=onSnapshot(pubRef52(),{includeMetadataChanges:true},s=>{if(auth.currentUser?.uid!==uid)return;if(s.metadata.fromCache||!s.exists()){publicData=null;error('公開座位圖尚未就緒');return;}publicData=s.data();syncViews52();if(!admin&&!configReady)pollGate52();},err=>{publicData=null;error(err);});
+      if(admin)unsubPrivate=onSnapshot(evtRef52(),{includeMetadataChanges:true},s=>{if(auth.currentUser?.uid!==uid)return;privateReady=!s.metadata.fromCache&&s.exists();privateData=privateReady?s.data():null;if(!privateReady){error('管理資料尚未就緒');return;}syncViews52();},err=>{privateReady=false;privateData=null;error(err);});
     }
-
-    function subscribeBanquetConfig() {
-      const cfgRef = doc(db, "artifacts", appId, "public", "data", "system_state", "banquet_config");
-      if(unsubConfig) unsubConfig();
-      unsubConfig = onSnapshot(cfgRef, {includeMetadataChanges:true}, (snap) => {
-        if (snap.metadata.fromCache || !snap.exists() || snap.data().isOpen !== true) {
-          isRegistrationOpen = false;
-        } else {
-          isRegistrationOpen = true;
-        }
-        updateWorkspaceAvailability();
-        updateAdminRegStatusButton();
-      }, () => {
-        isRegistrationOpen = false;
-        updateWorkspaceAvailability();
-      });
+    function phaseAllowed(key){return configReady&&isCloudConnected&&(isAdminAuthenticated?phaseOpen(phaseConfig,key):key==='registration'&&publicRegistrationOpen);}
+    function taipeiInput(ms){if(!Number.isSafeInteger(ms))return "";return new Date(ms+8*3600000).toISOString().slice(0,16);}
+    function parseTaipei(value){if(!value)return null;if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(value))throw Error("請輸入有效日期時間");const t=Date.parse(value+":00+08:00");if(!Number.isSafeInteger(t)||taipeiInput(t)!==value)throw Error("日期時間無效");return t;}
+    function phaseStatus(key){if(!isAdminAuthenticated)return key==='registration'&&phaseAllowed(key)?"開放中":"尚未開放";if(!configReady||!isCloudConnected)return "同步中／未連線";const p=getPhase(phaseConfig,key);if(p.mode==="open")return "開放中（手動）";if(p.mode==="closed")return "已關閉（手動）";const now=Date.now();if(now<p.start)return "尚未開放";if(p.end!==null&&now>=p.end)return "已截止";return "開放中（預約）";}
+    function phaseWindow(key){const p=getPhase(phaseConfig,key);return p.mode==="scheduled"?`${taipeiInput(p.start).replace('T',' ')} 起${p.end===null?'｜無截止':` ～ ${taipeiInput(p.end).replace('T',' ')}`}`:"";}
+    function refreshPhaseAccess(force=false){
+      const sig=JSON.stringify([configReady,isCloudConnected,isAdminAuthenticated,phaseConfig,publicRegistrationOpen,...Object.keys(PHASE_LABELS).map(phaseStatus)]);
+      if(!force&&sig===phaseSignature)return;phaseSignature=sig;
+      isRegistrationOpen=phaseAllowed('registration');
+      const canCheck=phaseAllowed('checkin')&&isAdminAuthenticated;
+      document.getElementById('checkinFAccountInput').disabled=!canCheck;
+      document.getElementById('btnLookupCheckin').disabled=!canCheck||checkinLookupBusy;
+      if(!canCheck)document.getElementById('checkinResultCard').textContent=!isAdminAuthenticated?'請由管理員登入辦理報到。':'報到尚未開放或已關閉。';
+      else if(!document.getElementById('checkinResultCard').children.length)document.getElementById('checkinResultCard').textContent='請輸入 F 帳號查詢報到。';
+      document.getElementById('btnOpenWaitlist').disabled=!isRegistrationOpen;
+      document.getElementById('btnSubmitWaitlist').disabled=!isRegistrationOpen;
+      for(const k of Object.keys(PHASE_LABELS)){const e=document.getElementById('phaseState-'+k);if(e)e.textContent=phaseStatus(k);}
+      updateWorkspaceAvailability();updateLotteryAccess();
     }
+    function subscribeBanquetConfig(){if(unsubConfig)unsubConfig();configReady=false;phaseConfig=null;refreshPhaseAccess(true);if(!isAdminAuthenticated){pollGate52();return;}unsubConfig=onSnapshot(cfgRef52(),{includeMetadataChanges:true},snap=>{configReady=!snap.metadata.fromCache&&snap.exists();phaseConfig=configReady?snap.data():null;refreshPhaseAccess(true);},()=>{configReady=false;phaseConfig=null;refreshPhaseAccess(true);});}
+    setInterval(pollGate52,120000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pollGate52();});
+    setInterval(refreshPhaseAccess,1000);
+    window.openPhaseControl=function(){if(!isAdminAuthenticated||isLotterySpinning||!configReady)return showToast("請先登入並完成雲端同步。");renderPhaseEditor();document.getElementById('phaseControlModal').classList.remove('hidden');};
+    function renderPhaseEditor(){
+      document.getElementById('phaseEditor').innerHTML=Object.keys(PHASE_LABELS).map(k=>{const p=getPhase(phaseConfig,k);return `<section class="p-4 rounded-2xl border border-[#E6DDD0] bg-[#FAF7F2] space-y-3"><h3 class="serif-title text-lg font-bold">${PHASE_LABELS[k]}</h3><p id="phaseState-${k}" class="font-bold text-[#A85D55]">${phaseStatus(k)}</p><label class="block text-sm">預約開始（臺灣時間）<input id="phaseStart-${k}" type="datetime-local" value="${taipeiInput(p.start)}" class="block w-full mt-1 p-2 rounded-lg border bg-white"></label><label class="block text-sm">預約截止（可留空）<input id="phaseEnd-${k}" type="datetime-local" value="${taipeiInput(p.end)}" class="block w-full mt-1 p-2 rounded-lg border bg-white"></label><button onclick="savePhase('${k}','scheduled')" class="w-full p-3 rounded-xl bg-[#6E8B74] text-white font-bold">儲存並啟用預約時程</button><div class="grid grid-cols-2 gap-2"><button onclick="savePhase('${k}','open')" class="p-3 rounded-xl bg-[#E9F0EA] text-[#4E6B54] font-bold border">立即開放</button><button onclick="savePhase('${k}','closed')" class="p-3 rounded-xl bg-[#F9EFEA] text-[#A85D55] font-bold border">立即關閉</button></div><div id="phaseMsg-${k}" role="status" class="text-sm text-[#787067]">目前模式：${p.mode==='scheduled'?'預約':p.mode==='open'?'手動開放':'手動關閉'}</div></section>`;}).join('');
+    }
+    window.savePhase=async function(key,mode){
+      if(!isAdminAuthenticated||!isCloudConnected||!configReady||phaseBusy||isLotterySpinning)return showToast('請先登入並確認雲端同步。');
+      const msg=document.getElementById('phaseMsg-'+key), buttons=document.querySelectorAll('#phaseEditor button');
+      try{const previous=getPhase(phaseConfig,key), start=mode==='scheduled'?parseTaipei(document.getElementById('phaseStart-'+key).value):previous.start, end=mode==='scheduled'?parseTaipei(document.getElementById('phaseEnd-'+key).value):previous.end;
+        if(mode==='scheduled'&&(start===null||(end!==null&&end<=start)))throw Error('請設定開始時間，截止須晚於開始時間。');
+        phaseBusy=true;buttons.forEach(b=>b.disabled=true);msg.textContent='儲存中…';
+        const result=await callBackend('setPhase',{phase:key,settings:{mode,start,end}});
+        phaseConfig={phases:result.phases};refreshPhaseAccess(true);
+        msg.textContent='已儲存｜'+phaseStatus(key);showToast(PHASE_LABELS[key]+'設定已儲存。');
+      }catch(e){msg.textContent=e.message||'儲存失敗';}finally{phaseBusy=false;buttons.forEach(b=>b.disabled=false);}
+    };
 
     function updateSyncBadge(connected) {
       const badge = document.getElementById("syncStatusBadge");
       if (!badge) return;
       if (connected) {
         badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-[#E9F0EA] text-[#4E6B54] border border-[#C6D8C9]";
-        badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-[#6E8B74] animate-pulse"></span>雲端多人即時同步中`;
+        badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-[#6E8B74] animate-pulse"></span>雲端座位同步中`;
       } else {
         badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-[#F9EFEA] text-[#A85D55] border border-[#E8CFC9]";
         badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-[#C86D65]"></span>雲端未連線（禁止報名）`;
@@ -3403,8 +3436,8 @@
         overlay.classList.remove("hidden");
         formSec.classList.add("hidden");
         seatSec.classList.add("hidden");
-        document.getElementById("lockOverlayTitle").textContent = "長庚科技大學116年旺年會報名已截止";
-        document.getElementById("lockOverlayDesc").textContent = "目前管理員已關閉線上新增報名；已報名同仁仍可點擊右上角「查詢 / 取消報名與重選」查詢紀錄。";
+        document.getElementById("lockOverlayTitle").textContent = "報名與選位｜"+phaseStatus("registration");
+        document.getElementById("lockOverlayDesc").textContent = "目前未開放新增報名；原報名瀏覽器可查詢或取消未報到紀錄。跨裝置請洽管理員。";
         return;
       }
 
@@ -3503,7 +3536,7 @@
           if (checkedDuplicateFAccount === fAccUpper) checkedDuplicateFAccount = null;
           if (formState.fAccount === fAccUpper && hintEl) {
             hintEl.className = "text-xs text-[#4E6B54] font-semibold mt-1";
-            hintEl.textContent = "✓ F 帳號格式正確且尚未報名";
+            hintEl.textContent = "✓ F 帳號格式正確，送出時檢查重複";
           }
           return false;
         }
@@ -4066,7 +4099,7 @@
           </div>
 
           <p class="text-center text-xs text-[#787067] mt-2">
-            綠燈為可選空位；黃燈為您目前暫選（點擊可取消）；紅燈為其他人已預約（滑鼠移至紅燈可查看遮罩姓名）。
+            綠燈為可選空位；黃燈為您目前暫選（點擊可取消）；紅燈為其他人已預約（滑鼠移至紅燈可查看座位占用狀態）。
           </p>
         </div>
       `;
@@ -4387,7 +4420,7 @@
           const parts = msg.split(":");
           showToast(`抱歉！${formatTableName(Number(parts[1]))} ${parts[2]} 號席剛剛被其他同仁搶先一步鎖定，請點選其他綠燈空位！`);
         } else {
-          showToast("雲端資料庫寫入被拒絕或網路異常，請確認 Firebase Rules 權限設定後再試。");
+          showToast("送出失敗：F 帳號或 Email 可能已報名、座位已滿、報名已關閉，或網路異常。請確認資料後再試。");
         }
       } finally {
         btn.disabled = false;
@@ -4501,7 +4534,7 @@
         renderCancelManagementView(reg);
       } catch (e) {
         console.error(e);
-        area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-sm text-[#A85D55]">查詢過程發生錯誤，請確認網路連線。</div>`;
+        area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-sm text-[#A85D55]">查無資料、取消碼不符或已更換瀏覽器；請使用原報名瀏覽器，或洽管理員。</div>`;
       } finally {
         btn.disabled = false;
         btn.textContent = "驗證並查詢我的報名紀錄";
@@ -4600,6 +4633,7 @@
     // ==================== 分頁二：當天報到簽到（座位即時亮燈） ====================
     window.lookupCheckInGroup = async function() {
       if(!isAdminAuthenticated) return showToast("請由管理員登入辦理報到。");
+      if(!phaseAllowed("checkin"))return showToast("報到尚未開放或已關閉。");
       if (!isCloudConnected) return showToast("雲端資料庫尚未連線，請稍後再試。");
       const fAcc = document.getElementById("checkinFAccountInput").value.trim().toUpperCase();
       const cardEl = document.getElementById("checkinResultCard");
@@ -4612,11 +4646,11 @@
       const btn = document.getElementById("btnLookupCheckin");
       btn.disabled = true;
       btn.textContent = "查詢中...";
+      checkinLookupBusy=true;
 
       try {
-        const privRef = doc(db, "artifacts", appId, "public", "data", "private_registrations", fAcc);
-        const snap = await getDoc(privRef);
-        if (!snap.exists()) {
+        const reg = await getReg52(fAcc);
+        if (!reg) {
           cardEl.innerHTML = `
             <div class="p-4 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9] text-sm text-[#A85D55] space-y-1">
               <div class="font-bold">查無此 F 帳號之事前報名資料</div>
@@ -4625,13 +4659,12 @@
           `;
           return;
         }
-        const reg = snap.data();
-        renderCheckinActionCard(reg);
+        if(phaseAllowed("checkin")&&isAdminAuthenticated)renderCheckinActionCard(reg);
       } catch (e) {
         console.error("Check-in lookup error:", e);
         showToast("查詢報到資料失敗，請確認網路連線。");
       } finally {
-        btn.disabled = false;
+        checkinLookupBusy=false;btn.disabled = !phaseAllowed("checkin")||!isAdminAuthenticated;
         btn.textContent = "查詢報到";
       }
     };
@@ -4713,12 +4746,13 @@
 
     window.confirmCheckInMembers = async function(fAccount, targetKeyOrAll) {
       if(!isAdminAuthenticated) return showToast("請由管理員辦理報到。");
+      if(!phaseAllowed("checkin"))return showToast("報到尚未開放或已關閉。");
       const fAccUpper = fAccount.toUpperCase();
       try {
         const reg=await callBackend("checkin",{fAccount:fAccUpper,target:targetKeyOrAll});
         checkinInspectedTable = reg.mainSeat.table === VIP_HEAD_TABLE ? 1 : reg.mainSeat.table;
         showToast("報到成功！本人完成報到才具抽獎資格。");
-        renderCheckinActionCard(reg);
+        if(phaseAllowed("checkin")&&isAdminAuthenticated)renderCheckinActionCard(reg);
       } catch (e) {
         console.error("Confirm check-in error:", e);
         showToast("報到亮燈寫入失敗，請確認網路連線。");
@@ -5056,6 +5090,7 @@
       if (!isAdminAuthenticated) return showToast("正式抽獎僅限管理員登入後操作。");
       if (!isCloudConnected) return showToast("雲端資料庫尚未連線，無法進行抽獎。");
 
+      if(!phaseAllowed("lottery"))return showToast("抽獎尚未開放或已關閉。");
       if(prizeSaving)return;
       const prize = selectedPrize();
       if(!prize)return showToast("請先選擇獎項。");
@@ -5092,7 +5127,7 @@
       const previewEl = document.getElementById("lotterySweepPreview");
       tickerEl.firstElementChild.textContent = `🎰 正在抽出【${prizeName}】！全場已報到參與者座位極速跑燈中...`;
 
-      // 正式得主由伺服器交易隨機抽出；成功鎖定名額才揭曉。
+      // 管理員瀏覽器以加密亂數抽出，Firestore 原子交易成功才揭曉。
       const winRecord=await callBackend("draw",{prize:prizeName,excludeWinners});
       const winner=winRecord;
       const winnerKey=`${winner.table}-${winner.seat}`;
@@ -5219,11 +5254,13 @@
 
     // ==================== 線上候補登記 ====================
     window.openWaitlistModal = function() {
+      if(!phaseAllowed("registration"))return showToast("目前未開放候補登記。");
       if (!isCloudConnected) return showToast("雲端資料庫尚未連線，請稍後再試。");
       document.getElementById("waitlistModal").classList.remove("hidden");
     };
 
     window.submitWaitlistEntry = async function() {
+      if(!phaseAllowed("registration"))return showToast("目前未開放候補登記。");
       const fAcc = document.getElementById("wlFAccount").value.trim().toUpperCase();
       const name = document.getElementById("wlName").value.trim();
       const ext = document.getElementById("wlExt").value.trim();
@@ -5255,7 +5292,7 @@
         showToast("候補送出失敗，請確認網路連線或稍後再試。");
       } finally {
         btn.disabled = false;
-        btn.textContent = "送出候補登記";
+        btn.disabled=!phaseAllowed("registration");btn.textContent = "送出候補登記";
       }
     };
 
@@ -5285,20 +5322,20 @@
 
       try {
         const credential=await signInWithEmailAndPassword(auth, email, pwd);
-        if((await credential.user.getIdTokenResult(true)).claims.admin!==true){await signOut(auth);await signInAnonymously(auth);throw new Error("未獲管理員授權");}
+        if(!(await adminRole52(credential.user))){await signOut(auth);await signInAnonymously(auth);throw new Error("未獲管理員授權");}
         isAdminAuthenticated = true;
         await callBackend("initialize");
-        subscribePublicSeatMap();
+        subscribePublicSeatMap();subscribeBanquetConfig();
         updateLotteryAccess();
         closeModal("adminLoginModal");
-        if(activeMainPage!=="lottery") {await loadAdminData();document.getElementById("adminDashboardModal").classList.remove("hidden");}
+        await loadAdminData();document.getElementById("adminDashboardModal").classList.remove("hidden");
         renderLotteryPage();
-        showToast("管理員驗證通過，可開始抽獎！");
+        showToast("管理員驗證通過，請依活動時程開放功能。");
       } catch (e) {
-        isAdminAuthenticated=false;isCloudConnected=false;checkedInStaff={};luckyDrawWinners=[];if(unsubSeat)unsubSeat();updateLotteryAccess();
+        isAdminAuthenticated=false;isCloudConnected=false;checkedInStaff={};luckyDrawWinners=[];adminRegistrations=[];adminWaitlist=[];document.getElementById("adminTableBody").replaceChildren();document.getElementById("phaseEditor").replaceChildren();closeModal("phaseControlModal");closeModal("adminDashboardModal");if(unsubSeat)unsubSeat();if(unsubPrivate)unsubPrivate();privateReady=false;publicData=null;privateData=null;publicRegistrationOpen=false;if(unsubConfig)unsubConfig();configReady=false;phaseConfig=null;refreshPhaseAccess(true);updateLotteryAccess();
         try{await signOut(auth);await signInAnonymously(auth);}catch{}
         console.error("Admin auth error:", e);
-        showToast("管理員帳號或密碼錯誤，或尚未在 Firebase Authentication 啟用 Email/Password 登入。");
+        showToast("登入或初始化失敗：請確認 Email/Password 已啟用、管理員 UID 已授權，以及新版 Rules 已發布。");
       } finally {
         btn.disabled = false;
         btn.textContent = "登入後台";
@@ -5307,28 +5344,15 @@
 
     window.adminSignOut = async function() {
       if(isLotterySpinning||prizeSaving) return showToast("請等待本輪操作完成。");
-      isAdminAuthenticated=false;isCloudConnected=false;checkedInStaff={};luckyDrawWinners=[];if(unsubSeat)unsubSeat();
+      isAdminAuthenticated=false;isCloudConnected=false;checkedInStaff={};luckyDrawWinners=[];adminRegistrations=[];adminWaitlist=[];document.getElementById("adminTableBody").replaceChildren();document.getElementById("phaseEditor").replaceChildren();closeModal("phaseControlModal");closeModal("adminDashboardModal");if(unsubSeat)unsubSeat();if(unsubPrivate)unsubPrivate();privateReady=false;publicData=null;privateData=null;
       updateLotteryAccess();renderLotteryPage();
-      closeModal("clearWinnersConfirmModal");closeModal("adminDashboardModal");
+      closeModal("clearWinnersConfirmModal");closeModal("adminDashboardModal");closeModal("phaseControlModal");configReady=false;phaseConfig=null;if(unsubConfig)unsubConfig();refreshPhaseAccess(true);
       try {
         await signOut(auth);
         isAdminAuthenticated = false;
         await signInAnonymously(auth);
       } catch (e) {
         console.error(e);
-      }
-    };
-
-    window.toggleRegistrationStatus = async function() {
-      if (!isAdminAuthenticated) return;
-      try {
-        const cfgRef = doc(db, "artifacts", appId, "public", "data", "system_state", "banquet_config");
-        const nextOpen = !isRegistrationOpen;
-        await setDoc(cfgRef, { isOpen: nextOpen, updatedAt: Date.now() }, { merge: true });
-        showToast(nextOpen ? "已重新開放線上報名！" : "已立即截止並關閉線上報名！");
-      } catch (e) {
-        console.error(e);
-        showToast("更新報名狀態失敗，請確認管理員權限。");
       }
     };
 
@@ -5351,17 +5375,7 @@
       }
     };
 
-    function updateAdminRegStatusButton() {
-      const btn = document.getElementById("btnToggleRegOpen");
-      if (!btn) return;
-      if (isRegistrationOpen) {
-        btn.className = "px-3.5 py-2 rounded-xl text-sm font-bold bg-[#E9F0EA] text-[#4E6B54] border border-[#C6D8C9] cursor-pointer";
-        btn.textContent = "報名狀態：開放中（點擊截止）";
-      } else {
-        btn.className = "px-3.5 py-2 rounded-xl text-sm font-bold bg-[#F9EFEA] text-[#B2564E] border border-[#E8CFC9] cursor-pointer";
-        btn.textContent = "報名狀態：已截止（點擊重開）";
-      }
-    }
+    function updateAdminRegStatusButton(){const btn=document.getElementById('btnToggleRegOpen');if(btn)btn.textContent='活動時程與開放控制';}
 
     async function loadAdminData() {
       if (!isAdminAuthenticated) return;
@@ -5498,7 +5512,7 @@
         if (!kw) return true;
         const guestNames = (r.guests || []).map(g => `${g.name} ${g.roleLabel || ""}`).join(" ");
         const tableStr = `${formatTableName(r.mainSeat.table)} ${r.mainSeat.table}桌 ${r.mainSeat.table === VEGETARIAN_TABLE ? "素食桌" : ""}`;
-        return `${r.regId} ${r.fAccount} ${r.name} ${r.ext} ${r.email} ${guestNames} ${tableStr}`.toLowerCase().includes(kw);
+        return `${escapeHtml(r.regId)} ${r.fAccount} ${r.name} ${r.ext} ${r.email} ${guestNames} ${tableStr}`.toLowerCase().includes(kw);
       });
 
       document.getElementById("adminRowCount").textContent = `顯示 ${filtered.length} / ${adminRegistrations.length} 筆紀錄`;
@@ -5524,11 +5538,11 @@
 
         return `
           <tr class="hover:bg-[#FAF7F2]">
-            <td class="py-2.5 px-2.5 font-mono font-semibold text-[#4A423B]">${r.regId}</td>
+            <td class="py-2.5 px-2.5 font-mono font-semibold text-[#4A423B]">${escapeHtml(r.regId)}</td>
             <td class="py-2.5 px-2.5 font-mono font-bold text-[#6E8B74]">${escapeHtml(r.fAccount)}</td>
             <td class="py-2.5 px-2.5 font-bold text-[#38332E]">${escapeHtml(r.name)}</td>
             <td class="py-2.5 px-2.5 text-[#696056]">分機 ${escapeHtml(r.ext)}<br/><span class="text-xs">${escapeHtml(r.email)}</span></td>
-            <td class="py-2.5 px-2.5 font-mono font-bold text-[#A85D55]">${r.cancelCode}</td>
+            <td class="py-2.5 px-2.5 font-mono font-bold text-[#A85D55]">${escapeHtml(r.cancelCode)}</td>
             <td class="py-2.5 px-2.5 space-y-0.5">${peopleList}</td>
             <td class="py-2.5 px-2.5 text-right font-bold text-[#A85D55]">NT$ ${(r.totalAmount || 0).toLocaleString()}</td>
             <td class="py-2.5 px-2.5 text-center space-y-1">
@@ -5558,7 +5572,7 @@
       if (!fAccUpper) return;
 
       try {
-        const wlRef = doc(db, "artifacts", appId, "public", "data", "waitlist_entries", fAccUpper);
+        const item=adminWaitlist.find(w=>w.fAccount===fAccUpper);if(!item)return;const wlRef=baseRef("waitlist_entries",item.ownerUid);
         await deleteDoc(wlRef);
         await loadAdminData();
         showToast(`已成功刪除 ${fAccUpper} 的候補登記紀錄！`);
@@ -5717,6 +5731,7 @@
     refreshAllUI();
     window.renderLotteryPage=renderLotteryPage;
     renderLotteryPage();
+    refreshPhaseAccess(true);
     initDatabase();
 
   </script>
