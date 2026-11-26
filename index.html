@@ -3,9 +3,1870 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>長庚科技大學116年旺年會｜線上報名與實景圓桌選位系統</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+  <title>長庚科技大學116年旺年會 V4.2｜報名選位・當天報到・線上抽獎系統</title>
+  <style>/*! tailwindcss v4.1.10 | MIT License | https://tailwindcss.com */
+@layer properties;
+@layer theme, base, components, utilities;
+@layer theme {
+  :root, :host {
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+      "Courier New", monospace;
+    --spacing: 0.25rem;
+    --container-sm: 24rem;
+    --container-md: 28rem;
+    --container-lg: 32rem;
+    --container-xl: 36rem;
+    --container-6xl: 72rem;
+    --text-xs: 0.75rem;
+    --text-xs--line-height: calc(1 / 0.75);
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
+    --text-base: 1rem;
+    --text-base--line-height: calc(1.5 / 1);
+    --text-lg: 1.125rem;
+    --text-lg--line-height: calc(1.75 / 1.125);
+    --text-xl: 1.25rem;
+    --text-xl--line-height: calc(1.75 / 1.25);
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
+    --text-3xl: 1.875rem;
+    --text-3xl--line-height: calc(2.25 / 1.875);
+    --text-4xl: 2.25rem;
+    --text-4xl--line-height: calc(2.5 / 2.25);
+    --text-5xl: 3rem;
+    --text-5xl--line-height: 1;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --tracking-wide: 0.025em;
+    --tracking-wider: 0.05em;
+    --tracking-widest: 0.1em;
+    --leading-tight: 1.25;
+    --leading-relaxed: 1.625;
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+    --radius-xl: 0.75rem;
+    --radius-2xl: 1rem;
+    --radius-3xl: 1.5rem;
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    --blur-sm: 8px;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --default-font-family: var(--font-sans);
+    --default-mono-font-family: var(--font-mono);
+  }
+}
+@layer base {
+  *, ::after, ::before, ::backdrop, ::file-selector-button {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0 solid;
+  }
+  html, :host {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--default-font-feature-settings, normal);
+    font-variation-settings: var(--default-font-variation-settings, normal);
+    -webkit-tap-highlight-color: transparent;
+  }
+  hr {
+    height: 0;
+    color: inherit;
+    border-top-width: 1px;
+  }
+  abbr:where([title]) {
+    -webkit-text-decoration: underline dotted;
+    text-decoration: underline dotted;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+  a {
+    color: inherit;
+    -webkit-text-decoration: inherit;
+    text-decoration: inherit;
+  }
+  b, strong {
+    font-weight: bolder;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-size: 1em;
+  }
+  small {
+    font-size: 80%;
+  }
+  sub, sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+  table {
+    text-indent: 0;
+    border-color: inherit;
+    border-collapse: collapse;
+  }
+  :-moz-focusring {
+    outline: auto;
+  }
+  progress {
+    vertical-align: baseline;
+  }
+  summary {
+    display: list-item;
+  }
+  ol, ul, menu {
+    list-style: none;
+  }
+  img, svg, video, canvas, audio, iframe, embed, object {
+    display: block;
+    vertical-align: middle;
+  }
+  img, video {
+    max-width: 100%;
+    height: auto;
+  }
+  button, input, select, optgroup, textarea, ::file-selector-button {
+    font: inherit;
+    font-feature-settings: inherit;
+    font-variation-settings: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+    border-radius: 0;
+    background-color: transparent;
+    opacity: 1;
+  }
+  :where(select:is([multiple], [size])) optgroup {
+    font-weight: bolder;
+  }
+  :where(select:is([multiple], [size])) optgroup option {
+    padding-inline-start: 20px;
+  }
+  ::file-selector-button {
+    margin-inline-end: 4px;
+  }
+  ::placeholder {
+    opacity: 1;
+  }
+  @supports (not (-webkit-appearance: -apple-pay-button))  or (contain-intrinsic-size: 1px) {
+    ::placeholder {
+      color: currentcolor;
+      @supports (color: color-mix(in lab, red, red)) {
+        color: color-mix(in oklab, currentcolor 50%, transparent);
+      }
+    }
+  }
+  textarea {
+    resize: vertical;
+  }
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+  ::-webkit-date-and-time-value {
+    min-height: 1lh;
+    text-align: inherit;
+  }
+  ::-webkit-datetime-edit {
+    display: inline-flex;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+  }
+  ::-webkit-datetime-edit, ::-webkit-datetime-edit-year-field, ::-webkit-datetime-edit-month-field, ::-webkit-datetime-edit-day-field, ::-webkit-datetime-edit-hour-field, ::-webkit-datetime-edit-minute-field, ::-webkit-datetime-edit-second-field, ::-webkit-datetime-edit-millisecond-field, ::-webkit-datetime-edit-meridiem-field {
+    padding-block: 0;
+  }
+  :-moz-ui-invalid {
+    box-shadow: none;
+  }
+  button, input:where([type="button"], [type="reset"], [type="submit"]), ::file-selector-button {
+    appearance: button;
+  }
+  ::-webkit-inner-spin-button, ::-webkit-outer-spin-button {
+    height: auto;
+  }
+  [hidden]:where(:not([hidden="until-found"])) {
+    display: none !important;
+  }
+}
+@layer utilities {
+  .fixed {
+    position: fixed;
+  }
+  .relative {
+    position: relative;
+  }
+  .sticky {
+    position: sticky;
+  }
+  .inset-0 {
+    inset: calc(var(--spacing) * 0);
+  }
+  .top-0 {
+    top: calc(var(--spacing) * 0);
+  }
+  .right-5 {
+    right: calc(var(--spacing) * 5);
+  }
+  .bottom-5 {
+    bottom: calc(var(--spacing) * 5);
+  }
+  .z-30 {
+    z-index: 30;
+  }
+  .z-40 {
+    z-index: 40;
+  }
+  .z-50 {
+    z-index: 50;
+  }
+  .col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+  .col-span-full {
+    grid-column: 1 / -1;
+  }
+  .container {
+    width: 100%;
+    @media (width >= 40rem) {
+      max-width: 40rem;
+    }
+    @media (width >= 48rem) {
+      max-width: 48rem;
+    }
+    @media (width >= 64rem) {
+      max-width: 64rem;
+    }
+    @media (width >= 80rem) {
+      max-width: 80rem;
+    }
+    @media (width >= 96rem) {
+      max-width: 96rem;
+    }
+  }
+  .mx-auto {
+    margin-inline: auto;
+  }
+  .mt-0\.5 {
+    margin-top: calc(var(--spacing) * 0.5);
+  }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
+  .mt-2 {
+    margin-top: calc(var(--spacing) * 2);
+  }
+  .mt-4 {
+    margin-top: calc(var(--spacing) * 4);
+  }
+  .mt-5 {
+    margin-top: calc(var(--spacing) * 5);
+  }
+  .mb-1 {
+    margin-bottom: calc(var(--spacing) * 1);
+  }
+  .mb-2 {
+    margin-bottom: calc(var(--spacing) * 2);
+  }
+  .mb-2\.5 {
+    margin-bottom: calc(var(--spacing) * 2.5);
+  }
+  .mb-3 {
+    margin-bottom: calc(var(--spacing) * 3);
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+  .mb-5 {
+    margin-bottom: calc(var(--spacing) * 5);
+  }
+  .ml-1 {
+    margin-left: calc(var(--spacing) * 1);
+  }
+  .ml-1\.5 {
+    margin-left: calc(var(--spacing) * 1.5);
+  }
+  .ml-2 {
+    margin-left: calc(var(--spacing) * 2);
+  }
+  .block {
+    display: block;
+  }
+  .flex {
+    display: flex;
+  }
+  .grid {
+    display: grid;
+  }
+  .hidden {
+    display: none;
+  }
+  .inline-block {
+    display: inline-block;
+  }
+  .inline-flex {
+    display: inline-flex;
+  }
+  .table {
+    display: table;
+  }
+  .h-2 {
+    height: calc(var(--spacing) * 2);
+  }
+  .h-2\.5 {
+    height: calc(var(--spacing) * 2.5);
+  }
+  .h-3 {
+    height: calc(var(--spacing) * 3);
+  }
+  .h-3\.5 {
+    height: calc(var(--spacing) * 3.5);
+  }
+  .h-4 {
+    height: calc(var(--spacing) * 4);
+  }
+  .h-5 {
+    height: calc(var(--spacing) * 5);
+  }
+  .h-7 {
+    height: calc(var(--spacing) * 7);
+  }
+  .h-11 {
+    height: calc(var(--spacing) * 11);
+  }
+  .h-px {
+    height: 1px;
+  }
+  .max-h-\[92vh\] {
+    max-height: 92vh;
+  }
+  .max-h-\[220px\] {
+    max-height: 220px;
+  }
+  .max-h-\[420px\] {
+    max-height: 420px;
+  }
+  .max-h-\[520px\] {
+    max-height: 520px;
+  }
+  .min-h-screen {
+    min-height: 100vh;
+  }
+  .w-2 {
+    width: calc(var(--spacing) * 2);
+  }
+  .w-2\.5 {
+    width: calc(var(--spacing) * 2.5);
+  }
+  .w-3 {
+    width: calc(var(--spacing) * 3);
+  }
+  .w-3\.5 {
+    width: calc(var(--spacing) * 3.5);
+  }
+  .w-4 {
+    width: calc(var(--spacing) * 4);
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
+  }
+  .w-7 {
+    width: calc(var(--spacing) * 7);
+  }
+  .w-11 {
+    width: calc(var(--spacing) * 11);
+  }
+  .w-64 {
+    width: calc(var(--spacing) * 64);
+  }
+  .w-full {
+    width: 100%;
+  }
+  .max-w-6xl {
+    max-width: var(--container-6xl);
+  }
+  .max-w-\[1440px\] {
+    max-width: 1440px;
+  }
+  .max-w-lg {
+    max-width: var(--container-lg);
+  }
+  .max-w-md {
+    max-width: var(--container-md);
+  }
+  .max-w-sm {
+    max-width: var(--container-sm);
+  }
+  .max-w-xl {
+    max-width: var(--container-xl);
+  }
+  .min-w-0 {
+    min-width: calc(var(--spacing) * 0);
+  }
+  .flex-1 {
+    flex: 1;
+  }
+  .shrink-0 {
+    flex-shrink: 0;
+  }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .transform {
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .animate-pulse {
+    animation: var(--animate-pulse);
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .flex-col {
+    flex-direction: column;
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .items-end {
+    align-items: flex-end;
+  }
+  .items-start {
+    align-items: flex-start;
+  }
+  .items-stretch {
+    align-items: stretch;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .justify-end {
+    justify-content: flex-end;
+  }
+  .gap-0\.5 {
+    gap: calc(var(--spacing) * 0.5);
+  }
+  .gap-1 {
+    gap: calc(var(--spacing) * 1);
+  }
+  .gap-1\.5 {
+    gap: calc(var(--spacing) * 1.5);
+  }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
+  .gap-2\.5 {
+    gap: calc(var(--spacing) * 2.5);
+  }
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+  .gap-3\.5 {
+    gap: calc(var(--spacing) * 3.5);
+  }
+  .gap-4 {
+    gap: calc(var(--spacing) * 4);
+  }
+  .gap-6 {
+    gap: calc(var(--spacing) * 6);
+  }
+  .space-y-0\.5 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 0.5) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 0.5) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-1 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 1) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-1\.5 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 1.5) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 1.5) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-2 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-2\.5 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 2.5) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 2.5) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-3 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-3\.5 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 3.5) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 3.5) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-4 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-5 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 5) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 5) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .space-y-6 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
+    }
+  }
+  .divide-y {
+    :where(& > :not(:last-child)) {
+      --tw-divide-y-reverse: 0;
+      border-bottom-style: var(--tw-border-style);
+      border-top-style: var(--tw-border-style);
+      border-top-width: calc(1px * var(--tw-divide-y-reverse));
+      border-bottom-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+    }
+  }
+  .divide-\[\#EFE8DD\] {
+    :where(& > :not(:last-child)) {
+      border-color: #EFE8DD;
+    }
+  }
+  .overflow-auto {
+    overflow: auto;
+  }
+  .overflow-hidden {
+    overflow: hidden;
+  }
+  .overflow-y-auto {
+    overflow-y: auto;
+  }
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
+  }
+  .rounded-3xl {
+    border-radius: var(--radius-3xl);
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
+  }
+  .border-2 {
+    border-style: var(--tw-border-style);
+    border-width: 2px;
+  }
+  .border-4 {
+    border-style: var(--tw-border-style);
+    border-width: 4px;
+  }
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+  .border-t-2 {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 2px;
+  }
+  .border-b {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 1px;
+  }
+  .border-b-2 {
+    border-bottom-style: var(--tw-border-style);
+    border-bottom-width: 2px;
+  }
+  .border-l {
+    border-left-style: var(--tw-border-style);
+    border-left-width: 1px;
+  }
+  .border-dashed {
+    --tw-border-style: dashed;
+    border-style: dashed;
+  }
+  .border-\[\#6E8B74\] {
+    border-color: #6E8B74;
+  }
+  .border-\[\#6E6359\] {
+    border-color: #6E6359;
+  }
+  .border-\[\#B4CCB8\] {
+    border-color: #B4CCB8;
+  }
+  .border-\[\#C6D8C9\] {
+    border-color: #C6D8C9;
+  }
+  .border-\[\#C86D65\] {
+    border-color: #C86D65;
+  }
+  .border-\[\#CFC5B6\] {
+    border-color: #CFC5B6;
+  }
+  .border-\[\#D6C7B4\] {
+    border-color: #D6C7B4;
+  }
+  .border-\[\#D8C6B0\] {
+    border-color: #D8C6B0;
+  }
+  .border-\[\#D9B89C\] {
+    border-color: #D9B89C;
+  }
+  .border-\[\#D99B38\] {
+    border-color: #D99B38;
+  }
+  .border-\[\#DDD6CD\] {
+    border-color: #DDD6CD;
+  }
+  .border-\[\#DFC397\] {
+    border-color: #DFC397;
+  }
+  .border-\[\#DFD3C3\] {
+    border-color: #DFD3C3;
+  }
+  .border-\[\#DFD5C7\] {
+    border-color: #DFD5C7;
+  }
+  .border-\[\#E0B973\] {
+    border-color: #E0B973;
+  }
+  .border-\[\#E2D6C5\] {
+    border-color: #E2D6C5;
+  }
+  .border-\[\#E2D7C7\] {
+    border-color: #E2D7C7;
+  }
+  .border-\[\#E4C99B\] {
+    border-color: #E4C99B;
+  }
+  .border-\[\#E5C6BE\] {
+    border-color: #E5C6BE;
+  }
+  .border-\[\#E5D9C8\] {
+    border-color: #E5D9C8;
+  }
+  .border-\[\#E5DBD0\] {
+    border-color: #E5DBD0;
+  }
+  .border-\[\#E6C794\] {
+    border-color: #E6C794;
+  }
+  .border-\[\#E6D5C8\] {
+    border-color: #E6D5C8;
+  }
+  .border-\[\#E6DDD0\] {
+    border-color: #E6DDD0;
+  }
+  .border-\[\#E8C99B\] {
+    border-color: #E8C99B;
+  }
+  .border-\[\#E8CFC9\] {
+    border-color: #E8CFC9;
+  }
+  .border-\[\#E8DFD1\] {
+    border-color: #E8DFD1;
+  }
+  .border-\[\#E09F3E\] {
+    border-color: #E09F3E;
+  }
+  .border-\[\#EADBC8\] {
+    border-color: #EADBC8;
+  }
+  .border-\[\#EAE0D2\] {
+    border-color: #EAE0D2;
+  }
+  .border-\[\#EBD5B3\] {
+    border-color: #EBD5B3;
+  }
+  .border-\[\#EDE4D8\] {
+    border-color: #EDE4D8;
+  }
+  .border-\[\#EFE8DD\] {
+    border-color: #EFE8DD;
+  }
+  .border-\[\#F2DCD9\] {
+    border-color: #F2DCD9;
+  }
+  .bg-\[\#4A423B\] {
+    background-color: #4A423B;
+  }
+  .bg-\[\#4A423B\]\/45 {
+    background-color: color-mix(in oklab, #4A423B 45%, transparent);
+  }
+  .bg-\[\#4A423B\]\/55 {
+    background-color: color-mix(in oklab, #4A423B 55%, transparent);
+  }
+  .bg-\[\#4E6B54\] {
+    background-color: #4E6B54;
+  }
+  .bg-\[\#6E8B74\] {
+    background-color: #6E8B74;
+  }
+  .bg-\[\#8C8276\] {
+    background-color: #8C8276;
+  }
+  .bg-\[\#968E84\] {
+    background-color: #968E84;
+  }
+  .bg-\[\#628368\] {
+    background-color: #628368;
+  }
+  .bg-\[\#BDB5AB\] {
+    background-color: #BDB5AB;
+  }
+  .bg-\[\#C86D65\] {
+    background-color: #C86D65;
+  }
+  .bg-\[\#C86D65\]\/55 {
+    background-color: color-mix(in oklab, #C86D65 55%, transparent);
+  }
+  .bg-\[\#C86D65\]\/60 {
+    background-color: color-mix(in oklab, #C86D65 60%, transparent);
+  }
+  .bg-\[\#C86D65\]\/65 {
+    background-color: color-mix(in oklab, #C86D65 65%, transparent);
+  }
+  .bg-\[\#C87D75\] {
+    background-color: #C87D75;
+  }
+  .bg-\[\#C6924E\] {
+    background-color: #C6924E;
+  }
+  .bg-\[\#D9A05B\] {
+    background-color: #D9A05B;
+  }
+  .bg-\[\#DC2626\] {
+    background-color: #DC2626;
+  }
+  .bg-\[\#DFD8CE\] {
+    background-color: #DFD8CE;
+  }
+  .bg-\[\#E2D9CC\] {
+    background-color: #E2D9CC;
+  }
+  .bg-\[\#E5DFD5\] {
+    background-color: #E5DFD5;
+  }
+  .bg-\[\#E8DFD1\] {
+    background-color: #E8DFD1;
+  }
+  .bg-\[\#E09F3E\] {
+    background-color: #E09F3E;
+  }
+  .bg-\[\#E9F0EA\] {
+    background-color: #E9F0EA;
+  }
+  .bg-\[\#E9F0EA\]\/80 {
+    background-color: color-mix(in oklab, #E9F0EA 80%, transparent);
+  }
+  .bg-\[\#EAE0D2\] {
+    background-color: #EAE0D2;
+  }
+  .bg-\[\#EEF4EF\] {
+    background-color: #EEF4EF;
+  }
+  .bg-\[\#EFE8DD\] {
+    background-color: #EFE8DD;
+  }
+  .bg-\[\#F3EDE4\] {
+    background-color: #F3EDE4;
+  }
+  .bg-\[\#F3F0EC\] {
+    background-color: #F3F0EC;
+  }
+  .bg-\[\#F5EFE6\] {
+    background-color: #F5EFE6;
+  }
+  .bg-\[\#F6EFE6\] {
+    background-color: #F6EFE6;
+  }
+  .bg-\[\#F7F2EA\] {
+    background-color: #F7F2EA;
+  }
+  .bg-\[\#F7F3EC\] {
+    background-color: #F7F3EC;
+  }
+  .bg-\[\#F9EFEA\] {
+    background-color: #F9EFEA;
+  }
+  .bg-\[\#F9F1EE\] {
+    background-color: #F9F1EE;
+  }
+  .bg-\[\#F59E0B\] {
+    background-color: #F59E0B;
+  }
+  .bg-\[\#FAF7F2\] {
+    background-color: #FAF7F2;
+  }
+  .bg-\[\#FBF3E4\] {
+    background-color: #FBF3E4;
+  }
+  .bg-\[\#FBF5EA\] {
+    background-color: #FBF5EA;
+  }
+  .bg-\[\#FFF3DF\] {
+    background-color: #FFF3DF;
+  }
+  .bg-\[\#FFF6E5\] {
+    background-color: #FFF6E5;
+  }
+  .bg-\[\#FFF7E6\] {
+    background-color: #FFF7E6;
+  }
+  .bg-\[\#FFF7E8\] {
+    background-color: #FFF7E8;
+  }
+  .bg-\[\#FFFDF9\] {
+    background-color: #FFFDF9;
+  }
+  .bg-\[\#FFFDF9\]\/85 {
+    background-color: color-mix(in oklab, #FFFDF9 85%, transparent);
+  }
+  .bg-\[\#FFFDF9\]\/95 {
+    background-color: color-mix(in oklab, #FFFDF9 95%, transparent);
+  }
+  .bg-transparent {
+    background-color: transparent;
+  }
+  .bg-gradient-to-b {
+    --tw-gradient-position: to bottom in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .bg-gradient-to-br {
+    --tw-gradient-position: to bottom right in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .bg-gradient-to-r {
+    --tw-gradient-position: to right in oklab;
+    background-image: linear-gradient(var(--tw-gradient-stops));
+  }
+  .from-\[\#C87D75\] {
+    --tw-gradient-from: #C87D75;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .from-\[\#D99B38\] {
+    --tw-gradient-from: #D99B38;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .from-\[\#EFE6D8\] {
+    --tw-gradient-from: #EFE6D8;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .from-\[\#FBF5EA\] {
+    --tw-gradient-from: #FBF5EA;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .from-\[\#FFFDF9\] {
+    --tw-gradient-from: #FFFDF9;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .via-\[\#E5D6C3\] {
+    --tw-gradient-via: #E5D6C3;
+    --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
+    --tw-gradient-stops: var(--tw-gradient-via-stops);
+  }
+  .to-\[\#B35D54\] {
+    --tw-gradient-to: #B35D54;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .to-\[\#C87D75\] {
+    --tw-gradient-to: #C87D75;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .to-\[\#EFE6D8\] {
+    --tw-gradient-to: #EFE6D8;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .to-\[\#F7EDE0\] {
+    --tw-gradient-to: #F7EDE0;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .to-\[\#FBF4E8\] {
+    --tw-gradient-to: #FBF4E8;
+    --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
+  }
+  .p-2\.5 {
+    padding: calc(var(--spacing) * 2.5);
+  }
+  .p-3 {
+    padding: calc(var(--spacing) * 3);
+  }
+  .p-3\.5 {
+    padding: calc(var(--spacing) * 3.5);
+  }
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+  .p-5 {
+    padding: calc(var(--spacing) * 5);
+  }
+  .p-6 {
+    padding: calc(var(--spacing) * 6);
+  }
+  .p-7 {
+    padding: calc(var(--spacing) * 7);
+  }
+  .p-10 {
+    padding: calc(var(--spacing) * 10);
+  }
+  .px-0\.5 {
+    padding-inline: calc(var(--spacing) * 0.5);
+  }
+  .px-1 {
+    padding-inline: calc(var(--spacing) * 1);
+  }
+  .px-1\.5 {
+    padding-inline: calc(var(--spacing) * 1.5);
+  }
+  .px-2 {
+    padding-inline: calc(var(--spacing) * 2);
+  }
+  .px-2\.5 {
+    padding-inline: calc(var(--spacing) * 2.5);
+  }
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
+  }
+  .px-3\.5 {
+    padding-inline: calc(var(--spacing) * 3.5);
+  }
+  .px-4 {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .px-5 {
+    padding-inline: calc(var(--spacing) * 5);
+  }
+  .px-6 {
+    padding-inline: calc(var(--spacing) * 6);
+  }
+  .px-8 {
+    padding-inline: calc(var(--spacing) * 8);
+  }
+  .py-0\.5 {
+    padding-block: calc(var(--spacing) * 0.5);
+  }
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
+  }
+  .py-1\.5 {
+    padding-block: calc(var(--spacing) * 1.5);
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
+  }
+  .py-2\.5 {
+    padding-block: calc(var(--spacing) * 2.5);
+  }
+  .py-3 {
+    padding-block: calc(var(--spacing) * 3);
+  }
+  .py-3\.5 {
+    padding-block: calc(var(--spacing) * 3.5);
+  }
+  .py-4 {
+    padding-block: calc(var(--spacing) * 4);
+  }
+  .py-5 {
+    padding-block: calc(var(--spacing) * 5);
+  }
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+  }
+  .py-8 {
+    padding-block: calc(var(--spacing) * 8);
+  }
+  .py-10 {
+    padding-block: calc(var(--spacing) * 10);
+  }
+  .pt-0\.5 {
+    padding-top: calc(var(--spacing) * 0.5);
+  }
+  .pt-1 {
+    padding-top: calc(var(--spacing) * 1);
+  }
+  .pt-2 {
+    padding-top: calc(var(--spacing) * 2);
+  }
+  .pt-3 {
+    padding-top: calc(var(--spacing) * 3);
+  }
+  .pt-4 {
+    padding-top: calc(var(--spacing) * 4);
+  }
+  .pt-5 {
+    padding-top: calc(var(--spacing) * 5);
+  }
+  .pr-1 {
+    padding-right: calc(var(--spacing) * 1);
+  }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
+  }
+  .pb-3 {
+    padding-bottom: calc(var(--spacing) * 3);
+  }
+  .pb-3\.5 {
+    padding-bottom: calc(var(--spacing) * 3.5);
+  }
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
+  }
+  .text-center {
+    text-align: center;
+  }
+  .text-left {
+    text-align: left;
+  }
+  .text-right {
+    text-align: right;
+  }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  .text-2xl {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
+  .text-3xl {
+    font-size: var(--text-3xl);
+    line-height: var(--tw-leading, var(--text-3xl--line-height));
+  }
+  .text-4xl {
+    font-size: var(--text-4xl);
+    line-height: var(--tw-leading, var(--text-4xl--line-height));
+  }
+  .text-base {
+    font-size: var(--text-base);
+    line-height: var(--tw-leading, var(--text-base--line-height));
+  }
+  .text-lg {
+    font-size: var(--text-lg);
+    line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-xl {
+    font-size: var(--text-xl);
+    line-height: var(--tw-leading, var(--text-xl--line-height));
+  }
+  .text-xs {
+    font-size: var(--text-xs);
+    line-height: var(--tw-leading, var(--text-xs--line-height));
+  }
+  .text-\[10px\] {
+    font-size: 10px;
+  }
+  .text-\[11px\] {
+    font-size: 11px;
+  }
+  .leading-relaxed {
+    --tw-leading: var(--leading-relaxed);
+    line-height: var(--leading-relaxed);
+  }
+  .leading-tight {
+    --tw-leading: var(--leading-tight);
+    line-height: var(--leading-tight);
+  }
+  .font-bold {
+    --tw-font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-bold);
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
+  .tracking-wide {
+    --tw-tracking: var(--tracking-wide);
+    letter-spacing: var(--tracking-wide);
+  }
+  .tracking-wider {
+    --tw-tracking: var(--tracking-wider);
+    letter-spacing: var(--tracking-wider);
+  }
+  .tracking-widest {
+    --tw-tracking: var(--tracking-widest);
+    letter-spacing: var(--tracking-widest);
+  }
+  .text-\[\#4A423B\] {
+    color: #4A423B;
+  }
+  .text-\[\#4A6850\] {
+    color: #4A6850;
+  }
+  .text-\[\#4E6B54\] {
+    color: #4E6B54;
+  }
+  .text-\[\#5C4938\] {
+    color: #5C4938;
+  }
+  .text-\[\#5C5349\] {
+    color: #5C5349;
+  }
+  .text-\[\#6E8B74\] {
+    color: #6E8B74;
+  }
+  .text-\[\#6E665E\] {
+    color: #6E665E;
+  }
+  .text-\[\#7A7269\] {
+    color: #7A7269;
+  }
+  .text-\[\#8A5A19\] {
+    color: #8A5A19;
+  }
+  .text-\[\#8A6736\] {
+    color: #8A6736;
+  }
+  .text-\[\#8C3B34\] {
+    color: #8C3B34;
+  }
+  .text-\[\#8C7A68\] {
+    color: #8C7A68;
+  }
+  .text-\[\#8C534C\] {
+    color: #8C534C;
+  }
+  .text-\[\#8C8276\] {
+    color: #8C8276;
+  }
+  .text-\[\#9A9084\] {
+    color: #9A9084;
+  }
+  .text-\[\#9B6318\] {
+    color: #9B6318;
+  }
+  .text-\[\#9B7744\] {
+    color: #9B7744;
+  }
+  .text-\[\#9E706A\] {
+    color: #9E706A;
+  }
+  .text-\[\#964E47\] {
+    color: #964E47;
+  }
+  .text-\[\#38332E\] {
+    color: #38332E;
+  }
+  .text-\[\#382508\] {
+    color: #382508;
+  }
+  .text-\[\#696056\] {
+    color: #696056;
+  }
+  .text-\[\#787067\] {
+    color: #787067;
+  }
+  .text-\[\#A85D55\] {
+    color: #A85D55;
+  }
+  .text-\[\#B87D2E\] {
+    color: #B87D2E;
+  }
+  .text-\[\#B2564E\] {
+    color: #B2564E;
+  }
+  .text-\[\#C86D65\] {
+    color: #C86D65;
+  }
+  .text-\[\#C87D75\] {
+    color: #C87D75;
+  }
+  .text-\[\#FFFDF9\] {
+    color: #FFFDF9;
+  }
+  .uppercase {
+    text-transform: uppercase;
+  }
+  .underline {
+    text-decoration-line: underline;
+  }
+  .placeholder-\[\#ACA397\] {
+    &::placeholder {
+      color: #ACA397;
+    }
+  }
+  .accent-\[\#C87D75\] {
+    accent-color: #C87D75;
+  }
+  .opacity-50 {
+    opacity: 50%;
+  }
+  .opacity-60 {
+    opacity: 60%;
+  }
+  .opacity-80 {
+    opacity: 80%;
+  }
+  .opacity-95 {
+    opacity: 95%;
+  }
+  .shadow-2xl {
+    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-lg {
+    --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-md {
+    --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-sm {
+    --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-xl {
+    --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .ring-1 {
+    --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .ring-\[\#E0B973\] {
+    --tw-ring-color: #E0B973;
+  }
+  .backdrop-blur {
+    --tw-backdrop-blur: blur(8px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .backdrop-blur-sm {
+    --tw-backdrop-blur: blur(var(--blur-sm));
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+  .transition {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, visibility, content-visibility, overlay, pointer-events;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+  .ease-in-out {
+    --tw-ease: var(--ease-in-out);
+    transition-timing-function: var(--ease-in-out);
+  }
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  .focus-within\:border-\[\#C87D75\] {
+    &:focus-within {
+      border-color: #C87D75;
+    }
+  }
+  .focus-within\:bg-\[\#FFFDF9\] {
+    &:focus-within {
+      background-color: #FFFDF9;
+    }
+  }
+  .hover\:border-\[\#6E8B74\] {
+    &:hover {
+      @media (hover: hover) {
+        border-color: #6E8B74;
+      }
+    }
+  }
+  .hover\:border-\[\#C87D75\] {
+    &:hover {
+      @media (hover: hover) {
+        border-color: #C87D75;
+      }
+    }
+  }
+  .hover\:border-\[\#D99B38\] {
+    &:hover {
+      @media (hover: hover) {
+        border-color: #D99B38;
+      }
+    }
+  }
+  .hover\:bg-\[\#5A7560\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #5A7560;
+      }
+    }
+  }
+  .hover\:bg-\[\#B2564E\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #B2564E;
+      }
+    }
+  }
+  .hover\:bg-\[\#B36860\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #B36860;
+      }
+    }
+  }
+  .hover\:bg-\[\#C28A46\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #C28A46;
+      }
+    }
+  }
+  .hover\:bg-\[\#DCD0BE\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #DCD0BE;
+      }
+    }
+  }
+  .hover\:bg-\[\#DCE7DE\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #DCE7DE;
+      }
+    }
+  }
+  .hover\:bg-\[\#E6DDD0\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #E6DDD0;
+      }
+    }
+  }
+  .hover\:bg-\[\#EAE0D2\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #EAE0D2;
+      }
+    }
+  }
+  .hover\:bg-\[\#EBE1D3\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #EBE1D3;
+      }
+    }
+  }
+  .hover\:bg-\[\#F2DDD7\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #F2DDD7;
+      }
+    }
+  }
+  .hover\:bg-\[\#F4E6E1\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #F4E6E1;
+      }
+    }
+  }
+  .hover\:bg-\[\#FAF7F2\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #FAF7F2;
+      }
+    }
+  }
+  .hover\:bg-\[\#FBE6C4\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #FBE6C4;
+      }
+    }
+  }
+  .hover\:from-\[\#B86C64\] {
+    &:hover {
+      @media (hover: hover) {
+        --tw-gradient-from: #B86C64;
+        --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+      }
+    }
+  }
+  .hover\:to-\[\#9F4C44\] {
+    &:hover {
+      @media (hover: hover) {
+        --tw-gradient-to: #9F4C44;
+        --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
+      }
+    }
+  }
+  .hover\:text-\[\#38332E\] {
+    &:hover {
+      @media (hover: hover) {
+        color: #38332E;
+      }
+    }
+  }
+  .hover\:underline {
+    &:hover {
+      @media (hover: hover) {
+        text-decoration-line: underline;
+      }
+    }
+  }
+  .hover\:opacity-95 {
+    &:hover {
+      @media (hover: hover) {
+        opacity: 95%;
+      }
+    }
+  }
+  .focus\:border-\[\#C87D75\] {
+    &:focus {
+      border-color: #C87D75;
+    }
+  }
+  .focus\:bg-\[\#FFFDF9\] {
+    &:focus {
+      background-color: #FFFDF9;
+    }
+  }
+  .focus\:outline-none {
+    &:focus {
+      --tw-outline-style: none;
+      outline-style: none;
+    }
+  }
+  .sm\:w-80 {
+    @media (width >= 40rem) {
+      width: calc(var(--spacing) * 80);
+    }
+  }
+  .sm\:grid-cols-2 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  .sm\:grid-cols-4 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .sm\:grid-cols-5 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+  .sm\:flex-row {
+    @media (width >= 40rem) {
+      flex-direction: row;
+    }
+  }
+  .sm\:items-center {
+    @media (width >= 40rem) {
+      align-items: center;
+    }
+  }
+  .sm\:p-5 {
+    @media (width >= 40rem) {
+      padding: calc(var(--spacing) * 5);
+    }
+  }
+  .sm\:p-6 {
+    @media (width >= 40rem) {
+      padding: calc(var(--spacing) * 6);
+    }
+  }
+  .sm\:px-6 {
+    @media (width >= 40rem) {
+      padding-inline: calc(var(--spacing) * 6);
+    }
+  }
+  .sm\:text-3xl {
+    @media (width >= 40rem) {
+      font-size: var(--text-3xl);
+      line-height: var(--tw-leading, var(--text-3xl--line-height));
+    }
+  }
+  .sm\:text-4xl {
+    @media (width >= 40rem) {
+      font-size: var(--text-4xl);
+      line-height: var(--tw-leading, var(--text-4xl--line-height));
+    }
+  }
+  .sm\:text-5xl {
+    @media (width >= 40rem) {
+      font-size: var(--text-5xl);
+      line-height: var(--tw-leading, var(--text-5xl--line-height));
+    }
+  }
+  .md\:col-span-4 {
+    @media (width >= 48rem) {
+      grid-column: span 4 / span 4;
+    }
+  }
+  .md\:grid-cols-7 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+  }
+  .md\:grid-cols-12 {
+    @media (width >= 48rem) {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+  .lg\:sticky {
+    @media (width >= 64rem) {
+      position: sticky;
+    }
+  }
+  .lg\:top-32 {
+    @media (width >= 64rem) {
+      top: calc(var(--spacing) * 32);
+    }
+  }
+  .lg\:col-span-4 {
+    @media (width >= 64rem) {
+      grid-column: span 4 / span 4;
+    }
+  }
+  .lg\:col-span-8 {
+    @media (width >= 64rem) {
+      grid-column: span 8 / span 8;
+    }
+  }
+  .lg\:col-span-12 {
+    @media (width >= 64rem) {
+      grid-column: span 12 / span 12;
+    }
+  }
+  .lg\:grid-cols-3 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .lg\:grid-cols-12 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+}
+@property --tw-rotate-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-rotate-z {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-x {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-skew-y {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-space-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-divide-y-reverse {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0;
+}
+@property --tw-border-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+@property --tw-gradient-position {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-via {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-to {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #0000;
+}
+@property --tw-gradient-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-via-stops {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-gradient-from-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+@property --tw-gradient-via-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+@property --tw-gradient-to-position {
+  syntax: "<length-percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-inset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-shadow-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+@property --tw-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-inset-ring-color {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-inset-ring-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-ring-inset {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ring-offset-width {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
+@property --tw-ring-offset-color {
+  syntax: "*";
+  inherits: false;
+  initial-value: #fff;
+}
+@property --tw-ring-offset-shadow {
+  syntax: "*";
+  inherits: false;
+  initial-value: 0 0 #0000;
+}
+@property --tw-backdrop-blur {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-brightness {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-contrast {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-grayscale {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-hue-rotate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-invert {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-opacity {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-saturate {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-backdrop-sepia {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-ease {
+  syntax: "*";
+  inherits: false;
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+@layer properties {
+  @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
+    *, ::before, ::after, ::backdrop {
+      --tw-rotate-x: initial;
+      --tw-rotate-y: initial;
+      --tw-rotate-z: initial;
+      --tw-skew-x: initial;
+      --tw-skew-y: initial;
+      --tw-space-y-reverse: 0;
+      --tw-divide-y-reverse: 0;
+      --tw-border-style: solid;
+      --tw-gradient-position: initial;
+      --tw-gradient-from: #0000;
+      --tw-gradient-via: #0000;
+      --tw-gradient-to: #0000;
+      --tw-gradient-stops: initial;
+      --tw-gradient-via-stops: initial;
+      --tw-gradient-from-position: 0%;
+      --tw-gradient-via-position: 50%;
+      --tw-gradient-to-position: 100%;
+      --tw-leading: initial;
+      --tw-font-weight: initial;
+      --tw-tracking: initial;
+      --tw-shadow: 0 0 #0000;
+      --tw-shadow-color: initial;
+      --tw-shadow-alpha: 100%;
+      --tw-inset-shadow: 0 0 #0000;
+      --tw-inset-shadow-color: initial;
+      --tw-inset-shadow-alpha: 100%;
+      --tw-ring-color: initial;
+      --tw-ring-shadow: 0 0 #0000;
+      --tw-inset-ring-color: initial;
+      --tw-inset-ring-shadow: 0 0 #0000;
+      --tw-ring-inset: initial;
+      --tw-ring-offset-width: 0px;
+      --tw-ring-offset-color: #fff;
+      --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-backdrop-blur: initial;
+      --tw-backdrop-brightness: initial;
+      --tw-backdrop-contrast: initial;
+      --tw-backdrop-grayscale: initial;
+      --tw-backdrop-hue-rotate: initial;
+      --tw-backdrop-invert: initial;
+      --tw-backdrop-opacity: initial;
+      --tw-backdrop-saturate: initial;
+      --tw-backdrop-sepia: initial;
+      --tw-ease: initial;
+    }
+  }
+}
+</style>
+  
   <style>
     :root {
       --bg-cream: #FAF7F2;
@@ -188,6 +2049,62 @@
       opacity: 0.85;
     }
 
+    /* 當天報到簽到：已報到亮燈效果 */
+    @keyframes checkInPulse {
+      0%, 100% {
+        box-shadow: 0 0 0 2px #F6C85F, 0 0 12px rgba(246, 200, 95, 0.85);
+      }
+      50% {
+        box-shadow: 0 0 0 4px #FFE08A, 0 0 18px rgba(246, 200, 95, 1);
+      }
+    }
+
+    .dot-checked-in {
+      background: radial-gradient(circle, #FFE58F 10%, #F59E0B 85%) !important;
+      border: 1.5px solid #FFFDF9;
+      animation: checkInPulse 2.2s infinite ease-in-out;
+      transform: scale(1.22);
+      z-index: 2;
+    }
+
+    .seat-checked-in {
+      background: radial-gradient(circle at 35% 35%, #FCD34D, #D97706 90%) !important;
+      color: #382508 !important;
+      border: 2.5px solid #FFFDF9 !important;
+      animation: checkInPulse 2s infinite ease-in-out;
+    }
+
+    /* 線上抽獎：跑燈掃描與最終得獎高亮 */
+    .lottery-dot-eligible {
+      background-color: #7A9A80;
+      border: 1px solid #F7F4EE;
+      transition: transform 0.08s ease, background-color 0.08s ease;
+    }
+
+    .lottery-dot-sweep {
+      background: radial-gradient(circle, #FFFBEB 15%, #F59E0B 85%) !important;
+      transform: scale(1.85) !important;
+      box-shadow: 0 0 0 2px #FDE68A, 0 0 16px #F59E0B !important;
+      z-index: 20 !important;
+    }
+
+    @keyframes winnerBeacon {
+      0%, 100% {
+        transform: scale(2.05);
+        box-shadow: 0 0 0 3px #FFFDF9, 0 0 0 6px #D97706, 0 0 24px #F59E0B;
+      }
+      50% {
+        transform: scale(2.35);
+        box-shadow: 0 0 0 4px #FFFDF9, 0 0 0 8px #C86D65, 0 0 34px #FBBF24;
+      }
+    }
+
+    .lottery-dot-winner {
+      background: radial-gradient(circle, #FFFBEB 10%, #DC2626 90%) !important;
+      animation: winnerBeacon 0.9s infinite ease-in-out !important;
+      z-index: 30 !important;
+    }
+
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -208,49 +2125,122 @@
       pointer-events: none;
       transition: opacity 0.15s ease, transform 0.15s ease;
     }
+
+    .hidden{display:none!important} button:disabled,input:disabled,select:disabled{opacity:.5;cursor:not-allowed!important}
+    #winnerCelebrationModal{background:radial-gradient(ellipse at 50% 45%,#67421f88,#201a16e8)!important;z-index:100;}
+    #winnerCelebrationModal>div{max-width:760px!important;padding:clamp(22px,5vw,58px)!important;background:linear-gradient(145deg,#fffdf3,#f8e8c6)!important;box-shadow:0 0 85px #f5c45d88!important;animation:winEntrance .45s cubic-bezier(.2,.8,.2,1) both;}
+    #winModalPersonName{font-size:clamp(40px,7vw,84px)!important;}#winModalPrizeName{font-size:clamp(30px,5vw,58px)!important;}
+    @keyframes winEntrance{from{opacity:0;transform:scale(.83)}to{opacity:1;transform:scale(1)}}
+    .confetti-piece{position:fixed;top:-25px;z-index:101;pointer-events:none;animation:confettiFall 3.4s linear forwards;}@keyframes confettiFall{to{transform:translate(var(--drift),110vh) rotate(880deg);opacity:.1}}
+    #winnerCelebrationModal.grand-prize{background:radial-gradient(ellipse at 50% 35%,#a66b17 0%,#402409 38%,#130b06 80%)!important;overflow:hidden;}
+    #winnerCelebrationModal.grand-prize:before{content:'';position:absolute;inset:-100%;background:repeating-conic-gradient(from 0deg at 50% 50%,transparent 0deg 14deg,#ffda7330 14deg 20deg,transparent 20deg 30deg);animation:grandRays 24s linear infinite;pointer-events:none;}
+    #winnerCelebrationModal.grand-prize>div{position:relative;z-index:2;max-width:900px!important;padding:clamp(18px,3vw,38px)!important;background:linear-gradient(145deg,#fffae8,#f5d38b 45%,#fff7df)!important;border:5px solid #eeb94d!important;box-shadow:0 0 25px #fff1a9,0 0 100px #fbc450,0 0 180px #d38a17!important;animation:grandEntrance .85s cubic-bezier(.16,.8,.3,1) both;max-height:96vh;overflow:auto;}
+    .grand-crown{font-size:clamp(42px,6vw,78px);line-height:1;color:#a56c09;text-shadow:0 2px 0 #fff1c2,0 0 24px #ffcd55;}
+    .grand-kicker{font-weight:900;letter-spacing:.24em;font-size:clamp(12px,2vw,20px);color:#8a5709;}
+    .grand-prize #winModalPrizeName{color:#9e5904!important;text-shadow:0 2px #fff8d6;}
+    .grand-spark{position:absolute;z-index:1;width:7px;height:7px;border-radius:50%;box-shadow:0 0 12px #ffde73;pointer-events:none;opacity:0;animation:grandBurst 1.5s var(--delay) ease-out forwards;}
+    @keyframes grandBurst{0%{opacity:0;transform:scale(.2)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.3)}}
+    @keyframes grandRays{to{transform:rotate(360deg)}}
+    @keyframes grandEntrance{from{opacity:0;transform:scale(.65)}to{opacity:1;transform:scale(1)}}
+    @media(prefers-reduced-motion:reduce){#winnerCelebrationModal.grand-prize:before,#winnerCelebrationModal.grand-prize>div{animation:none}.grand-spark{display:none}}
+    @media(prefers-reduced-motion:reduce){.confetti-piece{display:none}#winnerCelebrationModal>div{animation:none}.lottery-dot-winner{animation:none!important}}
+
+    #drawStage{position:relative;isolation:isolate;overflow:hidden;scroll-margin-top:18px;text-align:center;color:#fff5d8;background:radial-gradient(ellipse at 50% 15%,#8f3429 0%,#511a20 48%,#260e17 100%);border:2px solid #d7ad65;border-radius:22px;padding:22px 18px 27px;margin-top:18px;box-shadow:0 12px 34px #48221940;}
+    #drawStage:before{content:'';position:absolute;inset:0;z-index:-1;background:repeating-conic-gradient(from 15deg at 50% 0%,transparent 0deg 14deg,#ffdd9a0d 14deg 20deg);pointer-events:none;}
+    #stagePrizeName{font-size:clamp(30px,4.1vw,58px);line-height:1.18;overflow-wrap:anywhere;font-weight:900;margin:8px 0;color:#fff0be;text-shadow:0 3px 12px #18080a;}
+    #stagePrizeAmount{font-size:clamp(23px,3vw,40px);font-weight:800;color:#ffdb82;line-height:1.2;}
+    #drawStage.president-stage{background:radial-gradient(ellipse at 50% 15%,#9b6a1e,#392409 55%,#170f08);border:3px solid #f4cc79;box-shadow:0 0 28px #dca64688;}
+    #stagePrizeAmount:empty{display:none;}
+    #jackpotQuotaStatus{font-size:clamp(15px,1.5vw,22px);color:#f8dba6;margin:8px 0;}
+    #btnStartLottery{position:relative;display:flex;align-items:center;justify-content:center;gap:14px;width:min(90%,650px);min-height:122px;margin:20px auto 14px;padding:20px 26px;border:4px solid #ffdf91;border-radius:32px;background:linear-gradient(180deg,#ff7160 0%,#d52e32 46%,#a71927 100%);color:#fff8de;font-size:clamp(28px,4.5vw,64px);font-weight:900;letter-spacing:.08em;line-height:1.1;text-shadow:0 3px 3px #7b101b;box-shadow:0 12px 0 #741019,0 15px 0 #e2af58,0 25px 35px #17080caa,inset 0 4px 8px #ffb78b;transition:transform .15s,box-shadow .15s;cursor:pointer;touch-action:manipulation;}
+    #btnStartLottery:not(:disabled):hover{filter:brightness(1.1);}
+    #btnStartLottery:not(:disabled):active,#btnStartLottery.is-pressed{transform:translateY(11px) scale(.97);box-shadow:0 2px 0 #741019,0 4px 0 #f7d383,0 9px 16px #15070a,inset 0 6px 18px #7e1018;filter:brightness(1.15);}
+    #btnStartLottery:disabled{opacity:1;cursor:not-allowed!important;}
+    #btnStartLottery[data-state=offline],#btnStartLottery[data-state=locked],#btnStartLottery[data-state=done],#btnStartLottery[data-state=empty]{background:linear-gradient(#76636b,#493943);border-color:#a99b88;box-shadow:0 9px 0 #372a32,0 11px 0 #97836e;color:#f1e8de;font-size:clamp(22px,3vw,40px);text-shadow:none;}
+    #btnStartLottery[data-state=spinning]{font-size:clamp(25px,4vw,54px);}
+    #stageBurst{position:absolute;left:50%;top:65%;width:130px;height:130px;border-radius:50%;border:10px solid #ffe0a1;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.4);}
+    #drawStage.triggered #stageBurst{animation:stageBurst .8s ease-out both;}
+    @keyframes stageBurst{0%{opacity:.95;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-50%) scale(7)}}
+    #stageCue{min-height:46px;margin-top:20px;font-weight:800;font-size:clamp(19px,2.3vw,34px);color:#fff1bc;line-height:1.2;}
+    #stageCue.countdown{font-size:clamp(50px,7vw,94px);line-height:1;animation:stageCount .38s ease-out;}
+    @keyframes stageCount{from{transform:scale(.65);opacity:.5}to{transform:scale(1);opacity:1}}
+    #stageCandidate{min-height:30px;font-size:clamp(17px,2vw,28px);font-weight:700;color:#f6d99c;}
+    #stageSelectorRow{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;}
+    #stageSelectorRow label{flex:1;min-width:230px;color:#5c4938;font-weight:700;}
+    #lotteryPrizeSelect{display:block;width:100%;font-size:clamp(16px,1.7vw,23px);padding:10px;border:1px solid #d6c2a2;background:#fffdf9;border-radius:10px;}
+    #stageFullscreenBtn{border:1px solid #b88d58;border-radius:10px;padding:10px 16px;color:#725026;font-weight:700;background:#fff7e6;}
+    @media(max-width:600px){#btnStartLottery{min-height:100px;width:96%;}#drawStage{padding:16px 10px 20px;}}
+    @media(prefers-reduced-motion:reduce){#drawStage.triggered #stageBurst,#stageCue.countdown{animation:none;}#btnStartLottery{transition:none;}}
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
+
   <!-- 頂部導覽列 -->
-  <header class="sticky top-0 z-30 bg-[#FFFDF9]/95 backdrop-blur border-b border-[#E6DDD0] shadow-xs">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-4 flex flex-wrap items-center justify-between gap-3">
-      <div class="flex items-center gap-3.5">
-        <div class="w-11 h-11 rounded-xl bg-[#C87D75] text-[#FFFDF9] flex items-center justify-center shadow-xs font-serif font-bold text-xl">
-          庚
-        </div>
-        <div>
-          <div class="flex items-center gap-2.5 flex-wrap">
-            <h1 class="serif-title text-2xl sm:text-3xl font-bold text-[#38332E] tracking-wide">
-              長庚科技大學116年旺年會
-            </h1>
-            <span id="syncStatusBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-[#F3EDE4] text-[#787067] border border-[#E2D7C7]">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#D9A05B]"></span>
-              雲端資料庫安全驗證中...
-            </span>
+  <header class="sticky top-0 z-30 bg-[#FFFDF9]/95 backdrop-blur border-b border-[#E6DDD0] shadow-sm">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 py-3.5 flex flex-col gap-3">
+      <!-- 第一列：標題與功能捷徑 -->
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-3.5">
+          <div class="w-11 h-11 rounded-xl bg-[#C87D75] text-[#FFFDF9] flex items-center justify-center shadow-sm font-serif font-bold text-xl">
+            庚
           </div>
-          <p class="text-sm text-[#787067] mt-1">
-            舞台前 1 桌長官大主桌（12 席・長官本人專屬選位）＋ 宴會廳 53 桌（含第 50 桌素食桌、第 53 桌預備桌與線上候補機制）
-          </p>
+          <div>
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <h1 class="serif-title text-2xl sm:text-3xl font-bold text-[#38332E] tracking-wide">
+                長庚科技大學116年旺年會
+              </h1>
+              <span id="syncStatusBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-[#F3EDE4] text-[#787067] border border-[#E2D7C7]">
+                <span class="w-2.5 h-2.5 rounded-full bg-[#D9A05B]"></span>
+                雲端資料庫安全驗證中...
+              </span>
+            </div>
+            <p class="text-sm text-[#787067] mt-0.5">
+              舞台前 1 桌長官大主桌（12 席）＋ 宴會廳 53 桌（含第 50 桌素食桌、第 53 桌預備桌）｜支援事先選位、當天報到亮燈與線上抽獎
+            </p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <button onclick="openWaitlistModal()" id="btnOpenWaitlist" class="px-3.5 py-2 rounded-xl text-sm font-medium bg-[#FFF3DF] text-[#8A5A19] hover:bg-[#FBE6C4] border border-[#E6C794] transition flex items-center gap-1.5 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>座位已滿／登記候補</span>
+          </button>
+
+          <button onclick="openCancelOrQueryModal()" class="px-3.5 py-2 rounded-xl text-sm font-medium bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EBE1D3] border border-[#DFD3C3] transition flex items-center gap-1.5 cursor-pointer">
+            <svg class="w-4 h-4 text-[#A85D55]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
+            <span>查詢 / 取消報名與重選</span>
+          </button>
+
+          <button onclick="openAdminLoginModal()" class="px-3.5 py-2 rounded-xl text-sm font-medium bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] shadow-sm transition flex items-center gap-1.5 cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>管理員後台</span>
+          </button>
         </div>
       </div>
 
-      <div class="flex items-center gap-2.5 flex-wrap">
-        <button onclick="openWaitlistModal()" id="btnOpenWaitlist" class="px-4 py-2.5 rounded-xl text-base font-medium bg-[#FFF3DF] text-[#8A5A19] hover:bg-[#FBE6C4] border border-[#E6C794] transition flex items-center gap-1.5 cursor-pointer">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          座位已滿／登記候補
+      <!-- 第二列：三大核心系統分頁切換列 -->
+      <nav class="flex flex-wrap items-center gap-2 pt-2 border-t border-[#EFE8DD]" aria-label="主要功能分頁">
+        <button type="button" id="mainNav-register" onclick="switchMainPage('register')"
+          class="px-4 py-2.5 rounded-xl text-base font-bold bg-[#C87D75] text-[#FFFDF9] shadow-sm transition flex items-center gap-2 cursor-pointer">
+          <span>📝</span>
+          <span>1. 事先報名與選位</span>
         </button>
 
-        <button onclick="openCancelOrQueryModal()" class="px-4 py-2.5 rounded-xl text-base font-medium bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EBE1D3] border border-[#DFD3C3] transition flex items-center gap-1.5 cursor-pointer">
-          <svg class="w-5 h-5 text-[#A85D55]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
-          查詢 / 取消報名與重選
+        <button type="button" id="mainNav-checkin" onclick="switchMainPage('checkin')"
+          class="px-4 py-2.5 rounded-xl text-base font-semibold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] transition flex items-center gap-2 cursor-pointer">
+          <span>✨</span>
+          <span>2. 當天報到簽到（座位亮燈）</span>
+          <span id="navCheckinBadge" class="px-2 py-0.5 rounded-full text-xs font-bold bg-[#FFFDF9] text-[#8A5A19] border border-[#E6C794]">0 席已亮燈</span>
         </button>
 
-        <button onclick="openAdminLoginModal()" class="px-4 py-2.5 rounded-xl text-base font-medium bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] shadow-xs transition flex items-center gap-1.5 cursor-pointer">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-          管理員後台
+        <button type="button" id="mainNav-lottery" onclick="switchMainPage('lottery')"
+          class="px-4 py-2.5 rounded-xl text-base font-semibold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] transition flex items-center gap-2 cursor-pointer">
+          <span>🎁</span>
+          <span>3. 線上幸運抽獎（已報到 F 帳號名單）</span>
+          <span id="navLotteryBadge" class="px-2 py-0.5 rounded-full text-xs font-bold bg-[#FFFDF9] text-[#4E6B54] border border-[#C6D8C9]">0 人具資格</span>
         </button>
-      </div>
+      </nav>
     </div>
   </header>
 
@@ -267,212 +2257,472 @@
     </div>
   </div>
 
-  <!-- 隱私權與個資同意宣告條 -->
-  <div class="max-w-[1440px] w-full mx-auto px-4 sm:px-6 pt-5">
-    <div id="privacyConsentCard" class="p-5 rounded-2xl bg-[#FFFDF9] border-2 border-[#D9B89C] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <div class="space-y-1">
-        <div class="text-sm font-bold text-[#A85D55] tracking-wide">【個人資料蒐集與使用告知事項】</div>
-        <p class="text-base text-[#38332E] font-medium leading-relaxed">
-          本表單資料僅用於長庚科大旺年會聯繫及活動安排，不作其他用途，活動整體核銷結束後刪除。
-        </p>
+  <!-- ===================================================================== -->
+  <!-- 分頁一：事先報名與選位                                                  -->
+  <!-- ===================================================================== -->
+  <div id="page-register" class="flex-1 flex flex-col">
+    <!-- 隱私權與個資同意宣告條 -->
+    <div class="max-w-[1440px] w-full mx-auto px-4 sm:px-6 pt-5">
+      <div id="privacyConsentCard" class="p-5 rounded-2xl bg-[#FFFDF9] border-2 border-[#D9B89C] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="space-y-1">
+          <div class="text-sm font-bold text-[#A85D55] tracking-wide">【個人資料蒐集與使用告知事項】</div>
+          <p class="text-base text-[#38332E] font-medium leading-relaxed">
+            本表單資料僅用於長庚科大旺年會聯繫及活動安排，不作其他用途，活動整體核銷結束後刪除。
+          </p>
+        </div>
+        <label class="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-[#F9F1EE] border border-[#E5C6BE] cursor-pointer select-none shrink-0 hover:bg-[#F4E6E1] transition">
+          <input id="privacyConsentCheckbox" type="checkbox" onchange="handlePrivacyConsentChange()"
+            class="w-5 h-5 accent-[#C87D75] rounded cursor-pointer" />
+          <span class="text-base font-bold text-[#8C534C]">我同意上述個資使用方式</span>
+        </label>
       </div>
-      <label class="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-[#F9F1EE] border border-[#E5C6BE] cursor-pointer select-none shrink-0 hover:bg-[#F4E6E1] transition">
-        <input id="privacyConsentCheckbox" type="checkbox" onchange="handlePrivacyConsentChange()"
-          class="w-5 h-5 accent-[#C87D75] rounded cursor-pointer" />
-        <span class="text-base font-bold text-[#8C534C]">我同意上述個資使用方式</span>
-      </label>
+    </div>
+
+    <!-- 主內容雙欄工作區 -->
+    <main id="mainWorkspace" class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start relative">
+
+      <!-- 未勾選個資同意或系統未就緒前之鎖定提示 -->
+      <div id="consentLockOverlay" class="col-span-1 lg:col-span-12 rounded-2xl bg-[#FFFDF9]/85 backdrop-blur-sm border border-dashed border-[#D6C7B4] p-10 text-center space-y-2.5">
+        <div id="lockOverlayTitle" class="serif-title text-xl font-bold text-[#5C4938]">請先勾選上方「我同意上述個資使用方式」</div>
+        <p id="lockOverlayDesc" class="text-base text-[#787067]">勾選同意後，即可開始填寫報名資料與進入選位區選擇桌次。</p>
+      </div>
+
+      <!-- 報名登錄、陪同者與計費明細（佔 4 欄） -->
+      <section id="registrationFormSection" class="hidden lg:col-span-4 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6 space-y-5 lg:sticky lg:top-32">
+        <div class="border-b border-[#EFE8DD] pb-3.5 flex items-center justify-between gap-2">
+          <div>
+            <h2 class="serif-title text-xl font-bold text-[#38332E]">參加者報名與陪同者登記</h2>
+            <p class="text-sm text-[#787067] mt-0.5">每位同仁限報 1 次（不可重複佔位），最多 3 位陪同者</p>
+          </div>
+          <span class="px-3 py-1 rounded-lg bg-[#F6EFE6] text-[#A85D55] text-sm font-semibold border border-[#EADBC8] shrink-0">
+            同組限坐同桌
+          </span>
+        </div>
+
+        <!-- 本人基本資料 -->
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+            <div>
+              <label class="block text-sm font-semibold text-[#5C5349] mb-1">F 帳號（F + 9碼數字）<span class="text-[#C86D65]">*</span></label>
+              <input id="inputFAccount" type="text" maxlength="10" placeholder="例：F000009999" oninput="handleMainInput()"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition uppercase" />
+              <p id="fAccountHint" class="text-xs text-[#8C8276] mt-1">共 10 碼，例如 F000009999</p>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-[#5C5349] mb-1">參加者姓名 <span class="text-[#C86D65]">*</span></label>
+              <input id="inputName" type="text" placeholder="請輸入真實姓名" oninput="handleMainInput()"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition" />
+              <p id="vipNameHint" class="hidden text-xs text-[#9B7744] font-bold mt-1">👑 長官專席：本人請選長官大主桌，陪同者請選一般桌次</p>
+            </div>
+          </div>
+
+          <div class="space-y-3.5">
+            <div>
+              <label class="block text-sm font-semibold text-[#5C5349] mb-1">學校分機（4 碼數字）<span class="text-[#C86D65]">*</span></label>
+              <input id="inputExt" type="text" inputmode="numeric" maxlength="4" placeholder="例：5678" oninput="handleMainInput()"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition" />
+              <p id="extHint" class="text-xs text-[#8C8276] mt-1">請輸入 4 碼學校分機號碼</p>
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-[#5C5349] mb-1">學校 Email 帳號 <span class="text-[#C86D65]">*</span></label>
+              <div class="flex items-stretch rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] focus-within:border-[#C87D75] focus-within:bg-[#FFFDF9] overflow-hidden transition">
+                <input id="inputEmail" type="text" placeholder="例：wangxm" oninput="handleMainInput()"
+                  class="flex-1 min-w-0 px-3.5 py-2.5 bg-transparent text-base text-[#38332E] placeholder-[#ACA397] focus:outline-none" />
+                <span class="px-3 py-2.5 bg-[#EFE8DD] text-[#5C5349] text-sm font-semibold border-l border-[#DFD5C7] flex items-center select-none shrink-0">
+                  @mail.cgust.edu.tw
+                </span>
+              </div>
+              <p class="text-xs text-[#8C8276] mt-1">只需填寫 @ 前面的帳號（系統自動帶入 @mail.cgust.edu.tw）</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 陪同者（一般眷屬 / 其他）區塊 -->
+        <div class="pt-3 border-t border-[#EFE8DD]">
+          <div class="flex items-center justify-between mb-2.5">
+            <div>
+              <span class="text-base font-bold text-[#38332E]">陪同者（一般眷屬 / 其他）</span>
+              <span class="text-sm text-[#787067] ml-1">（上限 3 位）</span>
+            </div>
+            <button type="button" id="btnAddGuest" onclick="addGuest()"
+              class="px-3.5 py-2 rounded-xl text-sm font-semibold bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] border border-[#C6D8C9] transition cursor-pointer shrink-0">
+              + 新增陪同者
+            </button>
+          </div>
+
+          <!-- 收費說明小卡 -->
+          <div class="p-3 rounded-xl bg-[#F7F3EC] border border-[#E8DFD1] text-sm text-[#696056] leading-relaxed mb-3">
+            <span class="font-semibold text-[#A85D55]">收費與佔位標準：</span>
+            教職員本人免費佔位｜一般眷屬：未滿 1 歲免費（<span class="underline">不佔位</span>）、1–6 歲 250 元、7–12 歲國小 450 元、國中（含）以上 880 元｜其他（含臨時工、工讀生、退休老師、國外學者等）：每位 880 元（佔位）。
+          </div>
+
+          <div id="guestsContainer" class="space-y-3"></div>
+        </div>
+
+        <!-- 目前選位配對預覽 -->
+        <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-[#5C5349]">目前選位配對進度</span>
+            <span id="seatProgressText" class="text-sm font-semibold text-[#C87D75]">需選 1 席・已選 0 席</span>
+          </div>
+          <div id="currentTargetBanner" class="px-3.5 py-2.5 rounded-lg bg-[#FFF3DF] border border-[#E8C99B] text-sm text-[#8A5A19] font-semibold">
+            👉 目前選位對象：請先填寫參加者姓名後至選位區點選綠燈空位
+          </div>
+          <div id="seatAssignmentPreview" class="space-y-2 text-sm"></div>
+        </div>
+
+        <!-- 應繳金額總結 -->
+        <div class="p-4 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9] flex items-center justify-between">
+          <div>
+            <p class="text-sm text-[#8C534C] font-medium">本筆報名應繳總金額</p>
+            <p id="feeBreakdownSub" class="text-xs text-[#9E706A] mt-0.5">本人免費（1 席）</p>
+          </div>
+          <div class="text-right">
+            <span class="text-sm text-[#A85D55] font-semibold">NT$</span>
+            <span id="totalAmountDisplay" class="serif-title text-3xl font-bold text-[#A85D55]">0</span>
+          </div>
+        </div>
+
+        <!-- 送出按鈕 -->
+        <button type="button" id="btnOpenConfirm" onclick="openConfirmSubmitModal()"
+          class="w-full py-3.5 rounded-xl bg-[#C87D75] hover:bg-[#B36860] text-[#FFFDF9] font-bold text-base shadow-sm transition cursor-pointer tracking-wide">
+          檢視明細並確定存檔
+        </button>
+      </section>
+
+      <!-- 選位區：長官大主桌 + 宴會廳 53 桌實景圓桌平面圖（佔 8 欄） -->
+      <section id="seatSelectionSection" class="hidden lg:col-span-8 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6">
+        <!-- 圖例與統計列 -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#EFE8DD]">
+          <div>
+            <h2 class="serif-title text-xl font-bold text-[#38332E]">選位區｜宴會廳實景圓桌配置圖</h2>
+            <p class="text-sm text-[#787067] mt-0.5">請先點選下方 7 排桌次卡片，再於展開的大圓桌中點擊綠燈空位</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 text-sm font-medium bg-[#FAF7F2] px-4 py-2.5 rounded-xl border border-[#E8DFD1]">
+            <span class="flex items-center gap-1.5 text-[#4E6B54]">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#6E8B74] inline-block"></span>
+              一般空位 (<span id="statAvailable">520</span>)
+            </span>
+            <span class="flex items-center gap-1.5 text-[#B87D2E]">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#E09F3E] inline-block"></span>
+              預選中 (<span id="statSelected">0</span>)
+            </span>
+            <span class="flex items-center gap-1.5 text-[#B2564E]">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#C86D65] inline-block"></span>
+              已佔用 (<span id="statOccupied">0</span>)
+            </span>
+            <span class="flex items-center gap-1.5 text-[#4A6850]">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#628368] inline-block"></span>
+              素食桌 (第 50 桌)
+            </span>
+            <span class="flex items-center gap-1.5 text-[#7A7269]">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#968E84] inline-block"></span>
+              預備桌 (第 53 桌)
+            </span>
+          </div>
+        </div>
+
+        <!-- 主舞台橫幅 -->
+        <div class="mt-4 mb-4">
+          <div class="max-w-xl mx-auto py-3 px-6 rounded-2xl bg-gradient-to-r from-[#EFE6D8] via-[#E5D6C3] to-[#EFE6D8] border border-[#D8C6B0] text-center shadow-sm">
+            <span class="serif-title text-base font-bold text-[#5C4938] tracking-widest">
+              ✦ 主 舞 臺 & 摸 彩 頒 獎 區 ✦
+            </span>
+          </div>
+        </div>
+
+        <!-- 舞台正前方正中央：長官大主桌 -->
+        <div id="vipHeadTableContainer" class="mb-5"></div>
+
+        <!-- 即時「目前選位對象」引導橫幅 -->
+        <div id="hallCurrentTargetBar" class="mb-4 px-4 py-3 rounded-xl bg-[#FFF6E5] border border-[#E6C794] flex flex-wrap items-center justify-between gap-2 text-sm">
+          <span class="font-bold text-[#8A5A19]"><span>🎯 目前選位對象：</span><span id="hallTargetName" class="underline">尚未填寫姓名</span></span>
+          <span id="hallTargetHint" class="text-[#787067]">請先點選下方桌次卡片，再於展開的大圓桌中點擊綠燈空位</span>
+        </div>
+
+        <!-- 桌次快速篩選器 -->
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-sm">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-[#787067] font-medium">快速篩選：</span>
+            <button onclick="filterTables('all')" id="filter-all" class="filter-chip px-3 py-1.5 rounded-lg bg-[#C87D75] text-[#FFFDF9] font-medium cursor-pointer">全部 53 桌 (7×7+4)</button>
+            <button onclick="filterTables('veg')" id="filter-veg" class="filter-chip px-3 py-1.5 rounded-lg bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] cursor-pointer">🌱 素食桌 (50桌)</button>
+            <button onclick="filterTables('1-21')" id="filter-1-21" class="filter-chip px-3 py-1.5 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">前區 (01–21桌)</button>
+            <button onclick="filterTables('22-42')" id="filter-22-42" class="filter-chip px-3 py-1.5 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">中區 (22–42桌)</button>
+            <button onclick="filterTables('43-53')" id="filter-43-53" class="filter-chip px-3 py-1.5 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">後區與加開桌 (43–53桌)</button>
+            <button onclick="filterTables('available')" id="filter-available" class="filter-chip px-3 py-1.5 rounded-lg bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] cursor-pointer">僅看尚有空位</button>
+          </div>
+        </div>
+
+        <!-- 上半部：一行 7 桌迷你圓點選桌總覽 -->
+        <div id="banquetHallContainer" class="max-h-[420px] overflow-y-auto pr-1 space-y-3.5 pb-2"></div>
+
+        <!-- 下半部：點選桌次後展開的置中大圓桌與 10 席明細 -->
+        <div id="activeTableDetailStage" class="mt-5 pt-5 border-t-2 border-dashed border-[#E6DDD0]"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- 分頁二：當天報到簽到（登入報到後出席人座位即時亮燈）                    -->
+  <!-- ===================================================================== -->
+  <div id="page-checkin" class="hidden flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- 左側欄：報到簽到操作區（佔 4 欄） -->
+      <section class="lg:col-span-4 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6 space-y-5 lg:sticky lg:top-32">
+        <div class="border-b border-[#EFE8DD] pb-3.5">
+          <h2 class="serif-title text-xl font-bold text-[#38332E]">當天報到簽到櫃檯</h2>
+          <p class="text-sm text-[#787067] mt-1">輸入報名同仁之 F 帳號辦理報到，完成簽到後宴會廳座位圖將立即亮燈，且自動納入線上抽獎名單！</p>
+        </div>
+
+        <!-- 即時報到統計卡片 -->
+        <div class="grid grid-cols-3 gap-2.5 text-center">
+          <div class="p-3 rounded-xl bg-[#FFF7E6] border border-[#E8C99B]">
+            <div class="text-xs text-[#8A5A19] font-medium">已亮燈席次</div>
+            <div id="ciStatLitSeats" class="serif-title text-2xl font-bold text-[#B87D2E] mt-0.5">0</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#E9F0EA] border border-[#C6D8C9]">
+            <div class="text-xs text-[#4E6B54] font-medium">抽獎資格(F帳)</div>
+            <div id="ciStatStaffCount" class="serif-title text-2xl font-bold text-[#4E6B54] mt-0.5">0</div>
+          </div>
+          <div class="p-3 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0]">
+            <div class="text-xs text-[#787067] font-medium">席次報到率</div>
+            <div id="ciStatRate" class="serif-title text-2xl font-bold text-[#38332E] mt-0.5">0%</div>
+          </div>
+        </div>
+
+        <!-- F 帳號報到輸入 -->
+        <div class="space-y-3">
+          <label class="block text-sm font-bold text-[#5C5349]">請輸入報名同仁 F 帳號（共 10 碼）</label>
+          <div class="flex gap-2">
+            <input id="checkinFAccountInput" type="text" maxlength="10" placeholder="例：F000009999"
+              oninput="this.value = this.value.toUpperCase()"
+              onkeydown="if(event.key==='Enter') lookupCheckInGroup()"
+              class="flex-1 px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base font-mono font-bold text-[#38332E] uppercase focus:outline-none focus:border-[#C87D75]" />
+            <button type="button" id="btnLookupCheckin" onclick="lookupCheckInGroup()"
+              class="px-4 py-2.5 rounded-xl bg-[#C87D75] hover:bg-[#B36860] text-[#FFFDF9] text-sm font-bold shrink-0 cursor-pointer">
+              查詢報到
+            </button>
+          </div>
+        </div>
+
+        <!-- 查詢結果與勾選簽到卡片 -->
+        <div id="checkinResultCard" class="space-y-3">
+          <div class="p-4 rounded-xl bg-[#FAF7F2] border border-dashed border-[#DFD5C7] text-sm text-[#787067] text-center">
+            請輸入 F 帳號並按「查詢報到」，即可為本人及同行陪同者辦理簽到亮燈。
+          </div>
+        </div>
+
+        <!-- 最近完成報到亮燈動態 -->
+        <div class="pt-3 border-t border-[#EFE8DD] space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-[#5C5349]">✨ 最新完成報到亮燈名單</span>
+            <span class="text-xs text-[#8C8276]">即時同步</span>
+          </div>
+          <div id="recentCheckinList" class="max-h-[220px] overflow-y-auto space-y-1.5 text-xs"></div>
+        </div>
+      </section>
+
+      <!-- 右側欄：全場報到亮燈實景總覽（佔 8 欄） -->
+      <section class="lg:col-span-8 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#EFE8DD]">
+          <div>
+            <h2 class="serif-title text-xl font-bold text-[#38332E]">宴會廳即時報到亮燈實景圖</h2>
+            <p class="text-sm text-[#787067] mt-0.5">出席人完成簽到後，其座位將立即點亮金色光芒；點擊桌次卡片可檢視該桌入座與亮燈明細</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-3 text-sm font-medium bg-[#FAF7F2] px-4 py-2.5 rounded-xl border border-[#E8DFD1]">
+            <span class="flex items-center gap-1.5 text-[#B87D2E] font-bold">
+              <span class="w-3.5 h-3.5 rounded-full dot-checked-in inline-block"></span>
+              已報到亮燈 (<span id="ciLegendLit">0</span>)
+            </span>
+            <span class="flex items-center gap-1.5 text-[#B2564E]">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#C86D65]/55 inline-block"></span>
+              已報名未報到 (<span id="ciLegendUnlit">0</span>)
+            </span>
+            <span class="flex items-center gap-1.5 text-[#787067]">
+              <span class="w-3.5 h-3.5 rounded-full bg-[#DFD8CE] inline-block"></span>
+              空席
+            </span>
+          </div>
+        </div>
+
+        <!-- 主舞台與長官大主桌亮燈狀態 -->
+        <div class="max-w-xl mx-auto py-2.5 px-6 rounded-2xl bg-gradient-to-r from-[#EFE6D8] via-[#E5D6C3] to-[#EFE6D8] border border-[#D8C6B0] text-center">
+          <span class="serif-title text-base font-bold text-[#5C4938] tracking-widest">✦ 主 舞 臺 ✦</span>
+        </div>
+
+        <div id="checkinVipTableBox" class="max-w-lg mx-auto"></div>
+
+        <!-- 53 桌報到亮燈 7 欄網格 -->
+        <div id="checkinHallGrid" class="max-h-[520px] overflow-y-auto pr-1 space-y-3"></div>
+
+        <!-- 點選桌次展開亮燈大圓桌 -->
+        <div id="checkinExpandedTableStage" class="pt-4 border-t-2 border-dashed border-[#E6DDD0]"></div>
+      </section>
     </div>
   </div>
 
-  <!-- 主內容雙欄工作區 -->
-  <main id="mainWorkspace" class="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start relative">
+  <!-- ===================================================================== -->
+  <!-- 分頁三：線上幸運抽獎（利用具有 F 帳號的參與者報到名單）                 -->
+  <!-- ===================================================================== -->
+  <div id="page-lottery" class="hidden flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 py-6 space-y-6">
 
-    <!-- 未勾選個資同意或系統未就緒前之鎖定提示 -->
-    <div id="consentLockOverlay" class="col-span-1 lg:col-span-12 rounded-2xl bg-[#FFFDF9]/85 backdrop-blur-[2px] border border-dashed border-[#D6C7B4] p-10 text-center space-y-2.5">
-      <div id="lockOverlayTitle" class="serif-title text-xl font-bold text-[#5C4938]">請先勾選上方「我同意上述個資使用方式」</div>
-      <p id="lockOverlayDesc" class="text-base text-[#787067]">勾選同意後，即可開始填寫報名資料與進入選位區選擇桌次。</p>
-    </div>
-
-    <!-- 報名登錄、陪同者與計費明細（佔 4 欄） -->
-    <section id="registrationFormSection" class="hidden lg:col-span-4 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6 space-y-5 lg:sticky lg:top-24">
-      <div class="border-b border-[#EFE8DD] pb-3.5 flex items-center justify-between gap-2">
+    <!-- 頂部抽獎控制台 -->
+    <section class="bg-[#FFFDF9] rounded-2xl border-2 border-[#DFC397] shadow-sm p-5 sm:p-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-[#EFE8DD]">
         <div>
-          <h2 class="serif-title text-xl font-bold text-[#38332E]">參加者報名與陪同者登記</h2>
-          <p class="text-sm text-[#787067] mt-0.5">每位同仁限報 1 次（不可重複佔位），最多 3 位陪同者</p>
-        </div>
-        <span class="px-3 py-1 rounded-lg bg-[#F6EFE6] text-[#A85D55] text-sm font-semibold border border-[#EADBC8] shrink-0">
-          同組限坐同桌
-        </span>
-      </div>
-
-      <!-- 本人基本資料 -->
-      <div class="space-y-4">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-          <div>
-            <label class="block text-sm font-semibold text-[#5C5349] mb-1">F 帳號（F + 9碼數字）<span class="text-[#C86D65]">*</span></label>
-            <input id="inputFAccount" type="text" maxlength="10" placeholder="例：F000009999" oninput="handleMainInput()"
-              class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition uppercase" />
-            <p id="fAccountHint" class="text-xs text-[#8C8276] mt-1">共 10 碼，例如 F000009999</p>
+          <div class="flex items-center gap-2.5">
+            <span class="px-3 py-1 rounded-lg bg-[#C87D75] text-[#FFFDF9] text-xs font-bold tracking-wider">LIVE LUCKY DRAW</span>
+            <h2 class="serif-title text-2xl font-bold text-[#38332E]">長庚科技大學116年旺年會｜線上幸運抽獎</h2>
           </div>
-          <div>
-            <label class="block text-sm font-semibold text-[#5C5349] mb-1">參加者姓名 <span class="text-[#C86D65]">*</span></label>
-            <input id="inputName" type="text" placeholder="請輸入真實姓名" oninput="handleMainInput()"
-              class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition" />
-            <p id="vipNameHint" class="hidden text-xs text-[#9B7744] font-bold mt-1">👑 長官專席：本人請選長官大主桌，陪同者請選一般桌次</p>
-          </div>
+          <p class="text-sm text-[#787067] mt-1">
+            抽獎名冊限定為「已完成當天報到之具 F 帳號教職員同仁」；按下抽獎後全場參與者座位將極快速依序亮過一遍，最終隨機停在得獎者座位！
+          </p>
         </div>
 
-        <div class="space-y-3.5">
-          <div>
-            <label class="block text-sm font-semibold text-[#5C5349] mb-1">學校分機（4 碼數字）<span class="text-[#C86D65]">*</span></label>
-            <input id="inputExt" type="text" inputmode="numeric" maxlength="4" placeholder="例：5678" oninput="handleMainInput()"
-              class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base text-[#38332E] placeholder-[#ACA397] focus:outline-none focus:border-[#C87D75] focus:bg-[#FFFDF9] transition" />
-            <p id="extHint" class="text-xs text-[#8C8276] mt-1">請輸入 4 碼學校分機號碼</p>
+        <div class="flex items-center gap-3 flex-wrap">
+          <div class="px-4 py-2.5 rounded-xl bg-[#E9F0EA] border border-[#C6D8C9] text-sm font-bold text-[#4E6B54]">
+            🎯 目前可抽獎報到人數：<span id="lotteryEligibleCount" class="text-xl font-serif">0</span> 人
           </div>
-          <div>
-            <label class="block text-sm font-semibold text-[#5C5349] mb-1">學校 Email 帳號 <span class="text-[#C86D65]">*</span></label>
-            <div class="flex items-stretch rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] focus-within:border-[#C87D75] focus-within:bg-[#FFFDF9] overflow-hidden transition">
-              <input id="inputEmail" type="text" placeholder="例：wangxm" oninput="handleMainInput()"
-                class="flex-1 min-w-0 px-3.5 py-2.5 bg-transparent text-base text-[#38332E] placeholder-[#ACA397] focus:outline-none" />
-              <span class="px-3 py-2.5 bg-[#EFE8DD] text-[#5C5349] text-sm font-semibold border-l border-[#DFD5C7] flex items-center select-none shrink-0">
-                @mail.cgust.edu.tw
-              </span>
-            </div>
-            <p class="text-xs text-[#8C8276] mt-1">只需填寫 @ 前面的帳號（系統自動帶入 @mail.cgust.edu.tw）</p>
-          </div>
+          <label class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] text-sm font-medium text-[#5C5349] cursor-pointer select-none">
+            <input id="lotteryExcludeWinners" type="checkbox" checked onchange="renderLotteryPage()" class="w-4 h-4 accent-[#C87D75]" />
+            <span>排除已得獎者</span>
+          </label>
+          <label class="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] text-sm font-medium text-[#5C5349] cursor-pointer select-none">
+            <input id="lotterySoundToggle" type="checkbox" checked class="w-4 h-4 accent-[#C87D75]" />
+            <span>🔊 跑燈音效</span>
+          </label>
         </div>
       </div>
 
-      <!-- 陪同者（一般眷屬 / 其他）區塊 -->
-      <div class="pt-3 border-t border-[#EFE8DD]">
-        <div class="flex items-center justify-between mb-2.5">
-          <div>
-            <span class="text-base font-bold text-[#38332E]">陪同者（一般眷屬 / 其他）</span>
-            <span class="text-sm text-[#787067] ml-1">（上限 3 位）</span>
-          </div>
-          <button type="button" id="btnAddGuest" onclick="addGuest()"
-            class="px-3.5 py-2 rounded-xl text-sm font-semibold bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] border border-[#C6D8C9] transition cursor-pointer shrink-0">
-            + 新增陪同者
+      <div class="mt-4 flex flex-wrap items-center justify-between gap-3 p-4 rounded-xl border border-[#DFC397] bg-[#FAF7F2]">
+        <div><strong id="lotteryAccessStatus">訪客觀賞模式｜僅管理員登入後可操作抽獎</strong><p class="text-xs text-[#787067] mt-1">請使用已獲授權的正式管理員帳號登入。</p></div>
+        <div class="flex gap-2 flex-wrap"><button id="lotteryLoginBtn" onclick="openAdminLoginModal()" class="px-4 py-2 rounded-xl bg-[#6E8B74] text-white font-bold">管理員登入</button><button id="lotteryDashboardBtn" onclick="openAdminLoginModal()" class="hidden px-4 py-2 rounded-xl border font-bold">管理後台</button><button id="lotteryLogoutBtn" onclick="adminSignOut()" class="hidden px-4 py-2 rounded-xl bg-[#E6DDD0] font-bold">登出管理員</button></div>
+      </div>
+      <!-- 獎項由程式固定，現場僅選擇本輪獎項 -->
+      <div id="stageSelectorRow">
+        <label for="lotteryPrizeSelect">本輪抽獎獎項
+          <select id="lotteryPrizeSelect" onchange="handlePrizePresetChange()"></select>
+        </label>
+        <button type="button" id="stageFullscreenBtn" onclick="toggleStageFullscreen()">⛶ 全螢幕投影</button>
+      </div>
+      <section id="drawStage" aria-label="貴賓抽獎舞台">
+        <div style="font-size:15px;letter-spacing:.22em;font-weight:800;color:#f5cb85">長庚科技大學 116 年旺年會 · 貴賓抽獎舞台</div>
+        <div id="stagePrizeName" class="serif-title">校長獎</div>
+        <div id="stagePrizeAmount"></div>
+        <p id="jackpotQuotaStatus" role="status"></p>
+        <button type="button" id="btnStartLottery" onclick="startFullHallLottery()" disabled data-state="locked"><span aria-hidden="true">✦</span><span>請先登入管理員</span></button>
+        <div id="stageBurst" aria-hidden="true"></div>
+        <div id="stageCue" role="status" aria-live="polite">管理員登入後，邀請貴賓按下抽獎按鈕</div>
+        <div id="stageCandidate"></div>
+      </section>
+
+      <!-- 跑燈進行中即時狀態橫幅 -->
+      <div id="lotteryLiveTicker" class="mt-4 px-4 py-3 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] flex flex-wrap items-center justify-between gap-2">
+        <span class="text-sm font-semibold text-[#5C5349]">準備就緒：請選擇獎項，再由貴賓按下「開始抽獎」</span>
+        <span id="lotterySweepPreview" class="font-mono text-base font-bold text-[#C87D75]"></span>
+      </div>
+    </section>
+
+    <!-- 中央大舞台：全場參與者座位跑燈矩陣 -->
+    <section class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <h3 class="serif-title text-lg font-bold text-[#38332E]">全場座位跑燈燈陣（舞台前長官主桌 ＋ 第 01～53 桌）</h3>
+        <div class="flex items-center gap-4 text-xs font-medium text-[#696056]">
+          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full lottery-dot-eligible inline-block"></span>具抽獎資格座位（已報到 F 帳號）</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-[#F59E0B] inline-block"></span>跑燈掃描亮起</span>
+          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-[#DC2626] inline-block"></span>中獎席位</span>
+        </div>
+      </div>
+
+      <div class="max-w-lg mx-auto py-2 px-5 rounded-xl bg-gradient-to-r from-[#EFE6D8] via-[#E5D6C3] to-[#EFE6D8] border border-[#D8C6B0] text-center">
+        <span class="serif-title text-sm font-bold text-[#5C4938] tracking-widest">✦ 主 舞 臺 ✦</span>
+      </div>
+
+      <!-- 長官大主桌跑燈區 -->
+      <div id="lotteryVipTableRow" class="flex justify-center"></div>
+
+      <!-- 53 桌全場跑燈矩陣 -->
+      <div id="lotteryHallGrid" class="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-2.5"></div>
+    </section>
+
+    <!-- 底部：得獎名單榮譽榜 -->
+    <section class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6 space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-[#EFE8DD] pb-3">
+        <div>
+          <h3 class="serif-title text-xl font-bold text-[#38332E]">🏆 旺年會得獎名單榮譽榜</h3>
+          <p class="text-sm text-[#787067]">記錄本場活動已抽出之獎項與幸運得主，支援匯出得獎清冊</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" id="btnExportWinners" onclick="exportLotteryWinnersCSV()" class="px-3.5 py-2 rounded-xl text-sm font-bold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] cursor-pointer">
+            匯出得獎名單 (.csv)
+          </button>
+          <button type="button" id="btnClearWinners" hidden style="display:none" onclick="openClearWinnersModal()" class="px-3.5 py-2 rounded-xl text-sm font-semibold bg-[#F9EFEA] text-[#B2564E] hover:bg-[#F2DDD7] border border-[#E8CFC9] cursor-pointer">
+            清空一般獎項紀錄
           </button>
         </div>
-
-        <!-- 收費說明小卡 -->
-        <div class="p-3 rounded-xl bg-[#F7F3EC] border border-[#E8DFD1] text-sm text-[#696056] leading-relaxed mb-3">
-          <span class="font-semibold text-[#A85D55]">收費與佔位標準：</span>
-          教職員本人免費佔位｜一般眷屬：未滿 1 歲免費（<span class="underline">不佔位</span>）、1–6 歲 250 元、7–12 歲國小 450 元、國中（含）以上 880 元｜其他（含臨時工、工讀生、退休老師、國外學者等）：每位 880 元（佔位）。
-        </div>
-
-        <div id="guestsContainer" class="space-y-3"></div>
       </div>
 
-      <!-- 目前選位配對預覽 -->
-      <div class="p-4 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-sm font-bold text-[#5C5349]">目前選位配對進度</span>
-          <span id="seatProgressText" class="text-sm font-semibold text-[#C87D75]">需選 1 席・已選 0 席</span>
-        </div>
-        <div id="currentTargetBanner" class="px-3.5 py-2.5 rounded-lg bg-[#FFF3DF] border border-[#E8C99B] text-sm text-[#8A5A19] font-semibold">
-          👉 目前選位對象：請先填寫參加者姓名後至選位區點選綠燈空位
-        </div>
-        <div id="seatAssignmentPreview" class="space-y-2 text-sm"></div>
-      </div>
-
-      <!-- 應繳金額總結 -->
-      <div class="p-4 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9] flex items-center justify-between">
-        <div>
-          <p class="text-sm text-[#8C534C] font-medium">本筆報名應繳總金額</p>
-          <p id="feeBreakdownSub" class="text-xs text-[#9E706A] mt-0.5">本人免費（1 席）</p>
-        </div>
-        <div class="text-right">
-          <span class="text-sm text-[#A85D55] font-semibold">NT$</span>
-          <span id="totalAmountDisplay" class="serif-title text-3xl font-bold text-[#A85D55]">0</span>
-        </div>
-      </div>
-
-      <!-- 送出按鈕 -->
-      <button type="button" id="btnOpenConfirm" onclick="openConfirmSubmitModal()"
-        class="w-full py-3.5 rounded-xl bg-[#C87D75] hover:bg-[#B36860] text-[#FFFDF9] font-bold text-base shadow-sm transition cursor-pointer tracking-wide">
-        檢視明細並確定存檔
-      </button>
+      <div id="lotteryWinnersBoard" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
     </section>
-
-    <!-- 選位區：長官大主桌 + 宴會廳 53 桌實景圓桌平面圖（佔 8 欄） -->
-    <section id="seatSelectionSection" class="hidden lg:col-span-8 bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] shadow-sm p-5 sm:p-6">
-      <!-- 圖例與統計列 -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#EFE8DD]">
-        <div>
-          <h2 class="serif-title text-xl font-bold text-[#38332E]">選位區｜宴會廳實景圓桌配置圖</h2>
-          <p class="text-sm text-[#787067] mt-0.5">請先點選下方 7 排桌次卡片，再於展開的大圓桌中點擊綠燈空位</p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-3 text-sm font-medium bg-[#FAF7F2] px-4 py-2.5 rounded-xl border border-[#E8DFD1]">
-          <span class="flex items-center gap-1.5 text-[#4E6B54]">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#6E8B74] inline-block"></span>
-            一般空位 (<span id="statAvailable">520</span>)
-          </span>
-          <span class="flex items-center gap-1.5 text-[#B87D2E]">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#E09F3E] inline-block"></span>
-            預選中 (<span id="statSelected">0</span>)
-          </span>
-          <span class="flex items-center gap-1.5 text-[#B2564E]">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#C86D65] inline-block"></span>
-            已佔用 (<span id="statOccupied">0</span>)
-          </span>
-          <span class="flex items-center gap-1.5 text-[#4A6850]">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#628368] inline-block"></span>
-            素食桌 (第 50 桌)
-          </span>
-          <span class="flex items-center gap-1.5 text-[#7A7269]">
-            <span class="w-3.5 h-3.5 rounded-full bg-[#968E84] inline-block"></span>
-            預備桌 (第 53 桌)
-          </span>
-        </div>
-      </div>
-
-      <!-- 主舞台橫幅 -->
-      <div class="mt-4 mb-4">
-        <div class="max-w-xl mx-auto py-3 px-6 rounded-2xl bg-gradient-to-r from-[#EFE6D8] via-[#E5D6C3] to-[#EFE6D8] border border-[#D8C6B0] text-center shadow-2xs">
-          <span class="serif-title text-base font-bold text-[#5C4938] tracking-widest">
-            ✦ 主 舞 臺 & 摸 彩 頒 獎 區 ✦
-          </span>
-        </div>
-      </div>
-
-      <!-- 舞台正前方正中央：長官大主桌 -->
-      <div id="vipHeadTableContainer" class="mb-5"></div>
-
-      <!-- 即時「目前選位對象」引導橫幅 -->
-      <div id="hallCurrentTargetBar" class="mb-4 px-4 py-3 rounded-xl bg-[#FFF6E5] border border-[#E6C794] flex flex-wrap items-center justify-between gap-2 text-sm">
-        <span class="font-bold text-[#8A5A19]">🎯 目前選位對象：<span id="hallTargetName" class="underline">尚未填寫姓名</span></span>
-        <span id="hallTargetHint" class="text-[#787067]">請先點選下方桌次卡片，再於展開的大圓桌中點擊綠燈空位</span>
-      </div>
-
-      <!-- 桌次快速篩選器 -->
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-3 text-sm">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-[#787067] font-medium">快速篩選：</span>
-          <button onclick="filterTables('all')" id="filter-all" class="filter-chip px-3 py-1.5 rounded-lg bg-[#C87D75] text-[#FFFDF9] font-medium cursor-pointer">全部 53 桌 (7×7+4)</button>
-          <button onclick="filterTables('veg')" id="filter-veg" class="filter-chip px-3 py-1.5 rounded-lg bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] cursor-pointer">🌱 素食桌 (50桌)</button>
-          <button onclick="filterTables('1-21')" id="filter-1-21" class="filter-chip px-3 py-1.5 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">前區 (01–21桌)</button>
-          <button onclick="filterTables('22-42')" id="filter-22-42" class="filter-chip px-3 py-1.5 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">中區 (22–42桌)</button>
-          <button onclick="filterTables('43-53')" id="filter-43-53" class="filter-chip px-3 py-1.5 rounded-lg bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] cursor-pointer">後區與加開桌 (43–53桌)</button>
-          <button onclick="filterTables('available')" id="filter-available" class="filter-chip px-3 py-1.5 rounded-lg bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] cursor-pointer">僅看尚有空位</button>
-        </div>
-      </div>
-
-      <!-- 上半部：一行 7 桌迷你圓點選桌總覽 -->
-      <div id="banquetHallContainer" class="max-h-[420px] overflow-y-auto pr-1 space-y-3.5 pb-2"></div>
-
-      <!-- 下半部：點選桌次後展開的置中大圓桌與 10 席明細 -->
-      <div id="activeTableDetailStage" class="mt-5 pt-5 border-t-2 border-dashed border-[#E6DDD0]"></div>
-    </section>
-  </main>
+  </div>
 
   <!-- 懸停提示氣泡 -->
   <div id="seatTooltip" class="fixed z-50 hidden px-3.5 py-2 rounded-xl bg-[#4A423B] text-[#FFFDF9] text-sm font-medium shadow-md border border-[#6E6359]"></div>
 
+  <!-- ===================================================================== -->
+  <!-- 彈窗區                                                                -->
+  <!-- ===================================================================== -->
+
+  <!-- 彈窗 0：抽獎中獎恭賀視窗 -->
+  <div id="winnerCelebrationModal" class="fixed inset-0 z-50 hidden bg-[#4A423B]/55 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#FFFDF9] rounded-3xl border-4 border-[#E09F3E] max-w-lg w-full p-7 shadow-2xl text-center space-y-5 relative overflow-hidden">
+      <div class="inline-block px-4 py-1.5 rounded-full bg-[#FFF3DF] border border-[#E6C794] text-[#9B6318] text-sm font-bold tracking-widest">
+        🎉 長庚科技大學116年旺年會・幸運得主 🎉
+      </div>
+
+      <div id="grandPrizeHeadline" class="hidden"><div class="grand-crown">♛</div><div class="grand-kicker">校長獎 · 全場超級幸運得主</div></div>
+      <div class="space-y-2">
+        <div class="text-base text-[#787067] font-semibold">恭喜獲得</div>
+        <div id="winModalPrizeName" class="serif-title text-3xl sm:text-4xl font-bold text-[#C86D65]">校長獎</div>
+        <div id="winModalPrizeAmount" class="serif-title text-3xl font-bold" style="color:#B8860B"></div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-gradient-to-b from-[#FBF5EA] to-[#F7EDE0] border-2 border-[#DFC397] space-y-2">
+        <div id="winModalPersonName" class="serif-title text-4xl sm:text-5xl font-bold text-[#38332E] tracking-wider">王小明</div>
+        <div id="winModalSeatInfo" class="text-lg font-bold text-[#4E6B54]">第 08 桌・03 號席</div>
+        <div id="winModalFAccount" class="font-mono text-sm text-[#787067]">F 帳號：F000009999</div>
+      </div>
+
+      <p id="winModalCongratText" class="text-lg font-bold text-[#8A5A19]">
+        恭喜 王小明 獲得 校長獎！請上台領獎！
+      </p>
+
+      <div class="pt-2">
+        <button type="button" onclick="closeModal('winnerCelebrationModal')"
+          class="px-8 py-3 rounded-2xl bg-[#C87D75] hover:bg-[#B36860] text-[#FFFDF9] font-bold text-base shadow-md cursor-pointer">
+          太棒了！關閉視窗
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 彈窗 0-B：確認清空得獎紀錄 -->
+  <div id="clearWinnersConfirmModal" class="fixed inset-0 z-50 hidden bg-[#4A423B]/45 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-sm w-full p-6 shadow-xl space-y-4">
+      <h3 class="serif-title text-lg font-bold text-[#38332E]">確認清空一般獎項紀錄？</h3>
+      <p class="text-sm text-[#696056]">僅清空一般獎項紀錄；校長獎得主與已抽完的狀態保留於本場活動。</p>
+      <div class="flex justify-end gap-2 pt-2">
+        <button type="button" onclick="closeModal('clearWinnersConfirmModal')" class="px-4 py-2 rounded-xl text-sm font-semibold bg-[#F3EDE4] text-[#5C5349] cursor-pointer">取消</button>
+        <button type="button" onclick="confirmClearWinners()" class="px-4 py-2 rounded-xl text-sm font-bold bg-[#C86D65] text-[#FFFDF9] hover:bg-[#B2564E] cursor-pointer">確定清空</button>
+      </div>
+    </div>
+  </div>
+
   <!-- 彈窗 1：確認存檔與金額明細 -->
-  <div id="confirmSubmitModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+  <div id="confirmSubmitModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-lg w-full p-6 shadow-xl space-y-4">
       <div class="border-b border-[#EFE8DD] pb-3">
         <h3 class="serif-title text-xl font-bold text-[#38332E]">確認報名與繳費明細</h3>
@@ -481,13 +2731,13 @@
       <div id="confirmModalContent" class="space-y-3 text-base text-[#4A423B]"></div>
       <div class="flex items-center justify-end gap-3 pt-3 border-t border-[#EFE8DD]">
         <button onclick="closeModal('confirmSubmitModal')" class="px-4 py-2.5 rounded-xl text-sm font-semibold bg-[#F3EDE4] text-[#5C5349] hover:bg-[#E6DDD0] cursor-pointer">返回修改</button>
-        <button id="btnFinalSave" onclick="executeSaveRegistration()" class="px-5 py-2.5 rounded-xl text-sm font-bold bg-[#C87D75] text-[#FFFDF9] hover:bg-[#B36860] shadow-xs cursor-pointer">確定鎖定座位並存檔</button>
+        <button id="btnFinalSave" onclick="executeSaveRegistration()" class="px-5 py-2.5 rounded-xl text-sm font-bold bg-[#C87D75] text-[#FFFDF9] hover:bg-[#B36860] shadow-sm cursor-pointer">確定鎖定座位並存檔</button>
       </div>
     </div>
   </div>
 
   <!-- 彈窗 2：報名成功憑證 -->
-  <div id="receiptModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+  <div id="receiptModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-lg w-full p-6 shadow-xl space-y-4">
       <div class="flex items-center gap-3 border-b border-[#EFE8DD] pb-3.5">
         <div class="w-11 h-11 rounded-full bg-[#E9F0EA] text-[#4E6B54] flex items-center justify-center font-bold text-xl">✓</div>
@@ -521,7 +2771,7 @@
   </div>
 
   <!-- 彈窗 3：查詢 / 憑 F 帳號 + 取消碼取消特定人或整筆報名 -->
-  <div id="cancelQueryModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+  <div id="cancelQueryModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-lg w-full p-6 shadow-xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#EFE8DD] pb-3">
         <div>
@@ -539,7 +2789,7 @@
         </div>
         <div>
           <label class="block text-sm font-semibold text-[#5C5349] mb-1">專屬取消碼（6 碼）</label>
-          <input id="queryCancelCode" type="text" maxlength="6" placeholder="請輸入報名時取得之取消碼"
+          <input id="queryCancelCode" type="text" maxlength="16" placeholder="請輸入報名時取得之取消碼"
             class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base uppercase focus:outline-none focus:border-[#C87D75]" />
         </div>
       </div>
@@ -553,7 +2803,7 @@
   </div>
 
   <!-- 彈窗 4：線上候補登記 -->
-  <div id="waitlistModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+  <div id="waitlistModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-md w-full p-6 shadow-xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#EFE8DD] pb-3">
         <div>
@@ -610,19 +2860,19 @@
   </div>
 
   <!-- 彈窗 5：管理員安全驗證 -->
-  <div id="adminLoginModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-4">
+  <div id="adminLoginModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-sm w-full p-6 shadow-xl space-y-4">
       <div class="flex items-center justify-between border-b border-[#EFE8DD] pb-3">
         <div>
           <h3 class="serif-title text-xl font-bold text-[#38332E]">管理員安全驗證登入</h3>
-          <p class="text-xs text-[#787067] mt-0.5">採用 Firebase Authentication 授權帳號驗證</p>
+          <p class="text-xs text-[#787067] mt-0.5">本機測試驗證｜正式版須使用 Firebase 管理員授權</p>
         </div>
         <button onclick="closeModal('adminLoginModal')" class="text-[#8C8276] hover:text-[#38332E] text-xl cursor-pointer">✕</button>
       </div>
       <div class="space-y-3">
         <div>
           <label class="block text-sm font-semibold text-[#5C5349] mb-1">管理員帳號（Email）</label>
-          <input id="adminEmailInput" type="email" placeholder="admin@mail.cgust.edu.tw"
+          <input id="adminEmailInput" type="email" placeholder="管理員 Email"
             class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#DFD5C7] text-base focus:outline-none focus:border-[#C87D75]" />
         </div>
         <div>
@@ -639,21 +2889,21 @@
   </div>
 
   <!-- 彈窗 6：管理員後台總表、報名截止開關、候補名單與 Excel 匯出 -->
-  <div id="adminDashboardModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5">
+  <div id="adminDashboardModal" class="fixed inset-0 z-40 hidden bg-[#4A423B]/45 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
     <div class="bg-[#FFFDF9] rounded-2xl border border-[#E6DDD0] max-w-6xl w-full max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
       <div class="px-6 py-4 bg-[#F7F2EA] border-b border-[#E6DDD0] flex flex-wrap items-center justify-between gap-3">
         <div>
           <h3 class="serif-title text-xl font-bold text-[#38332E]">長庚科技大學116年旺年會｜管理員後台查驗中心</h3>
-          <p class="text-sm text-[#787067]">僅授權管理員可讀取完整個資與取消碼，支援報名截止開關、座位校正與 Excel 總表匯出</p>
+          <p class="text-sm text-[#787067]">僅授權管理員可讀取完整個資與取消碼，支援報名截止開關、座位校正、候補單筆刪除與 Excel 總表匯出</p>
         </div>
         <div class="flex items-center gap-2 flex-wrap">
-          <button id="btnSyncSeatMap" onclick="reconcilePublicSeatMap()" class="px-3.5 py-2 rounded-xl text-sm font-bold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] cursor-pointer" title="若曾在 Firebase 控制台手動刪除資料，可點此同步釋出殘留紅燈座位">
+          <button id="btnSyncSeatMap" onclick="reconcilePublicSeatMap()" class="px-3.5 py-2 rounded-xl text-sm font-bold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] cursor-pointer" title="請先關閉報名，再依正式報名名單校正座位圖；不會刪除得獎紀錄。">
             同步校正座位圖
           </button>
           <button id="btnToggleRegOpen" onclick="toggleRegistrationStatus()" class="px-3.5 py-2 rounded-xl text-sm font-bold bg-[#FFF3DF] text-[#8A5A19] border border-[#E6C794] cursor-pointer">
             報名狀態：開放中（點擊截止）
           </button>
-          <button onclick="exportAdminExcelCSV()" class="px-4 py-2 rounded-xl text-sm font-bold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] shadow-xs cursor-pointer">
+          <button onclick="exportAdminExcelCSV()" class="px-4 py-2 rounded-xl text-sm font-bold bg-[#6E8B74] text-[#FFFDF9] hover:bg-[#5A7560] shadow-sm cursor-pointer">
             匯出報到與發獎 Excel (.csv)
           </button>
           <button onclick="adminSignOut()" class="px-3.5 py-2 rounded-xl text-sm font-semibold bg-[#E8DFD1] text-[#5C5349] hover:bg-[#DCD0BE] cursor-pointer">
@@ -686,10 +2936,12 @@
   <!-- Toast 通知氣泡 -->
   <div id="toastBox" class="fixed bottom-5 right-5 z-50 hidden px-5 py-3.5 rounded-xl bg-[#4A423B] text-[#FFFDF9] text-base font-medium shadow-lg border border-[#6E6359]"></div>
 
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc, runTransaction, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+  <script>
+    let initializeApp, getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged, getFirestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc, runTransaction, onSnapshot;
+    let callBackend;
+
+
+
 
     const DEFAULT_FIREBASE_CONFIG = {
       apiKey: "AIzaSyDtlaTEOD5JTOOsQEfh5QPMH_YhHfqZSbU",
@@ -720,45 +2972,146 @@
     ];
 
     const FAMILY_AGE_TIERS = [
-      { id: "infant", label: "未滿 1 歲（免費・不佔位）", shortLabel: "未滿 1 歲", fee: 0, needsSeat: false },
-      { id: "child_1_6", label: "1–6 歲（250 元・佔位）", shortLabel: "1–6 歲", fee: 250, needsSeat: true },
-      { id: "child_7_12", label: "7–12 歲國小學童（450 元・佔位）", shortLabel: "7–12 歲國小", fee: 450, needsSeat: true },
-      { id: "adult_880", label: "國中（含）以上（880 元・佔位）", shortLabel: "國中（含）以上", fee: 880, needsSeat: true }
+      { id: "infant", label: "未滿 1 歲（免費・不佔位）", short: "未滿 1 歲", fee: 0, needsSeat: false },
+      { id: "child_1_6", label: "1–6 歲（250 元・佔位）", short: "1–6 歲", fee: 250, needsSeat: true },
+      { id: "child_7_12", label: "7–12 歲國小學童（450 元・佔位）", short: "7–12 歲國小", fee: 450, needsSeat: true },
+      { id: "adult_880", label: "國中（含）以上（880 元・佔位）", short: "國中（含）以上", fee: 880, needsSeat: true }
     ];
 
+    // ==================== 全域資料庫與系統狀態 ====================
     let db = null;
     let auth = null;
     let isCloudConnected = false;
-    let isRegistrationOpen = true;
     let isAdminAuthenticated = false;
-    let activeAdminTab = "regs";
+    let isRegistrationOpen = false;
     const appId = "cgust-116-banquet";
 
-    // 公開聚合座位圖（僅含 "table-seat": "楊O宇" 或 "楊O宇眷屬1"，不含個資與取消碼）
-    let publicSeatSlots = {};
-    // 管理員專用完整清單
-    let adminRegistrations = [];
-    let adminWaitlist = [];
+    let activeMainPage = "register"; // "register" | "checkin" | "lottery"
+
+    // 雲端同步狀態（存放於 system_state/public_seat_map）
+    let publicSeatSlots = {};        // "table-seat" -> masked label
+    let checkedInSlots = {};         // "table-seat" -> true
+    let checkedInStaff = {};         // fAccount -> { fAccount, name, table, seat, checkedInAt }
+    let luckyDrawWinners = [];       // [{ id, prize, fAccount, name, table, seat, drawnAt }]
+
+    let checkedDuplicateFAccount = null;
 
     let formState = {
       fAccount: "",
       name: "",
       ext: "",
       email: "",
-      mainSeat: null, // { table, seat }
-      guests: [] // [{ id, name, roleId, ageTierId, seat: { table, seat } | null }]
+      mainSeat: null,
+      guests: []
     };
 
     let currentTableFilter = "all";
     let inspectedTable = 1;
+    let checkinInspectedTable = 1;
     let lastReceiptRegId = "";
     let lastReceiptPlainText = "";
-    let checkedDuplicateFAccount = null; // 紀錄已確認重複的 F 帳號
 
-    // ==================== 隱私遮罩與格式驗證工具 ====================
+    let adminRegistrations = [];
+    let adminWaitlist = [];
+    let activeAdminTab = "regs";
+
+    // 抽獎動畫控制
+    let isLotterySpinning = false;
+    let currentSweepKey = null;
+    let currentWinnerKey = null;
+
+
+
+    let unsubSeat=null,unsubConfig=null;
+    let livePrizes = [];
+    let prizeSaving = false;
+    function isJackpotName(name) { return name === "校長獎"; }
+    function prizeKey(name) {return isJackpotName(name)?"jackpot":"prize:"+String(name||"").normalize("NFKC").trim().replace(/\s+/g," ").toLowerCase();}
+    function isJackpotRecord(w) {return isJackpotName(w?.prize);}
+    function recordKey(w) {return isJackpotRecord(w)?"jackpot":prizeKey(w.prize);}
+    function usedCount(key,wins) {return wins.filter(w=>recordKey(w)===key).length;}
+    const PRESET_PRIZES = [["校長獎", 1, null], ["副校長獎", 1, null], ["主任秘書獎", 1, null], ["教務長獎", 1, null], ["副教務長獎", 1, null], ["學務長獎", 1, null], ["副學務長獎", 1, null], ["總務長獎", 1, null], ["研發長獎", 1, null], ["國際長獎", 1, null], ["人事主任獎", 1, null], ["會計主任獎", 1, null], ["教資中心主任獎", 1, null], ["體育室主任獎", 1, null], ["圖資處長獎", 1, null], ["進推處長獎", 1, null], ["護理學院院長獎", 1, null], ["民生學院院長獎", 1, null], ["通識中心主任獎", 1, null], ["護理系主任獎", 1, null], ["護理系副主任獎 1-張怡雅副主任", 1, null], ["護理系副主任獎 2-吳美玲副主任", 1, null], ["護理系副主任獎 3-陳妙絹副主任", 1, null], ["高照系主任獎", 1, null], ["健科所所長獎", 1, null], ["幼保系主任獎", 1, null], ["妝品系主任獎", 1, null], ["保營系主任獎", 1, null]];
+    function formatPrizeAmount(amount){return amount==null?"":"NT$ "+amount.toLocaleString("zh-TW");}
+    // 固定清單：忽略歷史版本自訂獎項及名額，只讀取既有得獎紀錄。
+    function normalizePrizes(_prizes,_wins) {return PRESET_PRIZES.map(([name,quota,amount])=>({id:prizeKey(name),name,quota,amount}));}
+    function activePrizes(){return normalizePrizes(livePrizes,luckyDrawWinners);}
+    function selectedPrize(){return activePrizes().find(p=>p.id===document.getElementById("lotteryPrizeSelect").value);}
+    function remainingPrize(p,wins){return Math.max(0,p.quota-usedCount(p.id,wins));}
+    function refreshPrizeQuota(){
+      const select=document.getElementById("lotteryPrizeSelect"), prev=select.value, prizes=activePrizes();
+      const wins=luckyDrawWinners;
+      select.replaceChildren(...prizes.map(p=>{const opt=document.createElement("option");opt.value=p.id;const left=remainingPrize(p,wins);opt.textContent=`${p.name}${p.amount==null?"":"｜"+formatPrizeAmount(p.amount)}（${left===0?"已抽完":`剩 ${left} / ${p.quota} 名`}）`;opt.disabled=left===0;return opt;}));
+      if(prizes.some(p=>p.id===prev))select.value=prev;
+      else {const available=prizes.find(p=>remainingPrize(p,wins)>0);select.value=available?.id||prizes[0]?.id||"";}
+      const p=prizes.find(p=>p.id===select.value), left=p?remainingPrize(p,wins):0;
+      document.getElementById("stagePrizeName").textContent=p?.name||"所有獎項已抽完";document.getElementById("drawStage").classList.toggle("president-stage",p?.id==="jackpot");
+      document.getElementById("stagePrizeAmount").textContent=p?.amount==null?"":"獎金 "+formatPrizeAmount(p.amount);
+      document.getElementById("jackpotQuotaStatus").textContent=p?`已抽出 ${usedCount(p.id,wins)} / ${p.quota} 名　｜　剩餘 ${left} 名`:"";
+      const btn=document.getElementById("btnStartLottery"), cue=document.getElementById("stageCue");
+      const pool=p?getEligibleLotteryParticipants(document.getElementById("lotteryExcludeWinners").checked).filter(x=>!wins.some(w=>recordKey(w)===p.id&&w.fAccount===x.fAccount)):[];
+      const state=isLotterySpinning?"spinning":!isAdminAuthenticated?"locked":!isCloudConnected?"offline":!p||left===0?"done":pool.length===0?"empty":"ready";
+      btn.dataset.state=state;btn.disabled=state!=="ready";
+      btn.lastElementChild.textContent=({spinning:"抽獎進行中",locked:"請先登入管理員",offline:"雲端連線中斷",done:"本獎項已抽完",empty:"尚無符合資格人員",ready:"開始抽獎"})[state];
+      if(!isLotterySpinning){cue.classList.remove("countdown");cue.textContent=({locked:"管理員登入後，邀請貴賓按下抽獎按鈕",offline:"請確認雲端連線",done:"請選擇下一個尚有名額的獎項",empty:"請先完成報到",ready:"邀請貴賓按下按鈕 · 每次抽出 1 名"})[state]||"";}
+    }
+    window.refreshPrizeQuota=refreshPrizeQuota;
+    window.toggleStageFullscreen=async function(){
+      try{if(document.fullscreenElement){await document.exitFullscreen();}else{await document.documentElement.requestFullscreen();}}catch{showToast("瀏覽器不支援全螢幕，請使用 F11。");}
+      document.getElementById("drawStage").scrollIntoView({block:"center",behavior:"instant"});
+    };
+    document.addEventListener("fullscreenchange",()=>{document.getElementById("stageFullscreenBtn").textContent=document.fullscreenElement?"⛶ 離開全螢幕":"⛶ 全螢幕投影";});
+
+    function updateLotteryAccess() {
+      const allowed=isCloudConnected && isAdminAuthenticated && !isLotterySpinning && !prizeSaving;
+      for(const id of ['btnStartLottery','lotteryExcludeWinners','lotteryPrizeSelect','btnClearWinners','btnExportWinners']) {
+        const el=document.getElementById(id); if(el) el.disabled=!allowed;
+      }
+      const status=document.getElementById('lotteryAccessStatus');
+      status.textContent=isAdminAuthenticated?'管理員已登入｜可操作抽獎':'訪客觀賞模式｜僅管理員登入後可操作抽獎';
+      document.getElementById('lotteryLoginBtn').classList.toggle('hidden',isAdminAuthenticated);
+      document.getElementById('lotteryLogoutBtn').classList.toggle('hidden',!isAdminAuthenticated);
+      document.getElementById('lotteryLogoutBtn').disabled=isLotterySpinning;
+      document.getElementById('lotteryDashboardBtn').classList.toggle('hidden',!isAdminAuthenticated);
+      document.getElementById('lotteryDashboardBtn').disabled=isLotterySpinning;
+      refreshPrizeQuota();
+    }
+    function setSpinControls(disabled) {
+      for (const id of ['btnStartLottery','lotteryExcludeWinners','lotteryPrizeSelect','mainNav-register','mainNav-checkin']) document.getElementById(id).disabled=disabled;
+      updateLotteryAccess();
+    }
+    function randomIndex(n) {const a=new Uint32Array(1), limit=Math.floor(4294967296/n)*n;do{crypto.getRandomValues(a);}while(a[0]>=limit);return a[0]%n;}
+
+    // ==================== 三大核心分頁切換 ====================
+    window.switchMainPage = function(page) {
+      if (isLotterySpinning || prizeSaving) return;
+
+      activeMainPage = page;
+      const pages = ["register", "checkin", "lottery"];
+      pages.forEach(p => {
+        const sec = document.getElementById(`page-${p}`);
+        const navBtn = document.getElementById(`mainNav-${p}`);
+        if (sec) sec.classList.toggle("hidden", p !== page);
+        if (navBtn) {
+          if (p === page) {
+            navBtn.className = "px-4 py-2.5 rounded-xl text-base font-bold bg-[#C87D75] text-[#FFFDF9] shadow-sm transition flex items-center gap-2 cursor-pointer";
+          } else {
+            navBtn.className = "px-4 py-2.5 rounded-xl text-base font-semibold bg-[#F5EFE6] text-[#5C5349] hover:bg-[#EAE0D2] border border-[#DFD3C3] transition flex items-center gap-2 cursor-pointer";
+          }
+        }
+      });
+
+      if (page === "register") {
+        updateWorkspaceAvailability();
+      } else if (page === "checkin") {
+        renderCheckinPage();
+      } else if (page === "lottery") {
+        renderLotteryPage();
+      }
+    };
+
     function maskMiddleName(fullName) {
       const clean = (fullName || "").trim();
-      if (!clean) return "未填姓名";
+      if (!clean) return "已預約";
       const chars = Array.from(clean);
       if (chars.length === 1) return chars[0];
       if (chars.length === 2) return `${chars[0]}O`;
@@ -815,10 +3168,10 @@
       let regularUsed = 0;
       let hasTableWithEnoughSeats = false;
 
-      for (let t = 1; t < RESERVE_TABLE; t++) {
+      for (let tNum = 1; tNum < RESERVE_TABLE; tNum++) {
         let tableFree = 0;
         for (let s = 1; s <= SEATS_PER_TABLE; s++) {
-          if (publicSeatSlots[`${t}-${s}`]) regularUsed++;
+          if (publicSeatSlots[`${tNum}-${s}`]) regularUsed++;
           else tableFree++;
         }
         if (neededForCurrentGroup === 0 || tableFree >= neededForCurrentGroup) {
@@ -840,17 +3193,17 @@
           needsSeat: true
         };
       }
-      const tier = FAMILY_AGE_TIERS.find(t => t.id === (guest.ageTierId || "adult_880")) || FAMILY_AGE_TIERS[3];
+      const tier = FAMILY_AGE_TIERS.find(item => item.id === (guest.ageTierId || "adult_880")) || FAMILY_AGE_TIERS[3];
       return {
         roleLabel: "一般眷屬",
-        shortLabel: tier.shortLabel,
+        shortLabel: tier.short,
         fee: tier.fee,
         needsSeat: tier.needsSeat
       };
     }
 
     function getRequiredSeatCount() {
-      let count = 1; // 本人 1 席
+      let count = 1;
       formState.guests.forEach(g => {
         if (getCompanionPricing(g).needsSeat) count += 1;
       });
@@ -902,16 +3255,26 @@
 
     // ==================== Firebase 雲端連線與監聽 ====================
     async function initDatabase() {
+
       try {
+        ({ initializeApp } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"));
+        ({ getAuth, signInAnonymously, signInWithEmailAndPassword, signOut, onAuthStateChanged } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"));
+        ({ getFirestore, collection, doc, getDoc, getDocs, setDoc, deleteDoc, runTransaction, onSnapshot } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"));
         const app = initializeApp(DEFAULT_FIREBASE_CONFIG);
+        const {getFunctions,httpsCallable}=await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-functions.js");
+        const invoke=httpsCallable(getFunctions(app,"us-central1"),"banquetAction");
+        callBackend=async(action,data={})=>(await invoke({action,...data})).data;
         auth = getAuth(app);
         db = getFirestore(app);
 
-        await signInAnonymously(auth);
+        await auth.authStateReady();
+        if (!auth.currentUser) await signInAnonymously(auth);
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
+          isAdminAuthenticated=false;isCloudConnected=false;checkedInStaff={};luckyDrawWinners=[];if(unsubSeat)unsubSeat();updateLotteryAccess();
           if (user) {
-            isAdminAuthenticated = !user.isAnonymous;
+            try {const token=await user.getIdTokenResult();if(auth.currentUser?.uid!==user.uid)return;isAdminAuthenticated=token.claims.admin===true;} catch(e){console.error(e);}
+            updateLotteryAccess();
             subscribePublicSeatMap();
             subscribeBanquetConfig();
           }
@@ -929,17 +3292,33 @@
     }
 
     function subscribePublicSeatMap() {
-      const stateRef = doc(db, "artifacts", appId, "public", "data", "system_state", "public_seat_map");
-      onSnapshot(stateRef, (snap) => {
+      const stateRef = doc(db, "artifacts", appId, "public", "data", "system_state", isAdminAuthenticated?"public_seat_map":"public_view");
+      if(unsubSeat) unsubSeat();
+      unsubSeat = onSnapshot(stateRef, {includeMetadataChanges:true}, (snap) => {
+        if(snap.metadata.fromCache || !snap.exists()){isCloudConnected=false;updateSyncBadge(false);updateWorkspaceAvailability();updateLotteryAccess();return;}
         isCloudConnected = true;
         hideSystemAlert();
         updateSyncBadge(true);
+
         if (snap.exists()) {
-          publicSeatSlots = snap.data().slots || {};
+          const data = snap.data();
+          publicSeatSlots = data.slots || {};
+          checkedInSlots = data.checkedInSlots || {};
+          checkedInStaff = data.checkedInStaff || {};
+          luckyDrawWinners = (data.luckyDrawWinners || []).filter(w=>PRESET_PRIZES.some(p=>p[0]===w.prize));
+          livePrizes = data.prizeQuotas || [];
         } else {
           publicSeatSlots = {};
+          checkedInSlots = {};
+          checkedInStaff = {};
+          luckyDrawWinners = [];
+          livePrizes = [];
         }
+        updateNavBadges();
+        updateWorkspaceAvailability();
         refreshAllUI();
+        if (activeMainPage === "checkin") renderCheckinPage();
+        if (!isLotterySpinning) renderLotteryPage();
       }, (err) => {
         console.error("Public seat map error:", err);
         isCloudConnected = false;
@@ -948,14 +3327,15 @@
           "⚠️ 雲端座位圖同步中斷，已暫停報名",
           "無法讀取即時座位狀態（可能為網路中斷或權限設定限制），請重新整理頁面後再試。"
         );
-        updateWorkspaceAvailability();
+        updateWorkspaceAvailability();updateLotteryAccess();
       });
     }
 
     function subscribeBanquetConfig() {
       const cfgRef = doc(db, "artifacts", appId, "public", "data", "system_state", "banquet_config");
-      onSnapshot(cfgRef, (snap) => {
-        if (snap.exists() && snap.data().isOpen === false) {
+      if(unsubConfig) unsubConfig();
+      unsubConfig = onSnapshot(cfgRef, {includeMetadataChanges:true}, (snap) => {
+        if (snap.metadata.fromCache || !snap.exists() || snap.data().isOpen !== true) {
           isRegistrationOpen = false;
         } else {
           isRegistrationOpen = true;
@@ -963,7 +3343,7 @@
         updateWorkspaceAvailability();
         updateAdminRegStatusButton();
       }, () => {
-        isRegistrationOpen = true;
+        isRegistrationOpen = false;
         updateWorkspaceAvailability();
       });
     }
@@ -978,6 +3358,15 @@
         badge.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-[#F9EFEA] text-[#A85D55] border border-[#E8CFC9]";
         badge.innerHTML = `<span class="w-2.5 h-2.5 rounded-full bg-[#C86D65]"></span>雲端未連線（禁止報名）`;
       }
+    }
+
+    function updateNavBadges() {
+      const litCount = Object.keys(checkedInSlots).filter(k => publicSeatSlots[k]).length;
+      const eligibleList = getEligibleLotteryParticipants(true);
+      const ciBadge = document.getElementById("navCheckinBadge");
+      const ltBadge = document.getElementById("navLotteryBadge");
+      if (ciBadge) ciBadge.textContent = `${litCount} 席已亮燈`;
+      if (ltBadge) ltBadge.textContent = `${eligibleList.length} 人具資格`;
     }
 
     function showSystemAlert(title, desc) {
@@ -1047,9 +3436,7 @@
 
       const isVip = isVipExecutiveName(formState.name);
       const vipHintEl = document.getElementById("vipNameHint");
-      if (vipHintEl) {
-        vipHintEl.classList.toggle("hidden", !isVip);
-      }
+      if (vipHintEl) vipHintEl.classList.toggle("hidden", !isVip);
 
       if (formState.mainSeat) {
         if (isVip && formState.mainSeat.table !== VIP_HEAD_TABLE) {
@@ -1069,7 +3456,7 @@
       } else if (isValidFAccountFormat(rawF)) {
         if (checkedDuplicateFAccount === rawF) {
           hintEl.className = "text-xs text-[#C86D65] font-bold mt-1";
-          hintEl.textContent = "⛔ 此 F 帳號已完成報名，不可重複報名或重複佔位！";
+          hintEl.textContent = "⛔ 此 F 帳號已完成報名，不可重複報名！如需異動請點上方「查詢 / 取消報名與重選」。";
         } else {
           hintEl.className = "text-xs text-[#4E6B54] font-semibold mt-1";
           hintEl.textContent = "查詢帳號是否已報名中...";
@@ -1104,11 +3491,7 @@
       if (!db || !isCloudConnected || !isValidFAccountFormat(fAccUpper)) return false;
       const hintEl = document.getElementById("fAccountHint");
       try {
-        const [fLockSnap, privSnap] = await Promise.all([
-          getDoc(doc(db, "artifacts", appId, "public", "data", "f_account_locks", fAccUpper)),
-          getDoc(doc(db, "artifacts", appId, "public", "data", "private_registrations", fAccUpper))
-        ]);
-        const isDup = fLockSnap.exists() || privSnap.exists();
+        const {exists:isDup}=await callBackend("exists",{fAccount:fAccUpper});
         if (isDup) {
           checkedDuplicateFAccount = fAccUpper;
           if (formState.fAccount === fAccUpper && hintEl) {
@@ -1176,9 +3559,7 @@
       const target = formState.guests.find(g => g.id === guestId);
       if (target) {
         target.roleId = roleId;
-        if (!getCompanionPricing(target).needsSeat) {
-          target.seat = null;
-        }
+        if (!getCompanionPricing(target).needsSeat) target.seat = null;
         renderGuestsForm();
         updateBillingAndSeatPreview();
         renderBanquetHall();
@@ -1189,9 +3570,7 @@
       const target = formState.guests.find(g => g.id === guestId);
       if (target) {
         target.ageTierId = ageTierId;
-        if (!getCompanionPricing(target).needsSeat) {
-          target.seat = null;
-        }
+        if (!getCompanionPricing(target).needsSeat) target.seat = null;
         renderGuestsForm();
         updateBillingAndSeatPreview();
         renderBanquetHall();
@@ -1229,7 +3608,7 @@
               <div class="flex items-center gap-2 flex-wrap">
                 <span class="text-sm font-bold text-[#6E8B74]">陪同者 #${idx + 1}</span>
                 <span class="px-2.5 py-0.5 rounded-md text-xs font-semibold bg-[#FFFDF9] text-[#A85D55] border border-[#E6D5C8]">
-                  ${pricing.fee} 元・${pricing.needsSeat ? `標示：${escapeHtml(displayAlias)}` : "不佔位"}
+                  NT$${pricing.fee}・${escapeHtml(displayAlias)}
                 </span>
                 ${isCurrentTarget ? `<span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-[#E09F3E] text-[#FFFDF9]">目前選位對象</span>` : ""}
               </div>
@@ -1239,7 +3618,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               <div>
                 <label class="block text-xs font-medium text-[#696056] mb-1">陪同者姓名 <span class="text-[#C86D65]">*</span></label>
-                <input type="text" value="${escapeHtml(g.name)}" placeholder="請輸入姓名"
+                <input type="text" value="${escapeHtml(g.name)}" placeholder="請輸入真實姓名"
                   oninput="updateGuestName('${g.id}', this.value)"
                   class="w-full px-3 py-2 rounded-lg bg-[#FFFDF9] border border-[#DFD5C7] text-sm text-[#38332E] focus:outline-none focus:border-[#C87D75]" />
               </div>
@@ -1257,7 +3636,7 @@
                 <label class="block text-xs font-medium text-[#696056] mb-1">一般眷屬收費級距 <span class="text-[#C86D65]">*</span></label>
                 <select onchange="updateGuestAgeTier('${g.id}', this.value)"
                   class="w-full px-3 py-2 rounded-lg bg-[#FFFDF9] border border-[#DFD5C7] text-sm text-[#38332E] focus:outline-none focus:border-[#C87D75]">
-                  ${FAMILY_AGE_TIERS.map(t => `<option value="${t.id}" ${(g.ageTierId || "adult_880") === t.id ? "selected" : ""}>${t.label}</option>`).join("")}
+                  ${FAMILY_AGE_TIERS.map(tier => `<option value="${tier.id}" ${(g.ageTierId || "adult_880") === tier.id ? "selected" : ""}>${tier.label}</option>`).join("")}
                 </select>
               </div>
             ` : `
@@ -1288,7 +3667,7 @@
 
       if (!target) {
         leftBanner.className = "px-3.5 py-2.5 rounded-lg bg-[#E9F0EA] border border-[#C6D8C9] text-sm text-[#4E6B54] font-semibold";
-        leftBanner.textContent = `✓ 目前所有席次皆已選位完成！可直接檢視明細存檔，或按「+ 新增陪同者」`;
+        leftBanner.textContent = "✓ 目前所有席次皆已選位完成！可直接檢視明細存檔，或按「+ 新增陪同者」";
         hallTargetName.textContent = "全部已選位完成";
         hallTargetHint.textContent = "可點「檢視明細並確定存檔」或繼續新增陪同者";
       } else if (!target.readyToPick) {
@@ -1322,8 +3701,8 @@
       const feeParts = ["本人免費(1席)"];
       formState.guests.forEach((g, idx) => {
         const pricing = getCompanionPricing(g);
-        const gName = g.name.trim() || `陪同者${idx + 1}`;
-        feeParts.push(`${gName}(${pricing.roleLabel}) ${pricing.fee}元${pricing.needsSeat ? "" : "(不佔位)"}`);
+        const gName = g.name.trim() || `陪同者 ${idx + 1}`;
+        feeParts.push(`${gName}(${pricing.roleLabel}) NT$${pricing.fee}${pricing.needsSeat ? "" : "(不佔位)"}`);
       });
       document.getElementById("feeBreakdownSub").textContent = feeParts.join(" + ");
 
@@ -1337,9 +3716,7 @@
       rows.push(`
         <div class="flex items-center justify-between py-1.5 px-2.5 rounded-lg bg-[#FFFDF9] border border-[#EDE4D8]">
           <span class="font-medium text-[#38332E]">本人：${hostTag}</span>
-          <span class="${mainSeat ? "text-[#4E6B54] font-bold" : "text-[#C86D65]"}">
-            ${mainSeatText}
-          </span>
+          <span class="${mainSeat ? "text-[#4E6B54] font-bold" : "text-[#C86D65]"}">${mainSeatText}</span>
         </div>
       `);
 
@@ -1358,12 +3735,13 @@
           seatedOrder += 1;
           const aliasLabel = `${escapeHtml(maskedHost)}眷屬${seatedOrder}`;
           const s = g.seat;
+          const gSeatFormatted = s
+            ? `${formatTableName(s.table)}${s.table === VEGETARIAN_TABLE ? "(素食桌)" : ""}・${s.seat} 號席`
+            : "請至一般選位區點選綠燈";
           rows.push(`
             <div class="flex items-center justify-between py-1.5 px-2.5 rounded-lg bg-[#FFFDF9] border border-[#EDE4D8]">
               <span class="text-[#5C5349]">${aliasLabel}（${gRealName}）</span>
-              <span class="${s ? "text-[#4E6B54] font-bold" : "text-[#C86D65]"}">
-                ${s ? `${formatTableName(s.table)}${s.table === VEGETARIAN_TABLE ? "(素食桌)" : ""}・${s.seat} 號席` : "請至一般選位區點選綠燈"}
-              </span>
+              <span class="${s ? "text-[#4E6B54] font-bold" : "text-[#C86D65]"}">${gSeatFormatted}</span>
             </div>
           `);
         }
@@ -1428,7 +3806,7 @@
       const vipRosterHint = VIP_EXECUTIVES.join("、");
 
       container.innerHTML = `
-        <div class="max-w-lg mx-auto p-4 rounded-2xl bg-gradient-to-b from-[#FBF5EA] to-[#F7EDE0] border-2 border-[#DFC397] shadow-xs text-center">
+        <div class="max-w-lg mx-auto p-4 rounded-2xl bg-gradient-to-b from-[#FBF5EA] to-[#F7EDE0] border-2 border-[#DFC397] shadow-sm text-center">
           <div class="flex flex-wrap items-center justify-center gap-2 mb-2">
             <span class="px-3 py-1 rounded-lg bg-[#C6924E] text-[#FFFDF9] text-sm font-bold">👑 舞台最前方・長官大主桌（尚餘 ${vipFreeCount} 席）</span>
             <span class="text-xs text-[#8A6736]">僅限 12 位長官本人自行選位</span>
@@ -1460,9 +3838,7 @@
       if (activeBtn) {
         activeBtn.className = "filter-chip px-3 py-1.5 rounded-lg bg-[#C87D75] text-[#FFFDF9] font-medium cursor-pointer";
       }
-      if (mode === "veg") {
-        inspectedTable = VEGETARIAN_TABLE;
-      }
+      if (mode === "veg") inspectedTable = VEGETARIAN_TABLE;
       renderBanquetHall();
     };
 
@@ -1470,9 +3846,7 @@
       inspectedTable = tableNum;
       renderBanquetHall();
       const detailEl = document.getElementById("activeTableDetailStage");
-      if (detailEl) {
-        detailEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-      }
+      if (detailEl) detailEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
     };
 
     function renderBanquetHall() {
@@ -1489,16 +3863,14 @@
       const gridRows = [];
       for (let r = 0; r < 7; r++) {
         const rowTables = [];
-        for (let c = 1; c <= 7; c++) {
-          rowTables.push(r * 7 + c);
-        }
+        for (let c = 1; c <= 7; c++) rowTables.push(r * 7 + c);
         gridRows.push({ label: `第 ${r + 1} 排（7 桌）`, tables: rowTables });
       }
       gridRows.push({ label: "加開與預備區（4 桌）", tables: [50, 51, 52, 53] });
 
       const sectionsHtml = [];
       gridRows.forEach(rowObj => {
-        const visibleTables = rowObj.tables.filter(t => shouldShowTable(t, reserveUnlocked));
+        const visibleTables = rowObj.tables.filter(tNum => shouldShowTable(tNum, reserveUnlocked));
         if (visibleTables.length === 0) return;
 
         sectionsHtml.push(`
@@ -1508,7 +3880,7 @@
               <div class="flex-1 h-px bg-[#EAE0D2]"></div>
             </div>
             <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2.5">
-              ${visibleTables.map(t => renderMiniTableCard(t, draftSeats, reserveUnlocked)).join("")}
+              ${visibleTables.map(tNum => renderMiniTableCard(tNum, draftSeats, reserveUnlocked)).join("")}
             </div>
           </div>
         `);
@@ -1567,7 +3939,7 @@
 
       let cardStyle = "bg-[#FAF7F2] border-[#E5DBD0] hover:border-[#C87D75]";
       if (isInspected) {
-        cardStyle = "bg-[#E9F0EA]/80 border-2 border-[#6E8B74] shadow-xs";
+        cardStyle = "bg-[#E9F0EA]/80 border-2 border-[#6E8B74] shadow-sm";
       } else if (isVeg) {
         cardStyle = "bg-[#EEF4EF] border-[#B4CCB8] hover:border-[#6E8B74]";
       } else if (isReserveLocked) {
@@ -1625,20 +3997,20 @@
           btnClass = "seat-locked";
           subText = "未開";
           clickAttr = `onclick="showToast('第 53 桌為「預備桌」，必須等第 01～52 桌全滿或已無同桌連續空位時才會開放！')"`;
-          hoverAttr = `onmouseenter="showSeatTooltip(event, '第 53 桌預備桌（目前尚未開放）')" onmouseleave="hideSeatTooltip()"`;
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '預備桌（尚未開放）')" onmouseleave="hideSeatTooltip()"`;
         } else if (occLabel) {
           btnClass = "seat-occupied";
           subText = "已選";
           const safeLabel = escapeHtml(occLabel);
-          clickAttr = `onclick="showToast('第 ${String(tableNum).padStart(2, "0")} 桌 ${s} 號席已被「${safeLabel}」預約')"`;
+          clickAttr = `onclick="showToast('${formatTableName(tableNum)} ${s} 號席：${safeLabel}')"`;
           hoverAttr = `onmouseenter="showSeatTooltip(event, '${safeLabel}')" onmouseleave="hideSeatTooltip()"`;
         } else if (isSelected) {
           btnClass = "seat-selected";
           subText = "暫選";
           const draftAlias = getDraftAliasForSeat(tableNum, s);
-          hoverAttr = `onmouseenter="showSeatTooltip(event, '${escapeHtml(draftAlias)}（點擊可取消）')" onmouseleave="hideSeatTooltip()"`;
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '${escapeHtml(draftAlias)}')" onmouseleave="hideSeatTooltip()"`;
         } else {
-          hoverAttr = `onmouseenter="showSeatTooltip(event, '第 ${String(tableNum).padStart(2, "0")} 桌 ${s} 號空位')" onmouseleave="hideSeatTooltip()"`;
+          hoverAttr = `onmouseenter="showSeatTooltip(event, '${formatTableName(tableNum)} ${s} 號空位')" onmouseleave="hideSeatTooltip()"`;
         }
 
         seatsHtml += `
@@ -1672,7 +4044,7 @@
         <div class="rounded-2xl bg-[#FAF7F2] border border-[#E6DDD0] p-4 sm:p-5">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
             <div class="flex items-center gap-2">
-              <h3 class="serif-title text-xl font-bold text-[#38332E]">第 ${String(tableNum).padStart(2, "0")} 桌</h3>
+              <h3 class="serif-title text-xl font-bold text-[#38332E]">${formatTableName(tableNum)}</h3>
               ${badgeHtml}
             </div>
             <span class="text-sm font-semibold ${isReserveLocked ? "text-[#7A7269]" : freeCount > 0 ? "text-[#4E6B54]" : "text-[#B2564E]"}">
@@ -1686,7 +4058,7 @@
                 <div class="round-table-lazy-susan">
                   <span class="text-[10px] tracking-widest text-[#8C8276]">TABLE</span>
                   <span class="serif-title text-2xl font-bold ${centerTitleColor} leading-tight">${String(tableNum).padStart(2, "0")}</span>
-                  <span class="text-xs text-[#787067]">${centerSubText}</span>
+                  <span class="text-xs text-[#787067]">${isVeg || isReserve ? centerSubText : "CGUST 116"}</span>
                 </div>
               </div>
               ${seatsHtml}
@@ -1833,7 +4205,6 @@
         return showToast("「F 帳號」格式錯誤！請輸入大寫 F 再加 9 個數字（共 10 碼，例如 F000009999）。");
       }
 
-      // 送出預覽前即時向雲端雙重確認該 F 帳號是否已報名
       const isAlreadyRegistered = await verifyFAccountNotRegistered(formState.fAccount);
       if (isAlreadyRegistered) {
         document.getElementById("inputFAccount").focus();
@@ -1936,6 +4307,7 @@
     };
 
     window.executeSaveRegistration = async function() {
+      if(!isCloudConnected || !isRegistrationOpen) return showToast("目前無法報名。");
       const btn = document.getElementById("btnFinalSave");
       btn.disabled = true;
       btn.textContent = "雲端原子鎖定中...";
@@ -1983,64 +4355,9 @@
           createdAt: Date.now()
         };
 
-        await runTransaction(db, async (transaction) => {
-          const fLockRef = doc(db, "artifacts", appId, "public", "data", "f_account_locks", fAccUpper);
-          const privRegRef = doc(db, "artifacts", appId, "public", "data", "private_registrations", fAccUpper);
-          const emailLockRef = doc(db, "artifacts", appId, "public", "data", "email_locks", fullEmailLower);
-          const pubMapRef = doc(db, "artifacts", appId, "public", "data", "system_state", "public_seat_map");
-
-          const [fLockSnap, privRegSnap, emailLockSnap] = await Promise.all([
-            transaction.get(fLockRef),
-            transaction.get(privRegRef),
-            transaction.get(emailLockRef)
-          ]);
-
-          if (fLockSnap.exists() || privRegSnap.exists()) {
-            throw new Error("DUPLICATE_F_ACCOUNT");
-          }
-          if (emailLockSnap.exists()) {
-            throw new Error("DUPLICATE_EMAIL");
-          }
-
-          const seatsToLock = [
-            { key: `${newReg.mainSeat.table}-${newReg.mainSeat.seat}`, label: maskedHost, table: newReg.mainSeat.table, seat: newReg.mainSeat.seat }
-          ];
-          structuredGuests.forEach(g => {
-            if (g.needsSeat && g.seatInfo) {
-              seatsToLock.push({ key: `${g.seatInfo.table}-${g.seatInfo.seat}`, label: g.publicAlias, table: g.seatInfo.table, seat: g.seatInfo.seat });
-            }
-          });
-
-          for (const item of seatsToLock) {
-            const seatLockRef = doc(db, "artifacts", appId, "public", "data", "seat_locks", item.key);
-            const seatLockSnap = await transaction.get(seatLockRef);
-            if (seatLockSnap.exists()) {
-              throw new Error(`SEAT_TAKEN:${item.table}:${item.seat}`);
-            }
-          }
-
-          const pubMapSnap = await transaction.get(pubMapRef);
-          const currentSlots = pubMapSnap.exists() ? { ...(pubMapSnap.data().slots || {}) } : {};
-
-          for (const item of seatsToLock) {
-            if (currentSlots[item.key]) {
-              throw new Error(`SEAT_TAKEN:${item.table}:${item.seat}`);
-            }
-            currentSlots[item.key] = item.label;
-          }
-
-          transaction.set(fLockRef, { regId, createdAt: newReg.createdAt });
-          transaction.set(emailLockRef, { fAccount: fAccUpper, regId, createdAt: newReg.createdAt });
-          for (const item of seatsToLock) {
-            const seatLockRef = doc(db, "artifacts", appId, "public", "data", "seat_locks", item.key);
-            transaction.set(seatLockRef, { fAccount: fAccUpper, displayLabel: item.label, createdAt: newReg.createdAt });
-          }
-          transaction.set(privRegRef, newReg);
-          transaction.set(pubMapRef, { slots: currentSlots, updatedAt: Date.now() });
-        });
-
+        const saved=await callBackend("register",{registration:newReg});
         closeModal("confirmSubmitModal");
-        showReceiptModal(newReg);
+        showReceiptModal(saved);
 
         checkedDuplicateFAccount = null;
         formState = { fAccount: "", name: "", ext: "", email: "", mainSeat: null, guests: [] };
@@ -2180,17 +4497,7 @@
       btn.textContent = "雲端驗證查詢中...";
 
       try {
-        const privRef = doc(db, "artifacts", appId, "public", "data", "private_registrations", fAcc);
-        const snap = await getDoc(privRef);
-        if (!snap.exists()) {
-          area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-sm text-[#A85D55]">查無此 F 帳號的報名紀錄。</div>`;
-          return;
-        }
-        const reg = snap.data();
-        if ((reg.cancelCode || "").toUpperCase() !== code) {
-          area.innerHTML = `<div class="p-3 rounded-xl bg-[#F9F1EE] text-sm text-[#A85D55]">專屬取消碼驗證錯誤，請確認後再試（若遺失請洽管理員查詢）。</div>`;
-          return;
-        }
+        const reg=await callBackend("lookup",{fAccount:fAcc,cancelCode:code});
         renderCancelManagementView(reg);
       } catch (e) {
         console.error(e);
@@ -2265,55 +4572,7 @@
     window.cancelSpecificGuest = async function(fAccount, cancelCode, guestId) {
       const fAccUpper = fAccount.toUpperCase();
       try {
-        let updatedRegResult = null;
-        await runTransaction(db, async (transaction) => {
-          const privRef = doc(db, "artifacts", appId, "public", "data", "private_registrations", fAccUpper);
-          const pubMapRef = doc(db, "artifacts", appId, "public", "data", "system_state", "public_seat_map");
-
-          const privSnap = await transaction.get(privRef);
-          if (!privSnap.exists()) throw new Error("NOT_FOUND");
-          const reg = privSnap.data();
-          if ((reg.cancelCode || "").toUpperCase() !== cancelCode.toUpperCase()) {
-            throw new Error("INVALID_CODE");
-          }
-
-          const targetGuest = (reg.guests || []).find(g => g.id === guestId);
-          if (!targetGuest) throw new Error("GUEST_NOT_FOUND");
-
-          const pubMapSnap = await transaction.get(pubMapRef);
-          const currentSlots = pubMapSnap.exists() ? { ...(pubMapSnap.data().slots || {}) } : {};
-
-          // 釋出該位陪同者原本佔用的座位（若有）
-          if (targetGuest.seatInfo) {
-            const oldKey = `${targetGuest.seatInfo.table}-${targetGuest.seatInfo.seat}`;
-            delete currentSlots[oldKey];
-            const oldLockRef = doc(db, "artifacts", appId, "public", "data", "seat_locks", oldKey);
-            transaction.delete(oldLockRef);
-          }
-
-          // 重編剩餘佔位陪同者之公開遮罩代號（例如取消眷屬1後，原眷屬2遞補為眷屬1）
-          const maskedHost = maskMiddleName(reg.name);
-          let order = 0;
-          const remainingGuests = (reg.guests || [])
-            .filter(g => g.id !== guestId)
-            .map(g => {
-              if (g.needsSeat && g.seatInfo) {
-                order += 1;
-                const alias = `${maskedHost}眷屬${order}`;
-                const sKey = `${g.seatInfo.table}-${g.seatInfo.seat}`;
-                currentSlots[sKey] = alias;
-                return { ...g, publicAlias: alias };
-              }
-              return g;
-            });
-
-          const newTotal = remainingGuests.reduce((sum, g) => sum + (g.fee || 0), 0);
-          updatedRegResult = { ...reg, guests: remainingGuests, totalAmount: newTotal };
-
-          transaction.set(privRef, updatedRegResult);
-          transaction.set(pubMapRef, { slots: currentSlots, updatedAt: Date.now() });
-        });
-
+        const updatedRegResult=await callBackend("cancel",{fAccount:fAccUpper,cancelCode,guestId});
         showToast("已取消該位陪同者並釋出座位，總金額已自動重算！");
         if (updatedRegResult) renderCancelManagementView(updatedRegResult);
       } catch (e) {
@@ -2325,44 +4584,7 @@
     window.cancelEntireRegistration = async function(fAccount, cancelCode) {
       const fAccUpper = fAccount.toUpperCase();
       try {
-        await runTransaction(db, async (transaction) => {
-          const privRef = doc(db, "artifacts", appId, "public", "data", "private_registrations", fAccUpper);
-          const fLockRef = doc(db, "artifacts", appId, "public", "data", "f_account_locks", fAccUpper);
-          const pubMapRef = doc(db, "artifacts", appId, "public", "data", "system_state", "public_seat_map");
-
-          const privSnap = await transaction.get(privRef);
-          if (!privSnap.exists()) throw new Error("NOT_FOUND");
-          const reg = privSnap.data();
-
-          if (!isAdminAuthenticated && (reg.cancelCode || "").toUpperCase() !== cancelCode.toUpperCase()) {
-            throw new Error("INVALID_CODE");
-          }
-
-          const pubMapSnap = await transaction.get(pubMapRef);
-          const currentSlots = pubMapSnap.exists() ? { ...(pubMapSnap.data().slots || {}) } : {};
-
-          const keysToFree = [];
-          if (reg.mainSeat) keysToFree.push(`${reg.mainSeat.table}-${reg.mainSeat.seat}`);
-          (reg.guests || []).forEach(g => {
-            if (g.seatInfo) keysToFree.push(`${g.seatInfo.table}-${g.seatInfo.seat}`);
-          });
-
-          for (const k of keysToFree) {
-            delete currentSlots[k];
-            const sLockRef = doc(db, "artifacts", appId, "public", "data", "seat_locks", k);
-            transaction.delete(sLockRef);
-          }
-
-          if (reg.email) {
-            const emailLockRef = doc(db, "artifacts", appId, "public", "data", "email_locks", reg.email.toLowerCase());
-            transaction.delete(emailLockRef);
-          }
-
-          transaction.delete(privRef);
-          transaction.delete(fLockRef);
-          transaction.set(pubMapRef, { slots: currentSlots, updatedAt: Date.now() });
-        });
-
+        await callBackend("cancel",{fAccount:fAccUpper,cancelCode});
         if (checkedDuplicateFAccount === fAccUpper) checkedDuplicateFAccount = null;
         closeModal("cancelQueryModal");
         showToast(`已取消 ${fAccUpper} 的整筆報名並釋出所有座位！`);
@@ -2373,6 +4595,626 @@
         console.error(e);
         showToast("取消整筆報名失敗，請確認權限或網路連線。");
       }
+    };
+
+    // ==================== 分頁二：當天報到簽到（座位即時亮燈） ====================
+    window.lookupCheckInGroup = async function() {
+      if(!isAdminAuthenticated) return showToast("請由管理員登入辦理報到。");
+      if (!isCloudConnected) return showToast("雲端資料庫尚未連線，請稍後再試。");
+      const fAcc = document.getElementById("checkinFAccountInput").value.trim().toUpperCase();
+      const cardEl = document.getElementById("checkinResultCard");
+
+      if (!isValidFAccountFormat(fAcc)) {
+        showToast("請輸入正確的 10 碼 F 帳號（大寫 F + 9 個數字，例如 F000009999）。");
+        return;
+      }
+
+      const btn = document.getElementById("btnLookupCheckin");
+      btn.disabled = true;
+      btn.textContent = "查詢中...";
+
+      try {
+        const privRef = doc(db, "artifacts", appId, "public", "data", "private_registrations", fAcc);
+        const snap = await getDoc(privRef);
+        if (!snap.exists()) {
+          cardEl.innerHTML = `
+            <div class="p-4 rounded-xl bg-[#F9F1EE] border border-[#E8CFC9] text-sm text-[#A85D55] space-y-1">
+              <div class="font-bold">查無此 F 帳號之事前報名資料</div>
+              <div>請確認 F 帳號是否輸入正確，或請同仁先至「1. 事先報名與選位」完成報名。</div>
+            </div>
+          `;
+          return;
+        }
+        const reg = snap.data();
+        renderCheckinActionCard(reg);
+      } catch (e) {
+        console.error("Check-in lookup error:", e);
+        showToast("查詢報到資料失敗，請確認網路連線。");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "查詢報到";
+      }
+    };
+
+    function renderCheckinActionCard(reg) {
+      const cardEl = document.getElementById("checkinResultCard");
+      const mainKey = `${reg.mainSeat.table}-${reg.mainSeat.seat}`;
+      const isMainLit = Boolean(checkedInSlots[mainKey] || checkedInStaff[reg.fAccount]);
+
+      const seatedGuests = (reg.guests || []).filter(g => g.needsSeat && g.seatInfo);
+      const allLit = isMainLit && seatedGuests.every(g => Boolean(checkedInSlots[`${g.seatInfo.table}-${g.seatInfo.seat}`]));
+
+      const guestRowsHtml = (reg.guests || []).map(g => {
+        if (!g.needsSeat || !g.seatInfo) {
+          return `
+            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-[#FFFDF9] border border-[#EDE4D8] text-xs">
+              <span>${escapeHtml(g.name)}（未滿 1 歲・不佔位）</span>
+              <span class="text-[#787067]">免佔位</span>
+            </div>
+          `;
+        }
+        const gKey = `${g.seatInfo.table}-${g.seatInfo.seat}`;
+        const isGLit = Boolean(checkedInSlots[gKey]);
+        return `
+          <div class="flex items-center justify-between py-2 px-3 rounded-lg ${isGLit ? "bg-[#FFF7E6] border-[#E6C794]" : "bg-[#FFFDF9] border-[#EDE4D8]"} border text-xs gap-2">
+            <div>
+              <span class="font-bold text-[#38332E]">${escapeHtml(g.name)}</span>
+              <span class="text-[#696056] ml-1">${formatTableName(g.seatInfo.table)} ${g.seatInfo.seat} 號</span>
+            </div>
+            ${isGLit
+              ? `<span class="px-2.5 py-1 rounded-lg bg-[#F59E0B] text-[#FFFDF9] font-bold">✨ 已亮燈</span>`
+              : `<button type="button" onclick="confirmCheckInMembers('${reg.fAccount}', '${gKey}')" class="px-2.5 py-1 rounded-lg bg-[#6E8B74] hover:bg-[#5A7560] text-[#FFFDF9] font-bold cursor-pointer">簽到亮燈</button>`
+            }
+          </div>
+        `;
+      }).join("");
+
+      cardEl.innerHTML = `
+        <div class="p-4 rounded-xl bg-[#F7F3EC] border-2 border-[#DFC397] space-y-3">
+          <div class="flex items-center justify-between border-b border-[#E5D9C8] pb-2">
+            <div>
+              <div class="text-xs text-[#787067]">報名編號：${reg.regId}</div>
+              <div class="text-base font-bold text-[#38332E]">${escapeHtml(reg.name)}（${reg.fAccount}）</div>
+            </div>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-bold ${allLit ? "bg-[#E9F0EA] text-[#4E6B54]" : "bg-[#FFF3DF] text-[#8A5A19]"}">
+              ${allLit ? "全組已報到亮燈" : "待完成簽到"}
+            </span>
+          </div>
+
+          <div class="space-y-2">
+            <!-- 本人 -->
+            <div class="flex items-center justify-between py-2.5 px-3 rounded-lg ${isMainLit ? "bg-[#FFF7E6] border-[#E6C794]" : "bg-[#FFFDF9] border-[#EDE4D8]"} border text-sm gap-2">
+              <div>
+                <div class="font-bold text-[#38332E]">${escapeHtml(reg.name)}（本人・具抽獎資格）</div>
+                <div class="text-xs text-[#696056]">${formatTableName(reg.mainSeat.table)} ${reg.mainSeat.seat} 號席</div>
+              </div>
+              ${isMainLit
+                ? `<span class="px-3 py-1 rounded-lg bg-[#F59E0B] text-[#FFFDF9] text-xs font-bold shrink-0">✨ 已報到亮燈</span>`
+                : `<button type="button" onclick="confirmCheckInMembers('${reg.fAccount}', '${mainKey}')" class="px-3 py-1.5 rounded-lg bg-[#C87D75] hover:bg-[#B36860] text-[#FFFDF9] text-xs font-bold cursor-pointer shrink-0">本人報到亮燈</button>`
+              }
+            </div>
+
+            ${guestRowsHtml}
+          </div>
+
+          ${!allLit ? `
+            <button type="button" onclick="confirmCheckInMembers('${reg.fAccount}', 'ALL')"
+              class="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#D99B38] to-[#C87D75] hover:opacity-95 text-[#FFFDF9] text-sm font-bold shadow-sm cursor-pointer">
+              ✨ 一鍵全組報到並點亮所有座位
+            </button>
+          ` : `
+            <div class="text-center text-xs font-bold text-[#4E6B54] bg-[#E9F0EA] py-2 rounded-lg">
+              🎉 歡迎蒞臨長庚科大116年旺年會！您的座位已於右側宴會廳圖中亮起！
+            </div>
+          `}
+        </div>
+      `;
+    }
+
+    window.confirmCheckInMembers = async function(fAccount, targetKeyOrAll) {
+      if(!isAdminAuthenticated) return showToast("請由管理員辦理報到。");
+      const fAccUpper = fAccount.toUpperCase();
+      try {
+        const reg=await callBackend("checkin",{fAccount:fAccUpper,target:targetKeyOrAll});
+        checkinInspectedTable = reg.mainSeat.table === VIP_HEAD_TABLE ? 1 : reg.mainSeat.table;
+        showToast("報到成功！本人完成報到才具抽獎資格。");
+        renderCheckinActionCard(reg);
+      } catch (e) {
+        console.error("Confirm check-in error:", e);
+        showToast("報到亮燈寫入失敗，請確認網路連線。");
+      }
+    };
+
+    function renderCheckinPage() {
+      const totalBookedSeats = Object.keys(publicSeatSlots).length;
+      const litSeatsCount = Object.keys(checkedInSlots).filter(k => publicSeatSlots[k]).length;
+      const staffCheckedCount = Object.keys(checkedInStaff).length;
+      const ratePct = totalBookedSeats > 0 ? Math.round((litSeatsCount / totalBookedSeats) * 100) : 0;
+
+      document.getElementById("ciStatLitSeats").textContent = litSeatsCount;
+      document.getElementById("ciStatStaffCount").textContent = staffCheckedCount;
+      document.getElementById("ciStatRate").textContent = `${ratePct}%`;
+      document.getElementById("ciLegendLit").textContent = litSeatsCount;
+      document.getElementById("ciLegendUnlit").textContent = Math.max(0, totalBookedSeats - litSeatsCount);
+
+      // 最新報到列表
+      const recentListEl = document.getElementById("recentCheckinList");
+      const staffArr = Object.values(checkedInStaff).sort((a, b) => (b.checkedInAt || 0) - (a.checkedInAt || 0));
+      if (staffArr.length === 0) {
+        recentListEl.innerHTML = `<div class="text-center py-3 text-[#8C8276]">尚未有同仁完成報到簽到</div>`;
+      } else {
+        recentListEl.innerHTML = staffArr.slice(0, 15).map(item => `
+          <div class="flex items-center justify-between py-1.5 px-2.5 rounded-lg bg-[#FFF7E6] border border-[#EBD5B3]">
+            <span class="font-bold text-[#38332E]">✨ ${escapeHtml(maskMiddleName(item.name))}（${escapeHtml(isAdminAuthenticated?item.fAccount:"已報到")}）</span>
+            <span class="text-[#8A5A19] font-semibold">${formatTableName(item.table)} ${item.seat}號</span>
+          </div>
+        `).join("");
+      }
+
+      // 舞台前長官大主桌亮燈狀態
+      const vipBox = document.getElementById("checkinVipTableBox");
+      let vipDots = "";
+      let vipLit = 0;
+      for (let s = 1; s <= VIP_SEATS_COUNT; s++) {
+        const k = `${VIP_HEAD_TABLE}-${s}`;
+        const occ = publicSeatSlots[k];
+        const isLit = Boolean(occ && checkedInSlots[k]);
+        if (isLit) vipLit++;
+        const dotCls = isLit
+          ? "dot-checked-in text-[#382508]"
+          : occ
+            ? "bg-[#C86D65]/60 text-[#FFFDF9]"
+            : "bg-[#E2D9CC] text-[#787067]";
+        const tip = isLit ? `主桌 ${s}號：${occ}（已報到亮燈）` : occ ? `主桌 ${s}號：${occ}（尚未報到）` : `主桌 ${s}號：空席`;
+        vipDots += `
+          <span onmouseenter="showSeatTooltip(event, '${escapeHtml(tip)}')" onmouseleave="hideSeatTooltip()"
+            class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center cursor-pointer transition ${dotCls}">
+            ${String(s).padStart(2, "0")}
+          </span>
+        `;
+      }
+      vipBox.innerHTML = `
+        <div class="p-3.5 rounded-2xl bg-[#FBF5EA] border border-[#DFC397] text-center space-y-2">
+          <div class="text-xs font-bold text-[#8A6736]">👑 長官大主桌（已亮燈 ${vipLit} / 12 席）</div>
+          <div class="flex flex-wrap items-center justify-center gap-1.5">${vipDots}</div>
+        </div>
+      `;
+
+      // 53 桌報到亮燈 7 欄網格
+      const gridRows = [];
+      for (let r = 0; r < 7; r++) {
+        const rowTables = [];
+        for (let c = 1; c <= 7; c++) rowTables.push(r * 7 + c);
+        gridRows.push({ label: `第 ${r + 1} 排`, tables: rowTables });
+      }
+      gridRows.push({ label: "加開與預備桌", tables: [50, 51, 52, 53] });
+
+      const gridEl = document.getElementById("checkinHallGrid");
+      gridEl.innerHTML = gridRows.map(rowObj => `
+        <div class="space-y-1.5">
+          <div class="text-xs font-semibold text-[#8C8276]">${rowObj.label}</div>
+          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-2">
+            ${rowObj.tables.map(tNum => {
+              let tableLit = 0;
+              let tableBooked = 0;
+              const dots = [];
+              for (let s = 1; s <= SEATS_PER_TABLE; s++) {
+                const k = `${tNum}-${s}`;
+                const occ = publicSeatSlots[k];
+                const isLit = Boolean(occ && checkedInSlots[k]);
+                if (occ) tableBooked++;
+                if (isLit) tableLit++;
+                const cls = isLit ? "dot-checked-in" : occ ? "bg-[#C86D65]/55" : "bg-[#DFD8CE]";
+                dots.push(`<span class="w-2 h-2 rounded-full ${cls} inline-block"></span>`);
+              }
+              const isSelected = checkinInspectedTable === tNum;
+              return `
+                <button type="button" onclick="inspectCheckinTable(${tNum})"
+                  class="p-2 rounded-xl border text-center transition flex flex-col items-center gap-1 cursor-pointer ${isSelected ? "bg-[#FFF7E6] border-2 border-[#D99B38]" : "bg-[#FAF7F2] border-[#E5DBD0] hover:border-[#D99B38]"}">
+                  <div class="text-sm font-bold text-[#38332E]">${String(tNum).padStart(2, "0")} 桌</div>
+                  <div class="text-[11px] font-semibold ${tableLit > 0 ? "text-[#B87D2E]" : "text-[#8C8276]"}">亮燈 ${tableLit}/${tableBooked}</div>
+                  <div class="flex gap-0.5">${dots.slice(0, 5).join("")}</div>
+                  <div class="flex gap-0.5">${dots.slice(5, 10).join("")}</div>
+                </button>
+              `;
+            }).join("")}
+          </div>
+        </div>
+      `).join("");
+
+      renderCheckinExpandedTable(checkinInspectedTable);
+    }
+
+    window.inspectCheckinTable = function(tableNum) {
+      checkinInspectedTable = tableNum;
+      renderCheckinPage();
+    };
+
+    function renderCheckinExpandedTable(tableNum) {
+      const box = document.getElementById("checkinExpandedTableStage");
+      if (!box) return;
+
+      let seatsHtml = "";
+      let litCount = 0;
+      let bookedCount = 0;
+      for (let s = 1; s <= SEATS_PER_TABLE; s++) {
+        const angleDeg = (s - 1) * (360 / SEATS_PER_TABLE) - 90;
+        const rad = (angleDeg * Math.PI) / 180;
+        const radius = 104;
+        const x = 130 + radius * Math.cos(rad);
+        const y = 130 + radius * Math.sin(rad);
+
+        const k = `${tableNum}-${s}`;
+        const occ = publicSeatSlots[k];
+        const isLit = Boolean(occ && checkedInSlots[k]);
+        if (occ) bookedCount++;
+        if (isLit) litCount++;
+
+        let cls = "bg-[#E2D9CC] text-[#787067] border border-[#CFC5B6]";
+        let sub = "空席";
+        let tip = `${formatTableName(tableNum)} ${s} 號：空席`;
+
+        if (isLit) {
+          cls = "seat-checked-in";
+          sub = "亮燈";
+          tip = `${formatTableName(tableNum)} ${s} 號：${occ}（✨ 已報到亮燈）`;
+        } else if (occ) {
+          cls = "bg-[#C86D65]/65 text-[#FFFDF9] border border-[#F2DCD9]";
+          sub = "未到";
+          tip = `${formatTableName(tableNum)} ${s} 號：${occ}（已報名・尚未報到）`;
+        }
+
+        seatsHtml += `
+          <div style="left:${x.toFixed(1)}px; top:${y.toFixed(1)}px;"
+            onmouseenter="showSeatTooltip(event, '${escapeHtml(tip)}')" onmouseleave="hideSeatTooltip()"
+            class="seat-btn ${cls}">
+            <span class="font-bold text-xs">${String(s).padStart(2, "0")}</span>
+            <span class="text-[10px]">${sub}</span>
+          </div>
+        `;
+      }
+
+      box.innerHTML = `
+        <div class="rounded-2xl bg-[#FAF7F2] border border-[#E6DDD0] p-4">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="serif-title text-lg font-bold text-[#38332E]">${formatTableName(tableNum)}・報到亮燈狀態</h3>
+            <span class="text-sm font-bold text-[#B87D2E]">已報到亮燈：${litCount} / ${bookedCount} 席</span>
+          </div>
+          <div class="flex justify-center py-1">
+            <div class="round-table-wrapper">
+              <div class="round-table-surface">
+                <div class="round-table-lazy-susan">
+                  <span class="text-[10px] text-[#8C8276]">TABLE</span>
+                  <span class="serif-title text-2xl font-bold text-[#964E47]">${String(tableNum).padStart(2, "0")}</span>
+                  <span class="text-xs text-[#787067]">${litCount}/${bookedCount} 亮燈</span>
+                </div>
+              </div>
+              ${seatsHtml}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // ==================== 分頁三：線上幸運抽獎（全場跑燈 + 隨機停止彈出恭賀） ====================
+    window.handlePrizePresetChange = function(){if(!isAdminAuthenticated||isLotterySpinning)return;renderLotteryPage();};
+
+    function getEligibleLotteryParticipants(excludePreviousWinners = true) {
+      const wonSet = new Set(luckyDrawWinners.map(w => (w.fAccount || "").toUpperCase()));
+      const list = Object.values(checkedInStaff).filter(item => {
+        if (!item || (isAdminAuthenticated && !isValidFAccountFormat(item.fAccount))) return false;
+        const slotKey = `${item.table}-${item.seat}`;
+        if (!publicSeatSlots[slotKey] || !checkedInSlots[slotKey]) return false;
+        if (excludePreviousWinners && wonSet.has(item.fAccount.toUpperCase())) return false;
+        return true;
+      });
+      list.sort((a, b) => (a.table - b.table) || (a.seat - b.seat));
+      return list;
+    }
+
+    function renderLotteryPage() {
+
+      updateLotteryAccess();
+      if (isLotterySpinning) return;
+      const excludeWinners = document.getElementById("lotteryExcludeWinners")?.checked ?? true;
+      const chosen=selectedPrize();
+      const already=new Set(luckyDrawWinners.filter(w=>chosen&&recordKey(w)===chosen.id).map(w=>w.fAccount));
+      const eligible = getEligibleLotteryParticipants(excludeWinners).filter(p=>!already.has(p.fAccount));
+      document.getElementById("lotteryEligibleCount").textContent = eligible.length;
+
+      const eligibleSeatMap = new Map();
+      eligible.forEach(p => {
+        eligibleSeatMap.set(`${p.table}-${p.seat}`, p);
+      });
+
+      const wonSeatSet = new Set(luckyDrawWinners.map(w => `${w.table}-${w.seat}`));
+
+      // 舞台前長官大主桌跑燈
+      const vipRow = document.getElementById("lotteryVipTableRow");
+      let vipDots = "";
+      for (let s = 1; s <= VIP_SEATS_COUNT; s++) {
+        const k = `${VIP_HEAD_TABLE}-${s}`;
+        const p = eligibleSeatMap.get(k);
+        let cls = "bg-[#E2D9CC] text-[#8C8276]";
+        if (currentWinnerKey === k) cls = "lottery-dot-winner text-[#FFFDF9]";
+        else if (currentSweepKey === k) cls = "lottery-dot-sweep text-[#382508]";
+        else if (wonSeatSet.has(k)) cls = "bg-[#C86D65] text-[#FFFDF9]";
+        else if (p) cls = "lottery-dot-eligible text-[#FFFDF9]";
+
+        const tip = p ? `長官大主桌 ${s}號：${maskMiddleName(p.name)}（已報到具抽獎資格）` : `長官大主桌 ${s}號`;
+        vipDots += `
+          <span id="lot-seat-${k}" onmouseenter="showSeatTooltip(event, '${escapeHtml(tip)}')" onmouseleave="hideSeatTooltip()"
+            class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center transition ${cls}">
+            ${String(s).padStart(2, "0")}
+          </span>
+        `;
+      }
+      vipRow.innerHTML = `
+        <div class="px-5 py-3 rounded-2xl bg-[#FBF5EA] border border-[#DFC397] text-center space-y-1.5">
+          <div class="text-xs font-bold text-[#8A6736]">👑 長官大主桌</div>
+          <div class="flex flex-wrap justify-center gap-1.5">${vipDots}</div>
+        </div>
+      `;
+
+      // 53 桌全場跑燈燈陣
+      const gridEl = document.getElementById("lotteryHallGrid");
+      const cards = [];
+      for (let tNum = 1; tNum <= TOTAL_REGULAR_TABLES; tNum++) {
+        const dots = [];
+        for (let s = 1; s <= SEATS_PER_TABLE; s++) {
+          const k = `${tNum}-${s}`;
+          const p = eligibleSeatMap.get(k);
+          let cls = "bg-[#E5DFD5]";
+          if (currentWinnerKey === k) cls = "lottery-dot-winner";
+          else if (currentSweepKey === k) cls = "lottery-dot-sweep";
+          else if (wonSeatSet.has(k)) cls = "bg-[#C86D65]";
+          else if (p) cls = "lottery-dot-eligible";
+
+          const tip = p ? `${formatTableName(tNum)} ${s}號：${maskMiddleName(p.name)}` : `${formatTableName(tNum)} ${s}號`;
+          dots.push(`
+            <span id="lot-seat-${k}" onmouseenter="showSeatTooltip(event, '${escapeHtml(tip)}')" onmouseleave="hideSeatTooltip()"
+              class="w-2.5 h-2.5 rounded-full inline-block transition ${cls}"></span>
+          `);
+        }
+
+        cards.push(`
+          <div class="p-2 rounded-xl bg-[#FAF7F2] border border-[#E6DDD0] text-center space-y-1">
+            <div class="text-xs font-bold text-[#4A423B]">${String(tNum).padStart(2, "0")} 桌</div>
+            <div class="flex justify-center gap-1">${dots.slice(0, 5).join("")}</div>
+            <div class="flex justify-center gap-1">${dots.slice(5, 10).join("")}</div>
+          </div>
+        `);
+      }
+      gridEl.innerHTML = cards.join("");
+
+      renderLotteryWinnersBoard();
+    }
+
+    // Web Audio API 合成跑燈音效（無外部音檔連結）
+    let audioCtx = null, audioLimiter = null;
+    function playSweepBeep(freq = 680, duration = 0.045, type = "sine", volume = 0.08, delay = 0) {
+      if (!document.getElementById("lotterySoundToggle")?.checked) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          audioLimiter=audioCtx.createDynamicsCompressor();audioLimiter.threshold.value=-12;audioLimiter.knee.value=10;audioLimiter.ratio.value=8;audioLimiter.attack.value=.003;audioLimiter.release.value=.18;audioLimiter.connect(audioCtx.destination);
+        }
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        const t=audioCtx.currentTime+delay;osc.frequency.setValueAtTime(freq,t);
+        gain.gain.setValueAtTime(.001,t);gain.gain.linearRampToValueAtTime(volume,t+.012);
+        gain.gain.exponentialRampToValueAtTime(.001,t+duration);
+        osc.connect(gain);
+        gain.connect(audioLimiter);
+        osc.start(t);osc.stop(t+duration);
+      } catch (e) {}
+    }
+
+    function playWinFanfare(grand=false) {
+      if (!document.getElementById("lotterySoundToggle")?.checked) return;
+      if(!grand){[523.25,659.25,783.99,1046.5].forEach((n,i)=>setTimeout(()=>playSweepBeep(n,.28,"triangle"),i*110));return;}
+      // 校長獎：原創六秒銅管式勝利旋律、低音鼓點、鐘聲與終止和弦。
+      const melody=[392,523.25,659.25,783.99,659.25,783.99,1046.5,1318.51,1046.5,1318.51,1567.98,1046.5];
+      melody.forEach((n,i)=>{const t=i*.21;playSweepBeep(n,.34,"triangle",.24,t);playSweepBeep(n/2,.31,"sawtooth",.07,t);if(i%2===0)playSweepBeep(65,.22,"sine",.25,t);});
+      [261.63,392,523.25,659.25,783.99,1046.5].forEach(n=>playSweepBeep(n,1.7,"triangle",.14,2.65));
+      [1567.98,2093,2637,3136].forEach((n,i)=>playSweepBeep(n,.85,"sine",.12,3.1+i*.28));
+      [130.81,261.63,523.25,659.25,1046.5].forEach(n=>playSweepBeep(n,1.6,"triangle",.18,4.35));
+    }
+    function launchGrandFireworks(){
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+      const modal=document.getElementById('winnerCelebrationModal');
+      [[10,14],[90,14],[12,70],[88,66],[50,9],[22,45],[78,43],[9,39],[91,39],[35,15],[65,15],[50,85]].forEach(([x,y],i)=>{
+        for(let j=0;j<34;j++){
+          const el=document.createElement('i');const ang=j*Math.PI*2/34;const radius=70+(j%5)*24;
+          el.className='grand-spark';el.style.cssText=`left:${x}%;top:${y}%;--dx:${Math.cos(ang)*radius}px;--dy:${Math.sin(ang)*radius}px;--delay:${i*.28}s;background:${['#fff5b7','#ffc24b','#f8e5ac'][j%3]}`;
+          modal.append(el);setTimeout(()=>el.remove(),5200);
+        }
+      });
+    }
+
+    function setLotterySeatHighlight(seatKey, mode) {
+      if (currentSweepKey && (currentSweepKey !== seatKey || mode === "winner")) {
+        const prevEl = document.getElementById(`lot-seat-${currentSweepKey}`);
+        if (prevEl) prevEl.classList.remove("lottery-dot-sweep");
+      }
+      currentSweepKey = mode === "sweep" ? seatKey : null;
+      const targetEl = document.getElementById(`lot-seat-${seatKey}`);
+      if (targetEl) {
+        if (mode === "sweep") {
+          targetEl.classList.add("lottery-dot-sweep");
+        } else if (mode === "winner") {
+          targetEl.classList.remove("lottery-dot-sweep");
+          targetEl.classList.add("lottery-dot-winner");
+        }
+      }
+    }
+
+    window.startFullHallLottery = async function() {
+      if (isLotterySpinning) return;
+      if (!isAdminAuthenticated) return showToast("正式抽獎僅限管理員登入後操作。");
+      if (!isCloudConnected) return showToast("雲端資料庫尚未連線，無法進行抽獎。");
+
+      if(prizeSaving)return;
+      const prize = selectedPrize();
+      if(!prize)return showToast("請先選擇獎項。");
+      const grandPrize=prize.id==="jackpot", prizeName=prize.name;
+      const wins=luckyDrawWinners;
+      if(remainingPrize(prize,wins)===0)return showToast("此獎項名額已抽完。");
+      const excludeWinners=document.getElementById("lotteryExcludeWinners").checked;
+      const samePrizeWinners=new Set(wins.filter(w=>recordKey(w)===prize.id).map(w=>w.fAccount));
+      const eligible=getEligibleLotteryParticipants(excludeWinners).filter(p=>!samePrizeWinners.has(p.fAccount));
+      if (eligible.length === 0) {
+        return showToast("目前沒有符合抽獎資格的已報到 F 帳號同仁！請先至「2. 當天報到簽到」辦理報到。");
+      }
+
+      currentWinnerKey = null;
+      renderLotteryPage();
+      isLotterySpinning = true;
+      setSpinControls(true);
+      try {
+
+      const btn = document.getElementById("btnStartLottery");
+      btn.disabled = true;
+      btn.classList.add("opacity-60");
+
+      const stage=document.getElementById("drawStage"), cue=document.getElementById("stageCue"), candidateEl=document.getElementById("stageCandidate");
+      stage.scrollIntoView({block:"center",behavior:"instant"});
+      btn.classList.add("is-pressed");stage.classList.add("triggered");
+      cue.textContent="貴賓已啟動抽獎！";candidateEl.textContent="";
+      playSweepBeep(130,.24,"triangle");playSweepBeep(520,.22,"sine");
+      await new Promise(r=>setTimeout(r,650));
+      btn.classList.remove("is-pressed");stage.classList.remove("triggered");
+      for(let n=3;n>=1;n--){cue.classList.remove("countdown");void cue.offsetWidth;cue.classList.add("countdown");cue.textContent=String(n);playSweepBeep(440+(3-n)*110,.23,"triangle");await new Promise(r=>setTimeout(r,650));}
+      cue.classList.remove("countdown");cue.textContent="全場幸運跑燈中…";playSweepBeep(1046.5,.32,"triangle");
+      const tickerEl = document.getElementById("lotteryLiveTicker");
+      const previewEl = document.getElementById("lotterySweepPreview");
+      tickerEl.firstElementChild.textContent = `🎰 正在抽出【${prizeName}】！全場已報到參與者座位極速跑燈中...`;
+
+      // 正式得主由伺服器交易隨機抽出；成功鎖定名額才揭曉。
+      const winRecord=await callBackend("draw",{prize:prizeName,excludeWinners});
+      const winner=winRecord;
+      const winnerKey=`${winner.table}-${winner.seat}`;
+      if(!luckyDrawWinners.some(w=>w.id===winRecord.id))luckyDrawWinners=[winRecord,...luckyDrawWinners];
+
+      // 階段一：全場所有參與者座位以極快速方式依序亮過一遍（若人數少則依序跑兩輪確保視覺張力）
+      const rounds = eligible.length < 15 ? 2 : 1;
+      const fastDelay = Math.max(16, Math.min(35, Math.floor(1800 / (eligible.length * rounds))));
+
+      for (let r = 0; r < rounds; r++) {
+        for (let i = 0; i < eligible.length; i++) {
+          const p = eligible[i];
+          const k = `${p.table}-${p.seat}`;
+          setLotterySeatHighlight(k, "sweep");
+          candidateEl.textContent=previewEl.textContent = `${formatTableName(p.table)} ${p.seat}號｜${maskMiddleName(p.name)}`;
+          playSweepBeep(520 + (i % 12) * 35, 0.035);
+          await new Promise(res => setTimeout(res, fastDelay));
+        }
+      }
+
+      // 階段二：減速跳躍並精準停在最終得獎者座位
+      const slowSteps = 10;
+      for (let step = 0; step < slowSteps; step++) {
+        let candidate;
+        if (step === slowSteps - 1) {
+          candidate = winner;
+        } else {
+          const rIdx = Math.floor(Math.random() * eligible.length);
+          candidate = eligible[rIdx];
+        }
+        const k = `${candidate.table}-${candidate.seat}`;
+        setLotterySeatHighlight(k, "sweep");
+        candidateEl.textContent=previewEl.textContent = `${formatTableName(candidate.table)} ${candidate.seat}號｜${maskMiddleName(candidate.name)}`;
+        playSweepBeep(step === slowSteps - 1 ? 980 : 640, 0.06);
+        const stepDelay = 65 + step * step * 3.5;
+        await new Promise(res => setTimeout(res, stepDelay));
+      }
+
+      document.getElementById("stageCandidate").textContent="";
+      currentWinnerKey = winnerKey;
+      setLotterySeatHighlight(winnerKey,"winner");
+      playWinFanfare(grandPrize);
+      tickerEl.firstElementChild.textContent = `🎉 恭喜 ${winner.name}（${formatTableName(winner.table)} ${winner.seat} 號席）獲得【${prizeName}】！`;
+
+      // 彈出恭賀視窗
+      document.getElementById("winModalPrizeName").textContent = prizeName;
+      document.getElementById("winModalPrizeAmount").textContent = prize.amount==null?"":"獎金 "+formatPrizeAmount(prize.amount);
+      document.getElementById("winModalPersonName").textContent = winner.name;
+      document.getElementById("winModalSeatInfo").textContent = `${formatTableName(winner.table)}・${String(winner.seat).padStart(2, "0")} 號席`;
+      document.getElementById("winModalFAccount").textContent = `F 帳號：F••••••${winner.fAccount.slice(-3)}`;
+      document.getElementById("winModalCongratText").textContent = `恭喜 ${winner.name} 獲得 ${prizeName}！`;
+      const celebration=document.getElementById("winnerCelebrationModal");
+      celebration.classList.toggle("grand-prize",grandPrize);
+      document.getElementById("grandPrizeHeadline").classList.toggle("hidden",!grandPrize);
+      celebration.classList.remove("hidden");
+      if(grandPrize) launchGrandFireworks();
+      for(let i=0;i<(grandPrize?230:70);i++){const c=document.createElement("i");c.className="confetti-piece";c.style.cssText=`left:${Math.random()*100}vw;width:${6+Math.random()*7}px;height:13px;background:${["#f3ce75","#ca7068","#719478","#fff3d4"][i%4]};--drift:${Math.random()*240-120}px;animation-delay:${Math.random()*.7}s`;document.body.append(c);setTimeout(()=>c.remove(),4300);}
+
+
+      } catch(e) {
+        console.error("Lottery failed",e); currentWinnerKey=null;currentSweepKey=null;
+        document.getElementById("lotteryLiveTicker").firstElementChild.textContent="未能確認揭曉流程，請先查看雲端得獎清冊，勿直接重抽。";
+        showToast("抽獎未完成："+(e.message||"請檢查連線"));
+      } finally {
+        document.getElementById("btnStartLottery").classList.remove("is-pressed");document.getElementById("drawStage").classList.remove("triggered");document.getElementById("stageCandidate").textContent="";
+        isLotterySpinning=false;setSpinControls(false);document.getElementById("btnStartLottery").classList.remove("opacity-60");renderLotteryPage();updateNavBadges();
+      }
+    };
+
+    function renderLotteryWinnersBoard() {
+      const board = document.getElementById("lotteryWinnersBoard");
+      if (!board) return;
+      if (luckyDrawWinners.length === 0) {
+        board.innerHTML = `<div class="col-span-full text-center py-8 rounded-xl border border-dashed border-[#DFD5C7] text-sm text-[#8C8276]">尚未抽出任何獎項，點擊上方「開始抽獎」即可產生幸運得主！</div>`;
+        return;
+      }
+
+      board.innerHTML = luckyDrawWinners.map((w, idx) => `
+        <div class="p-4 rounded-2xl bg-gradient-to-br from-[#FFFDF9] to-[#FBF4E8] border-2 border-[#E4C99B] flex items-center justify-between gap-3">
+          <div class="space-y-1">
+            <span class="inline-block px-2.5 py-0.5 rounded-md bg-[#C87D75] text-[#FFFDF9] text-xs font-bold">${escapeHtml(w.prize)}</span>${w.amount==null?"":`<div class="text-sm font-bold text-[#8A5A19]">每名獎金 ${formatPrizeAmount(w.amount)}</div>`}
+            <div class="serif-title text-xl font-bold text-[#38332E]">${escapeHtml(isAdminAuthenticated?w.name:maskMiddleName(w.name))}</div>
+            <div class="text-xs text-[#696056]">${formatTableName(w.table)}・${String(w.seat).padStart(2, "0")} 號席${isAdminAuthenticated?`（${escapeHtml(w.fAccount)}）`:""}</div>
+          </div>
+          <div class="text-right text-xs text-[#8C8276]">
+            <div>#${luckyDrawWinners.length - idx}</div>
+            <div>${new Date(w.drawnAt || Date.now()).toLocaleTimeString("zh-TW", { hour: "2-digit", minute: "2-digit" })}</div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // 得獎紀錄為名額扣抵依據，不提供一般清空功能。
+    window.openClearWinnersModal = window.confirmClearWinners = function(){showToast("已抽出獎項紀錄不得清除，以免重複發獎。");};
+
+    window.exportLotteryWinnersCSV = function() {
+      if(!isAdminAuthenticated || isLotterySpinning) return showToast("僅管理員可匯出得獎清冊。");
+      if (luckyDrawWinners.length === 0) return showToast("目前尚無得獎名單可匯出。");
+      const headers = ["抽出順序", "獎項名稱", "得獎人姓名", "F帳號", "桌次", "座位號碼", "抽出時間", "領獎簽收"];
+      const rows = [headers];
+      luckyDrawWinners.slice().reverse().forEach((w, idx) => {
+        rows.push([
+          idx + 1,
+          w.prize,
+          w.name,
+          w.fAccount,
+          formatTableName(w.table),
+          `${w.seat}號`,
+          new Date(w.drawnAt || Date.now()).toLocaleString("zh-TW"),
+          ""
+        ]);
+      });
+      const csvContent = "\uFEFF" + rows.map(r => r.map(v => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const today = new Date().toISOString().slice(0, 10);
+      a.href = url;
+      a.download = `長庚科技大學116年旺年會_得獎名單_${today}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast("已匯出旺年會得獎名單 Excel (.csv)！");
     };
 
     // ==================== 線上候補登記 ====================
@@ -2392,9 +5234,7 @@
       if (!isValidFAccountFormat(fAcc)) {
         return showToast("F 帳號格式錯誤！請輸入大寫 F 再加 9 個數字（共 10 碼）。");
       }
-      if (!name) {
-        return showToast("請完整填寫參加者姓名。");
-      }
+      if (!name) return showToast("請完整填寫參加者姓名。");
       if (!isValidExtensionFormat(ext)) {
         return showToast("學校分機必須為 4 碼數字！不足或超過請修改。");
       }
@@ -2407,16 +5247,7 @@
       btn.textContent = "送出候補中...";
 
       try {
-        const wlRef = doc(db, "artifacts", appId, "public", "data", "waitlist_entries", fAcc);
-        await setDoc(wlRef, {
-          fAccount: fAcc,
-          name,
-          ext,
-          email,
-          seatsNeeded,
-          note,
-          createdAt: Date.now()
-        });
+        await callBackend("waitlist",{fAccount:fAcc,name,ext,email,seatsNeeded,note});
         closeModal("waitlistModal");
         showToast(`已成功送出線上候補登記（${fAcc}・需求 ${seatsNeeded} 席），若有空位釋出主辦單位將依序通知！`);
       } catch (e) {
@@ -2430,6 +5261,7 @@
 
     // ==================== 管理員後台（Firebase Email/Password 驗證） ====================
     window.openAdminLoginModal = async function() {
+      if(isLotterySpinning) return;
       if (isAdminAuthenticated) {
         await loadAdminData();
         document.getElementById("adminDashboardModal").classList.remove("hidden");
@@ -2443,23 +5275,28 @@
 
     window.verifyAdminLogin = async function() {
       const email = document.getElementById("adminEmailInput").value.trim();
-      const pwd = document.getElementById("adminPwdInput").value.trim();
-      if (!email || !pwd) {
-        return showToast("請輸入管理員帳號與密碼。");
-      }
+      const pwd = document.getElementById("adminPwdInput").value;
+      if(isLotterySpinning) return;
+      if (!email || !pwd) return showToast("請輸入管理員帳號與密碼。");
 
       const btn = document.getElementById("btnAdminLogin");
       btn.disabled = true;
       btn.textContent = "驗證中...";
 
       try {
-        await signInWithEmailAndPassword(auth, email, pwd);
+        const credential=await signInWithEmailAndPassword(auth, email, pwd);
+        if((await credential.user.getIdTokenResult(true)).claims.admin!==true){await signOut(auth);await signInAnonymously(auth);throw new Error("未獲管理員授權");}
         isAdminAuthenticated = true;
+        await callBackend("initialize");
+        subscribePublicSeatMap();
+        updateLotteryAccess();
         closeModal("adminLoginModal");
-        await loadAdminData();
-        document.getElementById("adminDashboardModal").classList.remove("hidden");
-        showToast("管理員安全驗證通過！");
+        if(activeMainPage!=="lottery") {await loadAdminData();document.getElementById("adminDashboardModal").classList.remove("hidden");}
+        renderLotteryPage();
+        showToast("管理員驗證通過，可開始抽獎！");
       } catch (e) {
+        isAdminAuthenticated=false;isCloudConnected=false;checkedInStaff={};luckyDrawWinners=[];if(unsubSeat)unsubSeat();updateLotteryAccess();
+        try{await signOut(auth);await signInAnonymously(auth);}catch{}
         console.error("Admin auth error:", e);
         showToast("管理員帳號或密碼錯誤，或尚未在 Firebase Authentication 啟用 Email/Password 登入。");
       } finally {
@@ -2469,7 +5306,10 @@
     };
 
     window.adminSignOut = async function() {
-      closeModal("adminDashboardModal");
+      if(isLotterySpinning||prizeSaving) return showToast("請等待本輪操作完成。");
+      isAdminAuthenticated=false;isCloudConnected=false;checkedInStaff={};luckyDrawWinners=[];if(unsubSeat)unsubSeat();
+      updateLotteryAccess();renderLotteryPage();
+      closeModal("clearWinnersConfirmModal");closeModal("adminDashboardModal");
       try {
         await signOut(auth);
         isAdminAuthenticated = false;
@@ -2499,75 +5339,12 @@
       btn.textContent = "校正中...";
 
       try {
-        const regsSnap = await getDocs(collection(db, "artifacts", appId, "public", "data", "private_registrations"));
-        const validSlots = {};
-        const validFAccounts = new Map();
-        const validEmails = new Map();
-
-        regsSnap.forEach(d => {
-          const r = d.data();
-          const fAcc = (r.fAccount || d.id).toUpperCase();
-          validFAccounts.set(fAcc, r);
-          if (r.email) validEmails.set(r.email.toLowerCase(), { fAccount: fAcc, regId: r.regId });
-          const maskedHost = maskMiddleName(r.name);
-          if (r.mainSeat) {
-            validSlots[`${r.mainSeat.table}-${r.mainSeat.seat}`] = maskedHost;
-          }
-          let order = 0;
-          (r.guests || []).forEach(g => {
-            if (g.needsSeat && g.seatInfo) {
-              order += 1;
-              validSlots[`${g.seatInfo.table}-${g.seatInfo.seat}`] = g.publicAlias || `${maskedHost}眷屬${order}`;
-            }
-          });
-        });
-
-        // 清除殘留的 seat_locks
-        const locksSnap = await getDocs(collection(db, "artifacts", appId, "public", "data", "seat_locks"));
-        for (const lockDoc of locksSnap.docs) {
-          if (!validSlots[lockDoc.id]) {
-            await deleteDoc(lockDoc.ref);
-          }
-        }
-
-        // 清除殘留的 f_account_locks 並補齊缺少的帳號鎖
-        const fLocksSnap = await getDocs(collection(db, "artifacts", appId, "public", "data", "f_account_locks"));
-        const existingFLocks = new Set();
-        for (const fDoc of fLocksSnap.docs) {
-          const key = fDoc.id.toUpperCase();
-          if (!validFAccounts.has(key)) {
-            await deleteDoc(fDoc.ref);
-          } else {
-            existingFLocks.add(key);
-          }
-        }
-        for (const [fAcc, r] of validFAccounts.entries()) {
-          if (!existingFLocks.has(fAcc)) {
-            await setDoc(doc(db, "artifacts", appId, "public", "data", "f_account_locks", fAcc), {
-              regId: r.regId,
-              createdAt: r.createdAt || Date.now()
-            });
-          }
-        }
-
-        // 同步補齊 email_locks
-        for (const [em, info] of validEmails.entries()) {
-          await setDoc(doc(db, "artifacts", appId, "public", "data", "email_locks", em), {
-            fAccount: info.fAccount,
-            regId: info.regId,
-            createdAt: Date.now()
-          }, { merge: true });
-        }
-
-        // 覆寫更新公開座位圖
-        const pubMapRef = doc(db, "artifacts", appId, "public", "data", "system_state", "public_seat_map");
-        await setDoc(pubMapRef, { slots: validSlots, updatedAt: Date.now() });
-
+        await callBackend("reconcile");
         await loadAdminData();
-        showToast("座位圖、F 帳號唯一鎖與 Email 鎖已與正式報名名單完全同步校正！");
+        showToast("座位圖已與正式報名名單同步校正；如有殘留鎖定資料，請由資料庫管理員核對。");
       } catch (e) {
         console.error("Reconcile error:", e);
-        showToast("校正座位圖失敗，請確認 Firestore Rules 已允許管理員讀取 seat_locks 與 f_account_locks。");
+        showToast("校正座位圖失敗，請確認 Firestore Rules 權限。");
       } finally {
         btn.disabled = false;
         btn.textContent = "同步校正座位圖";
@@ -2676,12 +5453,13 @@
             <th class="py-2.5 px-2.5">需求席次</th>
             <th class="py-2.5 px-2.5">備註說明</th>
             <th class="py-2.5 px-2.5">登記時間</th>
+            <th class="py-2.5 px-2.5 text-center">管理操作</th>
           </tr>
         `;
         const filteredWl = adminWaitlist.filter(w => !kw || `${w.fAccount} ${w.name} ${w.ext} ${w.email} ${w.note}`.toLowerCase().includes(kw));
         document.getElementById("adminRowCount").textContent = `候補共 ${filteredWl.length} 組`;
         if (filteredWl.length === 0) {
-          tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-[#8C8276]">目前尚無候補登記紀錄</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="8" class="py-8 text-center text-[#8C8276]">目前尚無候補登記紀錄</td></tr>`;
           return;
         }
         tbody.innerHTML = filteredWl.map((w, idx) => `
@@ -2693,6 +5471,11 @@
             <td class="py-2.5 px-2.5 font-semibold">${w.seatsNeeded} 席</td>
             <td class="py-2.5 px-2.5 text-[#5C5349]">${escapeHtml(w.note || "無")}</td>
             <td class="py-2.5 px-2.5 text-xs text-[#787067]">${new Date(w.createdAt || Date.now()).toLocaleString("zh-TW")}</td>
+            <td class="py-2.5 px-2.5 text-center">
+              <button onclick="deleteWaitlistEntry('${escapeHtml(w.fAccount)}')" class="px-2.5 py-1 rounded-lg bg-[#F9EFEA] text-[#B2564E] hover:bg-[#F2DDD7] border border-[#E8CFC9] cursor-pointer">
+                刪除候補
+              </button>
+            </td>
           </tr>
         `).join("");
         return;
@@ -2728,6 +5511,7 @@
       tbody.innerHTML = filtered.map(r => {
         const vegTag = r.mainSeat.table === VEGETARIAN_TABLE ? "(素食桌)" : "";
         const tableStr = `${formatTableName(r.mainSeat.table)}${vegTag}`;
+        const isChecked = Boolean(checkedInStaff[r.fAccount.toUpperCase()]);
         const peopleList = [
           `<div class="font-semibold text-[#38332E]">・${escapeHtml(r.name)}（本人・${tableStr} ${r.mainSeat.seat}號）</div>`,
           ...(r.guests || []).map(g => {
@@ -2747,14 +5531,41 @@
             <td class="py-2.5 px-2.5 font-mono font-bold text-[#A85D55]">${r.cancelCode}</td>
             <td class="py-2.5 px-2.5 space-y-0.5">${peopleList}</td>
             <td class="py-2.5 px-2.5 text-right font-bold text-[#A85D55]">NT$ ${(r.totalAmount || 0).toLocaleString()}</td>
-            <td class="py-2.5 px-2.5 text-center">
-              <button onclick="cancelEntireRegistration('${escapeHtml(r.fAccount)}', '${escapeHtml(r.cancelCode)}')" class="px-2.5 py-1 rounded-lg bg-[#F9EFEA] text-[#B2564E] hover:bg-[#F2DDD7] border border-[#E8CFC9] cursor-pointer">
+            <td class="py-2.5 px-2.5 text-center space-y-1">
+              ${isChecked
+                ? `<span class="block px-2 py-0.5 rounded bg-[#FFF7E6] text-[#B87D2E] text-xs font-bold border border-[#E6C794]">✨ 已報到</span>`
+                : `<button onclick="adminQuickCheckIn('${escapeHtml(r.fAccount)}')" class="block w-full px-2.5 py-1 rounded-lg bg-[#E9F0EA] text-[#4E6B54] hover:bg-[#DCE7DE] border border-[#C6D8C9] text-xs font-bold cursor-pointer">代辦報到</button>`
+              }
+              <button onclick="cancelEntireRegistration('${escapeHtml(r.fAccount)}', '${escapeHtml(r.cancelCode)}')" class="block w-full px-2.5 py-1 rounded-lg bg-[#F9EFEA] text-[#B2564E] hover:bg-[#F2DDD7] border border-[#E8CFC9] text-xs cursor-pointer">
                 刪除釋出
               </button>
             </td>
           </tr>
         `;
       }).join("");
+    };
+
+    window.adminQuickCheckIn = async function(fAccount) {
+      await confirmCheckInMembers(fAccount, "ALL");
+      renderAdminTable();
+    };
+
+    window.deleteWaitlistEntry = async function(fAccount) {
+      if (!isAdminAuthenticated) {
+        return showToast("僅授權管理員可刪除線上候補名單。");
+      }
+      const fAccUpper = (fAccount || "").trim().toUpperCase();
+      if (!fAccUpper) return;
+
+      try {
+        const wlRef = doc(db, "artifacts", appId, "public", "data", "waitlist_entries", fAccUpper);
+        await deleteDoc(wlRef);
+        await loadAdminData();
+        showToast(`已成功刪除 ${fAccUpper} 的候補登記紀錄！`);
+      } catch (e) {
+        console.error("Delete waitlist error:", e);
+        showToast("刪除候補紀錄失敗，請確認網路連線或管理員權限。");
+      }
     };
 
     window.exportAdminExcelCSV = function() {
@@ -2770,6 +5581,7 @@
         "身分別",
         "收費級距明細",
         "是否佔位",
+        "當天報到狀態",
         "個人應繳金額",
         "同組應繳總金額",
         "主報名人F帳號",
@@ -2784,6 +5596,7 @@
 
       const flatEntries = [];
       adminRegistrations.forEach(r => {
+        const mainLit = Boolean(checkedInSlots[`${r.mainSeat.table}-${r.mainSeat.seat}`] || checkedInStaff[r.fAccount.toUpperCase()]);
         flatEntries.push({
           table: r.mainSeat.table,
           seat: r.mainSeat.seat,
@@ -2793,6 +5606,7 @@
           roleCategory: r.mainSeat.table === VIP_HEAD_TABLE ? "受邀長官本人" : "教職員本人",
           detailLabel: r.mainSeat.table === VIP_HEAD_TABLE ? "長官大主桌（免費）" : "教職員本人（免費）",
           seated: "佔位",
+          checkedInStatus: mainLit ? "已報到亮燈" : "未報到",
           fee: 0,
           groupTotal: r.totalAmount,
           fAccount: r.fAccount,
@@ -2802,6 +5616,7 @@
         });
 
         (r.guests || []).forEach(g => {
+          const gLit = g.seatInfo ? Boolean(checkedInSlots[`${g.seatInfo.table}-${g.seatInfo.seat}`]) : false;
           flatEntries.push({
             table: g.seatInfo ? g.seatInfo.table : r.mainSeat.table,
             seat: g.seatInfo ? g.seatInfo.seat : 99,
@@ -2811,6 +5626,7 @@
             roleCategory: g.roleLabel || "一般眷屬",
             detailLabel: g.shortLabel || g.tierLabel || "",
             seated: g.needsSeat ? "佔位" : "不佔位(未滿1歲)",
+            checkedInStatus: !g.needsSeat ? "免佔位" : (gLit ? "已報到亮燈" : "未報到"),
             fee: g.fee,
             groupTotal: r.totalAmount,
             fAccount: r.fAccount,
@@ -2841,6 +5657,7 @@
           item.roleCategory,
           item.detailLabel,
           item.seated,
+          item.checkedInStatus,
           item.fee,
           item.groupTotal,
           item.fAccount,
@@ -2896,8 +5713,12 @@
     }
 
     // 啟動初始化
+    updateWorkspaceAvailability();
     refreshAllUI();
+    window.renderLotteryPage=renderLotteryPage;
+    renderLotteryPage();
     initDatabase();
+
   </script>
 </body>
 </html>
